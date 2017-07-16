@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -93,19 +93,136 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="MySQL运算符和函数@(MySQL)[数据库]
+[TOC]
+字符函数
+
+
+函数名称
+描述
+
+
+
+
+CONCAT()
+字符连接
+
+
+CONCAT_WS()
+使用指定的分隔符进行字符连接
+
+
+FORMAT()
+数字格式化
+
+
+LOWEER()
+转换成小写字母
+
+
+UPPER()
+转换成大写字母
+
+
+LEFT()
+获取左侧字符
+
+
+RIGHT()
+获取右侧字符
+
+
+LENGTH()
+获取字符串长度">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/11/25/hello-world/index.html">
+<meta property="og:title" content="MySQL运算符和函数">
+<meta property="og:url" content="http://yoursite.com/2017/07/16/MySQL运算符和函数/index.html">
 <meta property="og:site_name" content="Taohong's blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-11-25T01:27:36.835Z">
+<meta property="og:description" content="MySQL运算符和函数@(MySQL)[数据库]
+[TOC]
+字符函数
+
+
+函数名称
+描述
+
+
+
+
+CONCAT()
+字符连接
+
+
+CONCAT_WS()
+使用指定的分隔符进行字符连接
+
+
+FORMAT()
+数字格式化
+
+
+LOWEER()
+转换成小写字母
+
+
+UPPER()
+转换成大写字母
+
+
+LEFT()
+获取左侧字符
+
+
+RIGHT()
+获取右侧字符
+
+
+LENGTH()
+获取字符串长度">
+<meta property="og:updated_time" content="2017-07-16T10:35:10.818Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="MySQL运算符和函数">
+<meta name="twitter:description" content="MySQL运算符和函数@(MySQL)[数据库]
+[TOC]
+字符函数
+
+
+函数名称
+描述
+
+
+
+
+CONCAT()
+字符连接
+
+
+CONCAT_WS()
+使用指定的分隔符进行字符连接
+
+
+FORMAT()
+数字格式化
+
+
+LOWEER()
+转换成小写字母
+
+
+UPPER()
+转换成大写字母
+
+
+LEFT()
+获取左侧字符
+
+
+RIGHT()
+获取右侧字符
+
+
+LENGTH()
+获取字符串长度">
 
 
 
@@ -133,13 +250,13 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/25/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/"/>
 
 
 
 
 
-  <title>Hello World | Taohong's blog</title>
+  <title>MySQL运算符和函数 | Taohong's blog</title>
   
 
 
@@ -302,7 +419,7 @@ Quick">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/25/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Taohong">
@@ -319,7 +436,7 @@ Quick">
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL运算符和函数</h1>
         
 
         <div class="post-meta">
@@ -331,8 +448,8 @@ Quick">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-25T09:27:36+08:00">
-                2016-11-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:34:25+08:00">
+                2017-07-16
               </time>
             
 
@@ -366,15 +483,246 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h1 id="MySQL运算符和函数"><a href="#MySQL运算符和函数" class="headerlink" title="MySQL运算符和函数"></a>MySQL运算符和函数</h1><p>@(MySQL)[数据库]</p>
+<p>[TOC]</p>
+<h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CONCAT()</td>
+<td style="text-align:left">字符连接</td>
+</tr>
+<tr>
+<td style="text-align:left">CONCAT_WS()</td>
+<td style="text-align:left">使用指定的分隔符进行字符连接</td>
+</tr>
+<tr>
+<td style="text-align:left">FORMAT()</td>
+<td style="text-align:left">数字格式化</td>
+</tr>
+<tr>
+<td style="text-align:left">LOWEER()</td>
+<td style="text-align:left">转换成小写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">UPPER()</td>
+<td style="text-align:left">转换成大写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">LEFT()</td>
+<td style="text-align:left">获取左侧字符</td>
+</tr>
+<tr>
+<td style="text-align:left">RIGHT()</td>
+<td style="text-align:left">获取右侧字符</td>
+</tr>
+<tr>
+<td style="text-align:left">LENGTH()</td>
+<td style="text-align:left">获取字符串长度</td>
+</tr>
+<tr>
+<td style="text-align:left">LTRIM()</td>
+<td style="text-align:left">删除前导空格</td>
+</tr>
+<tr>
+<td style="text-align:left">RTRIM()</td>
+<td style="text-align:left">删除后续空格</td>
+</tr>
+<tr>
+<td style="text-align:left">TRIM()</td>
+<td style="text-align:left">删除前导和后续空格</td>
+</tr>
+<tr>
+<td style="text-align:left">SUBSTRING()</td>
+<td style="text-align:left">字符串截取</td>
+</tr>
+<tr>
+<td style="text-align:left">[NOT] LIKE()</td>
+<td style="text-align:left">匹配模式</td>
+</tr>
+<tr>
+<td style="text-align:left">REPLACE()</td>
+<td style="text-align:left">字符串替换</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数值运算符与函数"><a href="#数值运算符与函数" class="headerlink" title="数值运算符与函数"></a>数值运算符与函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CEIL()</td>
+<td style="text-align:left">进一取整</td>
+</tr>
+<tr>
+<td style="text-align:left">DIV</td>
+<td style="text-align:left">整数除法</td>
+</tr>
+<tr>
+<td style="text-align:left">FLOOR()</td>
+<td style="text-align:left">舍一取整</td>
+</tr>
+<tr>
+<td style="text-align:left">MOD</td>
+<td style="text-align:left">取余数（取模）</td>
+</tr>
+<tr>
+<td style="text-align:left">POWER()</td>
+<td style="text-align:left">幂运算</td>
+</tr>
+<tr>
+<td style="text-align:left">ROUND()</td>
+<td style="text-align:left">四舍五入</td>
+</tr>
+<tr>
+<td style="text-align:left">TRUNCATE()</td>
+<td style="text-align:left">字数截取</td>
+</tr>
+</tbody>
+</table>
+<h2 id="比较运算符与函数"><a href="#比较运算符与函数" class="headerlink" title="比较运算符与函数"></a>比较运算符与函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[NOT] BETWEEN…AND…</td>
+<td style="text-align:left">[不]在范围之内</td>
+</tr>
+<tr>
+<td style="text-align:left">[NOT] IN()</td>
+<td style="text-align:left">[不]在列出值范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">IS [NOT] NULL</td>
+<td style="text-align:left">[不]为空</td>
+</tr>
+</tbody>
+</table>
+<h2 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NOW()</td>
+<td style="text-align:left">当前日期和时间</td>
+</tr>
+<tr>
+<td style="text-align:left">CURDATE()</td>
+<td style="text-align:left">当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">CURTIME()</td>
+<td style="text-align:left">当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">DATE_ADD()</td>
+<td style="text-align:left">日期变化</td>
+</tr>
+<tr>
+<td style="text-align:left">DATEDIFF()</td>
+<td style="text-align:left">日期差值</td>
+</tr>
+<tr>
+<td style="text-align:left">DATE_FORMAT()</td>
+<td style="text-align:left">日期格式化</td>
+</tr>
+</tbody>
+</table>
+<h2 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CONNECTION_ID()</td>
+<td style="text-align:left">连接ID</td>
+</tr>
+<tr>
+<td style="text-align:left">DATEBASE()</td>
+<td style="text-align:left">当前数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">LAST_INSERT_ID()</td>
+<td style="text-align:left">最后插入记录的ID号</td>
+</tr>
+<tr>
+<td style="text-align:left">USER()</td>
+<td style="text-align:left">当前用户</td>
+</tr>
+<tr>
+<td style="text-align:left">VERSION()</td>
+<td style="text-align:left">版本信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AVG()</td>
+<td style="text-align:left">平均值</td>
+</tr>
+<tr>
+<td style="text-align:left">COUNT()</td>
+<td style="text-align:left">计数</td>
+</tr>
+<tr>
+<td style="text-align:left">MAX()</td>
+<td style="text-align:left">最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">MIN()</td>
+<td style="text-align:left">最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">SUM()</td>
+<td style="text-align:left">求和</td>
+</tr>
+</tbody>
+</table>
+<h2 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MD5()</td>
+<td style="text-align:left">信息摘要算法</td>
+</tr>
+<tr>
+<td style="text-align:left">PASSWORD()</td>
+<td style="text-align:left">密码算法</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -402,6 +750,12 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
 
       
       
@@ -411,14 +765,18 @@ Quick">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/07/14/bash示例和书写流程/" rel="next" title="bash示例和书写流程">
+                <i class="fa fa-chevron-left"></i> bash示例和书写流程
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/09/install-ftp/" rel="prev" title="install_ftp">
-                install_ftp <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/16/Linux常用命令/" rel="prev" title="Linux常用命令">
+                Linux常用命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -559,7 +917,7 @@ Quick">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL运算符和函数"><span class="nav-number">1.</span> <span class="nav-text">MySQL运算符和函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符函数"><span class="nav-number">1.1.</span> <span class="nav-text">字符函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值运算符与函数"><span class="nav-number">1.2.</span> <span class="nav-text">数值运算符与函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较运算符与函数"><span class="nav-number">1.3.</span> <span class="nav-text">比较运算符与函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期时间函数"><span class="nav-number">1.4.</span> <span class="nav-text">日期时间函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息函数"><span class="nav-number">1.5.</span> <span class="nav-text">信息函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合函数"><span class="nav-number">1.6.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密函数"><span class="nav-number">1.7.</span> <span class="nav-text">加密函数</span></a></li></ol></li></ol></div>
             
 
           </div>
