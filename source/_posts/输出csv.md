@@ -48,10 +48,9 @@ function exportToCsv(filename, rows) {
     
     
 exportToCsv('export.csv', [
-	['name','description'],	
+  ['name','description'],	
   ['david','123'],
   ['jona','""'],
   ['a','b'],
-
 ])
 ```

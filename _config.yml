@@ -8,7 +8,7 @@ subtitle:
 description:
 author: Taohong
 language: zh-Hans
-timezone: Asia/Beijing
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -71,3 +71,9 @@ deploy:
   type: git
   repo: https://github.com/taohong000/taohong000.github.io.git
   branch: master 
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000

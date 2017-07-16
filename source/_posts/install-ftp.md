@@ -2,6 +2,7 @@
 title: install_ftp
 date: 2017-07-09 22:25:02
 tags: Linux
+categories: 技术
 ---
 
 # 安装ftp服务
