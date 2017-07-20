@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="慕课网,vue," />
 
 
 
@@ -93,12 +93,69 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Taohong's blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/11/index.html">
+<meta name="description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）@(taohong000 的笔记本)[慕课网, vue]
+[toc]
+应用的分层逻辑结构模型(总体结构)
+课程收获
+了解一个中度复杂的应用开发
+拆分目录
+设计路由
+设计数据结构
+
+
+掌握vue.js的高级应用
+vuex的状态管理
+组件间的数据共享
+在路由间跳转并传递复杂的数据
+懒加载
+
+
+学会组件化, 模块化的开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）">
+<meta property="og:url" content="http://yoursite.com/2017/07/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）/index.html">
 <meta property="og:site_name" content="Taohong's blog">
+<meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）@(taohong000 的笔记本)[慕课网, vue]
+[toc]
+应用的分层逻辑结构模型(总体结构)
+课程收获
+了解一个中度复杂的应用开发
+拆分目录
+设计路由
+设计数据结构
+
+
+掌握vue.js的高级应用
+vuex的状态管理
+组件间的数据共享
+在路由间跳转并传递复杂的数据
+懒加载
+
+
+学会组件化, 模块化的开">
+<meta property="og:image" content="http://ot2alabfu.bkt.clouddn.com/image/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/%E6%85%95%E8%AF%BE%E7%BD%91/vue2.0%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9F%B3%E4%B9%90WebApp/%E6%80%BB%E4%BD%93%E7%BB%93%E6%9E%84.png">
+<meta property="og:updated_time" content="2017-07-20T15:23:38.553Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Taohong's blog">
+<meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）">
+<meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）@(taohong000 的笔记本)[慕课网, vue]
+[toc]
+应用的分层逻辑结构模型(总体结构)
+课程收获
+了解一个中度复杂的应用开发
+拆分目录
+设计路由
+设计数据结构
+
+
+掌握vue.js的高级应用
+vuex的状态管理
+组件间的数据共享
+在路由间跳转并传递复杂的数据
+懒加载
+
+
+学会组件化, 模块化的开">
+<meta name="twitter:image" content="http://ot2alabfu.bkt.clouddn.com/image/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/%E6%85%95%E8%AF%BE%E7%BD%91/vue2.0%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9F%B3%E4%B9%90WebApp/%E6%80%BB%E4%BD%93%E7%BB%93%E6%9E%84.png">
 
 
 
@@ -126,13 +183,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/11/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）/"/>
 
 
 
 
 
-  <title>归档 | Taohong's blog</title>
+  <title>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍） | Taohong's blog</title>
   
 
 
@@ -157,7 +214,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -285,66 +342,210 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 15 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T23:58:02+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）</h1><p>@(taohong000 的笔记本)[慕课网, vue]</p>
+<p>[toc]</p>
+<h2 id="应用的分层逻辑结构模型-总体结构"><a href="#应用的分层逻辑结构模型-总体结构" class="headerlink" title="应用的分层逻辑结构模型(总体结构)"></a>应用的分层逻辑结构模型(总体结构)</h2><p><img src="http://ot2alabfu.bkt.clouddn.com/image/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/%E6%85%95%E8%AF%BE%E7%BD%91/vue2.0%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9F%B3%E4%B9%90WebApp/%E6%80%BB%E4%BD%93%E7%BB%93%E6%9E%84.png" alt="总体结构"></p>
+<h2 id="课程收获"><a href="#课程收获" class="headerlink" title="课程收获"></a>课程收获</h2><ul>
+<li>了解一个中度复杂的应用开发<ul>
+<li>拆分目录</li>
+<li>设计路由</li>
+<li>设计数据结构</li>
+</ul>
+</li>
+<li>掌握vue.js的高级应用<ul>
+<li>vuex的状态管理</li>
+<li>组件间的数据共享</li>
+<li>在路由间跳转并传递复杂的数据</li>
+<li>懒加载</li>
+</ul>
+</li>
+<li>学会组件化, 模块化的开发方式<ul>
+<li>什么时候该抽象一个组件, 该抽象基础组件还是通用组件还是应用组件</li>
+<li>如何设计和开发一个组件</li>
+</ul>
+</li>
+<li>了解原生App体验交互的实现原理</li>
+</ul>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
         </div>
       
+
+      
+      
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/16/scss基础/" rel="next" title="scss基础">
+                <i class="fa fa-chevron-left"></i> scss基础
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/25/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/18/19-个-JavaScript-快速编程技巧-—-SitePoint/" rel="prev" title="19+ 个 JavaScript 快速编程技巧 — SitePoint">
+                19+ 个 JavaScript 快速编程技巧 — SitePoint <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-25T09:27:36+08:00"
-              content="2016-11-25" >
-          11-25
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -352,6 +553,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -371,8 +576,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg"
@@ -445,6 +659,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）"><span class="nav-number">1.</span> <span class="nav-text">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用的分层逻辑结构模型-总体结构"><span class="nav-number">1.1.</span> <span class="nav-text">应用的分层逻辑结构模型(总体结构)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程收获"><span class="nav-number">1.2.</span> <span class="nav-text">课程收获</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -565,11 +795,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
