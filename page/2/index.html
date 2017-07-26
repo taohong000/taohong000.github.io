@@ -297,6 +297,570 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/16/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:36:16+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h2 id="命令的基本格式"><a href="#命令的基本格式" class="headerlink" title="命令的基本格式"></a>命令的基本格式</h2><p>命令 [选项] [参数]</p>
+<p>注意:个别命令使用不遵循此格式<br>        当有多个选项时,可以写在一起<br>        简化选项等于完整选项<br>        -a 等于 –all</p>
+<p>查询目录中内容:ls<br>ls [选项] [文件或目录]<br>选项：<br>-a 显示所有文件，包含隐藏文件<br>-l 显示详细信息<br>-d 查看目录本身属性<br>-h 人性化显示文件大小<br>-i 显示inode节点（储存时生成的编码，格式化硬盘时候，分成等大的内存块4k,同时生成相应的节点表）</p>
+<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><h3 id="目录和文件处理命令"><a href="#目录和文件处理命令" class="headerlink" title="目录和文件处理命令"></a>目录和文件处理命令</h3><h4 id="建立目录：mkdir"><a href="#建立目录：mkdir" class="headerlink" title="建立目录：mkdir"></a>建立目录：mkdir</h4><ul>
+<li>mkdir -p [目录名]<br>-p 递归创建<br>命令英文原意:<strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectories</li>
+</ul>
+<h4 id="切换所在目录：cd"><a href="#切换所在目录：cd" class="headerlink" title="切换所在目录：cd"></a>切换所在目录：cd</h4><ul>
+<li><p>cd [目录]<br>命令英文原意:<strong>c</strong>hange <strong>d</strong>irectory</p>
+</li>
+<li><p>简化命令<br>cd和cd ~进入当前用户的家目录<br>cd - 进入上次目录<br>cd .. 进入上一级目录<br>cd .  进入当前目录</p>
+</li>
+</ul>
+<p>Ctrl+L 清屏<br>tab 可以补全目录或命令</p>
+<h4 id="查询所在目录位置：pwd"><a href="#查询所在目录位置：pwd" class="headerlink" title="查询所在目录位置：pwd"></a>查询所在目录位置：pwd</h4><p>命令英文原意:<strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory</p>
+<h4 id="删除空目录：rmdir"><a href="#删除空目录：rmdir" class="headerlink" title="删除空目录：rmdir"></a>删除空目录：rmdir</h4><ul>
+<li>rmdir [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove empty <strong>dir</strong>ectories</li>
+</ul>
+<h4 id="删除文件或目录：rm"><a href="#删除文件或目录：rm" class="headerlink" title="删除文件或目录：rm"></a>删除文件或目录：rm</h4><ul>
+<li>rm -rf [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove</li>
+<li>选项：<br>-r 删除目录<br>-f 强制</li>
+</ul>
+<h4 id="复制命令：cp"><a href="#复制命令：cp" class="headerlink" title="复制命令：cp"></a>复制命令：cp</h4><ul>
+<li>cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：<strong>c</strong>op<strong>y</strong></li>
+<li>选项：<br>-r   复制目录<br>-p   连带文件属性复制<br>-d   若源文件是链接文件,则复制链接属性<br>-a   相当于 -pdr</li>
+</ul>
+<h4 id="剪切或改名命令：mv"><a href="#剪切或改名命令：mv" class="headerlink" title="剪切或改名命令：mv"></a>剪切或改名命令：mv</h4><ul>
+<li>mv [原文件或目录] [目标目录]<br>命令英文原意：<strong>m</strong>o<strong>v</strong>e</li>
+</ul>
+<p>ll 等于 ls -l</p>
+<h4 id="常用目录的作用"><a href="#常用目录的作用" class="headerlink" title="常用目录的作用"></a>常用目录的作用</h4><ul>
+<li>/根目录<ul>
+<li>/bin命令保存目录（普通用户就可以读取的命令）</li>
+<li>/boot启动目录，启动相关文件</li>
+<li>/dev设备文件保存目录</li>
+<li>/etc配置文件保存目录</li>
+<li>/home普通用户的家目录</li>
+<li>/lib系统库保存目录</li>
+<li>/mnt系统挂载目录</li>
+<li>/media挂载目录</li>
+<li>/root超级用户的家目录</li>
+<li>/tmp临时目录</li>
+<li>/sbin命令保存目录（超级用户才能使用的目录）</li>
+<li>/proc直接写入内存的</li>
+<li>/sys</li>
+<li>/usr系统软件资源目录<ul>
+<li>/usr/bin/系统命令（普通用户）</li>
+<li>/usr/sbin/（超级用户）</li>
+</ul>
+</li>
+<li>/var系统相关文档内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
+<li>ln -s [原文件] [目标文件]<br>命令英文原意：<strong>l</strong>i<strong>n</strong>k</li>
+<li>功能描述：生成链接文件</li>
+<li>选项： -s 创建软链接</li>
+</ul>
+<p>硬链接特征：<br>1、拥有相同的i节点和存储block块，可以看作是同一个文件<br>2、可通过i节点识别<br>3、不能跨分区<br>4、不能针对目录使用</p>
+<p>软链接特征：<br>1、类似Windows快捷方式<br>2、软链接拥有自己的i节点和Block块，但是数据块中只保存原文件的文件名和i节点号，并没有实际的文件数据<br>3、lrwxrwxrwx l 软链接<br>4、修改任意文件，另一个文件都改变<br>5、删除原文件，软链接不能使用</p>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
+<li>locate 文件名<br>在后台数据库中安文件名搜索，搜索速度更快</li>
+<li>updatedb<br>更新数据库</li>
+</ul>
+<h3 id="命令搜索命令-whereis-和-which"><a href="#命令搜索命令-whereis-和-which" class="headerlink" title="命令搜索命令 whereis 和 which"></a>命令搜索命令 whereis 和 which</h3><ul>
+<li><p>whereis 命令名<br>搜索命令所在路径及帮助文档所在位置<br>选项：<br>-b：只查找可执行文件<br>-m：只查找帮助文档</p>
+</li>
+<li><p>which 文件名<br>搜索命令所在路径及别名</p>
+</li>
+</ul>
+<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
+<li><p>find [搜索范围] [搜索条件]<br>搜索文件</p>
+</li>
+<li><p>find / -name install.log<br>避免大范围搜索，会非常消耗系统资源<br>find是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
+</li>
+<li><p>find / -iname install.log<br>不区分大小写</p>
+</li>
+<li><p>find / -user install.log<br>按照所有者搜索</p>
+</li>
+<li><p>find /root -nouser<br>查找没有所有者的文件</p>
+</li>
+<li><p>find /var/log/ -mtime +10<br>查找10天亲修改的文件</p>
+<p>+10 10天以前<br>-10 10天内<br>10 10天当天<br>-mtime 修改文件内容<br>-ctime 修改文件属性<br>-atime 文件访问时间</p>
+</li>
+<li><p>find . -size 25k<br>查找文件大小是25KB的文件</p>
+</li>
+</ul>
+<p>-25k 小于25KB的文件<br>25k 等于25KB的文件<br>+25k 大于25KB的文件</p>
+<ul>
+<li>find . -inum 262422<br>查找i几点是262422的文件</li>
+</ul>
+<p>find /ect -size +20k -a -size -50k<br>查找/etc/目录下，大于20KB并且小于50KB的文件<br>-a and 逻辑与<br>-o or 逻辑或</p>
+<p>find /ect -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20KB并且小于50KB的文件，并显示详细信息<br>-exec/-ok 命令 {} \; 对搜索结果执行操作</p>
+<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
+<li>grep [选项] 字符串 文件名<br>在文件当中匹配符合条件的字符串</li>
+</ul>
+<p>选项：<br>-i 忽略大小写<br>-v 排除指定的字符串</p>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><p>man 命令</p>
+<p>查看命令拥有哪个级别的帮助<br>man -f 命令<br>相当于<br>whereis 命令</p>
+<p>举例：<br>man -5 passwd</p>
+<p>查看和命令相关的所有帮助<br>man -k 命令<br>相当于<br>apropos 命令</p>
+<p>选项帮助<br>命令 –help</p>
+<p>shell内部命令帮助<br>help shell内部命令</p>
+<p>详细命令info<br>info 命令<br>回车：进入子帮助页面<br>u：进入上层页面<br>n：进入下一个帮助小节<br>p：进入上一个帮助小节<br>q：退出</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/16/MySQL运算符和函数/" itemprop="url">MySQL运算符和函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:34:25+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MySQL运算符和函数"><a href="#MySQL运算符和函数" class="headerlink" title="MySQL运算符和函数"></a>MySQL运算符和函数</h1><h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CONCAT()</td>
+<td style="text-align:left">字符连接</td>
+</tr>
+<tr>
+<td style="text-align:left">CONCAT_WS()</td>
+<td style="text-align:left">使用指定的分隔符进行字符连接</td>
+</tr>
+<tr>
+<td style="text-align:left">FORMAT()</td>
+<td style="text-align:left">数字格式化</td>
+</tr>
+<tr>
+<td style="text-align:left">LOWEER()</td>
+<td style="text-align:left">转换成小写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">UPPER()</td>
+<td style="text-align:left">转换成大写字母</td>
+</tr>
+<tr>
+<td style="text-align:left">LEFT()</td>
+<td style="text-align:left">获取左侧字符</td>
+</tr>
+<tr>
+<td style="text-align:left">RIGHT()</td>
+<td style="text-align:left">获取右侧字符</td>
+</tr>
+<tr>
+<td style="text-align:left">LENGTH()</td>
+<td style="text-align:left">获取字符串长度</td>
+</tr>
+<tr>
+<td style="text-align:left">LTRIM()</td>
+<td style="text-align:left">删除前导空格</td>
+</tr>
+<tr>
+<td style="text-align:left">RTRIM()</td>
+<td style="text-align:left">删除后续空格</td>
+</tr>
+<tr>
+<td style="text-align:left">TRIM()</td>
+<td style="text-align:left">删除前导和后续空格</td>
+</tr>
+<tr>
+<td style="text-align:left">SUBSTRING()</td>
+<td style="text-align:left">字符串截取</td>
+</tr>
+<tr>
+<td style="text-align:left">[NOT] LIKE()</td>
+<td style="text-align:left">匹配模式</td>
+</tr>
+<tr>
+<td style="text-align:left">REPLACE()</td>
+<td style="text-align:left">字符串替换</td>
+</tr>
+</tbody>
+</table>
+<h2 id="数值运算符与函数"><a href="#数值运算符与函数" class="headerlink" title="数值运算符与函数"></a>数值运算符与函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CEIL()</td>
+<td style="text-align:left">进一取整</td>
+</tr>
+<tr>
+<td style="text-align:left">DIV</td>
+<td style="text-align:left">整数除法</td>
+</tr>
+<tr>
+<td style="text-align:left">FLOOR()</td>
+<td style="text-align:left">舍一取整</td>
+</tr>
+<tr>
+<td style="text-align:left">MOD</td>
+<td style="text-align:left">取余数（取模）</td>
+</tr>
+<tr>
+<td style="text-align:left">POWER()</td>
+<td style="text-align:left">幂运算</td>
+</tr>
+<tr>
+<td style="text-align:left">ROUND()</td>
+<td style="text-align:left">四舍五入</td>
+</tr>
+<tr>
+<td style="text-align:left">TRUNCATE()</td>
+<td style="text-align:left">字数截取</td>
+</tr>
+</tbody>
+</table>
+<h2 id="比较运算符与函数"><a href="#比较运算符与函数" class="headerlink" title="比较运算符与函数"></a>比较运算符与函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">[NOT] BETWEEN…AND…</td>
+<td style="text-align:left">[不]在范围之内</td>
+</tr>
+<tr>
+<td style="text-align:left">[NOT] IN()</td>
+<td style="text-align:left">[不]在列出值范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">IS [NOT] NULL</td>
+<td style="text-align:left">[不]为空</td>
+</tr>
+</tbody>
+</table>
+<h2 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NOW()</td>
+<td style="text-align:left">当前日期和时间</td>
+</tr>
+<tr>
+<td style="text-align:left">CURDATE()</td>
+<td style="text-align:left">当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">CURTIME()</td>
+<td style="text-align:left">当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">DATE_ADD()</td>
+<td style="text-align:left">日期变化</td>
+</tr>
+<tr>
+<td style="text-align:left">DATEDIFF()</td>
+<td style="text-align:left">日期差值</td>
+</tr>
+<tr>
+<td style="text-align:left">DATE_FORMAT()</td>
+<td style="text-align:left">日期格式化</td>
+</tr>
+</tbody>
+</table>
+<h2 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CONNECTION_ID()</td>
+<td style="text-align:left">连接ID</td>
+</tr>
+<tr>
+<td style="text-align:left">DATEBASE()</td>
+<td style="text-align:left">当前数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">LAST_INSERT_ID()</td>
+<td style="text-align:left">最后插入记录的ID号</td>
+</tr>
+<tr>
+<td style="text-align:left">USER()</td>
+<td style="text-align:left">当前用户</td>
+</tr>
+<tr>
+<td style="text-align:left">VERSION()</td>
+<td style="text-align:left">版本信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AVG()</td>
+<td style="text-align:left">平均值</td>
+</tr>
+<tr>
+<td style="text-align:left">COUNT()</td>
+<td style="text-align:left">计数</td>
+</tr>
+<tr>
+<td style="text-align:left">MAX()</td>
+<td style="text-align:left">最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">MIN()</td>
+<td style="text-align:left">最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">SUM()</td>
+<td style="text-align:left">求和</td>
+</tr>
+</tbody>
+</table>
+<h2 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MD5()</td>
+<td style="text-align:left">信息摘要算法</td>
+</tr>
+<tr>
+<td style="text-align:left">PASSWORD()</td>
+<td style="text-align:left">密码算法</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/14/bash示例和书写流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1142,7 +1706,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -297,6 +297,415 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T23:24:16+08:00">
+                2017-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）</h1><h2 id="jsonp原理介绍-Promise封装"><a href="#jsonp原理介绍-Promise封装" class="headerlink" title="jsonp原理介绍+Promise封装"></a>jsonp原理介绍+Promise封装</h2><h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p><a href="https://github.com/webmodules/jsonp" target="_blank" rel="external">jsonp github库</a></p>
+<h3 id="Promise封装"><a href="#Promise封装" class="headerlink" title="Promise封装"></a>Promise封装</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> originJsonp <span class="keyword">from</span> <span class="string">'jsonp'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">url, data, option</span>) </span>&#123;</div><div class="line">  url += (url.indexOf(<span class="string">'?'</span>) &lt; <span class="number">0</span> ? <span class="string">'?'</span> : <span class="string">'&amp;'</span>) + param(data)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    originJsonp(url, option, (err, data) =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (!err) &#123;</div><div class="line">        resolve(data)</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        reject(err)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">param</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> url = <span class="string">''</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> data) &#123;</div><div class="line">    <span class="keyword">let</span> value = data[k] !== <span class="literal">undefined</span> ? data[k] : <span class="string">''</span></div><div class="line">    url += <span class="string">'&amp;'</span> + k + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(value)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> url ? url.substring(<span class="number">1</span>) : <span class="string">''</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="jsonp的应用-轮播图数据抓取"><a href="#jsonp的应用-轮播图数据抓取" class="headerlink" title="jsonp的应用+轮播图数据抓取"></a>jsonp的应用+轮播图数据抓取</h2><ol>
+<li><p>添加请求通用配置文件src/api/config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> commonParams = &#123;</div><div class="line">  <span class="attr">g_tk</span>: <span class="number">5381</span>,</div><div class="line">  <span class="attr">inCharset</span>: <span class="string">'utf-8'</span>,</div><div class="line">  <span class="attr">outCharset</span>: <span class="string">'utf-8'</span>,</div><div class="line">  <span class="attr">notice</span>: <span class="number">0</span>,</div><div class="line">  <span class="attr">format</span>: <span class="string">'jsonp'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> options = &#123;</div><div class="line">  <span class="attr">param</span>: <span class="string">'jsonpCallback'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ERR_OK = <span class="number">0</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加接口文件src/api/recommend.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> jsonp <span class="keyword">from</span> <span class="string">'common/js/jsonp'</span></div><div class="line"><span class="keyword">import</span> &#123;commonParams, options&#125; <span class="keyword">from</span> <span class="string">'./config'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getRecommend</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">platform</span>: <span class="string">'h5'</span>,</div><div class="line">    <span class="attr">uin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">1</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建 components/recommend/recommend.vue组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"recommend"</span> <span class="attr">ref</span>=<span class="string">"recommend"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;getRecommend&#125; <span class="keyword">from</span> <span class="string">'api/recommend'</span></div><div class="line">  <span class="keyword">import</span> &#123;ERR_OK&#125; <span class="keyword">from</span> <span class="string">'api/config'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">recommends</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>._getRecommend()</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      _getRecommend() &#123;</div><div class="line">        getRecommend().then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">if</span> (res.code === ERR_OK) &#123;</div><div class="line">            <span class="keyword">this</span>.recommends = res.data.slider</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .recommend</div><div class="line">    position: fixed</div><div class="line">    width: 100%</div><div class="line">    top: 88px</div><div class="line">    bottom: 0</div><div class="line">    .recommend-content</div><div class="line">      height: 100%</div><div class="line">      overflow: hidden</div><div class="line">      .slider-wrapper</div><div class="line">        position: relative</div><div class="line">        width: 100%</div><div class="line">        overflow: hidden</div><div class="line">      .recommend-list</div><div class="line">        .list-title</div><div class="line">          height: 65px</div><div class="line">          line-height: 65px</div><div class="line">          text-align: center</div><div class="line">          font-size: $font-size-medium</div><div class="line">          color: $color-theme</div><div class="line">        .item</div><div class="line">          display: flex</div><div class="line">          box-sizing: border-box</div><div class="line">          align-items: center</div><div class="line">          padding: 0 20px 20px 20px</div><div class="line">          .icon</div><div class="line">            flex: 0 0 60px</div><div class="line">            width: 60px</div><div class="line">            padding-right: 20px</div><div class="line">          .text</div><div class="line">            display: flex</div><div class="line">            flex-direction: column</div><div class="line">            justify-content: center</div><div class="line">            flex: 1</div><div class="line">            line-height: 20px</div><div class="line">            overflow: hidden</div><div class="line">            font-size: $font-size-medium</div><div class="line">            .name</div><div class="line">              margin-bottom: 10px</div><div class="line">              color: $color-text</div><div class="line">            .desc</div><div class="line">              color: $color-text-d</div><div class="line">      .loading-container</div><div class="line">        position: absolute</div><div class="line">        width: 100%</div><div class="line">        top: 50%</div><div class="line">        transform: translateY(-50%)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="轮播图组件实现"><a href="#轮播图组件实现" class="headerlink" title="轮播图组件实现"></a>轮播图组件实现</h2><ol>
+<li>创建基础组件 base/slider/slider.vue<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"slider"</span> <span class="attr">ref</span>=<span class="string">"slider"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"slider-group"</span> <span class="attr">ref</span>=<span class="string">"sliderGroup"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">slot</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dots"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"dot"</span> <span class="attr">:class</span>=<span class="string">"&#123;active: currentPageIndex === index &#125;"</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in dots"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .slider</div><div class="line">    min-height: 1px</div><div class="line">    .slider-group</div><div class="line">      position: relative</div><div class="line">      overflow: hidden</div><div class="line">      white-space: nowrap</div><div class="line">      .slider-item</div><div class="line">        float: left</div><div class="line">        box-sizing: border-box</div><div class="line">        overflow: hidden</div><div class="line">        text-align: center</div><div class="line">        a</div><div class="line">          display: block</div><div class="line">          width: 100%</div><div class="line">          overflow: hidden</div><div class="line">          text-decoration: none</div><div class="line">        img</div><div class="line">          display: block</div><div class="line">          width: 100%</div><div class="line">    .dots</div><div class="line">      position: absolute</div><div class="line">      right: 0</div><div class="line">      left: 0</div><div class="line">      bottom: 12px</div><div class="line">      text-align: center</div><div class="line">      font-size: 0</div><div class="line">      .dot</div><div class="line">        display: inline-block</div><div class="line">        margin: 0 4px</div><div class="line">        width: 8px</div><div class="line">        height: 8px</div><div class="line">        border-radius: 50%</div><div class="line">        background: $color-text-l</div><div class="line">        &amp;.active</div><div class="line">          width: 20px</div><div class="line">          border-radius: 5px</div><div class="line">          background: $color-text-ll</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>添加设置<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'slider'</span>,</div><div class="line">  <span class="attr">props</span>: &#123;</div><div class="line">    <span class="comment">// 循环轮播</span></div><div class="line">    loop: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">      <span class="attr">default</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 自动录播</span></div><div class="line">    autoPlay: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">      <span class="attr">default</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 轮播间隔</span></div><div class="line">    interval: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">      <span class="attr">default</span>: <span class="number">4000</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>引入better-scroll并设置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 设置sliderGroup宽度</span></div><div class="line">_setSliderWidth(isResize) &#123;</div><div class="line">        <span class="keyword">this</span>.children = <span class="keyword">this</span>.$refs.sliderGroup.children</div><div class="line"></div><div class="line">        <span class="keyword">let</span> width = <span class="number">0</span></div><div class="line">        <span class="keyword">let</span> sliderWidth = <span class="keyword">this</span>.$refs.slider.clientWidth</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.children.length; i++) &#123;</div><div class="line">          <span class="keyword">let</span> child = <span class="keyword">this</span>.children[i]</div><div class="line">          addClass(child, <span class="string">'slider-item'</span>)</div><div class="line"></div><div class="line">          child.style.width = sliderWidth + <span class="string">'px'</span></div><div class="line">          width += sliderWidth</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.loop &amp;&amp; !isResize) &#123;</div><div class="line">          width += <span class="number">2</span> * sliderWidth</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.$refs.sliderGroup.style.width = width + <span class="string">'px'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加common/js/dom.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">hasClass</span>(<span class="params">el, className</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^|\\s)'</span> + className + <span class="string">'(\\s|$)'</span>)</div><div class="line">  <span class="keyword">return</span> reg.test(el.className)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">el, className</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (hasClass(el, className)) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">let</span> newClass = el.className.split(<span class="string">' '</span>)</div><div class="line">  newClass.push(className)</div><div class="line">  el.className = newClass.join(<span class="string">' '</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在mounted中添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一般网页刷新为17毫秒</span></div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">     <span class="keyword">this</span>._setSliderWidth()</div><div class="line">     <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">       <span class="keyword">this</span>._play()</div><div class="line">     &#125;</div><div class="line">   &#125;, <span class="number">20</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>在recommend.vue中使用组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// v-if确保slider中有元素后再执行</span></div><div class="line">&lt;div v-<span class="keyword">if</span>=<span class="string">"recommends.length"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"slider-wrapper"</span> ref=<span class="string">"sliderWrapper"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">slider</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in recommends"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">"item.linkUrl"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"needsclick"</span> @<span class="attr">load</span>=<span class="string">"loadImage"</span> <span class="attr">:src</span>=<span class="string">"item.picUrl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">slider</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在slider.vue中初始化slider</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">_initSlider() &#123;</div><div class="line">  <span class="keyword">this</span>.slider = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.slider, &#123;</div><div class="line">    <span class="attr">scrollX</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">scrollY</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">momentum</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">snap</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">snapLoop</span>: <span class="keyword">this</span>.loop,</div><div class="line">    <span class="attr">snapThreshold</span>: <span class="number">0.3</span>,</div><div class="line">    <span class="attr">snapSpeed</span>: <span class="number">400</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化dots</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加methods</span></div><div class="line">_initDots() &#123;</div><div class="line">  <span class="keyword">this</span>.dots = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="keyword">this</span>.children.length)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 在_initSlider中添加监听事件</span></div><div class="line"><span class="keyword">this</span>.slider.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">  <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.slider.getCurrentPage().pageX</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</div><div class="line">    pageIndex -= <span class="number">1</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.currentPageIndex = pageIndex</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">    <span class="keyword">this</span>._play()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加自动播放事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加methods</span></div><div class="line">_initDots() &#123;</div><div class="line">  <span class="keyword">this</span>.dots = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="keyword">this</span>.children.length)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 在_initSlider中添加监听事件</span></div><div class="line">_play() &#123;</div><div class="line">  <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.currentPageIndex + <span class="number">1</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</div><div class="line">    pageIndex += <span class="number">1</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.slider.goToPage(pageIndex, <span class="number">0</span>, <span class="number">400</span>)</div><div class="line">  &#125;, <span class="keyword">this</span>.interval)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改_initSlider</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">_initSlider() &#123;</div><div class="line">  <span class="keyword">this</span>.slider = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.slider, &#123;</div><div class="line">      <span class="attr">scrollX</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">scrollY</span>: <span class="literal">false</span>,</div><div class="line">      <span class="attr">momentum</span>: <span class="literal">false</span>,</div><div class="line">      <span class="attr">snap</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">snapLoop</span>: <span class="keyword">this</span>.loop,</div><div class="line">      <span class="attr">snapThreshold</span>: <span class="number">0.3</span>,</div><div class="line">      <span class="attr">snapSpeed</span>: <span class="number">400</span>,</div><div class="line">      <span class="attr">click</span>: <span class="literal">true</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.slider.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">      <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.slider.getCurrentPage().pageX</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</div><div class="line">          pageIndex -= <span class="number">1</span></div><div class="line">      &#125;</div><div class="line">      <span class="keyword">this</span>.currentPageIndex = pageIndex</div><div class="line">      <span class="comment">// 添加自动播放</span></div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">          <span class="keyword">this</span>._play()</div><div class="line">      &#125;</div><div class="line">  &#125;)</div><div class="line">  <span class="comment">// 手动滑动后清除定时器</span></div><div class="line">  <span class="keyword">this</span>.slider.on(<span class="string">'beforeScrollStart'</span>, () =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">          clearTimeout(<span class="keyword">this</span>.timer)</div><div class="line">      &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加窗口改变监听事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, () =&gt; &#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.slider) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>._setSliderWidth(<span class="literal">true</span>)</div><div class="line">  <span class="keyword">this</span>.slider.refresh()</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="歌单数据接口-axios-介绍和后端接口代理"><a href="#歌单数据接口-axios-介绍和后端接口代理" class="headerlink" title="歌单数据接口, axios 介绍和后端接口代理"></a>歌单数据接口, axios 介绍和后端接口代理</h2><ol>
+<li><p>在dev-server</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> apiRoutes = express.Router()</div><div class="line"></div><div class="line">apiRoutes.get(<span class="string">'/getDiscList'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> url = <span class="string">'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'</span></div><div class="line">  axios.get(url, &#123;</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">      <span class="attr">referer</span>: <span class="string">'https://c.y.qq.com/'</span>,</div><div class="line">      <span class="attr">host</span>: <span class="string">'c.y.qq.com'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">params</span>: req.query</div><div class="line">  &#125;).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">    res.json(response.data)</div><div class="line">  &#125;).catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(e)</div><div class="line">  &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(<span class="string">'/api'</span>, apiRoutes)</div></pre></td></tr></table></figure>
+</li>
+<li><p>在src/api/recommend.js中添加接口getDiscList</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getDiscList</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'/api/getDiscList'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">platform</span>: <span class="string">'yqq'</span>,</div><div class="line">    <span class="attr">hostUin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">sin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">ein</span>: <span class="number">29</span>,</div><div class="line">    <span class="attr">sortId</span>: <span class="number">5</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">categoryId</span>: <span class="number">10000000</span>,</div><div class="line">    <span class="attr">rnd</span>: <span class="built_in">Math</span>.random(),</div><div class="line">    <span class="attr">format</span>: <span class="string">'json'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> axios.get(url, &#123;</div><div class="line">    <span class="attr">params</span>: data</div><div class="line">  &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(res.data)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在recommend.vue中添加列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"recommend-list"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"list-title"</span>&gt;</span>热门歌单推荐<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"item in discList"</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"60"</span> <span class="attr">height</span>=<span class="string">"60"</span>  <span class="attr">:src</span>=<span class="string">"item.imgurl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span></div><div class="line">      // v-html:转义</div><div class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">v-html</span>=<span class="string">"item.creator.name"</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span> <span class="attr">v-html</span>=<span class="string">"item.dissname"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="scroll-组件的抽象和应用"><a href="#scroll-组件的抽象和应用" class="headerlink" title="scroll 组件的抽象和应用"></a>scroll 组件的抽象和应用</h2><ol>
+<li><p>添加通用组件scroll</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"wrapper"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">'better-scroll'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">probeType</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">        <span class="attr">default</span>: <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">click</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">        <span class="attr">default</span>: <span class="literal">true</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: <span class="literal">null</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    mounted() &#123;</div><div class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>._initScroll()</div><div class="line">      &#125;, <span class="number">20</span>)</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      _initScroll() &#123;</div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.$refs.wrapper) &#123;</div><div class="line">          <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, &#123;</div><div class="line">          <span class="attr">probeType</span>: <span class="keyword">this</span>.probeType,</div><div class="line">          <span class="attr">click</span>: <span class="keyword">this</span>.click</div><div class="line">        &#125;)</div><div class="line">      &#125;,</div><div class="line">      enable() &#123;</div><div class="line">        <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.enable()</div><div class="line">      &#125;,</div><div class="line">      disable() &#123;</div><div class="line">        <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.disable()</div><div class="line">      &#125;,</div><div class="line">      refresh() &#123;</div><div class="line">        <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.refresh()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      data() &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.refresh()</div><div class="line">        &#125;, <span class="number">20</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>recommend.vue中添加loadImage</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">loadImage() &#123;</div><div class="line">  <span class="comment">// this.checkloaded:标志位, 只计算一次</span></div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.checkloaded) &#123;</div><div class="line">    <span class="keyword">this</span>.checkloaded = <span class="literal">true</span></div><div class="line">    <span class="keyword">this</span>.$refs.scroll.refresh()</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="vue-lazyloadvue-lazyload-懒加载插件介绍和应用"><a href="#vue-lazyloadvue-lazyload-懒加载插件介绍和应用" class="headerlink" title="vue-lazyloadvue-lazyload 懒加载插件介绍和应用"></a>vue-lazyload<a href="https://github.com/hilongjw/vue-lazyload" target="_blank" rel="external">vue-lazyload</a> 懒加载插件介绍和应用</h2><ol>
+<li><p>main.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> VueLazyload <span class="keyword">from</span> <span class="string">'vue-lazyload'</span></div><div class="line">Vue.use(VueLazyload, &#123;</div><div class="line">  <span class="attr">loading</span>: <span class="built_in">require</span>(<span class="string">'common/image/default.png'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>recommend.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"60"</span> <span class="attr">height</span>=<span class="string">"60"</span>  <span class="attr">v-lazy</span>=<span class="string">"item.imgurl"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>fastclick避免拦截, 加class needsclick</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"needsclick"</span> @<span class="attr">load</span>=<span class="string">"loadImage"</span> <span class="attr">:src</span>=<span class="string">"item.picUrl"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="loading-基础组件的开发和应用"><a href="#loading-基础组件的开发和应用" class="headerlink" title="loading 基础组件的开发和应用"></a>loading 基础组件的开发和应用</h2><ol>
+<li>添加基础组件loading.vue 在 recommend.vue中使用<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"loading"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"24"</span> <span class="attr">height</span>=<span class="string">"24"</span> <span class="attr">src</span>=<span class="string">"./loading.gif"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">title</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'正在载入...'</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .loading</div><div class="line">    width: 100%</div><div class="line">    text-align: center</div><div class="line">    .desc</div><div class="line">      line-height: 20px</div><div class="line">      font-size: $font-size-small</div><div class="line">      color: $color-text-l</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/24/Vue-js-中，7种定义组件模板的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/Vue-js-中，7种定义组件模板的方法/" itemprop="url">Vue.js 中，7种定义组件模板的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T15:14:33+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue-js-中，7种定义组件模板的方法-Codementor"><a href="#Vue-js-中，7种定义组件模板的方法-Codementor" class="headerlink" title="Vue.js 中，7种定义组件模板的方法 | Codementor"></a>Vue.js 中，7种定义组件模板的方法 | Codementor</h1><blockquote>
+<p>本文转载自：<a href="http://www.zcfy.cc" target="_blank" rel="external">众成翻译</a><br>译者：<a href="http://www.zcfy.cc/@Mcbai" target="_blank" rel="external">Mcbai</a><br>审校: <a href="http://www.zcfy.cc/@huangxiaolu" target="_blank" rel="external">huangxiaolu</a><br>链接：<a href="http://www.zcfy.cc/article/3644" target="_blank" rel="external">http://www.zcfy.cc/article/3644</a><br>原文：<a href="https://www.codementor.io/vuejsdevelopers/7-ways-to-define-a-component-template-in-vue-js-8wxxhmxo6" target="_blank" rel="external">https://www.codementor.io/vuejsdevelopers/7-ways-to-define-a-component-template-in-vue-js-8wxxhmxo6</a></p>
+</blockquote>
+<p><span style="font-size: 1rem;">有多种方式可以</span>在vue中定义模板组件。我算了一下，至少有7种不同的方法：</p>
+<ul>
+<li><p>字符串（String）</p>
+</li>
+<li><p>模板字符串（Template literal）</p>
+</li>
+<li><p>X-Templates</p>
+</li>
+<li><p>内联（Inline）</p>
+</li>
+<li><p>Render函数（Render functions）</p>
+</li>
+<li><p>JSX</p>
+</li>
+<li><p>单文件组件（Single page components）</p>
+</li>
+</ul>
+<p>当然，可能还有更多方法!</p>
+<p>在这篇文章里，我们将会展示每一个方法的示例，分析其优缺点，以便你能明白在特定的情形下，哪种方式是合适的。</p>
+<blockquote>
+<p>_注意: 这篇文章最初发表在<a href="http://vuejsdevelopers.com/2017/03/24/vue-js-component-templates/?jsdojo_id=cm_cot" target="_blank" rel="external">在Vue.js Developers blog上</a> on 2017/03/24_</p>
+</blockquote>
+<h2 id="1-字符串"><a href="#1-字符串" class="headerlink" title=" 1. 字符串"></a><a href="#1-strings"></a> 1. 字符串</h2><p>默认情况下，<span style="font-size: 1rem;">在JS文件里</span>模板会被定义为一个字符串。但是我觉得大家都会同意这种写法很难看懂，它除了有广泛的浏览器支持之外，并没有什么优势。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'&lt;div class="checkbox-wrapper" @click="check"&gt;&lt;div :class="&#123; checkbox: true, checked: checked &#125;"&gt;&lt;/div&gt;&lt;div class="title"&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;&lt;/div&gt;'</span>,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="2-模板字符串（Template-literals）"><a href="#2-模板字符串（Template-literals）" class="headerlink" title=" 2. 模板字符串（Template literals）"></a><a href="#2-template-literals"></a> 2. 模板字符串（Template literals）</h2><p>通过ES6的模板字符串（反引号）语法，你在定义模板时可以直接换行，这是通过常规的JavaScript字符串没法做到的。<br>这种写法更容易阅读，并且这种模板字符串语法得到了许多新版本浏览器的支持。当然，为了安全起见，你仍然应该把它转译为ES5的语法形式。</p>
+<p>然而，这种方式并不完美，我发现大多数的IDE在语法高亮上做的差强人意，并且在缩进和换行等的格式方面，仍然很痛苦。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">`&lt;div class="checkbox-wrapper" @click="check"&gt;</span></div><div class="line">              &lt;div :class="&#123; checkbox: true, checked: checked &#125;"&gt;&lt;/div&gt;</div><div class="line">              &lt;div class="title"&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;</div><div class="line">            &lt;/div&gt;`,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="3-X-Templates"><a href="#3-X-Templates" class="headerlink" title=" 3. X-Templates"></a><a href="#3-x-templates"></a> 3. X-Templates</h2><p>使用这种方法，你需要在<em>index.html</em>文件里的script标签中定义你的模板。script标签需要添加<code>text/x-template</code>类型作为标记，并且在定义组件时，通过id来引用。</p>
+<p>我喜欢这种方式，它允许你使用真正的HTML标记来书写你的HTML文件，但是不足之处在于，这种方式会把模板和组件其它部分的定义分开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'#checkbox-template'</span>,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/x-template"</span> <span class="attr">id</span>=<span class="string">"checkbox-template"</span>&gt;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> @<span class="attr">click</span>=<span class="string">"check"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; checkbox: true, checked: checked &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="4-内联模板（Inline-Templates）"><a href="#4-内联模板（Inline-Templates）" class="headerlink" title=" 4. 内联模板（Inline Templates）"></a><a href="#4-inline-templates"></a> 4. 内联模板（Inline Templates）</h2><p>通过给组件添加<code>inline-template</code>属性来告诉Vue，里面的内容就是模板，而不是把它当作是分发内容(见 <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots" target="_blank" rel="external">slots</a>)。</p>
+<p>它的缺点和x-templates一样，但是有一个优点就是，它的内容就在HTML模板对应的位置，所以页面一加载就会渲染，而不用等到JavaScript执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-checkbox</span> <span class="attr">inline-template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> @<span class="attr">click</span>=<span class="string">"check"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; checkbox: true, checked: checked &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">my-checkbox</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="5-Render-functions（渲染函数）"><a href="#5-Render-functions（渲染函数）" class="headerlink" title=" 5. Render functions（渲染函数）"></a><a href="#5-render-functions"></a> 5. Render functions（渲染函数）</h2><p>渲染函数需要你把模板当作一个JavaScript对象来进行定义，它们是一些复杂并且抽象的模板选项。</p>
+<p>然而，它的优点是你定义的模板更接近编译器，你可以使用所有JavaScript方法，而不仅是指令提供的那些功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;,</div><div class="line">  render(createElement) &#123;</div><div class="line">    <span class="keyword">return</span> createElement(</div><div class="line">      <span class="string">'div'</span>,</div><div class="line">        &#123;</div><div class="line">          <span class="attr">attrs</span>: &#123;</div><div class="line">            <span class="string">'class'</span>: <span class="string">'checkbox-wrapper'</span></div><div class="line">          &#125;,</div><div class="line">          <span class="attr">on</span>: &#123;</div><div class="line">            <span class="attr">click</span>: <span class="keyword">this</span>.check</div><div class="line">          &#125;</div><div class="line">        &#125;,</div><div class="line">        [</div><div class="line">          createElement(</div><div class="line">            <span class="string">'div'</span>,</div><div class="line">            &#123;</div><div class="line">              <span class="string">'class'</span>: &#123;</div><div class="line">                <span class="attr">checkbox</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">checked</span>: <span class="keyword">this</span>.checked</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          ),</div><div class="line">          createElement(</div><div class="line">            <span class="string">'div'</span>,</div><div class="line">            &#123;</div><div class="line">              <span class="attr">attrs</span>: &#123;</div><div class="line">                <span class="string">'class'</span>: <span class="string">'title'</span></div><div class="line">              &#125;</div><div class="line">            &#125;,</div><div class="line">            [ <span class="keyword">this</span>.title ]</div><div class="line">          )</div><div class="line">        ]</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="6-JSX"><a href="#6-JSX" class="headerlink" title=" 6. JSX"></a><a href="#6-jsx"></a> 6. JSX</h2><p>Vue中最有争议性的模板选项就是JSX，一些开发者认为JSX语法太丑，不直观，而且和Vue的简洁特性背道而驰。</p>
+<p>JSX需要事先编译，因为浏览器并不支持JSX。但是如果你需要使用渲染函数，那么JSX语法绝对是一种更简洁的定义模板的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;,</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> <span class="attr">onClick</span>=<span class="string">&#123;</span> <span class="attr">this.check</span> &#125;&gt;</span></span></div><div class="line">             <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#123;&#123;</span> <span class="attr">checkbox:</span> <span class="attr">true</span>, <span class="attr">checked:</span> <span class="attr">this.checked</span> &#125;&#125;&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123; this.title &#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="7-单文件组件（Single-File-Components）"><a href="#7-单文件组件（Single-File-Components）" class="headerlink" title=" 7. 单文件组件（Single File Components）"></a><a href="#7-single-file-components"></a> 7. 单文件组件（<span style="font-family: inherit;">Single File Components）</span></h2><p>只要你愿意在项目中使用构建工具，那么单文件组件绝对是这些方法中的首选。它们有两个最好的优点：允许你使用标记，同时把所有组件定义都写在一个文件中。</p>
+<p>尽管单文件组件需要编译，并且一些IDE不支持这种类型文件的语法高亮，但它仍然很难被其它方法战胜。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> @<span class="attr">click</span>=<span class="string">"check"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; checkbox: true, checked: checked &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>你可能会举出还有更多的方式来定义模板，因为你还可以使用一些模板预处理器，比如Pug！</p>
+<h2 id="哪个最好"><a href="#哪个最好" class="headerlink" title=" 哪个最好?"></a><a href="#which-is-the-best"></a> 哪个最好?</h2><p>当然没有完美的方法，你应该根据你的实际情况来进行判断。我觉得一个好的程序员应该知道所有的方式，并把它们当作Vue.js技术栈里一种解决问题的工具。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第三章-页面骨架开发）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1727,570 +2136,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Linux常用命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/16/Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:36:16+08:00">
-                2017-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h2 id="命令的基本格式"><a href="#命令的基本格式" class="headerlink" title="命令的基本格式"></a>命令的基本格式</h2><p>命令 [选项] [参数]</p>
-<p>注意:个别命令使用不遵循此格式<br>        当有多个选项时,可以写在一起<br>        简化选项等于完整选项<br>        -a 等于 –all</p>
-<p>查询目录中内容:ls<br>ls [选项] [文件或目录]<br>选项：<br>-a 显示所有文件，包含隐藏文件<br>-l 显示详细信息<br>-d 查看目录本身属性<br>-h 人性化显示文件大小<br>-i 显示inode节点（储存时生成的编码，格式化硬盘时候，分成等大的内存块4k,同时生成相应的节点表）</p>
-<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><h3 id="目录和文件处理命令"><a href="#目录和文件处理命令" class="headerlink" title="目录和文件处理命令"></a>目录和文件处理命令</h3><h4 id="建立目录：mkdir"><a href="#建立目录：mkdir" class="headerlink" title="建立目录：mkdir"></a>建立目录：mkdir</h4><ul>
-<li>mkdir -p [目录名]<br>-p 递归创建<br>命令英文原意:<strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectories</li>
-</ul>
-<h4 id="切换所在目录：cd"><a href="#切换所在目录：cd" class="headerlink" title="切换所在目录：cd"></a>切换所在目录：cd</h4><ul>
-<li><p>cd [目录]<br>命令英文原意:<strong>c</strong>hange <strong>d</strong>irectory</p>
-</li>
-<li><p>简化命令<br>cd和cd ~进入当前用户的家目录<br>cd - 进入上次目录<br>cd .. 进入上一级目录<br>cd .  进入当前目录</p>
-</li>
-</ul>
-<p>Ctrl+L 清屏<br>tab 可以补全目录或命令</p>
-<h4 id="查询所在目录位置：pwd"><a href="#查询所在目录位置：pwd" class="headerlink" title="查询所在目录位置：pwd"></a>查询所在目录位置：pwd</h4><p>命令英文原意:<strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory</p>
-<h4 id="删除空目录：rmdir"><a href="#删除空目录：rmdir" class="headerlink" title="删除空目录：rmdir"></a>删除空目录：rmdir</h4><ul>
-<li>rmdir [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove empty <strong>dir</strong>ectories</li>
-</ul>
-<h4 id="删除文件或目录：rm"><a href="#删除文件或目录：rm" class="headerlink" title="删除文件或目录：rm"></a>删除文件或目录：rm</h4><ul>
-<li>rm -rf [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove</li>
-<li>选项：<br>-r 删除目录<br>-f 强制</li>
-</ul>
-<h4 id="复制命令：cp"><a href="#复制命令：cp" class="headerlink" title="复制命令：cp"></a>复制命令：cp</h4><ul>
-<li>cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：<strong>c</strong>op<strong>y</strong></li>
-<li>选项：<br>-r   复制目录<br>-p   连带文件属性复制<br>-d   若源文件是链接文件,则复制链接属性<br>-a   相当于 -pdr</li>
-</ul>
-<h4 id="剪切或改名命令：mv"><a href="#剪切或改名命令：mv" class="headerlink" title="剪切或改名命令：mv"></a>剪切或改名命令：mv</h4><ul>
-<li>mv [原文件或目录] [目标目录]<br>命令英文原意：<strong>m</strong>o<strong>v</strong>e</li>
-</ul>
-<p>ll 等于 ls -l</p>
-<h4 id="常用目录的作用"><a href="#常用目录的作用" class="headerlink" title="常用目录的作用"></a>常用目录的作用</h4><ul>
-<li>/根目录<ul>
-<li>/bin命令保存目录（普通用户就可以读取的命令）</li>
-<li>/boot启动目录，启动相关文件</li>
-<li>/dev设备文件保存目录</li>
-<li>/etc配置文件保存目录</li>
-<li>/home普通用户的家目录</li>
-<li>/lib系统库保存目录</li>
-<li>/mnt系统挂载目录</li>
-<li>/media挂载目录</li>
-<li>/root超级用户的家目录</li>
-<li>/tmp临时目录</li>
-<li>/sbin命令保存目录（超级用户才能使用的目录）</li>
-<li>/proc直接写入内存的</li>
-<li>/sys</li>
-<li>/usr系统软件资源目录<ul>
-<li>/usr/bin/系统命令（普通用户）</li>
-<li>/usr/sbin/（超级用户）</li>
-</ul>
-</li>
-<li>/var系统相关文档内容</li>
-</ul>
-</li>
-</ul>
-<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
-<li>ln -s [原文件] [目标文件]<br>命令英文原意：<strong>l</strong>i<strong>n</strong>k</li>
-<li>功能描述：生成链接文件</li>
-<li>选项： -s 创建软链接</li>
-</ul>
-<p>硬链接特征：<br>1、拥有相同的i节点和存储block块，可以看作是同一个文件<br>2、可通过i节点识别<br>3、不能跨分区<br>4、不能针对目录使用</p>
-<p>软链接特征：<br>1、类似Windows快捷方式<br>2、软链接拥有自己的i节点和Block块，但是数据块中只保存原文件的文件名和i节点号，并没有实际的文件数据<br>3、lrwxrwxrwx l 软链接<br>4、修改任意文件，另一个文件都改变<br>5、删除原文件，软链接不能使用</p>
-<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
-<li>locate 文件名<br>在后台数据库中安文件名搜索，搜索速度更快</li>
-<li>updatedb<br>更新数据库</li>
-</ul>
-<h3 id="命令搜索命令-whereis-和-which"><a href="#命令搜索命令-whereis-和-which" class="headerlink" title="命令搜索命令 whereis 和 which"></a>命令搜索命令 whereis 和 which</h3><ul>
-<li><p>whereis 命令名<br>搜索命令所在路径及帮助文档所在位置<br>选项：<br>-b：只查找可执行文件<br>-m：只查找帮助文档</p>
-</li>
-<li><p>which 文件名<br>搜索命令所在路径及别名</p>
-</li>
-</ul>
-<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
-<li><p>find [搜索范围] [搜索条件]<br>搜索文件</p>
-</li>
-<li><p>find / -name install.log<br>避免大范围搜索，会非常消耗系统资源<br>find是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
-</li>
-<li><p>find / -iname install.log<br>不区分大小写</p>
-</li>
-<li><p>find / -user install.log<br>按照所有者搜索</p>
-</li>
-<li><p>find /root -nouser<br>查找没有所有者的文件</p>
-</li>
-<li><p>find /var/log/ -mtime +10<br>查找10天亲修改的文件</p>
-<p>+10 10天以前<br>-10 10天内<br>10 10天当天<br>-mtime 修改文件内容<br>-ctime 修改文件属性<br>-atime 文件访问时间</p>
-</li>
-<li><p>find . -size 25k<br>查找文件大小是25KB的文件</p>
-</li>
-</ul>
-<p>-25k 小于25KB的文件<br>25k 等于25KB的文件<br>+25k 大于25KB的文件</p>
-<ul>
-<li>find . -inum 262422<br>查找i几点是262422的文件</li>
-</ul>
-<p>find /ect -size +20k -a -size -50k<br>查找/etc/目录下，大于20KB并且小于50KB的文件<br>-a and 逻辑与<br>-o or 逻辑或</p>
-<p>find /ect -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20KB并且小于50KB的文件，并显示详细信息<br>-exec/-ok 命令 {} \; 对搜索结果执行操作</p>
-<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
-<li>grep [选项] 字符串 文件名<br>在文件当中匹配符合条件的字符串</li>
-</ul>
-<p>选项：<br>-i 忽略大小写<br>-v 排除指定的字符串</p>
-<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><p>man 命令</p>
-<p>查看命令拥有哪个级别的帮助<br>man -f 命令<br>相当于<br>whereis 命令</p>
-<p>举例：<br>man -5 passwd</p>
-<p>查看和命令相关的所有帮助<br>man -k 命令<br>相当于<br>apropos 命令</p>
-<p>选项帮助<br>命令 –help</p>
-<p>shell内部命令帮助<br>help shell内部命令</p>
-<p>详细命令info<br>info 命令<br>回车：进入子帮助页面<br>u：进入上层页面<br>n：进入下一个帮助小节<br>p：进入上一个帮助小节<br>q：退出</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/16/MySQL运算符和函数/" itemprop="url">MySQL运算符和函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:34:25+08:00">
-                2017-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL运算符和函数"><a href="#MySQL运算符和函数" class="headerlink" title="MySQL运算符和函数"></a>MySQL运算符和函数</h1><h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CONCAT()</td>
-<td style="text-align:left">字符连接</td>
-</tr>
-<tr>
-<td style="text-align:left">CONCAT_WS()</td>
-<td style="text-align:left">使用指定的分隔符进行字符连接</td>
-</tr>
-<tr>
-<td style="text-align:left">FORMAT()</td>
-<td style="text-align:left">数字格式化</td>
-</tr>
-<tr>
-<td style="text-align:left">LOWEER()</td>
-<td style="text-align:left">转换成小写字母</td>
-</tr>
-<tr>
-<td style="text-align:left">UPPER()</td>
-<td style="text-align:left">转换成大写字母</td>
-</tr>
-<tr>
-<td style="text-align:left">LEFT()</td>
-<td style="text-align:left">获取左侧字符</td>
-</tr>
-<tr>
-<td style="text-align:left">RIGHT()</td>
-<td style="text-align:left">获取右侧字符</td>
-</tr>
-<tr>
-<td style="text-align:left">LENGTH()</td>
-<td style="text-align:left">获取字符串长度</td>
-</tr>
-<tr>
-<td style="text-align:left">LTRIM()</td>
-<td style="text-align:left">删除前导空格</td>
-</tr>
-<tr>
-<td style="text-align:left">RTRIM()</td>
-<td style="text-align:left">删除后续空格</td>
-</tr>
-<tr>
-<td style="text-align:left">TRIM()</td>
-<td style="text-align:left">删除前导和后续空格</td>
-</tr>
-<tr>
-<td style="text-align:left">SUBSTRING()</td>
-<td style="text-align:left">字符串截取</td>
-</tr>
-<tr>
-<td style="text-align:left">[NOT] LIKE()</td>
-<td style="text-align:left">匹配模式</td>
-</tr>
-<tr>
-<td style="text-align:left">REPLACE()</td>
-<td style="text-align:left">字符串替换</td>
-</tr>
-</tbody>
-</table>
-<h2 id="数值运算符与函数"><a href="#数值运算符与函数" class="headerlink" title="数值运算符与函数"></a>数值运算符与函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CEIL()</td>
-<td style="text-align:left">进一取整</td>
-</tr>
-<tr>
-<td style="text-align:left">DIV</td>
-<td style="text-align:left">整数除法</td>
-</tr>
-<tr>
-<td style="text-align:left">FLOOR()</td>
-<td style="text-align:left">舍一取整</td>
-</tr>
-<tr>
-<td style="text-align:left">MOD</td>
-<td style="text-align:left">取余数（取模）</td>
-</tr>
-<tr>
-<td style="text-align:left">POWER()</td>
-<td style="text-align:left">幂运算</td>
-</tr>
-<tr>
-<td style="text-align:left">ROUND()</td>
-<td style="text-align:left">四舍五入</td>
-</tr>
-<tr>
-<td style="text-align:left">TRUNCATE()</td>
-<td style="text-align:left">字数截取</td>
-</tr>
-</tbody>
-</table>
-<h2 id="比较运算符与函数"><a href="#比较运算符与函数" class="headerlink" title="比较运算符与函数"></a>比较运算符与函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">[NOT] BETWEEN…AND…</td>
-<td style="text-align:left">[不]在范围之内</td>
-</tr>
-<tr>
-<td style="text-align:left">[NOT] IN()</td>
-<td style="text-align:left">[不]在列出值范围内</td>
-</tr>
-<tr>
-<td style="text-align:left">IS [NOT] NULL</td>
-<td style="text-align:left">[不]为空</td>
-</tr>
-</tbody>
-</table>
-<h2 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">NOW()</td>
-<td style="text-align:left">当前日期和时间</td>
-</tr>
-<tr>
-<td style="text-align:left">CURDATE()</td>
-<td style="text-align:left">当前日期</td>
-</tr>
-<tr>
-<td style="text-align:left">CURTIME()</td>
-<td style="text-align:left">当前时间</td>
-</tr>
-<tr>
-<td style="text-align:left">DATE_ADD()</td>
-<td style="text-align:left">日期变化</td>
-</tr>
-<tr>
-<td style="text-align:left">DATEDIFF()</td>
-<td style="text-align:left">日期差值</td>
-</tr>
-<tr>
-<td style="text-align:left">DATE_FORMAT()</td>
-<td style="text-align:left">日期格式化</td>
-</tr>
-</tbody>
-</table>
-<h2 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CONNECTION_ID()</td>
-<td style="text-align:left">连接ID</td>
-</tr>
-<tr>
-<td style="text-align:left">DATEBASE()</td>
-<td style="text-align:left">当前数据库</td>
-</tr>
-<tr>
-<td style="text-align:left">LAST_INSERT_ID()</td>
-<td style="text-align:left">最后插入记录的ID号</td>
-</tr>
-<tr>
-<td style="text-align:left">USER()</td>
-<td style="text-align:left">当前用户</td>
-</tr>
-<tr>
-<td style="text-align:left">VERSION()</td>
-<td style="text-align:left">版本信息</td>
-</tr>
-</tbody>
-</table>
-<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">AVG()</td>
-<td style="text-align:left">平均值</td>
-</tr>
-<tr>
-<td style="text-align:left">COUNT()</td>
-<td style="text-align:left">计数</td>
-</tr>
-<tr>
-<td style="text-align:left">MAX()</td>
-<td style="text-align:left">最大值</td>
-</tr>
-<tr>
-<td style="text-align:left">MIN()</td>
-<td style="text-align:left">最小值</td>
-</tr>
-<tr>
-<td style="text-align:left">SUM()</td>
-<td style="text-align:left">求和</td>
-</tr>
-</tbody>
-</table>
-<h2 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">MD5()</td>
-<td style="text-align:left">信息摘要算法</td>
-</tr>
-<tr>
-<td style="text-align:left">PASSWORD()</td>
-<td style="text-align:left">密码算法</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2340,7 +2185,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
