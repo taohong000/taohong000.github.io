@@ -93,25 +93,22 @@
 
 
 
-<meta name="description" content="scss基础@(SCSS)
-找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。只要知道是什么，和最基本的东西就行。
+<meta name="description" content="scss基础找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。只要知道是什么，和最基本的东西就行。
 前端技术发展的很快，要不断的学一些新东西，这样以这些东西为基础的新东西发展出来时，才能很快知道和学习。
-[">
+变量scss中可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="scss基础">
 <meta property="og:url" content="http://yoursite.com/2017/07/16/scss基础/index.html">
 <meta property="og:site_name" content="Taohong's blog">
-<meta property="og:description" content="scss基础@(SCSS)
-找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。只要知道是什么，和最基本的东西就行。
+<meta property="og:description" content="scss基础找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。只要知道是什么，和最基本的东西就行。
 前端技术发展的很快，要不断的学一些新东西，这样以这些东西为基础的新东西发展出来时，才能很快知道和学习。
-[">
-<meta property="og:updated_time" content="2017-07-16T11:16:20.490Z">
+变量scss中可以">
+<meta property="og:updated_time" content="2017-07-20T15:42:54.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scss基础">
-<meta name="twitter:description" content="scss基础@(SCSS)
-找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。只要知道是什么，和最基本的东西就行。
+<meta name="twitter:description" content="scss基础找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。只要知道是什么，和最基本的东西就行。
 前端技术发展的很快，要不断的学一些新东西，这样以这些东西为基础的新东西发展出来时，才能很快知道和学习。
-[">
+变量scss中可以">
 
 
 
@@ -372,10 +369,8 @@
       
 
       
-        <h1 id="scss基础"><a href="#scss基础" class="headerlink" title="scss基础"></a>scss基础</h1><p>@(SCSS)</p>
-<p>找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。<br>只要知道是什么，和最基本的东西就行。</p>
+        <h1 id="scss基础"><a href="#scss基础" class="headerlink" title="scss基础"></a>scss基础</h1><p>找一个点看官网的demo入手，入手后边用边找对应的API。只要学会最基本的东西，如何编译，嵌套的写法，如何计算。就和学js一样，最开始只要学习变量，判断，循环，随着项目过程，不断的看api，慢慢就熟了，然后可以看一看背后的东西。<br>只要知道是什么，和最基本的东西就行。</p>
 <p>前端技术发展的很快，要不断的学一些新东西，这样以这些东西为基础的新东西发展出来时，才能很快知道和学习。</p>
-<p>[TOC]</p>
 <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>scss中可以定义变量，方便统一修改和维护。<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//scss style</span></div><div class="line"><span class="comment">//-----------------------------------</span></div><div class="line"><span class="variable">$fontStack</span>:    Helvetica, sans-serif;</div><div class="line"><span class="variable">$primaryColor</span>: <span class="number">#333</span>;</div><div class="line"></div><div class="line"><span class="selector-tag">body</span> &#123;</div><div class="line">  <span class="attribute">font-family</span>: <span class="variable">$fontStack</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="variable">$primaryColor</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//css style</div><div class="line">//-----------------------------------</div><div class="line">body &#123;</div><div class="line">  font-family: Helvetica, sans-serif;</div><div class="line">  color: #333;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h2><p>scss可以进行选择器的嵌套，表示层级关系，看起来很优雅整齐。</p>
@@ -449,8 +444,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记-第一章/" rel="prev" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章）">
-                Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）/" rel="prev" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）">
+                Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -523,7 +518,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -545,7 +540,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -1,0 +1,1182 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="慕课网,vue," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）jsonp原理介绍+Promise封装jsonpjsonp github库
+Promise封装123456789101112131415161718192021222324import originJsonp from &apos;jsonp&apos;export default function jsonp(url, data,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）">
+<meta property="og:url" content="http://yoursite.com/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/index.html">
+<meta property="og:site_name" content="Taohong's blog">
+<meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）jsonp原理介绍+Promise封装jsonpjsonp github库
+Promise封装123456789101112131415161718192021222324import originJsonp from &apos;jsonp&apos;export default function jsonp(url, data,">
+<meta property="og:updated_time" content="2017-07-26T15:25:06.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）">
+<meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）jsonp原理介绍+Promise封装jsonpjsonp github库
+Promise封装123456789101112131415161718192021222324import originJsonp from &apos;jsonp&apos;export default function jsonp(url, data,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/"/>
+
+
+
+
+
+  <title>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发） | Taohong's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T23:24:16+08:00">
+                2017-07-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）</h1><h2 id="jsonp原理介绍-Promise封装"><a href="#jsonp原理介绍-Promise封装" class="headerlink" title="jsonp原理介绍+Promise封装"></a>jsonp原理介绍+Promise封装</h2><h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p><a href="https://github.com/webmodules/jsonp" target="_blank" rel="external">jsonp github库</a></p>
+<h3 id="Promise封装"><a href="#Promise封装" class="headerlink" title="Promise封装"></a>Promise封装</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> originJsonp <span class="keyword">from</span> <span class="string">'jsonp'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">url, data, option</span>) </span>&#123;</div><div class="line">  url += (url.indexOf(<span class="string">'?'</span>) &lt; <span class="number">0</span> ? <span class="string">'?'</span> : <span class="string">'&amp;'</span>) + param(data)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    originJsonp(url, option, (err, data) =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (!err) &#123;</div><div class="line">        resolve(data)</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        reject(err)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">param</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> url = <span class="string">''</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> data) &#123;</div><div class="line">    <span class="keyword">let</span> value = data[k] !== <span class="literal">undefined</span> ? data[k] : <span class="string">''</span></div><div class="line">    url += <span class="string">'&amp;'</span> + k + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>(value)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> url ? url.substring(<span class="number">1</span>) : <span class="string">''</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="jsonp的应用-轮播图数据抓取"><a href="#jsonp的应用-轮播图数据抓取" class="headerlink" title="jsonp的应用+轮播图数据抓取"></a>jsonp的应用+轮播图数据抓取</h2><ol>
+<li><p>添加请求通用配置文件src/api/config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> commonParams = &#123;</div><div class="line">  <span class="attr">g_tk</span>: <span class="number">5381</span>,</div><div class="line">  <span class="attr">inCharset</span>: <span class="string">'utf-8'</span>,</div><div class="line">  <span class="attr">outCharset</span>: <span class="string">'utf-8'</span>,</div><div class="line">  <span class="attr">notice</span>: <span class="number">0</span>,</div><div class="line">  <span class="attr">format</span>: <span class="string">'jsonp'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> options = &#123;</div><div class="line">  <span class="attr">param</span>: <span class="string">'jsonpCallback'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ERR_OK = <span class="number">0</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加接口文件src/api/recommend.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> jsonp <span class="keyword">from</span> <span class="string">'common/js/jsonp'</span></div><div class="line"><span class="keyword">import</span> &#123;commonParams, options&#125; <span class="keyword">from</span> <span class="string">'./config'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getRecommend</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">platform</span>: <span class="string">'h5'</span>,</div><div class="line">    <span class="attr">uin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">1</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建 components/recommend/recommend.vue组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"recommend"</span> <span class="attr">ref</span>=<span class="string">"recommend"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;getRecommend&#125; <span class="keyword">from</span> <span class="string">'api/recommend'</span></div><div class="line">  <span class="keyword">import</span> &#123;ERR_OK&#125; <span class="keyword">from</span> <span class="string">'api/config'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">recommends</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>._getRecommend()</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      _getRecommend() &#123;</div><div class="line">        getRecommend().then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">if</span> (res.code === ERR_OK) &#123;</div><div class="line">            <span class="keyword">this</span>.recommends = res.data.slider</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .recommend</div><div class="line">    position: fixed</div><div class="line">    width: 100%</div><div class="line">    top: 88px</div><div class="line">    bottom: 0</div><div class="line">    .recommend-content</div><div class="line">      height: 100%</div><div class="line">      overflow: hidden</div><div class="line">      .slider-wrapper</div><div class="line">        position: relative</div><div class="line">        width: 100%</div><div class="line">        overflow: hidden</div><div class="line">      .recommend-list</div><div class="line">        .list-title</div><div class="line">          height: 65px</div><div class="line">          line-height: 65px</div><div class="line">          text-align: center</div><div class="line">          font-size: $font-size-medium</div><div class="line">          color: $color-theme</div><div class="line">        .item</div><div class="line">          display: flex</div><div class="line">          box-sizing: border-box</div><div class="line">          align-items: center</div><div class="line">          padding: 0 20px 20px 20px</div><div class="line">          .icon</div><div class="line">            flex: 0 0 60px</div><div class="line">            width: 60px</div><div class="line">            padding-right: 20px</div><div class="line">          .text</div><div class="line">            display: flex</div><div class="line">            flex-direction: column</div><div class="line">            justify-content: center</div><div class="line">            flex: 1</div><div class="line">            line-height: 20px</div><div class="line">            overflow: hidden</div><div class="line">            font-size: $font-size-medium</div><div class="line">            .name</div><div class="line">              margin-bottom: 10px</div><div class="line">              color: $color-text</div><div class="line">            .desc</div><div class="line">              color: $color-text-d</div><div class="line">      .loading-container</div><div class="line">        position: absolute</div><div class="line">        width: 100%</div><div class="line">        top: 50%</div><div class="line">        transform: translateY(-50%)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="轮播图组件实现"><a href="#轮播图组件实现" class="headerlink" title="轮播图组件实现"></a>轮播图组件实现</h2><ol>
+<li>创建基础组件 base/slider/slider.vue<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"slider"</span> <span class="attr">ref</span>=<span class="string">"slider"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"slider-group"</span> <span class="attr">ref</span>=<span class="string">"sliderGroup"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">slot</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"dots"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"dot"</span> <span class="attr">:class</span>=<span class="string">"&#123;active: currentPageIndex === index &#125;"</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in dots"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .slider</div><div class="line">    min-height: 1px</div><div class="line">    .slider-group</div><div class="line">      position: relative</div><div class="line">      overflow: hidden</div><div class="line">      white-space: nowrap</div><div class="line">      .slider-item</div><div class="line">        float: left</div><div class="line">        box-sizing: border-box</div><div class="line">        overflow: hidden</div><div class="line">        text-align: center</div><div class="line">        a</div><div class="line">          display: block</div><div class="line">          width: 100%</div><div class="line">          overflow: hidden</div><div class="line">          text-decoration: none</div><div class="line">        img</div><div class="line">          display: block</div><div class="line">          width: 100%</div><div class="line">    .dots</div><div class="line">      position: absolute</div><div class="line">      right: 0</div><div class="line">      left: 0</div><div class="line">      bottom: 12px</div><div class="line">      text-align: center</div><div class="line">      font-size: 0</div><div class="line">      .dot</div><div class="line">        display: inline-block</div><div class="line">        margin: 0 4px</div><div class="line">        width: 8px</div><div class="line">        height: 8px</div><div class="line">        border-radius: 50%</div><div class="line">        background: $color-text-l</div><div class="line">        &amp;.active</div><div class="line">          width: 20px</div><div class="line">          border-radius: 5px</div><div class="line">          background: $color-text-ll</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>添加设置<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'slider'</span>,</div><div class="line">  <span class="attr">props</span>: &#123;</div><div class="line">    <span class="comment">// 循环轮播</span></div><div class="line">    loop: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">      <span class="attr">default</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 自动录播</span></div><div class="line">    autoPlay: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">      <span class="attr">default</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 轮播间隔</span></div><div class="line">    interval: &#123;</div><div class="line">      <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">      <span class="attr">default</span>: <span class="number">4000</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>引入better-scroll并设置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 设置sliderGroup宽度</span></div><div class="line">_setSliderWidth(isResize) &#123;</div><div class="line">        <span class="keyword">this</span>.children = <span class="keyword">this</span>.$refs.sliderGroup.children</div><div class="line"></div><div class="line">        <span class="keyword">let</span> width = <span class="number">0</span></div><div class="line">        <span class="keyword">let</span> sliderWidth = <span class="keyword">this</span>.$refs.slider.clientWidth</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.children.length; i++) &#123;</div><div class="line">          <span class="keyword">let</span> child = <span class="keyword">this</span>.children[i]</div><div class="line">          addClass(child, <span class="string">'slider-item'</span>)</div><div class="line"></div><div class="line">          child.style.width = sliderWidth + <span class="string">'px'</span></div><div class="line">          width += sliderWidth</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.loop &amp;&amp; !isResize) &#123;</div><div class="line">          width += <span class="number">2</span> * sliderWidth</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.$refs.sliderGroup.style.width = width + <span class="string">'px'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加common/js/dom.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">hasClass</span>(<span class="params">el, className</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(^|\\s)'</span> + className + <span class="string">'(\\s|$)'</span>)</div><div class="line">  <span class="keyword">return</span> reg.test(el.className)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">el, className</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (hasClass(el, className)) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">let</span> newClass = el.className.split(<span class="string">' '</span>)</div><div class="line">  newClass.push(className)</div><div class="line">  el.className = newClass.join(<span class="string">' '</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在mounted中添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一般网页刷新为17毫秒</span></div><div class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">     <span class="keyword">this</span>._setSliderWidth()</div><div class="line">     <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">       <span class="keyword">this</span>._play()</div><div class="line">     &#125;</div><div class="line">   &#125;, <span class="number">20</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>在recommend.vue中使用组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// v-if确保slider中有元素后再执行</span></div><div class="line">&lt;div v-<span class="keyword">if</span>=<span class="string">"recommends.length"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"slider-wrapper"</span> ref=<span class="string">"sliderWrapper"</span>&gt;</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">slider</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in recommends"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">"item.linkUrl"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"needsclick"</span> @<span class="attr">load</span>=<span class="string">"loadImage"</span> <span class="attr">:src</span>=<span class="string">"item.picUrl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">slider</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在slider.vue中初始化slider</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">_initSlider() &#123;</div><div class="line">  <span class="keyword">this</span>.slider = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.slider, &#123;</div><div class="line">    <span class="attr">scrollX</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">scrollY</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">momentum</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">snap</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">snapLoop</span>: <span class="keyword">this</span>.loop,</div><div class="line">    <span class="attr">snapThreshold</span>: <span class="number">0.3</span>,</div><div class="line">    <span class="attr">snapSpeed</span>: <span class="number">400</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化dots</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加methods</span></div><div class="line">_initDots() &#123;</div><div class="line">  <span class="keyword">this</span>.dots = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="keyword">this</span>.children.length)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 在_initSlider中添加监听事件</span></div><div class="line"><span class="keyword">this</span>.slider.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">  <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.slider.getCurrentPage().pageX</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</div><div class="line">    pageIndex -= <span class="number">1</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.currentPageIndex = pageIndex</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">    <span class="keyword">this</span>._play()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加自动播放事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 添加methods</span></div><div class="line">_initDots() &#123;</div><div class="line">  <span class="keyword">this</span>.dots = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="keyword">this</span>.children.length)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 在_initSlider中添加监听事件</span></div><div class="line">_play() &#123;</div><div class="line">  <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.currentPageIndex + <span class="number">1</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</div><div class="line">    pageIndex += <span class="number">1</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.slider.goToPage(pageIndex, <span class="number">0</span>, <span class="number">400</span>)</div><div class="line">  &#125;, <span class="keyword">this</span>.interval)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改_initSlider</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">_initSlider() &#123;</div><div class="line">  <span class="keyword">this</span>.slider = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.slider, &#123;</div><div class="line">      <span class="attr">scrollX</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">scrollY</span>: <span class="literal">false</span>,</div><div class="line">      <span class="attr">momentum</span>: <span class="literal">false</span>,</div><div class="line">      <span class="attr">snap</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">snapLoop</span>: <span class="keyword">this</span>.loop,</div><div class="line">      <span class="attr">snapThreshold</span>: <span class="number">0.3</span>,</div><div class="line">      <span class="attr">snapSpeed</span>: <span class="number">400</span>,</div><div class="line">      <span class="attr">click</span>: <span class="literal">true</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.slider.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">      <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.slider.getCurrentPage().pageX</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</div><div class="line">          pageIndex -= <span class="number">1</span></div><div class="line">      &#125;</div><div class="line">      <span class="keyword">this</span>.currentPageIndex = pageIndex</div><div class="line">      <span class="comment">// 添加自动播放</span></div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">          <span class="keyword">this</span>._play()</div><div class="line">      &#125;</div><div class="line">  &#125;)</div><div class="line">  <span class="comment">// 手动滑动后清除定时器</span></div><div class="line">  <span class="keyword">this</span>.slider.on(<span class="string">'beforeScrollStart'</span>, () =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.autoPlay) &#123;</div><div class="line">          clearTimeout(<span class="keyword">this</span>.timer)</div><div class="line">      &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加窗口改变监听事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, () =&gt; &#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.slider) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>._setSliderWidth(<span class="literal">true</span>)</div><div class="line">  <span class="keyword">this</span>.slider.refresh()</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="歌单数据接口-axios-介绍和后端接口代理"><a href="#歌单数据接口-axios-介绍和后端接口代理" class="headerlink" title="歌单数据接口, axios 介绍和后端接口代理"></a>歌单数据接口, axios 介绍和后端接口代理</h2><ol>
+<li><p>在dev-server</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> apiRoutes = express.Router()</div><div class="line"></div><div class="line">apiRoutes.get(<span class="string">'/getDiscList'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> url = <span class="string">'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'</span></div><div class="line">  axios.get(url, &#123;</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">      <span class="attr">referer</span>: <span class="string">'https://c.y.qq.com/'</span>,</div><div class="line">      <span class="attr">host</span>: <span class="string">'c.y.qq.com'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">params</span>: req.query</div><div class="line">  &#125;).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">    res.json(response.data)</div><div class="line">  &#125;).catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(e)</div><div class="line">  &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(<span class="string">'/api'</span>, apiRoutes)</div></pre></td></tr></table></figure>
+</li>
+<li><p>在src/api/recommend.js中添加接口getDiscList</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getDiscList</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'/api/getDiscList'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">platform</span>: <span class="string">'yqq'</span>,</div><div class="line">    <span class="attr">hostUin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">sin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">ein</span>: <span class="number">29</span>,</div><div class="line">    <span class="attr">sortId</span>: <span class="number">5</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">categoryId</span>: <span class="number">10000000</span>,</div><div class="line">    <span class="attr">rnd</span>: <span class="built_in">Math</span>.random(),</div><div class="line">    <span class="attr">format</span>: <span class="string">'json'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> axios.get(url, &#123;</div><div class="line">    <span class="attr">params</span>: data</div><div class="line">  &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(res.data)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在recommend.vue中添加列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"recommend-list"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"list-title"</span>&gt;</span>热门歌单推荐<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"item in discList"</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"60"</span> <span class="attr">height</span>=<span class="string">"60"</span>  <span class="attr">:src</span>=<span class="string">"item.imgurl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span></div><div class="line">      // v-html:转义</div><div class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"name"</span> <span class="attr">v-html</span>=<span class="string">"item.creator.name"</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span> <span class="attr">v-html</span>=<span class="string">"item.dissname"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="scroll-组件的抽象和应用"><a href="#scroll-组件的抽象和应用" class="headerlink" title="scroll 组件的抽象和应用"></a>scroll 组件的抽象和应用</h2><ol>
+<li><p>添加通用组件scroll</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"wrapper"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">'better-scroll'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">probeType</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">        <span class="attr">default</span>: <span class="number">1</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">click</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">        <span class="attr">default</span>: <span class="literal">true</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: <span class="literal">null</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    mounted() &#123;</div><div class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>._initScroll()</div><div class="line">      &#125;, <span class="number">20</span>)</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      _initScroll() &#123;</div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.$refs.wrapper) &#123;</div><div class="line">          <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.scroll = <span class="keyword">new</span> BScroll(<span class="keyword">this</span>.$refs.wrapper, &#123;</div><div class="line">          <span class="attr">probeType</span>: <span class="keyword">this</span>.probeType,</div><div class="line">          <span class="attr">click</span>: <span class="keyword">this</span>.click</div><div class="line">        &#125;)</div><div class="line">      &#125;,</div><div class="line">      enable() &#123;</div><div class="line">        <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.enable()</div><div class="line">      &#125;,</div><div class="line">      disable() &#123;</div><div class="line">        <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.disable()</div><div class="line">      &#125;,</div><div class="line">      refresh() &#123;</div><div class="line">        <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.refresh()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      data() &#123;</div><div class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.refresh()</div><div class="line">        &#125;, <span class="number">20</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>recommend.vue中添加loadImage</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">loadImage() &#123;</div><div class="line">  <span class="comment">// this.checkloaded:标志位, 只计算一次</span></div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.checkloaded) &#123;</div><div class="line">    <span class="keyword">this</span>.checkloaded = <span class="literal">true</span></div><div class="line">    <span class="keyword">this</span>.$refs.scroll.refresh()</div><div class="line">  &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="vue-lazyloadvue-lazyload-懒加载插件介绍和应用"><a href="#vue-lazyloadvue-lazyload-懒加载插件介绍和应用" class="headerlink" title="vue-lazyloadvue-lazyload 懒加载插件介绍和应用"></a>vue-lazyload<a href="https://github.com/hilongjw/vue-lazyload" target="_blank" rel="external">vue-lazyload</a> 懒加载插件介绍和应用</h2><ol>
+<li><p>main.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> VueLazyload <span class="keyword">from</span> <span class="string">'vue-lazyload'</span></div><div class="line">Vue.use(VueLazyload, &#123;</div><div class="line">  <span class="attr">loading</span>: <span class="built_in">require</span>(<span class="string">'common/image/default.png'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>recommend.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"60"</span> <span class="attr">height</span>=<span class="string">"60"</span>  <span class="attr">v-lazy</span>=<span class="string">"item.imgurl"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>fastclick避免拦截, 加class needsclick</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"needsclick"</span> @<span class="attr">load</span>=<span class="string">"loadImage"</span> <span class="attr">:src</span>=<span class="string">"item.picUrl"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="loading-基础组件的开发和应用"><a href="#loading-基础组件的开发和应用" class="headerlink" title="loading 基础组件的开发和应用"></a>loading 基础组件的开发和应用</h2><ol>
+<li>添加基础组件loading.vue 在 recommend.vue中使用<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"loading"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">width</span>=<span class="string">"24"</span> <span class="attr">height</span>=<span class="string">"24"</span> <span class="attr">src</span>=<span class="string">"./loading.gif"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">title</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'正在载入...'</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .loading</div><div class="line">    width: 100%</div><div class="line">    text-align: center</div><div class="line">    .desc</div><div class="line">      line-height: 20px</div><div class="line">      font-size: $font-size-small</div><div class="line">      color: $color-text-l</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/24/Vue-js-中，7种定义组件模板的方法/" rel="next" title="Vue.js 中，7种定义组件模板的方法">
+                <i class="fa fa-chevron-left"></i> Vue.js 中，7种定义组件模板的方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/" rel="prev" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）">
+                Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg"
+               alt="Taohong" />
+          <p class="site-author-name" itemprop="name">Taohong</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/taohong000" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）"><span class="nav-number">1.</span> <span class="nav-text">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp原理介绍-Promise封装"><span class="nav-number">1.1.</span> <span class="nav-text">jsonp原理介绍+Promise封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">1.1.1.</span> <span class="nav-text">jsonp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise封装"><span class="nav-number">1.1.2.</span> <span class="nav-text">Promise封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp的应用-轮播图数据抓取"><span class="nav-number">1.2.</span> <span class="nav-text">jsonp的应用+轮播图数据抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轮播图组件实现"><span class="nav-number">1.3.</span> <span class="nav-text">轮播图组件实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#歌单数据接口-axios-介绍和后端接口代理"><span class="nav-number">1.4.</span> <span class="nav-text">歌单数据接口, axios 介绍和后端接口代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scroll-组件的抽象和应用"><span class="nav-number">1.5.</span> <span class="nav-text">scroll 组件的抽象和应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-lazyloadvue-lazyload-懒加载插件介绍和应用"><span class="nav-number">1.6.</span> <span class="nav-text">vue-lazyloadvue-lazyload 懒加载插件介绍和应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loading-基础组件的开发和应用"><span class="nav-number">1.7.</span> <span class="nav-text">loading 基础组件的开发和应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
