@@ -100,7 +100,7 @@ export default class Singer {
 
 ## listview 基础组件的开发和应用-滚动列表实现
 新建通用组件 listview
-```javascript
+```html
 <template>
   <scroll :data="data"
           class="listview">
