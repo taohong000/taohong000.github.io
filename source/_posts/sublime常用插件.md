@@ -6,10 +6,6 @@ tags: sublime
 
 # sublime常用插件
 
-@(sublime)[插件, 初始化配置]
-
-[TOC]
-
 ## 设置(setting)
 
 ```json

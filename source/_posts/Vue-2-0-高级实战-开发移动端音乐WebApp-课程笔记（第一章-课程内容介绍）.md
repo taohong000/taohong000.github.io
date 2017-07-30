@@ -11,10 +11,6 @@ tags:
 
 # Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第一章 课程内容介绍）
 
-@(taohong000 的笔记本)[慕课网, vue]
-
-[toc]
-
 ## 应用的分层逻辑结构模型(总体结构)
 
 ![总体结构](http://ot2alabfu.bkt.clouddn.com/image/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/%E6%85%95%E8%AF%BE%E7%BD%91/vue2.0%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9F%B3%E4%B9%90WebApp/%E6%80%BB%E4%BD%93%E7%BB%93%E6%9E%84.png)

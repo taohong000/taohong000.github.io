@@ -1,14 +1,12 @@
 ---
 title: MySQL语句
 date: 2017-07-12 22:58:09
-tags: mysql
+tags: 
+- mysql
+- 数据库
 ---
 
 # MySQL语句
-
-@(MySQL)[数据库]
-
-[TOC]
 
 ## 初涉MySQL
 

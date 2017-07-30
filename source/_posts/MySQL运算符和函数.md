@@ -1,14 +1,12 @@
 ---
 title: MySQL运算符和函数
 date: 2017-07-16 18:34:25
-tags: mysql
+tags: 
+- mysql
+- 数据库
 ---
 
 # MySQL运算符和函数
-
-@(MySQL)[数据库]
-
-[TOC]
 
 ## 字符函数
 

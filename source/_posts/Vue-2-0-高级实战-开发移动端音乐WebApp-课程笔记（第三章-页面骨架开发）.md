@@ -10,11 +10,8 @@ tags:
 ---
 # Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第三章 页面骨架开发）
 
-@(taohong000 的笔记本)[慕课网, vue]
-
-[toc]
-
 ## 页面入口+header 组件的编写
+
 ### index.js 添加 viewport
 ```html
 <!DOCTYPE html>

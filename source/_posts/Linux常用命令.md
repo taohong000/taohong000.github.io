@@ -6,10 +6,6 @@ tags: Linux
 
 # Linux常用命令
 
-@(Linux)
-
-[TOC]
-
 ## 命令的基本格式
 
 命令 [选项] [参数]
