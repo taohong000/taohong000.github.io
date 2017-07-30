@@ -1,0 +1,1131 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="慕课网,vue," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）歌手数据接口抓取12345678910111213141516171819import jsonp from &apos;common/js/jsonp&apos;import &amp;#123;commonParams, options&amp;#125; from &apos;./config&apos;export function getSingerList">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/index.html">
+<meta property="og:site_name" content="Taohong's blog">
+<meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）歌手数据接口抓取12345678910111213141516171819import jsonp from &apos;common/js/jsonp&apos;import &amp;#123;commonParams, options&amp;#125; from &apos;./config&apos;export function getSingerList">
+<meta property="og:updated_time" content="2017-07-30T08:47:14.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）">
+<meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）歌手数据接口抓取12345678910111213141516171819import jsonp from &apos;common/js/jsonp&apos;import &amp;#123;commonParams, options&amp;#125; from &apos;./config&apos;export function getSingerList">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/"/>
+
+
+
+
+
+  <title>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发） | Taohong's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T16:46:25+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）</h1><h2 id="歌手数据接口抓取"><a href="#歌手数据接口抓取" class="headerlink" title="歌手数据接口抓取"></a>歌手数据接口抓取</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> jsonp <span class="keyword">from</span> <span class="string">'common/js/jsonp'</span></div><div class="line"><span class="keyword">import</span> &#123;commonParams, options&#125; <span class="keyword">from</span> <span class="string">'./config'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getSingerList</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/v8/fcg-bin/v8.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">channel</span>: <span class="string">'singer'</span>,</div><div class="line">    <span class="attr">page</span>: <span class="string">'list'</span>,</div><div class="line">    <span class="attr">key</span>: <span class="string">'all_all_all'</span>,</div><div class="line">    <span class="attr">pagesize</span>: <span class="number">100</span>,</div><div class="line">    <span class="attr">pagenum</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">hostUin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'yqq'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="歌手数据处理和-Singer-类的封装"><a href="#歌手数据处理和-Singer-类的封装" class="headerlink" title="歌手数据处理和 Singer 类的封装"></a>歌手数据处理和 Singer 类的封装</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">_normalizeSinger(list) &#123;</div><div class="line">  <span class="keyword">let</span> map = &#123;</div><div class="line">    <span class="attr">hot</span>: &#123;</div><div class="line">      <span class="attr">title</span>: HOT_NAME,</div><div class="line">      <span class="attr">items</span>: []</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 填充hot</span></div><div class="line">  list.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> (index &lt; HOT_SINGER_LEN) &#123;</div><div class="line">    	<span class="comment">// 封装 类Singer</span></div><div class="line">      map.hot.items.push(<span class="keyword">new</span> Singer(&#123;</div><div class="line">        <span class="attr">name</span>: item.Fsinger_name,</div><div class="line">        <span class="attr">id</span>: item.Fsinger_mid</div><div class="line">      &#125;))</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 聚合</span></div><div class="line">    <span class="keyword">const</span> key = item.Findex</div><div class="line"></div><div class="line">    <span class="comment">// 创建对象</span></div><div class="line">    <span class="keyword">if</span> (!map[key]) &#123;</div><div class="line">      map[key] = &#123;</div><div class="line">        <span class="attr">title</span>: key,</div><div class="line">        <span class="attr">items</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    map[key].items.push(<span class="keyword">new</span> Singer(&#123;</div><div class="line">      <span class="attr">name</span>: item.Fsinger_name,</div><div class="line">      <span class="attr">id</span>: item.Fsinger_mid</div><div class="line">    &#125;))</div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  <span class="comment">// 为了得到有序列表，我们需要处理 map</span></div><div class="line">  <span class="keyword">let</span> ret = []</div><div class="line">  <span class="keyword">let</span> hot = []</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> map) &#123;</div><div class="line">    <span class="keyword">let</span> val = map[key]</div><div class="line">    <span class="keyword">if</span> (val.title.match(<span class="regexp">/[a-zA-Z]/</span>)) &#123;</div><div class="line">      ret.push(val)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (val.title === HOT_NAME) &#123;</div><div class="line">      hot.push(val)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  ret.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> a.title.charCodeAt(<span class="number">0</span>) - b.title.charCodeAt(<span class="number">0</span>)</div><div class="line">  &#125;)</div><div class="line">  <span class="keyword">return</span> hot.concat(ret)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新建common/js/singer.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Singer</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(&#123;id, name&#125;) &#123;</div><div class="line">    <span class="keyword">this</span>.id = id</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.avatar = <span class="string">`https://y.gtimg.cn/music/photo_new/T001R300x300M000<span class="subst">$&#123;id&#125;</span>.jpg?max_age=2592000`</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="listview-基础组件的开发和应用-滚动列表实现"><a href="#listview-基础组件的开发和应用-滚动列表实现" class="headerlink" title="listview 基础组件的开发和应用-滚动列表实现"></a>listview 基础组件的开发和应用-滚动列表实现</h2><p>新建通用组件 listview<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;scroll :data="data"</div><div class="line">          class="listview"&gt;</div><div class="line">    &lt;ul&gt;</div><div class="line">      &lt;li v-for="group in data" class="list-group" ref="listGroup"&gt;</div><div class="line">        &lt;h2 class="list-group-title"&gt;&#123;&#123;group.title&#125;&#125;&lt;/h2&gt;</div><div class="line">        &lt;uL&gt;</div><div class="line">          &lt;li v-for="item in group.items" class="list-group-item"&gt;</div><div class="line">            &lt;img class="avatar" v-lazy="item.avatar"&gt;</div><div class="line">            &lt;span class="name"&gt;&#123;&#123;item.name&#125;&#125;&lt;/span&gt;</div><div class="line">          &lt;/li&gt;</div><div class="line">        &lt;/uL&gt;</div><div class="line">      &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">  &lt;/scroll&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">  import Scroll from 'base/scroll/scroll'</div><div class="line"></div><div class="line">  export default &#123;</div><div class="line">    props: &#123;</div><div class="line">      data: &#123;</div><div class="line">        type: Array,</div><div class="line">        default: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    components: &#123;</div><div class="line">      Scroll</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style scoped lang="stylus" rel="stylesheet/stylus"&gt;</div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .listview</div><div class="line">    position: relative</div><div class="line">    width: 100%</div><div class="line">    height: 100%</div><div class="line">    overflow: hidden</div><div class="line">    background: $color-background</div><div class="line">    .list-group</div><div class="line">      padding-bottom: 30px</div><div class="line">      .list-group-title</div><div class="line">        height: 30px</div><div class="line">        line-height: 30px</div><div class="line">        padding-left: 20px</div><div class="line">        font-size: $font-size-small</div><div class="line">        color: $color-text-l</div><div class="line">        background: $color-highlight-background</div><div class="line">      .list-group-item</div><div class="line">        display: flex</div><div class="line">        align-items: center</div><div class="line">        padding: 20px 0 0 30px</div><div class="line">        .avatar</div><div class="line">          width: 50px</div><div class="line">          height: 50px</div><div class="line">          border-radius: 50%</div><div class="line">        .name</div><div class="line">          margin-left: 20px</div><div class="line">          color: $color-text-l</div><div class="line">          font-size: $font-size-medium</div><div class="line">    .list-shortcut</div><div class="line">      position: absolute</div><div class="line">      z-index: 30</div><div class="line">      right: 0</div><div class="line">      top: 50%</div><div class="line">      transform: translateY(-50%)</div><div class="line">      width: 20px</div><div class="line">      padding: 20px 0</div><div class="line">      border-radius: 10px</div><div class="line">      text-align: center</div><div class="line">      background: $color-background-d</div><div class="line">      font-family: Helvetica</div><div class="line">      .item</div><div class="line">        padding: 3px</div><div class="line">        line-height: 1</div><div class="line">        color: $color-text-l</div><div class="line">        font-size: $font-size-small</div><div class="line">        &amp;.current</div><div class="line">          color: $color-theme</div><div class="line">    .list-fixed</div><div class="line">      position: absolute</div><div class="line">      top: 0</div><div class="line">      left: 0</div><div class="line">      width: 100%</div><div class="line">      .fixed-title</div><div class="line">        height: 30px</div><div class="line">        line-height: 30px</div><div class="line">        padding-left: 20px</div><div class="line">        font-size: $font-size-small</div><div class="line">        color: $color-text-l</div><div class="line">        background: $color-highlight-background</div><div class="line">    .loading-container</div><div class="line">      position: absolute</div><div class="line">      width: 100%</div><div class="line">      top: 50%</div><div class="line">      transform: translateY(-50%)</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="listview-基础组件的开发和应用-右侧快速入口实现"><a href="#listview-基础组件的开发和应用-右侧快速入口实现" class="headerlink" title="listview 基础组件的开发和应用-右侧快速入口实现"></a>listview 基础组件的开发和应用-右侧快速入口实现</h2><ol>
+<li><p>dom.js 添加通用方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">el, name, val</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> prefix = <span class="string">'data-'</span></div><div class="line">  name = prefix + name</div><div class="line">  <span class="keyword">if</span> (val) &#123;</div><div class="line">    <span class="keyword">return</span> el.setAttribute(name, val)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> el.getAttribute(name)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>scroll.vue 添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">scrollTo() &#123;</div><div class="line">  <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.scrollTo.apply(<span class="keyword">this</span>.scroll, <span class="built_in">arguments</span>)</div><div class="line">&#125;,</div><div class="line">scrollToElement() &#123;</div><div class="line">  <span class="comment">// 用apply保证调用方法时上下文相同</span></div><div class="line">  <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.scrollToElement.apply(<span class="keyword">this</span>.scroll, <span class="built_in">arguments</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>viewlist.vue添加dom</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-shortcut"</span></span></div><div class="line"> @<span class="attr">touchstart.stop.prevent</span>=<span class="string">"onShortcutTouchStart"</span> </div><div class="line"> @<span class="attr">touchmove.stop.prevent</span>=<span class="string">"onShortcutTouchMove"</span></div><div class="line"> @<span class="attr">touchend.stop</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in shortcutList"</span> <span class="attr">:data-index</span>=<span class="string">"index"</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>&#123;&#123;item&#125;&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>viewlist.vue添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">onShortcutTouchStart(e) &#123;</div><div class="line">  <span class="keyword">let</span> anchorIndex = getData(e.target, <span class="string">'index'</span>)</div><div class="line">  <span class="keyword">let</span> firstTouch = e.touches[<span class="number">0</span>]</div><div class="line">  <span class="keyword">this</span>.touch.y1 = firstTouch.pageY</div><div class="line">  <span class="keyword">this</span>.touch.anchorIndex = anchorIndex</div><div class="line">  <span class="keyword">this</span>.$refs.listview.scrollToElement(<span class="keyword">this</span>.$refs.listGroup[anchorIndex], <span class="number">0</span>)</div><div class="line">  <span class="keyword">this</span>._scrollTo(anchorIndex)</div><div class="line">&#125;,</div><div class="line">onShortcutTouchMove(e) &#123;</div><div class="line">  <span class="keyword">let</span> firstTouch = e.touches[<span class="number">0</span>]</div><div class="line">  <span class="keyword">this</span>.touch.y2 = firstTouch.pageY</div><div class="line">  <span class="keyword">let</span> delta = (<span class="keyword">this</span>.touch.y2 - <span class="keyword">this</span>.touch.y1) / ANCHOR_HEIGHT | <span class="number">0</span></div><div class="line">  <span class="keyword">let</span> anchorIndex = <span class="built_in">parseInt</span>(<span class="keyword">this</span>.touch.anchorIndex) + delta</div><div class="line"></div><div class="line">  <span class="keyword">this</span>._scrollTo(anchorIndex)</div><div class="line">&#125;,</div><div class="line">_scrollTo(index) &#123;</div><div class="line">  <span class="keyword">this</span>.$refs.listview.scrollToElement(<span class="keyword">this</span>.$refs.listGroup[index], <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>计算所有group的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">_calculateHeight() &#123;</div><div class="line">  <span class="keyword">this</span>.listHeight = []</div><div class="line">  <span class="keyword">const</span> list = <span class="keyword">this</span>.$refs.listGroup</div><div class="line">  <span class="keyword">let</span> height = <span class="number">0</span></div><div class="line">  <span class="keyword">this</span>.listHeight.push(height)</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</div><div class="line">    <span class="keyword">let</span> item = list[i]</div><div class="line">    height += item.clientHeight</div><div class="line">    <span class="keyword">this</span>.listHeight.push(height)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>6 添加watch 计算 currentIndex<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">watch: &#123;</div><div class="line"> data() &#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="comment">// 数据变化到dom的变化有一个延时</span></div><div class="line">      <span class="keyword">this</span>._calculateHeight()</div><div class="line">    &#125;, <span class="number">20</span>)</div><div class="line">  &#125;,</div><div class="line">  scrollY(newY) &#123;</div><div class="line">    <span class="keyword">const</span> listHeight = <span class="keyword">this</span>.listHeight</div><div class="line">    <span class="comment">// 当滚动到顶部，newY&gt;0</span></div><div class="line">    <span class="keyword">if</span> (newY &gt; <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">this</span>.currentIndex = <span class="number">0</span></div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 在中间部分滚动</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; listHeight.length - <span class="number">1</span>; i++) &#123;</div><div class="line">      <span class="keyword">let</span> height1 = listHeight[i]</div><div class="line">      <span class="keyword">let</span> height2 = listHeight[i + <span class="number">1</span>]</div><div class="line">      <span class="keyword">if</span> (-newY &gt;= height1 &amp;&amp; -newY &lt; height2) &#123;</div><div class="line">        <span class="keyword">this</span>.currentIndex = i</div><div class="line">        <span class="keyword">this</span>.diff = height2 + newY</div><div class="line">        <span class="keyword">return</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 当滚动到底部，且-newY大于最后一个元素的上限</span></div><div class="line">    <span class="keyword">this</span>.currentIndex = listHeight.length - <span class="number">2</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>总结:联动思路</p>
+<ol>
+<li>知道实时滚动位置</li>
+<li>根据滚动位置计算落在哪个group区间</li>
+<li>根据区间计算索引哪个高亮</li>
+</ol>
+<h2 id="listview-基础组件的开发和应用-滚动固定标题实现"><a href="#listview-基础组件的开发和应用-滚动固定标题实现" class="headerlink" title="listview 基础组件的开发和应用-滚动固定标题实现"></a>listview 基础组件的开发和应用-滚动固定标题实现</h2><ol>
+<li><p>添加dom</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-fixed"</span> <span class="attr">ref</span>=<span class="string">"fixed"</span> <span class="attr">v-show</span>=<span class="string">"fixedTitle"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fixed-title"</span>&gt;</span>&#123;&#123;fixedTitle&#125;&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fixedTitle() &#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.scrollY &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">''</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.data[<span class="keyword">this</span>.currentIndex] ? <span class="keyword">this</span>.data[<span class="keyword">this</span>.currentIndex].title : <span class="string">''</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加watch</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">diff(newVal) &#123;</div><div class="line">  <span class="keyword">let</span> fixedTop = (newVal &gt; <span class="number">0</span> &amp;&amp; newVal &lt; TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : <span class="number">0</span></div><div class="line">  <span class="comment">// 减少dom操作的频度</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.fixedTop === fixedTop) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.fixedTop = fixedTop</div><div class="line">  <span class="keyword">this</span>.$refs.fixed.style.transform = <span class="string">`translate3d(0,<span class="subst">$&#123;fixedTop&#125;</span>px,0)`</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/" rel="next" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）">
+                <i class="fa fa-chevron-left"></i> Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第四章 推荐页面开发）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg"
+               alt="Taohong" />
+          <p class="site-author-name" itemprop="name">Taohong</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/taohong000" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）"><span class="nav-number">1.</span> <span class="nav-text">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#歌手数据接口抓取"><span class="nav-number">1.1.</span> <span class="nav-text">歌手数据接口抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#歌手数据处理和-Singer-类的封装"><span class="nav-number">1.2.</span> <span class="nav-text">歌手数据处理和 Singer 类的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#listview-基础组件的开发和应用-滚动列表实现"><span class="nav-number">1.3.</span> <span class="nav-text">listview 基础组件的开发和应用-滚动列表实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#listview-基础组件的开发和应用-右侧快速入口实现"><span class="nav-number">1.4.</span> <span class="nav-text">listview 基础组件的开发和应用-右侧快速入口实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#listview-基础组件的开发和应用-滚动固定标题实现"><span class="nav-number">1.5.</span> <span class="nav-text">listview 基础组件的开发和应用-滚动固定标题实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

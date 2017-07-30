@@ -297,6 +297,132 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/sublime常用插件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/16/sublime常用插件/" itemprop="url">sublime常用插件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:52:02+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="sublime常用插件"><a href="#sublime常用插件" class="headerlink" title="sublime常用插件"></a>sublime常用插件</h1><h2 id="设置-setting"><a href="#设置-setting" class="headerlink" title="设置(setting)"></a>设置(setting)</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"auto_complete_triggers"</span>:</div><div class="line">	[</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"characters"</span>: <span class="string">"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.&lt;"</span>,</div><div class="line">			<span class="attr">"selector"</span>: <span class="string">"text.html"</span></div><div class="line">		&#125;</div><div class="line">	],</div><div class="line">	<span class="attr">"font_size"</span>: <span class="number">14</span>,</div><div class="line">	<span class="attr">"ignored_packages"</span>:</div><div class="line">	[</div><div class="line">		<span class="string">"Vintage"</span></div><div class="line">	],</div><div class="line">	<span class="attr">"tab_size"</span>: <span class="number">2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctrl+shirt+p</div></pre></td></tr></table></figure>
+<p>install package control</p>
+<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><h4 id="emmet"><a href="#emmet" class="headerlink" title="emmet"></a>emmet</h4><p>介绍：仿选择器语法生成代码</p>
+<h4 id="docBlock"><a href="#docBlock" class="headerlink" title="docBlock"></a>docBlock</h4><p>介绍：自动补全注释</p>
+<h4 id="html-css-js-prettify"><a href="#html-css-js-prettify" class="headerlink" title="html/css/js prettify"></a>html/css/js prettify</h4><p>介绍：整理代码</p>
+<h4 id="CSScomb"><a href="#CSScomb" class="headerlink" title="CSScomb"></a>CSScomb</h4><p>介绍：规范css，整理css顺序<br>配置网站：<a href="http://csscomb.com/config" target="_blank" rel="external">http://csscomb.com/config</a><br>配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"node-path"</span> : <span class="string">"C:\\Program Files\\nodejs.node.exe"</span>,</div><div class="line">    <span class="attr">"config"</span>: &#123;</div><div class="line">        <span class="attr">"remove-empty-rulesets"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"always-semicolon"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"color-case"</span>: <span class="string">"lower"</span>,</div><div class="line">        <span class="attr">"block-indent"</span>: <span class="string">"\t"</span>,</div><div class="line">        <span class="attr">"color-shorthand"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"element-case"</span>: <span class="string">"lower"</span>,</div><div class="line">        <span class="attr">"eof-newline"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"leading-zero"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"quotes"</span>: <span class="string">"single"</span>,</div><div class="line">        <span class="attr">"sort-order-fallback"</span>: <span class="string">"abc"</span>,</div><div class="line">        <span class="attr">"space-before-colon"</span>: <span class="string">""</span>,</div><div class="line">        <span class="attr">"space-after-colon"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-before-combinator"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-after-combinator"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-between-declarations"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-before-opening-brace"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-after-opening-brace"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-after-selector-delimiter"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-before-selector-delimiter"</span>: <span class="string">""</span>,</div><div class="line">        <span class="attr">"space-before-closing-brace"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"strip-spaces"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"tab-size"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"unitless-zero"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"vendor-prefix-align"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="file-header"><a href="#file-header" class="headerlink" title="file header"></a>file header</h4><p>介绍：添加文件header</p>
+<h4 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h4><p>介绍：jquery代码提示</p>
+<h4 id="Bootstrap-3-Snippets"><a href="#Bootstrap-3-Snippets" class="headerlink" title="Bootstrap 3 Snippets"></a>Bootstrap 3 Snippets</h4><p>介绍：bootstrap3 代码片段</p>
+<h4 id="SCSS"><a href="#SCSS" class="headerlink" title="SCSS"></a>SCSS</h4><p>介绍：scss代码提示</p>
+<h4 id="ES6-Toolkit"><a href="#ES6-Toolkit" class="headerlink" title="ES6-Toolkit"></a>ES6-Toolkit</h4><p>介绍：es6转es5,es6代码片段</p>
+<h4 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h4><p>介绍：打开浏览器</p>
+<h4 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h4><p>介绍：打开命令行工具</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Linux常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1706,7 +1832,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

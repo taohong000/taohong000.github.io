@@ -297,6 +297,189 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T16:46:25+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）</h1><h2 id="歌手数据接口抓取"><a href="#歌手数据接口抓取" class="headerlink" title="歌手数据接口抓取"></a>歌手数据接口抓取</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> jsonp <span class="keyword">from</span> <span class="string">'common/js/jsonp'</span></div><div class="line"><span class="keyword">import</span> &#123;commonParams, options&#125; <span class="keyword">from</span> <span class="string">'./config'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getSingerList</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/v8/fcg-bin/v8.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">channel</span>: <span class="string">'singer'</span>,</div><div class="line">    <span class="attr">page</span>: <span class="string">'list'</span>,</div><div class="line">    <span class="attr">key</span>: <span class="string">'all_all_all'</span>,</div><div class="line">    <span class="attr">pagesize</span>: <span class="number">100</span>,</div><div class="line">    <span class="attr">pagenum</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">hostUin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'yqq'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="歌手数据处理和-Singer-类的封装"><a href="#歌手数据处理和-Singer-类的封装" class="headerlink" title="歌手数据处理和 Singer 类的封装"></a>歌手数据处理和 Singer 类的封装</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">_normalizeSinger(list) &#123;</div><div class="line">  <span class="keyword">let</span> map = &#123;</div><div class="line">    <span class="attr">hot</span>: &#123;</div><div class="line">      <span class="attr">title</span>: HOT_NAME,</div><div class="line">      <span class="attr">items</span>: []</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 填充hot</span></div><div class="line">  list.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> (index &lt; HOT_SINGER_LEN) &#123;</div><div class="line">    	<span class="comment">// 封装 类Singer</span></div><div class="line">      map.hot.items.push(<span class="keyword">new</span> Singer(&#123;</div><div class="line">        <span class="attr">name</span>: item.Fsinger_name,</div><div class="line">        <span class="attr">id</span>: item.Fsinger_mid</div><div class="line">      &#125;))</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 聚合</span></div><div class="line">    <span class="keyword">const</span> key = item.Findex</div><div class="line"></div><div class="line">    <span class="comment">// 创建对象</span></div><div class="line">    <span class="keyword">if</span> (!map[key]) &#123;</div><div class="line">      map[key] = &#123;</div><div class="line">        <span class="attr">title</span>: key,</div><div class="line">        <span class="attr">items</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    map[key].items.push(<span class="keyword">new</span> Singer(&#123;</div><div class="line">      <span class="attr">name</span>: item.Fsinger_name,</div><div class="line">      <span class="attr">id</span>: item.Fsinger_mid</div><div class="line">    &#125;))</div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  <span class="comment">// 为了得到有序列表，我们需要处理 map</span></div><div class="line">  <span class="keyword">let</span> ret = []</div><div class="line">  <span class="keyword">let</span> hot = []</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> map) &#123;</div><div class="line">    <span class="keyword">let</span> val = map[key]</div><div class="line">    <span class="keyword">if</span> (val.title.match(<span class="regexp">/[a-zA-Z]/</span>)) &#123;</div><div class="line">      ret.push(val)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (val.title === HOT_NAME) &#123;</div><div class="line">      hot.push(val)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  ret.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> a.title.charCodeAt(<span class="number">0</span>) - b.title.charCodeAt(<span class="number">0</span>)</div><div class="line">  &#125;)</div><div class="line">  <span class="keyword">return</span> hot.concat(ret)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新建common/js/singer.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Singer</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(&#123;id, name&#125;) &#123;</div><div class="line">    <span class="keyword">this</span>.id = id</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.avatar = <span class="string">`https://y.gtimg.cn/music/photo_new/T001R300x300M000<span class="subst">$&#123;id&#125;</span>.jpg?max_age=2592000`</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="listview-基础组件的开发和应用-滚动列表实现"><a href="#listview-基础组件的开发和应用-滚动列表实现" class="headerlink" title="listview 基础组件的开发和应用-滚动列表实现"></a>listview 基础组件的开发和应用-滚动列表实现</h2><p>新建通用组件 listview<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">  &lt;scroll :data="data"</div><div class="line">          class="listview"&gt;</div><div class="line">    &lt;ul&gt;</div><div class="line">      &lt;li v-for="group in data" class="list-group" ref="listGroup"&gt;</div><div class="line">        &lt;h2 class="list-group-title"&gt;&#123;&#123;group.title&#125;&#125;&lt;/h2&gt;</div><div class="line">        &lt;uL&gt;</div><div class="line">          &lt;li v-for="item in group.items" class="list-group-item"&gt;</div><div class="line">            &lt;img class="avatar" v-lazy="item.avatar"&gt;</div><div class="line">            &lt;span class="name"&gt;&#123;&#123;item.name&#125;&#125;&lt;/span&gt;</div><div class="line">          &lt;/li&gt;</div><div class="line">        &lt;/uL&gt;</div><div class="line">      &lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">  &lt;/scroll&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">  import Scroll from 'base/scroll/scroll'</div><div class="line"></div><div class="line">  export default &#123;</div><div class="line">    props: &#123;</div><div class="line">      data: &#123;</div><div class="line">        type: Array,</div><div class="line">        default: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    components: &#123;</div><div class="line">      Scroll</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style scoped lang="stylus" rel="stylesheet/stylus"&gt;</div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .listview</div><div class="line">    position: relative</div><div class="line">    width: 100%</div><div class="line">    height: 100%</div><div class="line">    overflow: hidden</div><div class="line">    background: $color-background</div><div class="line">    .list-group</div><div class="line">      padding-bottom: 30px</div><div class="line">      .list-group-title</div><div class="line">        height: 30px</div><div class="line">        line-height: 30px</div><div class="line">        padding-left: 20px</div><div class="line">        font-size: $font-size-small</div><div class="line">        color: $color-text-l</div><div class="line">        background: $color-highlight-background</div><div class="line">      .list-group-item</div><div class="line">        display: flex</div><div class="line">        align-items: center</div><div class="line">        padding: 20px 0 0 30px</div><div class="line">        .avatar</div><div class="line">          width: 50px</div><div class="line">          height: 50px</div><div class="line">          border-radius: 50%</div><div class="line">        .name</div><div class="line">          margin-left: 20px</div><div class="line">          color: $color-text-l</div><div class="line">          font-size: $font-size-medium</div><div class="line">    .list-shortcut</div><div class="line">      position: absolute</div><div class="line">      z-index: 30</div><div class="line">      right: 0</div><div class="line">      top: 50%</div><div class="line">      transform: translateY(-50%)</div><div class="line">      width: 20px</div><div class="line">      padding: 20px 0</div><div class="line">      border-radius: 10px</div><div class="line">      text-align: center</div><div class="line">      background: $color-background-d</div><div class="line">      font-family: Helvetica</div><div class="line">      .item</div><div class="line">        padding: 3px</div><div class="line">        line-height: 1</div><div class="line">        color: $color-text-l</div><div class="line">        font-size: $font-size-small</div><div class="line">        &amp;.current</div><div class="line">          color: $color-theme</div><div class="line">    .list-fixed</div><div class="line">      position: absolute</div><div class="line">      top: 0</div><div class="line">      left: 0</div><div class="line">      width: 100%</div><div class="line">      .fixed-title</div><div class="line">        height: 30px</div><div class="line">        line-height: 30px</div><div class="line">        padding-left: 20px</div><div class="line">        font-size: $font-size-small</div><div class="line">        color: $color-text-l</div><div class="line">        background: $color-highlight-background</div><div class="line">    .loading-container</div><div class="line">      position: absolute</div><div class="line">      width: 100%</div><div class="line">      top: 50%</div><div class="line">      transform: translateY(-50%)</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="listview-基础组件的开发和应用-右侧快速入口实现"><a href="#listview-基础组件的开发和应用-右侧快速入口实现" class="headerlink" title="listview 基础组件的开发和应用-右侧快速入口实现"></a>listview 基础组件的开发和应用-右侧快速入口实现</h2><ol>
+<li><p>dom.js 添加通用方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">el, name, val</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> prefix = <span class="string">'data-'</span></div><div class="line">  name = prefix + name</div><div class="line">  <span class="keyword">if</span> (val) &#123;</div><div class="line">    <span class="keyword">return</span> el.setAttribute(name, val)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> el.getAttribute(name)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>scroll.vue 添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">scrollTo() &#123;</div><div class="line">  <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.scrollTo.apply(<span class="keyword">this</span>.scroll, <span class="built_in">arguments</span>)</div><div class="line">&#125;,</div><div class="line">scrollToElement() &#123;</div><div class="line">  <span class="comment">// 用apply保证调用方法时上下文相同</span></div><div class="line">  <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.scrollToElement.apply(<span class="keyword">this</span>.scroll, <span class="built_in">arguments</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>viewlist.vue添加dom</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-shortcut"</span></span></div><div class="line"> @<span class="attr">touchstart.stop.prevent</span>=<span class="string">"onShortcutTouchStart"</span> </div><div class="line"> @<span class="attr">touchmove.stop.prevent</span>=<span class="string">"onShortcutTouchMove"</span></div><div class="line"> @<span class="attr">touchend.stop</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in shortcutList"</span> <span class="attr">:data-index</span>=<span class="string">"index"</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span>&#123;&#123;item&#125;&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>viewlist.vue添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">onShortcutTouchStart(e) &#123;</div><div class="line">  <span class="keyword">let</span> anchorIndex = getData(e.target, <span class="string">'index'</span>)</div><div class="line">  <span class="keyword">let</span> firstTouch = e.touches[<span class="number">0</span>]</div><div class="line">  <span class="keyword">this</span>.touch.y1 = firstTouch.pageY</div><div class="line">  <span class="keyword">this</span>.touch.anchorIndex = anchorIndex</div><div class="line">  <span class="keyword">this</span>.$refs.listview.scrollToElement(<span class="keyword">this</span>.$refs.listGroup[anchorIndex], <span class="number">0</span>)</div><div class="line">  <span class="keyword">this</span>._scrollTo(anchorIndex)</div><div class="line">&#125;,</div><div class="line">onShortcutTouchMove(e) &#123;</div><div class="line">  <span class="keyword">let</span> firstTouch = e.touches[<span class="number">0</span>]</div><div class="line">  <span class="keyword">this</span>.touch.y2 = firstTouch.pageY</div><div class="line">  <span class="keyword">let</span> delta = (<span class="keyword">this</span>.touch.y2 - <span class="keyword">this</span>.touch.y1) / ANCHOR_HEIGHT | <span class="number">0</span></div><div class="line">  <span class="keyword">let</span> anchorIndex = <span class="built_in">parseInt</span>(<span class="keyword">this</span>.touch.anchorIndex) + delta</div><div class="line"></div><div class="line">  <span class="keyword">this</span>._scrollTo(anchorIndex)</div><div class="line">&#125;,</div><div class="line">_scrollTo(index) &#123;</div><div class="line">  <span class="keyword">this</span>.$refs.listview.scrollToElement(<span class="keyword">this</span>.$refs.listGroup[index], <span class="number">0</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>计算所有group的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">_calculateHeight() &#123;</div><div class="line">  <span class="keyword">this</span>.listHeight = []</div><div class="line">  <span class="keyword">const</span> list = <span class="keyword">this</span>.$refs.listGroup</div><div class="line">  <span class="keyword">let</span> height = <span class="number">0</span></div><div class="line">  <span class="keyword">this</span>.listHeight.push(height)</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</div><div class="line">    <span class="keyword">let</span> item = list[i]</div><div class="line">    height += item.clientHeight</div><div class="line">    <span class="keyword">this</span>.listHeight.push(height)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>6 添加watch 计算 currentIndex<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">watch: &#123;</div><div class="line"> data() &#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="comment">// 数据变化到dom的变化有一个延时</span></div><div class="line">      <span class="keyword">this</span>._calculateHeight()</div><div class="line">    &#125;, <span class="number">20</span>)</div><div class="line">  &#125;,</div><div class="line">  scrollY(newY) &#123;</div><div class="line">    <span class="keyword">const</span> listHeight = <span class="keyword">this</span>.listHeight</div><div class="line">    <span class="comment">// 当滚动到顶部，newY&gt;0</span></div><div class="line">    <span class="keyword">if</span> (newY &gt; <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">this</span>.currentIndex = <span class="number">0</span></div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 在中间部分滚动</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; listHeight.length - <span class="number">1</span>; i++) &#123;</div><div class="line">      <span class="keyword">let</span> height1 = listHeight[i]</div><div class="line">      <span class="keyword">let</span> height2 = listHeight[i + <span class="number">1</span>]</div><div class="line">      <span class="keyword">if</span> (-newY &gt;= height1 &amp;&amp; -newY &lt; height2) &#123;</div><div class="line">        <span class="keyword">this</span>.currentIndex = i</div><div class="line">        <span class="keyword">this</span>.diff = height2 + newY</div><div class="line">        <span class="keyword">return</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 当滚动到底部，且-newY大于最后一个元素的上限</span></div><div class="line">    <span class="keyword">this</span>.currentIndex = listHeight.length - <span class="number">2</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>总结:联动思路</p>
+<ol>
+<li>知道实时滚动位置</li>
+<li>根据滚动位置计算落在哪个group区间</li>
+<li>根据区间计算索引哪个高亮</li>
+</ol>
+<h2 id="listview-基础组件的开发和应用-滚动固定标题实现"><a href="#listview-基础组件的开发和应用-滚动固定标题实现" class="headerlink" title="listview 基础组件的开发和应用-滚动固定标题实现"></a>listview 基础组件的开发和应用-滚动固定标题实现</h2><ol>
+<li><p>添加dom</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-fixed"</span> <span class="attr">ref</span>=<span class="string">"fixed"</span> <span class="attr">v-show</span>=<span class="string">"fixedTitle"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fixed-title"</span>&gt;</span>&#123;&#123;fixedTitle&#125;&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fixedTitle() &#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.scrollY &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">''</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.data[<span class="keyword">this</span>.currentIndex] ? <span class="keyword">this</span>.data[<span class="keyword">this</span>.currentIndex].title : <span class="string">''</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加watch</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">diff(newVal) &#123;</div><div class="line">  <span class="keyword">let</span> fixedTop = (newVal &gt; <span class="number">0</span> &amp;&amp; newVal &lt; TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : <span class="number">0</span></div><div class="line">  <span class="comment">// 减少dom操作的频度</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.fixedTop === fixedTop) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.fixedTop = fixedTop</div><div class="line">  <span class="keyword">this</span>.$refs.fixed.style.transform = <span class="string">`translate3d(0,<span class="subst">$&#123;fixedTop&#125;</span>px,0)`</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/26/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第四章-推荐页面开发）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2010,132 +2193,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/sublime常用插件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/16/sublime常用插件/" itemprop="url">sublime常用插件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:52:02+08:00">
-                2017-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="sublime常用插件"><a href="#sublime常用插件" class="headerlink" title="sublime常用插件"></a>sublime常用插件</h1><h2 id="设置-setting"><a href="#设置-setting" class="headerlink" title="设置(setting)"></a>设置(setting)</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"auto_complete_triggers"</span>:</div><div class="line">	[</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"characters"</span>: <span class="string">"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.&lt;"</span>,</div><div class="line">			<span class="attr">"selector"</span>: <span class="string">"text.html"</span></div><div class="line">		&#125;</div><div class="line">	],</div><div class="line">	<span class="attr">"font_size"</span>: <span class="number">14</span>,</div><div class="line">	<span class="attr">"ignored_packages"</span>:</div><div class="line">	[</div><div class="line">		<span class="string">"Vintage"</span></div><div class="line">	],</div><div class="line">	<span class="attr">"tab_size"</span>: <span class="number">2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctrl+shirt+p</div></pre></td></tr></table></figure>
-<p>install package control</p>
-<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><h4 id="emmet"><a href="#emmet" class="headerlink" title="emmet"></a>emmet</h4><p>介绍：仿选择器语法生成代码</p>
-<h4 id="docBlock"><a href="#docBlock" class="headerlink" title="docBlock"></a>docBlock</h4><p>介绍：自动补全注释</p>
-<h4 id="html-css-js-prettify"><a href="#html-css-js-prettify" class="headerlink" title="html/css/js prettify"></a>html/css/js prettify</h4><p>介绍：整理代码</p>
-<h4 id="CSScomb"><a href="#CSScomb" class="headerlink" title="CSScomb"></a>CSScomb</h4><p>介绍：规范css，整理css顺序<br>配置网站：<a href="http://csscomb.com/config" target="_blank" rel="external">http://csscomb.com/config</a><br>配置：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"node-path"</span> : <span class="string">"C:\\Program Files\\nodejs.node.exe"</span>,</div><div class="line">    <span class="attr">"config"</span>: &#123;</div><div class="line">        <span class="attr">"remove-empty-rulesets"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"always-semicolon"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"color-case"</span>: <span class="string">"lower"</span>,</div><div class="line">        <span class="attr">"block-indent"</span>: <span class="string">"\t"</span>,</div><div class="line">        <span class="attr">"color-shorthand"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"element-case"</span>: <span class="string">"lower"</span>,</div><div class="line">        <span class="attr">"eof-newline"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"leading-zero"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"quotes"</span>: <span class="string">"single"</span>,</div><div class="line">        <span class="attr">"sort-order-fallback"</span>: <span class="string">"abc"</span>,</div><div class="line">        <span class="attr">"space-before-colon"</span>: <span class="string">""</span>,</div><div class="line">        <span class="attr">"space-after-colon"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-before-combinator"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-after-combinator"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-between-declarations"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-before-opening-brace"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-after-opening-brace"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-after-selector-delimiter"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-before-selector-delimiter"</span>: <span class="string">""</span>,</div><div class="line">        <span class="attr">"space-before-closing-brace"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"strip-spaces"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"tab-size"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"unitless-zero"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"vendor-prefix-align"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="file-header"><a href="#file-header" class="headerlink" title="file header"></a>file header</h4><p>介绍：添加文件header</p>
-<h4 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h4><p>介绍：jquery代码提示</p>
-<h4 id="Bootstrap-3-Snippets"><a href="#Bootstrap-3-Snippets" class="headerlink" title="Bootstrap 3 Snippets"></a>Bootstrap 3 Snippets</h4><p>介绍：bootstrap3 代码片段</p>
-<h4 id="SCSS"><a href="#SCSS" class="headerlink" title="SCSS"></a>SCSS</h4><p>介绍：scss代码提示</p>
-<h4 id="ES6-Toolkit"><a href="#ES6-Toolkit" class="headerlink" title="ES6-Toolkit"></a>ES6-Toolkit</h4><p>介绍：es6转es5,es6代码片段</p>
-<h4 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h4><p>介绍：打开浏览器</p>
-<h4 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h4><p>介绍：打开命令行工具</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2185,7 +2242,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
