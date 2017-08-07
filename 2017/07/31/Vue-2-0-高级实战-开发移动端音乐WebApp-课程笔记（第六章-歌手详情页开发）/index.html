@@ -1,0 +1,1190 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="慕课网,vue," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）子路由配置以及转场动画实现
+添加组件singer-detail
+12345678910111213141516171819202122232425&amp;lt;template&amp;gt;  &amp;lt;transition name=&quot;slide&quot;&amp;gt;    &amp;lt;div class=&quot;singer-detail&quot;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）">
+<meta property="og:url" content="http://yoursite.com/2017/07/31/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第六章-歌手详情页开发）/index.html">
+<meta property="og:site_name" content="Taohong's blog">
+<meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）子路由配置以及转场动画实现
+添加组件singer-detail
+12345678910111213141516171819202122232425&amp;lt;template&amp;gt;  &amp;lt;transition name=&quot;slide&quot;&amp;gt;    &amp;lt;div class=&quot;singer-detail&quot;&amp;">
+<meta property="og:updated_time" content="2017-07-30T16:30:17.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）">
+<meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）子路由配置以及转场动画实现
+添加组件singer-detail
+12345678910111213141516171819202122232425&amp;lt;template&amp;gt;  &amp;lt;transition name=&quot;slide&quot;&amp;gt;    &amp;lt;div class=&quot;singer-detail&quot;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/31/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第六章-歌手详情页开发）/"/>
+
+
+
+
+
+  <title>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发） | Taohong's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/31/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第六章-歌手详情页开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T00:20:40+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第六章-歌手详情页开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第六章-歌手详情页开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）</h1><h2 id="子路由配置以及转场动画实现"><a href="#子路由配置以及转场动画实现" class="headerlink" title="子路由配置以及转场动画实现"></a>子路由配置以及转场动画实现</h2><ol>
+<li><p>添加组件singer-detail</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"slide"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"singer-detail"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line"></div><div class="line">  .singer-detail</div><div class="line">    position: fixed</div><div class="line">    z-index: 100</div><div class="line">    top: 0</div><div class="line">    left: 0</div><div class="line">    right: 0</div><div class="line">    bottom: 0</div><div class="line">    background: $color-background</div><div class="line">  .slide-enter-active, .slide-leave-active</div><div class="line">    transition: all 0.3s</div><div class="line">  .slide-enter, .slide-leave-to</div><div class="line">    transform: translate3d(100%, 0, 0)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>路由配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'/singer'</span>,</div><div class="line">  <span class="attr">component</span>: Singer,</div><div class="line">  <span class="attr">children</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">':id'</span>,</div><div class="line">      <span class="attr">component</span>: SingerDetail</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>singer.vue添加<code>&lt;view-router&gt;</code></p>
+</li>
+<li><p>listview.vue添加点击事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">selectItem(item) &#123;</div><div class="line"> <span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>基础组件不会有业务逻辑, 仅仅派发事件</p>
+<ol>
+<li>singer.vue添加事件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">selectSinger(singer) &#123;</div><div class="line">  <span class="keyword">this</span>.$router.push(&#123;</div><div class="line">    <span class="attr">path</span>: <span class="string">`/singer/<span class="subst">$&#123;singer.id&#125;</span>`</span></div><div class="line">  &#125;)</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="初识-Vuex"><a href="#初识-Vuex" class="headerlink" title="初识 Vuex"></a>初识 Vuex</h2><p>学习一个技术栈时, 首先通过3w方式</p>
+<ol>
+<li>vuex是什么<br>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式</li>
+<li>vuex解决什么问题<br>多个组件的数据共享<br>路由间的复杂数据传递</li>
+<li>怎么使用vuex</li>
+</ol>
+<h2 id="Vuex-初始化及歌手数据的配置"><a href="#Vuex-初始化及歌手数据的配置" class="headerlink" title="Vuex 初始化及歌手数据的配置"></a>Vuex 初始化及歌手数据的配置</h2><p>创建目录</p>
+<ul>
+<li>store<ul>
+<li>index.js 入口</li>
+<li>state.js 所有状态</li>
+<li>mutations.js</li>
+<li>mutations-type.js mutations相关字符串常量</li>
+<li>actions.js 异步操作, mutations封装</li>
+<li>getter.js 获取state映射</li>
+</ul>
+</li>
+</ul>
+<p>为什么要有mutations-type</p>
+<ol>
+<li>书写方便</li>
+<li><p>方便lint工具检测</p>
+</li>
+<li><p>index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actions <span class="keyword">from</span> <span class="string">'./actions'</span></div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> getters <span class="keyword">from</span> <span class="string">'./getters'</span></div><div class="line"><span class="keyword">import</span> state <span class="keyword">from</span> <span class="string">'./state'</span></div><div class="line"><span class="keyword">import</span> mutations <span class="keyword">from</span> <span class="string">'./mutations'</span></div><div class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">'vuex/dist/logger'</span></div><div class="line"></div><div class="line">Vue.use(Vuex)</div><div class="line"></div><div class="line"><span class="keyword">const</span> debug = process.env.NODE_ENV !== <span class="string">'production'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</div><div class="line">  actions,</div><div class="line">  getters,</div><div class="line">  state,</div><div class="line">  mutations,</div><div class="line">  <span class="attr">strict</span>: debug,</div><div class="line">  <span class="attr">plugins</span>: debug ? [createLogger()] : []</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>state.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> state = &#123;</div><div class="line">  <span class="attr">singer</span>: &#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> state</div></pre></td></tr></table></figure>
+</li>
+<li><p>mutation-types.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_SINGER = <span class="string">'SET_SINGER'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>mutations</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">'./mutation-types'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> matutaions = &#123;</div><div class="line">  [types.SET_SINGER](state, singer) &#123;</div><div class="line">    state.singer = singer</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> matutaions</div></pre></td></tr></table></figure>
+</li>
+<li><p>getters.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> singer = <span class="function"><span class="params">state</span> =&gt;</span> state.singer</div></pre></td></tr></table></figure>
+</li>
+<li><p>singer.vue 设置数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;mapMutations&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line"></div><div class="line">methods: &#123;</div><div class="line">  ...mapMutations(&#123;</div><div class="line">    <span class="attr">setSinger</span>: <span class="string">'SET_SINGER'</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>singer.vue 设置数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;mapMutations&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line"></div><div class="line">methods: &#123;</div><div class="line">  ...mapMutations(&#123;</div><div class="line">    <span class="attr">setSinger</span>: <span class="string">'SET_SINGER'</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="歌手详情数据抓取"><a href="#歌手详情数据抓取" class="headerlink" title="歌手详情数据抓取"></a>歌手详情数据抓取</h2><ol>
+<li>api/singer.js 添加方法<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getSingerDetail</span>(<span class="params">singerId</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_track_cp.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">hostUin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'yqq'</span>,</div><div class="line">    <span class="attr">order</span>: <span class="string">'listen'</span>,</div><div class="line">    <span class="attr">begin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">num</span>: <span class="number">80</span>,</div><div class="line">    <span class="attr">songstatus</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">singermid</span>: singerId</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="歌手详情数据处理和Song类的封装"><a href="#歌手详情数据处理和Song类的封装" class="headerlink" title="歌手详情数据处理和Song类的封装"></a>歌手详情数据处理和Song类的封装</h2><p>创建class Song<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Song</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(&#123;id, mid, singer, name, album, duration, image, url&#125;) &#123;</div><div class="line">    <span class="keyword">this</span>.id = id</div><div class="line">    <span class="keyword">this</span>.mid = mid</div><div class="line">    <span class="keyword">this</span>.singer = singer</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">this</span>.album = album</div><div class="line">    <span class="keyword">this</span>.duration = duration</div><div class="line">    <span class="keyword">this</span>.image = image</div><div class="line">    <span class="keyword">this</span>.url = url</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>设计成类的好处</p>
+<ol>
+<li>集中一处维护</li>
+<li>面向对象的方式, 扩展性强</li>
+</ol>
+<p>添加工厂方法createSong<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createSong</span>(<span class="params">musicData</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Song(&#123;</div><div class="line">    <span class="attr">id</span>: musicData.songid,</div><div class="line">    <span class="attr">mid</span>: musicData.songmid,</div><div class="line">    <span class="attr">singer</span>: filterSinger(musicData.singer),</div><div class="line">    <span class="attr">name</span>: musicData.songname,</div><div class="line">    <span class="attr">album</span>: musicData.albumname,</div><div class="line">    <span class="attr">duration</span>: musicData.interval,</div><div class="line">    <span class="attr">image</span>: <span class="string">`https://y.gtimg.cn/music/photo_new/T002R300x300M000<span class="subst">$&#123;musicData.albummid&#125;</span>.jpg?max_age=2592000`</span>,</div><div class="line">    <span class="attr">url</span>: <span class="string">`http://ws.stream.qqmusic.qq.com/<span class="subst">$&#123;musicData.songid&#125;</span>.m4a?fromtag=46`</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filterSinger</span>(<span class="params">singer</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> ret = []</div><div class="line">  <span class="keyword">if</span> (!singer) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">''</span></div><div class="line">  &#125;</div><div class="line">  singer.forEach(<span class="function">(<span class="params">s</span>) =&gt;</span> &#123;</div><div class="line">    ret.push(s.name)</div><div class="line">  &#125;)</div><div class="line">  <span class="keyword">return</span> ret.join(<span class="string">'/'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="music-list-组件开发"><a href="#music-list-组件开发" class="headerlink" title="music-list 组件开发"></a>music-list 组件开发</h2><ol>
+<li><p>添加业务组件music-list.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"music-list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span> <span class="attr">v-html</span>=<span class="string">"title"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bg-image"</span> <span class="attr">:style</span>=<span class="string">"bgStyle"</span> <span class="attr">ref</span>=<span class="string">"bgImage"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"play-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"playBtn"</span> <span class="attr">v-show</span>=<span class="string">"songs.length&gt;0"</span> <span class="attr">class</span>=<span class="string">"play"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-play"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>随机播放全部<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"filter"</span> <span class="attr">ref</span>=<span class="string">"filter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">bgImage</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">songs</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: []</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">title</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">computed</span>: &#123;</div><div class="line">      bgStyle() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`background-image:url(<span class="subst">$&#123;<span class="keyword">this</span>.bgImage&#125;</span>)`</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .music-list</div><div class="line">    position: fixed</div><div class="line">    z-index: 100</div><div class="line">    top: 0</div><div class="line">    left: 0</div><div class="line">    bottom: 0</div><div class="line">    right: 0</div><div class="line">    background: $color-background</div><div class="line">    .back</div><div class="line">      position absolute</div><div class="line">      top: 0</div><div class="line">      left: 6px</div><div class="line">      z-index: 50</div><div class="line">      .icon-back</div><div class="line">        display: block</div><div class="line">        padding: 10px</div><div class="line">        font-size: $font-size-large-x</div><div class="line">        color: $color-theme</div><div class="line">    .title</div><div class="line">      position: absolute</div><div class="line">      top: 0</div><div class="line">      left: 10%</div><div class="line">      z-index: 40</div><div class="line">      width: 80%</div><div class="line">      no-wrap()</div><div class="line">      text-align: center</div><div class="line">      line-height: 40px</div><div class="line">      font-size: $font-size-large</div><div class="line">      color: $color-text</div><div class="line">    .bg-image</div><div class="line">      position: relative</div><div class="line">      width: 100%</div><div class="line">      height: 0</div><div class="line">      padding-top: 70%</div><div class="line">      transform-origin: top</div><div class="line">      background-size: cover</div><div class="line">      .play-wrapper</div><div class="line">        position: absolute</div><div class="line">        bottom: 20px</div><div class="line">        z-index: 50</div><div class="line">        width: 100%</div><div class="line">        .play</div><div class="line">          box-sizing: border-box</div><div class="line">          width: 135px</div><div class="line">          padding: 7px 0</div><div class="line">          margin: 0 auto</div><div class="line">          text-align: center</div><div class="line">          border: 1px solid $color-theme</div><div class="line">          color: $color-theme</div><div class="line">          border-radius: 100px</div><div class="line">          font-size: 0</div><div class="line">          .icon-play</div><div class="line">            display: inline-block</div><div class="line">            vertical-align: middle</div><div class="line">            margin-right: 6px</div><div class="line">            font-size: $font-size-medium-x</div><div class="line">          .text</div><div class="line">            display: inline-block</div><div class="line">            vertical-align: middle</div><div class="line">            font-size: $font-size-small</div><div class="line">      .filter</div><div class="line">        position: absolute</div><div class="line">        top: 0</div><div class="line">        left: 0</div><div class="line">        width: 100%</div><div class="line">        height: 100%</div><div class="line">        background: rgba(7, 17, 27, 0.4)</div><div class="line">    .bg-layer</div><div class="line">      position: relative</div><div class="line">      height: 100%</div><div class="line">      background: $color-background</div><div class="line">    .list</div><div class="line">      position: fixed</div><div class="line">      top: 0</div><div class="line">      bottom: 0</div><div class="line">      width: 100%</div><div class="line">      background: $color-background</div><div class="line">      .song-list-wrapper</div><div class="line">        padding: 20px 30px</div><div class="line">      .loading-container</div><div class="line">        position: absolute</div><div class="line">        width: 100%</div><div class="line">        top: 50%</div><div class="line">        transform: translateY(-50%)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加基础组件song-list.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"song-list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">v-for</span>=<span class="string">"song in songs"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"name"</span>&gt;</span>&#123;&#123;song.name&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>&#123;&#123;getDesc(song)&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">songs</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      getDesc(song) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;song.singer&#125;</span>·<span class="subst">$&#123;song.album&#125;</span>`</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .song-list</div><div class="line">    .item</div><div class="line">      display: flex</div><div class="line">      align-items: center</div><div class="line">      box-sizing: border-box</div><div class="line">      height: 64px</div><div class="line">      font-size: $font-size-medium</div><div class="line">      .content</div><div class="line">        flex: 1</div><div class="line">        line-height: 20px</div><div class="line">        overflow: hidden</div><div class="line">        .name</div><div class="line">          no-wrap()</div><div class="line">          color: $color-text</div><div class="line">        .desc</div><div class="line">          no-wrap()</div><div class="line">          margin-top: 4px</div><div class="line">          color: $color-text-d</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>dom.js 添加 prefixStyle</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// js中的css前缀补全</span></div><div class="line"><span class="keyword">let</span> elementStyle = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>).style</div><div class="line"></div><div class="line"><span class="comment">// 浏览器能力检测</span></div><div class="line"><span class="keyword">let</span> vendor = <span class="function">(<span class="params">(</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">let</span> transformNames = &#123;</div><div class="line">    <span class="attr">webkit</span>: <span class="string">'webkitTransform'</span>,</div><div class="line">    <span class="attr">Moz</span>: <span class="string">'MozTransform'</span>,</div><div class="line">    <span class="attr">O</span>: <span class="string">'OTransform'</span>,</div><div class="line">    <span class="attr">ms</span>: <span class="string">'msTransform'</span>,</div><div class="line">    <span class="attr">standard</span>: <span class="string">'transform'</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> transformNames) &#123;</div><div class="line">    <span class="keyword">if</span> (elementStyle[transformNames[key]] !== <span class="literal">undefined</span>) &#123;</div><div class="line">      <span class="keyword">return</span> key</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">&#125;)()</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">prefixStyle</span>(<span class="params">style</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (vendor === <span class="literal">false</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (vendor === <span class="string">'standard'</span>) &#123;</div><div class="line">    <span class="keyword">return</span> style</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> vendor + style.charAt(<span class="number">0</span>).toUpperCase() + style.substr(<span class="number">1</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>完善music-list.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"music-list"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span> @<span class="attr">click</span>=<span class="string">"back"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span> <span class="attr">v-html</span>=<span class="string">"title"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bg-image"</span> <span class="attr">:style</span>=<span class="string">"bgStyle"</span> <span class="attr">ref</span>=<span class="string">"bgImage"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"play-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"playBtn"</span> <span class="attr">v-show</span>=<span class="string">"songs.length&gt;0"</span> <span class="attr">class</span>=<span class="string">"play"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-play"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>随机播放全部<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"filter"</span> <span class="attr">ref</span>=<span class="string">"filter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bg-layer"</span> <span class="attr">ref</span>=<span class="string">"layer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">:data</span>=<span class="string">"songs"</span> @<span class="attr">scroll</span>=<span class="string">"scroll"</span></span></div><div class="line">            <span class="attr">:listen-scroll</span>=<span class="string">"listenScroll"</span> <span class="attr">:probe-type</span>=<span class="string">"probeType"</span> <span class="attr">class</span>=<span class="string">"list"</span> <span class="attr">ref</span>=<span class="string">"list"</span>&gt;</div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"song-list-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">song-list</span> <span class="attr">:songs</span>=<span class="string">"songs"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-show</span>=<span class="string">"!songs.length"</span> <span class="attr">class</span>=<span class="string">"loading-container"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">loading</span>&gt;</span><span class="tag">&lt;/<span class="name">loading</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> Scroll <span class="keyword">from</span> <span class="string">'base/scroll/scroll'</span></div><div class="line">  <span class="keyword">import</span> Loading <span class="keyword">from</span> <span class="string">'base/loading/loading'</span></div><div class="line">  <span class="keyword">import</span> SongList <span class="keyword">from</span> <span class="string">'base/song-list/song-list'</span></div><div class="line">  <span class="keyword">import</span> &#123;prefixStyle&#125; <span class="keyword">from</span> <span class="string">'common/js/dom'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> RESERVED_HEIGHT = <span class="number">40</span></div><div class="line">  <span class="keyword">const</span> transform = prefixStyle(<span class="string">'transform'</span>)</div><div class="line">  <span class="keyword">const</span> backdrop = prefixStyle(<span class="string">'backdrop-filter'</span>)</div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">bgImage</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">songs</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: []</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">title</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">scrollY</span>: <span class="number">0</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">computed</span>: &#123;</div><div class="line">      bgStyle() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`background-image:url(<span class="subst">$&#123;<span class="keyword">this</span>.bgImage&#125;</span>)`</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>.probeType = <span class="number">3</span></div><div class="line">      <span class="keyword">this</span>.listenScroll = <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    mounted() &#123;</div><div class="line">      <span class="keyword">this</span>.imageHeight = <span class="keyword">this</span>.$refs.bgImage.clientHeight</div><div class="line">      <span class="keyword">this</span>.minTransalteY = -<span class="keyword">this</span>.imageHeight + RESERVED_HEIGHT</div><div class="line">      <span class="keyword">this</span>.$refs.list.$el.style.top = <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.imageHeight&#125;</span>px`</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      scroll(pos) &#123;</div><div class="line">        <span class="keyword">this</span>.scrollY = pos.y</div><div class="line">      &#125;,</div><div class="line">      back() &#123;</div><div class="line">        <span class="keyword">this</span>.$router.back()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      scrollY(newVal) &#123;</div><div class="line">        <span class="keyword">let</span> translateY = <span class="built_in">Math</span>.max(<span class="keyword">this</span>.minTransalteY, newVal)</div><div class="line">        <span class="keyword">let</span> scale = <span class="number">1</span></div><div class="line">        <span class="keyword">let</span> zIndex = <span class="number">0</span></div><div class="line">        <span class="keyword">let</span> blur = <span class="number">0</span></div><div class="line">        <span class="comment">// 计算图片放大比例</span></div><div class="line">        <span class="keyword">const</span> percent = <span class="built_in">Math</span>.abs(newVal / <span class="keyword">this</span>.imageHeight)</div><div class="line">        <span class="keyword">if</span> (newVal &gt; <span class="number">0</span>) &#123;</div><div class="line">          scale = <span class="number">1</span> + percent</div><div class="line">          zIndex = <span class="number">10</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="comment">// 计算模糊比例</span></div><div class="line">          blur = <span class="built_in">Math</span>.min(<span class="number">20</span>, percent * <span class="number">20</span>)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.$refs.layer.style[transform] = <span class="string">`translate3d(0,<span class="subst">$&#123;translateY&#125;</span>px,0)`</span></div><div class="line">        <span class="keyword">this</span>.$refs.filter.style[backdrop] = <span class="string">`blur(<span class="subst">$&#123;blur&#125;</span>px)`</span></div><div class="line">        <span class="keyword">if</span> (newVal &lt; <span class="keyword">this</span>.minTransalteY) &#123;</div><div class="line">          <span class="comment">// 向上滑动超过minTransalteY, 改变图片zIndex和高度, 按钮消失</span></div><div class="line">          zIndex = <span class="number">10</span></div><div class="line">          <span class="keyword">this</span>.$refs.bgImage.style.paddingTop = <span class="number">0</span></div><div class="line">          <span class="keyword">this</span>.$refs.bgImage.style.height = <span class="string">`<span class="subst">$&#123;RESERVED_HEIGHT&#125;</span>px`</span></div><div class="line">          <span class="keyword">this</span>.$refs.playBtn.style.display = <span class="string">'none'</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="comment">// 反之, 重置</span></div><div class="line">          <span class="keyword">this</span>.$refs.bgImage.style.paddingTop = <span class="string">'70%'</span></div><div class="line">          <span class="keyword">this</span>.$refs.bgImage.style.height = <span class="number">0</span></div><div class="line">          <span class="keyword">this</span>.$refs.playBtn.style.display = <span class="string">''</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.$refs.bgImage.style[transform] = <span class="string">`scale(<span class="subst">$&#123;scale&#125;</span>)`</span></div><div class="line">        <span class="keyword">this</span>.$refs.bgImage.style.zIndex = zIndex</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      Scroll,</div><div class="line">      Loading,</div><div class="line">      SongList</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .music-list</div><div class="line">    position: fixed</div><div class="line">    z-index: 100</div><div class="line">    top: 0</div><div class="line">    left: 0</div><div class="line">    bottom: 0</div><div class="line">    right: 0</div><div class="line">    background: $color-background</div><div class="line">    .back</div><div class="line">      position absolute</div><div class="line">      top: 0</div><div class="line">      left: 6px</div><div class="line">      z-index: 50</div><div class="line">      .icon-back</div><div class="line">        display: block</div><div class="line">        padding: 10px</div><div class="line">        font-size: $font-size-large-x</div><div class="line">        color: $color-theme</div><div class="line">    .title</div><div class="line">      position: absolute</div><div class="line">      top: 0</div><div class="line">      left: 10%</div><div class="line">      z-index: 40</div><div class="line">      width: 80%</div><div class="line">      no-wrap()</div><div class="line">      text-align: center</div><div class="line">      line-height: 40px</div><div class="line">      font-size: $font-size-large</div><div class="line">      color: $color-text</div><div class="line">    .bg-image</div><div class="line">      position: relative</div><div class="line">      width: 100%</div><div class="line">      height: 0</div><div class="line">      padding-top: 70%</div><div class="line">      transform-origin: top</div><div class="line">      background-size: cover</div><div class="line">      .play-wrapper</div><div class="line">        position: absolute</div><div class="line">        bottom: 20px</div><div class="line">        z-index: 50</div><div class="line">        width: 100%</div><div class="line">        .play</div><div class="line">          box-sizing: border-box</div><div class="line">          width: 135px</div><div class="line">          padding: 7px 0</div><div class="line">          margin: 0 auto</div><div class="line">          text-align: center</div><div class="line">          border: 1px solid $color-theme</div><div class="line">          color: $color-theme</div><div class="line">          border-radius: 100px</div><div class="line">          font-size: 0</div><div class="line">          .icon-play</div><div class="line">            display: inline-block</div><div class="line">            vertical-align: middle</div><div class="line">            margin-right: 6px</div><div class="line">            font-size: $font-size-medium-x</div><div class="line">          .text</div><div class="line">            display: inline-block</div><div class="line">            vertical-align: middle</div><div class="line">            font-size: $font-size-small</div><div class="line">      .filter</div><div class="line">        position: absolute</div><div class="line">        top: 0</div><div class="line">        left: 0</div><div class="line">        width: 100%</div><div class="line">        height: 100%</div><div class="line">        background: rgba(7, 17, 27, 0.4)</div><div class="line">    .bg-layer</div><div class="line">      position: relative</div><div class="line">      height: 100%</div><div class="line">      background: $color-background</div><div class="line">    .list</div><div class="line">      position: fixed</div><div class="line">      top: 0</div><div class="line">      bottom: 0</div><div class="line">      width: 100%</div><div class="line">      background: $color-background</div><div class="line">      .song-list-wrapper</div><div class="line">        padding: 20px 30px</div><div class="line">      .loading-container</div><div class="line">        position: absolute</div><div class="line">        width: 100%</div><div class="line">        top: 50%</div><div class="line">        transform: translateY(-50%)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/30/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第五章-歌手页面开发）/" rel="next" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）">
+                <i class="fa fa-chevron-left"></i> Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第五章 歌手页面开发）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/01/掌握Chrome开发工具：新一代前端开发技术/" rel="prev" title="掌握Chrome开发工具：新一代前端开发技术">
+                掌握Chrome开发工具：新一代前端开发技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg"
+               alt="Taohong" />
+          <p class="site-author-name" itemprop="name">Taohong</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/taohong000" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第六章-歌手详情页开发）"><span class="nav-number">1.</span> <span class="nav-text">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第六章 歌手详情页开发）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子路由配置以及转场动画实现"><span class="nav-number">1.1.</span> <span class="nav-text">子路由配置以及转场动画实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初识-Vuex"><span class="nav-number">1.2.</span> <span class="nav-text">初识 Vuex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-初始化及歌手数据的配置"><span class="nav-number">1.3.</span> <span class="nav-text">Vuex 初始化及歌手数据的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#歌手详情数据抓取"><span class="nav-number">1.4.</span> <span class="nav-text">歌手详情数据抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#歌手详情数据处理和Song类的封装"><span class="nav-number">1.5.</span> <span class="nav-text">歌手详情数据处理和Song类的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#music-list-组件开发"><span class="nav-number">1.6.</span> <span class="nav-text">music-list 组件开发</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
