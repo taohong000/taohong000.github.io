@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -74,7 +75,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -86,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -107,8 +108,9 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -206,7 +208,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -231,6 +233,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -296,7 +308,192 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第二章-项目准备工作）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/18/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第二章-项目准备工作）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第二章 项目准备工作）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T23:44:27+08:00">
+                2017-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第二章-项目准备工作）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第二章-项目准备工作）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第二章 项目准备工作）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第二章 项目准备工作）</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><h2 id="vue-cli脚手架安装"><a href="#vue-cli脚手架安装" class="headerlink" title="vue-cli脚手架安装"></a>vue-cli脚手架安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vue init webpack vue-music</div></pre></td></tr></table></figure>
+<h2 id="项目目录介绍及图标字体、公共样式等资源准备"><a href="#项目目录介绍及图标字体、公共样式等资源准备" class="headerlink" title="项目目录介绍及图标字体、公共样式等资源准备"></a>项目目录介绍及图标字体、公共样式等资源准备</h2><p>src目录介绍</p>
+<ul>
+<li>src<ul>
+<li>api （后端请求相关代买）</li>
+<li>common （通用静态资源）<ul>
+<li>fonts</li>
+<li>image</li>
+<li>js</li>
+<li>stylus<ul>
+<li>base.styl （基础样式）</li>
+<li>icon.styl （图标字体文件）</li>
+<li>index.styl （样式入口文件）</li>
+<li>mixin.styl （函数）</li>
+<li>reset.styl （重置样式文件）</li>
+<li>variable.styl （变量配置）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>components （通用组件）</li>
+<li>router （路由相关文件）</li>
+<li>store （vuex相关代码）</li>
+<li>App.vue</li>
+<li>main.js （入口文件）</li>
+</ul>
+</li>
+</ul>
+<p>variable.styl：设计都有一定的规范，保证风格统一。这个文件定义了颜色规范和字体规范。可以方便知道开发用什么样的颜色，保证开发的方便性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/19-个-JavaScript-快速编程技巧-—-SitePoint/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,6 +576,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -522,18 +722,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -547,6 +744,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -559,7 +760,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第一章-课程内容介绍）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -653,6 +858,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -688,18 +896,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -713,6 +918,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -725,7 +934,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/scss基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -786,6 +999,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -822,18 +1038,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -847,6 +1060,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -859,7 +1076,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/sublime快捷键设置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -920,6 +1141,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -950,18 +1174,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -975,6 +1196,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -987,7 +1212,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/sublime常用插件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1048,6 +1277,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1076,18 +1308,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -1101,6 +1330,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1113,7 +1346,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Linux常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1174,6 +1411,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1291,18 +1531,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -1316,6 +1553,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1328,7 +1569,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1389,6 +1634,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1640,18 +1888,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -1665,6 +1910,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1677,7 +1926,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/14/bash示例和书写流程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1738,6 +1991,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1763,18 +2019,15 @@
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -1788,6 +2041,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1800,7 +2057,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/MySQL语句/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1861,6 +2122,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -2079,18 +2343,15 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -2104,117 +2365,10 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
         <div class="post-eof"></div>
       
     </footer>
-  </article>
-
-
-    
-      
-
-  
-
+  </div>
   
   
   
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/09/输出csv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/09/输出csv/" itemprop="url">输出csv</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-09T22:56:32+08:00">
-                2017-07-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">exportToCsv</span>(<span class="params">filename, rows</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> processRow = <span class="function"><span class="keyword">function</span> (<span class="params">row</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> finalVal = <span class="string">''</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; row.length; j++) &#123;</div><div class="line">                <span class="keyword">var</span> innerValue = row[j] === <span class="literal">null</span> ? <span class="string">''</span> : row[j].toString();</div><div class="line">                <span class="keyword">if</span> (row[j] <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</div><div class="line">                    innerValue = row[j].toLocaleString();</div><div class="line">                &#125;;</div><div class="line">                <span class="keyword">var</span> result = innerValue.replace(<span class="regexp">/"/g</span>, <span class="string">'""'</span>);</div><div class="line">                <span class="keyword">if</span> (result.search(<span class="regexp">/("|,|\n)/g</span>) &gt;= <span class="number">0</span>)</div><div class="line">                    result = <span class="string">'"'</span> + result + <span class="string">'"'</span>;</div><div class="line">                <span class="keyword">if</span> (j &gt; <span class="number">0</span>)</div><div class="line">                    finalVal += <span class="string">','</span>;</div><div class="line">                finalVal += result;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> finalVal + <span class="string">'\n'</span>;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> csvFile = <span class="string">''</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; rows.length; i++) &#123;</div><div class="line">            csvFile += processRow(rows[i]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([csvFile], &#123; <span class="attr">type</span>: <span class="string">'text/csv;charset=utf-8;'</span> &#125;);</div><div class="line">        <span class="keyword">if</span> (navigator.msSaveBlob) &#123; <span class="comment">// IE 10+</span></div><div class="line">            navigator.msSaveBlob(blob, filename);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">var</span> link = <span class="built_in">document</span>.createElement(<span class="string">"a"</span>);</div><div class="line">            <span class="keyword">if</span> (link.download !== <span class="literal">undefined</span>) &#123; <span class="comment">// feature detection</span></div><div class="line">                <span class="comment">// Browsers that support HTML5 download attribute</span></div><div class="line">                <span class="keyword">var</span> url = URL.createObjectURL(blob);</div><div class="line">                link.setAttribute(<span class="string">"href"</span>, url);</div><div class="line">                link.setAttribute(<span class="string">"download"</span>, filename);</div><div class="line">                link.style.visibility = <span class="string">'hidden'</span>;</div><div class="line">                <span class="built_in">document</span>.body.appendChild(link);</div><div class="line">                link.click();</div><div class="line">                <span class="built_in">document</span>.body.removeChild(link);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">exportToCsv(<span class="string">'export.csv'</span>, [</div><div class="line">  [<span class="string">'name'</span>,<span class="string">'description'</span>],	</div><div class="line">  [<span class="string">'david'</span>,<span class="string">'123'</span>],</div><div class="line">  [<span class="string">'jona'</span>,<span class="string">'""'</span>],</div><div class="line">  [<span class="string">'a'</span>,<span class="string">'b'</span>],</div><div class="line">])</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </article>
 
 
@@ -2247,6 +2401,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -2268,7 +2423,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2290,7 +2445,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2308,7 +2463,9 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
                 </a>
               </span>
             
@@ -2429,32 +2586,32 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
   
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
