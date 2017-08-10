@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第九章 排行榜及详情页开发）]]></title>
+    <url>%2F2017%2F08%2F10%2FVue-2-0-%E9%AB%98%E7%BA%A7%E5%AE%9E%E6%88%98-%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9F%B3%E4%B9%90WebApp-%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0%EF%BC%88%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%8F%8A%E8%AF%A6%E6%83%85%E9%A1%B5%E5%BC%80%E5%8F%91%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第九章 排行榜及详情页开发）排行页面布局介绍及排行榜数据抓取添加api/rank.js12345678910111213import jsonp from 'common/js/jsonp'import &#123;commonParams, options&#125; from './config'export function getTopList() &#123; const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg' const data = Object.assign(&#123;&#125;, commonParams, &#123; needNewCode: 1, platform: 'h5' &#125;) return jsonp(url, data, options)&#125; 排行页排行榜数据应用新建组件rank 榜单详情页布局介绍及Vuex实现路由数据通讯新建组件top-list 榜单详情页数据抓取和应用123456789101112131415export function getMusicList(topid) &#123; const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg' const data = Object.assign(&#123;&#125;, commonParams, &#123; topid, needNewCode: 1, uin: 0, tpl: 3, page: 'detail', type: 'top', platform: 'h5' &#125;) return jsonp(url, data, options)&#125; 带排行的song-list组件扩展和应用 添加dom 123&lt;div class="rank" v-show="rank"&gt; &lt;span :class="getRankCls(index)"&gt;&#123;&#123;getRankText(index)&#125;&#125;&lt;/span&gt;&lt;/div&gt; 添加props 1234rank: &#123; type: Boolean, default: false&#125; 添加methods 123456789101112getRankCls(index) &#123; if (index &lt;= 2) &#123; return `icon icon$&#123;index&#125;` &#125; else &#123; return 'text' &#125;&#125;,getRankText(index) &#123; if (index &gt; 2) &#123; return index + 1 &#125;&#125; music-list添加props 1234rank: &#123; type: Boolean, default: false&#125;]]></content>
+      <categories>
+        <category>技术</category>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>慕课网</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[添加hexo Next主题自定样式]]></title>
     <url>%2F2017%2F08%2F07%2F%E6%B7%BB%E5%8A%A0hexo-Next%E4%B8%BB%E9%A2%98%E8%87%AA%E5%AE%9A%E6%A0%B7%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[添加hexo Next主题自定样式添加自定义样式主要有两种 添加自定义css 添加自定义内置标签 添加自定义样式在themes/next/source/css/_custom/中添加样式文件, 例如1234567891011121314151617181920212223.label&#123; font-family: Consolas; display: inline; color: #fff; padding: 1px 3px 2px 3px; margin: 0px 2px 0px 2px; border-radius: 2px;&#125;.label-red&#123; background: #d9534f;&#125;.label-green&#123; background: #5cb85c;&#125;.label-blue&#123; background: #428bca;&#125;.label-sky&#123; background: #5bc0de;&#125;.label-orange&#123; background: #f0ad4e;&#125; 在themes/next/source/css/main.styl用引入样式文件1@import "_custom/custom"; 在文章中使用1&lt;span class="label label-red"&gt;New&lt;/span&gt; 添加自定义内置标签在themes/next/scripts/tags中添加文件, 例如12345function bscallOut (args, content) &#123; return '&lt;div class="note ' + args.join(' ') + '"&gt;' + hexo.render.renderSync(&#123;text: content, engine: 'markdown'&#125;).trim() + '&lt;/div&gt;';&#125;hexo.extend.tag.register('note', bscallOut, &#123;ends: true&#125;); 在文章中使用12345&#123;% note [class] %&#125; Any content (support inline tags too).&#123;% endnote %&#125;// [class] : default | primary | success | info | warning | danger hexo完整的标签列表 Next主题内置的Bootstrap Callout]]></content>
