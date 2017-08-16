@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux服务器配置]]></title>
+    <url>%2F2017%2F08%2F16%2Flinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[linux服务器配置更新:yum1yum -y update 下载软件1yum -y install wget 解压软件1yum -y install tar 编辑器1yum -y install vim 安装nginx1yum -y install nginx nodejs版本管理123456git clone https://github.com/creationix/nvm.git ~/.nvm &amp;&amp; cd ~/.nvm &amp;&amp; git checkout `git describe --abbrev=0 --tags`. ~/.nvm/nvm.sh# 全局配置vi ~/.bashrc# 加一句source ~/.nvm/nvm.sh 安装 Nodejsnvm install 4.4.3 淘宝镜像1npm install -g cnpm --registry=https://registry.npm.taobao.org 安装pm21cnpm install pm2 -g 写入配置文件1234# 进入配置文件目录cd /etc/nginx/conf.d/# 新建配置vi blog.conf 服务配置12345678server &#123; listen 80; server_name blog.taohong.space; #域名 location / &#123; proxy_pass http://127.0.0.1:3000; # 端口 &#125;&#125; 静态文件配置123456789server &#123; listen 80; server_name resume.taohong.space; #域名 location / &#123; root /project/resume/docs; #静态文件地址 index index.html index.htm; #入口文件 &#125;&#125; 重启nginx1nginx -s reload]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第13章 编译打包）]]></title>
     <url>%2F2017%2F08%2F16%2FVue-2-0-%E9%AB%98%E7%BA%A7%E5%AE%9E%E6%88%98-%E5%BC%80%E5%8F%91%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%9F%B3%E4%B9%90WebApp-%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0%EF%BC%88%E7%AC%AC13%E7%AB%A0-%E7%BC%96%E8%AF%91%E6%89%93%E5%8C%85%EF%BC%89%2F</url>
     <content type="text"><![CDATA[Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第13章 编译打包）编译打包-项目编译打包及node服务测试123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960let express = require('express')let config = require('./config/index')let axios = require('axios')var app = express()var apiRoutes = express.Router()apiRoutes.get('/getDiscList', function (req, res) &#123; var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg' axios.get(url, &#123; headers: &#123; referer: 'https://c.y.qq.com/', host: 'c.y.qq.com' &#125;, params: req.query &#125;).then((response) =&gt; &#123; res.json(response.data) &#125;).catch((e) =&gt; &#123; console.log(e) &#125;)&#125;)apiRoutes.get('/lyric', function (req, res) &#123; var url = 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg' axios.get(url, &#123; headers: &#123; referer: 'https://c.y.qq.com/', host: 'c.y.qq.com' &#125;, params: req.query &#125;).then((response) =&gt; &#123; var ret = response.data if (typeof ret === 'string') &#123; var reg = /^\w+\((&#123;[^()]+&#125;)\)$/ var matches = ret.match(reg) if (matches) &#123; ret = JSON.parse(matches[1]) &#125; &#125; res.json(ret) &#125;).catch((e) =&gt; &#123; console.log(e) &#125;)&#125;)app.use('/api', apiRoutes)app.use(express.static('./dist'))let port = process.env.PORT || config.build.portmodule.exports = app.listen(port, function (err) &#123; if (err) &#123; console.log(err) return &#125; console.log('Listening at https://localhost:' + port + '\n')&#125;) 编译打包-路由组件实现懒加载修改router12345678const Recommend = () =&gt; import('components/recommend/recommend')const Singer = () =&gt; import('components/singer/singer')const Rank = () =&gt; import('components/rank/rank')const Search = () =&gt; import('components/search/search')const SingerDetail = () =&gt; import('components/singer-detail/singer-detail')const Disc = () =&gt; import('components/disc/disc')const TopList = () =&gt; import('components/top-list/top-list')const UserCenter = () =&gt; import('components/user-center/user-center') 总结 学习的价值不在于获得源码 组件化、模块化的本质都是分治(把复杂的项目拆分成一个个模块, 把模块拆分成组件, 把能复用的功能都抽象出js文件) 遇到问题要勇于面对、勤于思考 学会主动学习]]></content>
@@ -258,11 +269,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Linux常用命令]]></title>
-    <url>%2F2017%2F07%2F16%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[Linux常用命令命令的基本格式命令 [选项] [参数] 注意:个别命令使用不遵循此格式 当有多个选项时,可以写在一起 简化选项等于完整选项 -a 等于 –all 查询目录中内容:lsls [选项] [文件或目录]选项：-a 显示所有文件，包含隐藏文件-l 显示详细信息-d 查看目录本身属性-h 人性化显示文件大小-i 显示inode节点（储存时生成的编码，格式化硬盘时候，分成等大的内存块4k,同时生成相应的节点表） 文件处理命令目录和文件处理命令建立目录：mkdir mkdir -p [目录名]-p 递归创建命令英文原意:make directories 切换所在目录：cd cd [目录]命令英文原意:change directory 简化命令cd和cd ~进入当前用户的家目录cd - 进入上次目录cd .. 进入上一级目录cd . 进入当前目录 Ctrl+L 清屏tab 可以补全目录或命令 查询所在目录位置：pwd命令英文原意:print working directory 删除空目录：rmdir rmdir [目录名]命令英文原意:remove empty directories 删除文件或目录：rm rm -rf [目录名]命令英文原意:remove 选项：-r 删除目录-f 强制 复制命令：cp cp [选项] [原文件或目录] [目标目录]命令英文原意：copy 选项：-r 复制目录-p 连带文件属性复制-d 若源文件是链接文件,则复制链接属性-a 相当于 -pdr 剪切或改名命令：mv mv [原文件或目录] [目标目录]命令英文原意：move ll 等于 ls -l 常用目录的作用 /根目录 /bin命令保存目录（普通用户就可以读取的命令） /boot启动目录，启动相关文件 /dev设备文件保存目录 /etc配置文件保存目录 /home普通用户的家目录 /lib系统库保存目录 /mnt系统挂载目录 /media挂载目录 /root超级用户的家目录 /tmp临时目录 /sbin命令保存目录（超级用户才能使用的目录） /proc直接写入内存的 /sys /usr系统软件资源目录 /usr/bin/系统命令（普通用户） /usr/sbin/（超级用户） /var系统相关文档内容 链接命令 ln -s [原文件] [目标文件]命令英文原意：link 功能描述：生成链接文件 选项： -s 创建软链接 硬链接特征：1、拥有相同的i节点和存储block块，可以看作是同一个文件2、可通过i节点识别3、不能跨分区4、不能针对目录使用 软链接特征：1、类似Windows快捷方式2、软链接拥有自己的i节点和Block块，但是数据块中只保存原文件的文件名和i节点号，并没有实际的文件数据3、lrwxrwxrwx l 软链接4、修改任意文件，另一个文件都改变5、删除原文件，软链接不能使用 文件搜索命令文件搜索命令 locate locate 文件名在后台数据库中安文件名搜索，搜索速度更快 updatedb更新数据库 命令搜索命令 whereis 和 which whereis 命令名搜索命令所在路径及帮助文档所在位置选项：-b：只查找可执行文件-m：只查找帮助文档 which 文件名搜索命令所在路径及别名 文件搜索命令 find find [搜索范围] [搜索条件]搜索文件 find / -name install.log避免大范围搜索，会非常消耗系统资源find是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配。 find / -iname install.log不区分大小写 find / -user install.log按照所有者搜索 find /root -nouser查找没有所有者的文件 find /var/log/ -mtime +10查找10天亲修改的文件 +10 10天以前-10 10天内10 10天当天-mtime 修改文件内容-ctime 修改文件属性-atime 文件访问时间 find . -size 25k查找文件大小是25KB的文件 -25k 小于25KB的文件25k 等于25KB的文件+25k 大于25KB的文件 find . -inum 262422查找i几点是262422的文件 find /ect -size +20k -a -size -50k查找/etc/目录下，大于20KB并且小于50KB的文件-a and 逻辑与-o or 逻辑或 find /ect -size +20k -a -size -50k -exec ls -lh {} \;查找/etc/目录下，大于20KB并且小于50KB的文件，并显示详细信息-exec/-ok 命令 {} \; 对搜索结果执行操作 字符串搜索命令 grep grep [选项] 字符串 文件名在文件当中匹配符合条件的字符串 选项：-i 忽略大小写-v 排除指定的字符串 帮助命令man 命令 查看命令拥有哪个级别的帮助man -f 命令相当于whereis 命令 举例：man -5 passwd 查看和命令相关的所有帮助man -k 命令相当于apropos 命令 选项帮助命令 –help shell内部命令帮助help shell内部命令 详细命令infoinfo 命令回车：进入子帮助页面u：进入上层页面n：进入下一个帮助小节p：进入上一个帮助小节q：退出]]></content>
+    <title><![CDATA[linux常用命令]]></title>
+    <url>%2F2017%2F07%2F16%2Flinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[linux常用命令命令的基本格式命令 [选项] [参数] 注意:个别命令使用不遵循此格式 当有多个选项时,可以写在一起 简化选项等于完整选项 -a 等于 –all 查询目录中内容:lsls [选项] [文件或目录]选项：-a 显示所有文件，包含隐藏文件-l 显示详细信息-d 查看目录本身属性-h 人性化显示文件大小-i 显示inode节点（储存时生成的编码，格式化硬盘时候，分成等大的内存块4k,同时生成相应的节点表） 文件处理命令目录和文件处理命令建立目录：mkdir mkdir -p [目录名]-p 递归创建命令英文原意:make directories 切换所在目录：cd cd [目录]命令英文原意:change directory 简化命令cd和cd ~进入当前用户的家目录cd - 进入上次目录cd .. 进入上一级目录cd . 进入当前目录 Ctrl+L 清屏tab 可以补全目录或命令 查询所在目录位置：pwd命令英文原意:print working directory 删除空目录：rmdir rmdir [目录名]命令英文原意:remove empty directories 删除文件或目录：rm rm -rf [目录名]命令英文原意:remove 选项：-r 删除目录-f 强制 复制命令：cp cp [选项] [原文件或目录] [目标目录]命令英文原意：copy 选项：-r 复制目录-p 连带文件属性复制-d 若源文件是链接文件,则复制链接属性-a 相当于 -pdr 剪切或改名命令：mv mv [原文件或目录] [目标目录]命令英文原意：move ll 等于 ls -l 常用目录的作用 /根目录 /bin命令保存目录（普通用户就可以读取的命令） /boot启动目录，启动相关文件 /dev设备文件保存目录 /etc配置文件保存目录 /home普通用户的家目录 /lib系统库保存目录 /mnt系统挂载目录 /media挂载目录 /root超级用户的家目录 /tmp临时目录 /sbin命令保存目录（超级用户才能使用的目录） /proc直接写入内存的 /sys /usr系统软件资源目录 /usr/bin/系统命令（普通用户） /usr/sbin/（超级用户） /var系统相关文档内容 链接命令 ln -s [原文件] [目标文件]命令英文原意：link 功能描述：生成链接文件 选项： -s 创建软链接 硬链接特征：1、拥有相同的i节点和存储block块，可以看作是同一个文件2、可通过i节点识别3、不能跨分区4、不能针对目录使用 软链接特征：1、类似Windows快捷方式2、软链接拥有自己的i节点和Block块，但是数据块中只保存原文件的文件名和i节点号，并没有实际的文件数据3、lrwxrwxrwx l 软链接4、修改任意文件，另一个文件都改变5、删除原文件，软链接不能使用 文件搜索命令文件搜索命令 locate locate 文件名在后台数据库中安文件名搜索，搜索速度更快 updatedb更新数据库 命令搜索命令 whereis 和 which whereis 命令名搜索命令所在路径及帮助文档所在位置选项：-b：只查找可执行文件-m：只查找帮助文档 which 文件名搜索命令所在路径及别名 文件搜索命令 find find [搜索范围] [搜索条件]搜索文件 find / -name install.log避免大范围搜索，会非常消耗系统资源find是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配。 find / -iname install.log不区分大小写 find / -user install.log按照所有者搜索 find /root -nouser查找没有所有者的文件 find /var/log/ -mtime +10查找10天亲修改的文件 +10 10天以前-10 10天内10 10天当天-mtime 修改文件内容-ctime 修改文件属性-atime 文件访问时间 find . -size 25k查找文件大小是25KB的文件 -25k 小于25KB的文件25k 等于25KB的文件+25k 大于25KB的文件 find . -inum 262422查找i几点是262422的文件 find /ect -size +20k -a -size -50k查找/etc/目录下，大于20KB并且小于50KB的文件-a and 逻辑与-o or 逻辑或 find /ect -size +20k -a -size -50k -exec ls -lh {} \;查找/etc/目录下，大于20KB并且小于50KB的文件，并显示详细信息-exec/-ok 命令 {} \; 对搜索结果执行操作 字符串搜索命令 grep grep [选项] 字符串 文件名在文件当中匹配符合条件的字符串 选项：-i 忽略大小写-v 排除指定的字符串 帮助命令man 命令 查看命令拥有哪个级别的帮助man -f 命令相当于whereis 命令 举例：man -5 passwd 查看和命令相关的所有帮助man -k 命令相当于apropos 命令 选项帮助命令 –help shell内部命令帮助help shell内部命令 详细命令infoinfo 命令回车：进入子帮助页面u：进入上层页面n：进入下一个帮助小节p：进入上一个帮助小节q：退出]]></content>
       <tags>
-        <tag>Linux</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -277,10 +288,10 @@
   <entry>
     <title><![CDATA[bash示例和书写流程]]></title>
     <url>%2F2017%2F07%2F14%2Fbash%E7%A4%BA%E4%BE%8B%E5%92%8C%E4%B9%A6%E5%86%99%E6%B5%81%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[bash示例和书写流程新建文件test.sh1touch test.sh 添加可执行权限1$ chmod +x test.sh 编辑test.sh，test.sh内容如下：12345#!/bin/bashecho "hello bash"exit 0 说明： #!/bin/bash : 它是bash文件声明语句，表示是以/bin/bash程序执行该文件。它必须写在文件的第一行！ echo “hello bash” : 表示在终端输出“hello bash” exit 0 : 表示返回0。在bash中，0表示执行成功，其他表示失败。 执行bash脚本1234./test.sh#或者sh test.shbash test.sh 在终端输出“bash hello” 参考：Linux bash总结]]></content>
+    <content type="text"><![CDATA[bash示例和书写流程新建文件test.sh1touch test.sh 添加可执行权限1$ chmod +x test.sh 编辑test.sh，test.sh内容如下：12345#!/bin/bashecho "hello bash"exit 0 说明： #!/bin/bash : 它是bash文件声明语句，表示是以/bin/bash程序执行该文件。它必须写在文件的第一行！ echo “hello bash” : 表示在终端输出“hello bash” exit 0 : 表示返回0。在bash中，0表示执行成功，其他表示失败。 执行bash脚本1234./test.sh#或者sh test.shbash test.sh 在终端输出“bash hello” 参考：linux bash总结]]></content>
       <tags>
-        <tag>Linux</tag>
         <tag>bash</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -308,7 +319,7 @@
         <category>技术</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
