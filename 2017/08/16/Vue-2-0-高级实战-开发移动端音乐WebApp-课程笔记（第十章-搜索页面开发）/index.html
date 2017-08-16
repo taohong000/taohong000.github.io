@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="慕课网,vue," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）搜索页面search-box组件开发
+添加基础组件search-box
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）">
+<meta property="og:url" content="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）/index.html">
+<meta property="og:site_name" content="Taohong's blog">
+<meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）搜索页面search-box组件开发
+添加基础组件search-box
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465">
+<meta property="og:updated_time" content="2017-08-16T06:27:00.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）">
+<meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）搜索页面search-box组件开发
+添加基础组件search-box
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）/"/>
+
+
+
+
+
+  <title>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发） | Taohong's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T14:12:50+08:00">
+                2017-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）</h1><h2 id="搜索页面search-box组件开发"><a href="#搜索页面search-box组件开发" class="headerlink" title="搜索页面search-box组件开发"></a>搜索页面search-box组件开发</h2><ol>
+<li><p>添加基础组件search-box</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-search"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">"query"</span> <span class="attr">v-model</span>=<span class="string">"query"</span> <span class="attr">class</span>=<span class="string">"box"</span> <span class="attr">:placeholder</span>=<span class="string">"placeholder"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">i</span> @<span class="attr">click</span>=<span class="string">"clear"</span> <span class="attr">v-show</span>=<span class="string">"query"</span> <span class="attr">class</span>=<span class="string">"icon-dismiss"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;debounce&#125; <span class="keyword">from</span> <span class="string">'common/js/util'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">placeholder</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'搜索歌曲、歌手'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">query</span>: <span class="string">''</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      clear() &#123;</div><div class="line">        <span class="keyword">this</span>.query = <span class="string">''</span></div><div class="line">      &#125;,</div><div class="line">      setQuery(query) &#123;</div><div class="line">        <span class="keyword">this</span>.query = query</div><div class="line">      &#125;,</div><div class="line">      blur() &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.query.blur()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="comment">// 监听query</span></div><div class="line">      <span class="keyword">this</span>.$watch(<span class="string">'query'</span>, debounce(<span class="function">(<span class="params">newQuery</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'query'</span>, newQuery)</div><div class="line">      &#125;, <span class="number">200</span>))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .search-box</div><div class="line">    display: flex</div><div class="line">    align-items: center</div><div class="line">    box-sizing: border-box</div><div class="line">    width: 100%</div><div class="line">    padding: 0 6px</div><div class="line">    height: 40px</div><div class="line">    background: $color-highlight-background</div><div class="line">    border-radius: 6px</div><div class="line">    .icon-search</div><div class="line">      font-size: 24px</div><div class="line">      color: $color-background</div><div class="line">    .box</div><div class="line">      flex: 1</div><div class="line">      margin: 0 5px</div><div class="line">      line-height: 18px</div><div class="line">      background: $color-highlight-background</div><div class="line">      color: $color-text</div><div class="line">      font-size: $font-size-medium</div><div class="line">      &amp;::placeholder</div><div class="line">        color: $color-text-d</div><div class="line">    .icon-dismiss</div><div class="line">      font-size: 16px</div><div class="line">      color: $color-background</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>添加业务组件search</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box-wrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">search-box</span> <span class="attr">ref</span>=<span class="string">"searchBox"</span>&gt;</span><span class="tag">&lt;/<span class="name">search-box</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> SearchBox <span class="keyword">from</span> <span class="string">'base/search-box/search-box'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      SearchBox</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .search</div><div class="line">    .search-box-wrapper</div><div class="line">      margin: 20px</div><div class="line">    .shortcut-wrapper</div><div class="line">      position: fixed</div><div class="line">      top: 178px</div><div class="line">      bottom: 0</div><div class="line">      width: 100%</div><div class="line">      .shortcut</div><div class="line">        height: 100%</div><div class="line">        overflow: hidden</div><div class="line">        .hot-key</div><div class="line">          margin: 0 20px 20px 20px</div><div class="line">          .title</div><div class="line">            margin-bottom: 20px</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-l</div><div class="line">          .item</div><div class="line">            display: inline-block</div><div class="line">            padding: 5px 10px</div><div class="line">            margin: 0 20px 10px 0</div><div class="line">            border-radius: 6px</div><div class="line">            background: $color-highlight-background</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-d</div><div class="line">        .search-history</div><div class="line">          position: relative</div><div class="line">          margin: 0 20px</div><div class="line">          .title</div><div class="line">            display: flex</div><div class="line">            align-items: center</div><div class="line">            height: 40px</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-l</div><div class="line">            .text</div><div class="line">              flex: 1</div><div class="line">            .clear</div><div class="line">              extend-click()</div><div class="line">              .icon-clear</div><div class="line">                font-size: $font-size-medium</div><div class="line">                color: $color-text-d</div><div class="line">    .search-result</div><div class="line">      position: fixed</div><div class="line">      width: 100%</div><div class="line">      top: 178px</div><div class="line">      bottom: 0</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="搜索页面热门搜索数据抓取和应用"><a href="#搜索页面热门搜索数据抓取和应用" class="headerlink" title="搜索页面热门搜索数据抓取和应用"></a>搜索页面热门搜索数据抓取和应用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getHotKey</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">uin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'h5'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box-wrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">search-box</span> <span class="attr">ref</span>=<span class="string">"searchBox"</span>&gt;</span><span class="tag">&lt;/<span class="name">search-box</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"shortcutWrapper"</span> <span class="attr">class</span>=<span class="string">"shortcut-wrapper"</span> <span class="attr">v-show</span>=<span class="string">"!query"</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shortcut"</span>&gt;</span></div><div class="line">	      <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hot-key"</span>&gt;</span></div><div class="line">	          <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>热门搜索<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	          <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">	            <span class="tag">&lt;<span class="name">li</span> @<span class="attr">click</span>=<span class="string">"addQuery(item.k)"</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">v-for</span>=<span class="string">"item in hotKey"</span>&gt;</span></div><div class="line">	              <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.k&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">	            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">	          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">	        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> SearchBox <span class="keyword">from</span> <span class="string">'base/search-box/search-box'</span></div><div class="line">  <span class="keyword">import</span> &#123;getHotKey&#125; <span class="keyword">from</span> <span class="string">'api/search'</span></div><div class="line">  <span class="keyword">import</span> &#123;ERR_OK&#125; <span class="keyword">from</span> <span class="string">'api/config'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">hotKey</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>._getHotKey()</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      addQuery(query) &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.searchBox.setQuery(query)</div><div class="line">      &#125;,</div><div class="line">      _getHotKey() &#123;</div><div class="line">        getHotKey().then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">if</span> (res.code === ERR_OK) &#123;</div><div class="line">            <span class="keyword">this</span>.hotKey = res.data.hotkey.slice(<span class="number">0</span>, <span class="number">10</span>)</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      query(newQuery) &#123;</div><div class="line">        <span class="keyword">if</span> (!newQuery) &#123;</div><div class="line">          setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">this</span>.$refs.shortcut.refresh()</div><div class="line">          &#125;, <span class="number">20</span>)</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      SearchBox</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="搜索页面suggest组件开发"><a href="#搜索页面suggest组件开发" class="headerlink" title="搜索页面suggest组件开发"></a>搜索页面suggest组件开发</h2><ol>
+<li><p>添加接口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params">query, page, zhida, perpage</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">w</span>: query,</div><div class="line">    <span class="attr">p</span>: page,</div><div class="line">    perpage,</div><div class="line">    <span class="attr">n</span>: perpage,</div><div class="line">    <span class="attr">catZhida</span>: zhida ? <span class="number">1</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">zhidaqu</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">t</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">flag</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">ie</span>: <span class="string">'utf-8'</span>,</div><div class="line">    <span class="attr">sem</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">aggr</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">remoteplace</span>: <span class="string">'txt.mqq.all'</span>,</div><div class="line">    <span class="attr">uin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'h5'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>实现上拉刷新, 扩展scroll组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// props</span></div><div class="line">pullup: &#123;</div><div class="line">  <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">  <span class="attr">default</span>: <span class="literal">false</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// methods</span></div><div class="line"><span class="comment">// 当滚动结束时离底部还有50px时, 派发事件scrollToEnd</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">this</span>.pullup) &#123;</div><div class="line">  <span class="keyword">this</span>.scroll.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.scroll.y &lt;= (<span class="keyword">this</span>.scroll.maxScrollY + <span class="number">50</span>)) &#123;</div><div class="line">      <span class="keyword">this</span>.$emit(<span class="string">'scrollToEnd'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>suggest中添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">searchMore() &#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.hasMore) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.page++</div><div class="line">  search(<span class="keyword">this</span>.query, <span class="keyword">this</span>.page, <span class="keyword">this</span>.showSinger, perpage).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> (res.code === ERR_OK) &#123;</div><div class="line">      <span class="keyword">this</span>.result = <span class="keyword">this</span>.result.concat(<span class="keyword">this</span>._genResult(res.data))</div><div class="line">      <span class="keyword">this</span>._checkMore(res.data)</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;,</div><div class="line">_checkMore(data) &#123;</div><div class="line">  <span class="keyword">const</span> song = data.song</div><div class="line">  <span class="keyword">if</span> (!song.list.length || (song.curnum + song.curpage * perpage) &gt;= song.totalnum) &#123;</div><div class="line">    <span class="keyword">this</span>.hasMore = <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加actions</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> insertSong = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit, state&#125;, song</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> playlist = state.playlist.slice()</div><div class="line">  <span class="keyword">let</span> sequenceList = state.sequenceList.slice()</div><div class="line">  <span class="keyword">let</span> currentIndex = state.currentIndex</div><div class="line">  <span class="comment">// 记录当前歌曲</span></div><div class="line">  <span class="keyword">let</span> currentSong = playlist[currentIndex]</div><div class="line">  <span class="comment">// 查找当前列表中是否有待插入的歌曲并返回其索引</span></div><div class="line">  <span class="keyword">let</span> fpIndex = findIndex(playlist, song)</div><div class="line">  <span class="comment">// 因为是插入歌曲，所以索引+1</span></div><div class="line">  currentIndex++</div><div class="line">  <span class="comment">// 插入这首歌到当前索引位置</span></div><div class="line">  playlist.splice(currentIndex, <span class="number">0</span>, song)</div><div class="line">  <span class="comment">// 如果已经包含了这首歌</span></div><div class="line">  <span class="keyword">if</span> (fpIndex &gt; <span class="number">-1</span>) &#123;</div><div class="line">    <span class="comment">// 如果当前插入的序号大于列表中的序号</span></div><div class="line">    <span class="keyword">if</span> (currentIndex &gt; fpIndex) &#123;</div><div class="line">      playlist.splice(fpIndex, <span class="number">1</span>)</div><div class="line">      currentIndex--</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      playlist.splice(fpIndex + <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 应该插入的位置</span></div><div class="line">  <span class="keyword">let</span> currentSIndex = findIndex(sequenceList, currentSong) + <span class="number">1</span></div><div class="line"></div><div class="line">  <span class="keyword">let</span> fsIndex = findIndex(sequenceList, song)</div><div class="line"></div><div class="line">  sequenceList.splice(currentSIndex, <span class="number">0</span>, song)</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (fsIndex &gt; <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (currentSIndex &gt; fsIndex) &#123;</div><div class="line">      sequenceList.splice(fsIndex, <span class="number">1</span>)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      sequenceList.splice(fsIndex + <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  commit(types.SET_PLAYLIST, playlist)</div><div class="line">  commit(types.SET_SEQUENCE_LIST, sequenceList)</div><div class="line">  commit(types.SET_CURRENT_INDEX, currentIndex)</div><div class="line">  commit(types.SET_FULL_SCREEN, <span class="literal">true</span>)</div><div class="line">  commit(types.SET_PLAYING_STATE, <span class="literal">true</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加通用组件no-result</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"no-result"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"no-result-icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"no-result-text"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ecmascript-6"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">title</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .no-result</div><div class="line">    text-align: center</div><div class="line">    .no-result-icon</div><div class="line">      width: 86px</div><div class="line">      height: 90px</div><div class="line">      margin: 0 auto</div><div class="line">      bg-image('no-result')</div><div class="line">      background-size: 86px 90px</div><div class="line">    .no-result-text</div><div class="line">      margin-top: 30px</div><div class="line">      font-size: $font-size-medium</div><div class="line">      color: $color-text-d</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在common/js/util.js中添加节流函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, delay</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> timer</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (timer) &#123;</div><div class="line">      clearTimeout(timer)</div><div class="line">    &#125;</div><div class="line">    timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      func.apply(<span class="keyword">this</span>, args)</div><div class="line">    &#125;, delay)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="搜索页面搜索结果保存功能实现"><a href="#搜索页面搜索结果保存功能实现" class="headerlink" title="搜索页面搜索结果保存功能实现"></a>搜索页面搜索结果保存功能实现</h2><ol>
+<li><p>suggest组件selectItem方法派发事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item)</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加commom/js/cache.js 缓存操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertArray</span>(<span class="params">arr, val, compare, maxLen</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> index = arr.findIndex(compare)</div><div class="line">  <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 存在元素删除后插入, 没有直接插入</span></div><div class="line">  <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</div><div class="line">    arr.splice(index, <span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">  arr.unshift(val)</div><div class="line">  <span class="keyword">if</span> (maxLen &amp;&amp; arr.length &gt; maxLen) &#123;</div><div class="line">    arr.pop()</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSearch</span>(<span class="params">query</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> searches = storage.get(SEARCH_KEY, [])</div><div class="line">  insertArray(searches, query, (item) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> item === query</div><div class="line">  &#125;, SEARCH_MAX_LEN)</div><div class="line">  storage.set(SEARCH_KEY, searches)</div><div class="line">  <span class="keyword">return</span> searches</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加actions</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveSearchHistory = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;, query</span>) </span>&#123;</div><div class="line">  commit(types.SET_SEARCH_HISTORY, saveSearch(query))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="搜索页面search-list-组件功能实现"><a href="#搜索页面search-list-组件功能实现" class="headerlink" title="搜索页面search-list 组件功能实现"></a>搜索页面search-list 组件功能实现</h2><ol>
+<li><p>添加组件search-list</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-list"</span> <span class="attr">v-show</span>=<span class="string">"searches.length"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"search-item"</span> @<span class="attr">click</span>=<span class="string">"selectItem(item)"</span> <span class="attr">v-for</span>=<span class="string">"item in searches"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon"</span> @<span class="attr">click.stop</span>=<span class="string">"deleteOne(item)"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-delete"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">searches</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      selectItem(item) &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item)</div><div class="line">      &#125;,</div><div class="line">      deleteOne(item) &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'delete'</span>, item)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .search-list</div><div class="line">    .search-item</div><div class="line">      display: flex</div><div class="line">      align-items: center</div><div class="line">      height: 40px</div><div class="line">      .text</div><div class="line">        flex: 1</div><div class="line">        color: $color-text-l</div><div class="line">      .icon</div><div class="line">        extend-click()</div><div class="line">        .icon-delete</div><div class="line">          font-size: $font-size-small</div><div class="line">          color: $color-text-d</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>cache添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteFromArray</span>(<span class="params">arr, compare</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> index = arr.findIndex(compare)</div><div class="line">  <span class="keyword">if</span> (index &gt; <span class="number">-1</span>) &#123;</div><div class="line">    arr.splice(index, <span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">deleteSearch</span>(<span class="params">query</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> searches = storage.get(SEARCH_KEY, [])</div><div class="line">  deleteFromArray(searches, (item) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> item === query</div><div class="line">  &#125;)</div><div class="line">  storage.set(SEARCH_KEY, searches)</div><div class="line">  <span class="keyword">return</span> searches</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加action</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> deleteSearchHistory = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;, query</span>) </span>&#123;</div><div class="line">  commit(types.SET_SEARCH_HISTORY, deleteSearch(query))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加cache</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">clearSearch</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  storage.remove(SEARCH_KEY)</div><div class="line">  <span class="keyword">return</span> []</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加actions</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> clearSearchHistory = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;</span>) </span>&#123;</div><div class="line">  commit(types.SET_SEARCH_HISTORY, clearSearch())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="搜索页面confirm-组件功能实现"><a href="#搜索页面confirm-组件功能实现" class="headerlink" title="搜索页面confirm 组件功能实现"></a>搜索页面confirm 组件功能实现</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"confirm-fade"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"confirm"</span> <span class="attr">v-show</span>=<span class="string">"showFlag"</span> @<span class="attr">click.stop</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"confirm-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"confirm-content"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"operate"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"cancel"</span> <span class="attr">class</span>=<span class="string">"operate-btn left"</span>&gt;</span>&#123;&#123;cancelBtnText&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"confirm"</span> <span class="attr">class</span>=<span class="string">"operate-btn"</span>&gt;</span>&#123;&#123;confirmBtnText&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">text</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">confirmBtnText</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'确定'</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">cancelBtnText</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'取消'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">showFlag</span>: <span class="literal">false</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      show() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">true</span></div><div class="line">      &#125;,</div><div class="line">      hide() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">false</span></div><div class="line">      &#125;,</div><div class="line">      cancel() &#123;</div><div class="line">        <span class="keyword">this</span>.hide()</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'cancel'</span>)</div><div class="line">      &#125;,</div><div class="line">      confirm() &#123;</div><div class="line">        <span class="keyword">this</span>.hide()</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'confirm'</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .confirm</div><div class="line">    position: fixed</div><div class="line">    left: 0</div><div class="line">    right: 0</div><div class="line">    top: 0</div><div class="line">    bottom: 0</div><div class="line">    z-index: 998</div><div class="line">    background-color: $color-background-d</div><div class="line">    &amp;.confirm-fade-enter-active</div><div class="line">      animation: confirm-fadein 0.3s</div><div class="line">      .confirm-content</div><div class="line">        animation: confirm-zoom 0.3s</div><div class="line">    .confirm-wrapper</div><div class="line">      position: absolute</div><div class="line">      top: 50%</div><div class="line">      left: 50%</div><div class="line">      transform: translate(-50%, -50%)</div><div class="line">      z-index: 999</div><div class="line">      .confirm-content</div><div class="line">        width: 270px</div><div class="line">        border-radius: 13px</div><div class="line">        background: $color-highlight-background</div><div class="line">        .text</div><div class="line">          padding: 19px 15px</div><div class="line">          line-height: 22px</div><div class="line">          text-align: center</div><div class="line">          font-size: $font-size-large</div><div class="line">          color: $color-text-l</div><div class="line">        .operate</div><div class="line">          display: flex</div><div class="line">          align-items: center</div><div class="line">          text-align: center</div><div class="line">          font-size: $font-size-large</div><div class="line">          .operate-btn</div><div class="line">            flex: 1</div><div class="line">            line-height: 22px</div><div class="line">            padding: 10px 0</div><div class="line">            border-top: 1px solid $color-background-d</div><div class="line">            color: $color-text-d</div><div class="line">            &amp;.left</div><div class="line">              border-right: 1px solid $color-background-d</div><div class="line">  @keyframes confirm-fadein</div><div class="line">    0%</div><div class="line">      opacity: 0</div><div class="line">    100%</div><div class="line">      opacity: 1</div><div class="line">  @keyframes confirm-zoom</div><div class="line">    0%</div><div class="line">      transform: scale(0)</div><div class="line">    50%</div><div class="line">      transform: scale(1.1)</div><div class="line">    100%</div><div class="line">      transform: scale(1)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="搜索页面剩余功能实现"><a href="#搜索页面剩余功能实现" class="headerlink" title="搜索页面剩余功能实现"></a>搜索页面剩余功能实现</h2><p>给滚动组件传值, 一个复合属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">computed: &#123;</div><div class="line">  shortcut() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.hotKey.concat(<span class="keyword">this</span>.searchHistory)</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/10/10个JavaScript难点/" rel="next" title="10个JavaScript难点">
+                <i class="fa fa-chevron-left"></i> 10个JavaScript难点
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第11章-歌曲列表组件）/" rel="prev" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第11章 歌曲列表组件）">
+                Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第11章 歌曲列表组件） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg"
+               alt="Taohong" />
+          <p class="site-author-name" itemprop="name">Taohong</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/taohong000" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）"><span class="nav-number">1.</span> <span class="nav-text">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面search-box组件开发"><span class="nav-number">1.1.</span> <span class="nav-text">搜索页面search-box组件开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面热门搜索数据抓取和应用"><span class="nav-number">1.2.</span> <span class="nav-text">搜索页面热门搜索数据抓取和应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面suggest组件开发"><span class="nav-number">1.3.</span> <span class="nav-text">搜索页面suggest组件开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面搜索结果保存功能实现"><span class="nav-number">1.4.</span> <span class="nav-text">搜索页面搜索结果保存功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面search-list-组件功能实现"><span class="nav-number">1.5.</span> <span class="nav-text">搜索页面search-list 组件功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面confirm-组件功能实现"><span class="nav-number">1.6.</span> <span class="nav-text">搜索页面confirm 组件功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索页面剩余功能实现"><span class="nav-number">1.7.</span> <span class="nav-text">搜索页面剩余功能实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
