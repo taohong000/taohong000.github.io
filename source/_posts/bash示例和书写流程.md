@@ -3,7 +3,7 @@ title: bash示例和书写流程
 date: 2017-07-14 12:56:42
 tags: 
 - bash
-- Linux
+- linux
 ---
 
 # bash示例和书写流程
@@ -43,4 +43,4 @@ bash test.sh
 在终端输出“bash hello”
 
 参考：
-[Linux bash总结](http://www.cnblogs.com/skywang12345/archive/2013/05/30/3106570.html)
+[linux bash总结](http://www.cnblogs.com/skywang12345/archive/2013/05/30/3106570.html)

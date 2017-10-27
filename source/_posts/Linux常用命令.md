@@ -1,10 +1,10 @@
 ---
-title: Linux常用命令
+title: linux常用命令
 date: 2017-07-16 18:36:16
-tags: Linux
+tags: linux
 ---
 
-# Linux常用命令
+# linux常用命令
 
 ## 命令的基本格式
 
