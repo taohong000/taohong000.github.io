@@ -313,6 +313,356 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/charles本地调试之map功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/charles本地调试之map功能/" itemprop="url">charles本地调试之map功能</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T19:00:13+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="charles本地调试之map功能"><a href="#charles本地调试之map功能" class="headerlink" title="charles本地调试之map功能"></a>charles本地调试之map功能</h1><h2 id="map功能介绍"><a href="#map功能介绍" class="headerlink" title="map功能介绍"></a>map功能介绍</h2><p> map功能，顾名思义就是将某个请求进行重定向，用重定向后的内容来响应请求的内容；<br>map功能分为<strong>map Local</strong>和<strong>map Remote</strong>, 二者区分是：</p>
+<ul>
+<li><strong>map Local</strong>：是将某个网络请求重定向到本地的某个文件</li>
+<li><strong>map Remote</strong>：是将某个网络请求重定向到另一个网络请求</li>
+</ul>
+<p>二者除了重定向文件的位置不同之外，其他功能都是一样的。他们都可以对js、css、html以及api接口均可重定向，此外也可以使用通配符来进行简单的批量匹配，达到批量重定向的目的。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>这里介绍一下我最常用的功能<strong>api重定向</strong></p>
+<p>为了mock数据；一般使用<strong>map Remote</strong>功能来将本地的请求重定向到测试或者线上环境的网络请求。</p>
+<p> 例子如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://127.0.0.1:8080/api/foo/bar ---&gt; http://test.com/api/foo/bar</div></pre></td></tr></table></figure></p>
+<p>配置如下<br><img src="/2017/11/01/charles本地调试之map功能/edit map.PNG" alt="edit map"></p>
+<blockquote>
+<p>注意上面map From中的Path配置项使用了<code>*</code>通配符，表示匹配127.0.0.1:8080/api/下的所有文件及子路径，将其重定向到test.com下的/api/路径下</p>
+</blockquote>
+<h2 id="map通配符"><a href="#map通配符" class="headerlink" title="map通配符"></a>map通配符</h2><p>map隐射可以使用的模式匹配符有三种：</p>
+<ul>
+<li><p><code>*</code>: 可以匹配0个或者多个字符</p>
+</li>
+<li><p><code>?</code>: 可以匹配一个字符</p>
+</li>
+<li><p><code>[...]</code>: 范围选择符，可以匹配范围中的任意一个字符</p>
+</li>
+</ul>
+<h2 id="map配置实例"><a href="#map配置实例" class="headerlink" title="map配置实例"></a>map配置实例</h2><p>假设<code>Map From</code>配置中的各个项为空，表示匹配所有请求，然后<code>Map To</code>项的配置不同，代表不同含义，下表列出一个简单例子</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Host配置值</th>
+<th style="text-align:left">Path配置值</th>
+<th style="text-align:left">配置产生的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">匹配所有的请求重定向到charlesproxy.com主机</td>
+</tr>
+<tr>
+<td style="text-align:left">*.charlesproxy.com</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">匹配所有的请求重定向到以.charlesproxy.com结尾的主机</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/charles/</td>
+<td style="text-align:left">匹配所有请求只重定向到charlesproxy.com/charles/路径下</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/charles/*</td>
+<td style="text-align:left">匹配所有请求只重定向到charlesproxy.com/charles/路径下,包括路径下的文件及其路径的子路径</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/charles</td>
+<td style="text-align:left">匹配所有请求只重定向到charlesproxy.com/charles下</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/index.html</td>
+<td style="text-align:left">匹配所有请求重定向到charlesproxy.com/index.html</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">/charles/*.html</td>
+<td style="text-align:left">匹配所有请求重定向到任意主机下的以.html结尾的文件，该文件存放在主机的/charles/及其子目录下</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/hexo博客引用本地图片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/hexo博客引用本地图片/" itemprop="url">hexo博客引用本地图片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T15:29:31+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><ol>
+<li><p>设置 _config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_asset_folder:<span class="literal">true</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>安装插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>引入图片</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![avatar](图片目录/logo.jpg)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/2017/11/01/hexo博客引用本地图片/avatar.jpg" alt="avatar"></p>
+<h2 id="使用标签"><a href="#使用标签" class="headerlink" title="使用标签"></a>使用标签</h2><ol>
+<li><p>设置 _config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_asset_folder:<span class="literal">true</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>使用标签</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;% asset_path slug %&#125;</div><div class="line">&#123;% asset_img slug [title] %&#125;</div><div class="line">&#123;% asset_link slug [title] %&#125;</div><div class="line"></div><div class="line">如:</div><div class="line">&#123;% asset_img avatar.jpg avatar %&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<img src="/2017/11/01/hexo博客引用本地图片/avatar.jpg" alt="avatar" title="avatar">
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/27/常用npm包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1502,405 +1852,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T14:12:50+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">课程笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第十章-搜索页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第十章 搜索页面开发）</h1><h2 id="搜索页面search-box组件开发"><a href="#搜索页面search-box组件开发" class="headerlink" title="搜索页面search-box组件开发"></a>搜索页面search-box组件开发</h2><ol>
-<li><p>添加基础组件search-box</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-search"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">"query"</span> <span class="attr">v-model</span>=<span class="string">"query"</span> <span class="attr">class</span>=<span class="string">"box"</span> <span class="attr">:placeholder</span>=<span class="string">"placeholder"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">i</span> @<span class="attr">click</span>=<span class="string">"clear"</span> <span class="attr">v-show</span>=<span class="string">"query"</span> <span class="attr">class</span>=<span class="string">"icon-dismiss"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;debounce&#125; <span class="keyword">from</span> <span class="string">'common/js/util'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">placeholder</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'搜索歌曲、歌手'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">query</span>: <span class="string">''</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      clear() &#123;</div><div class="line">        <span class="keyword">this</span>.query = <span class="string">''</span></div><div class="line">      &#125;,</div><div class="line">      setQuery(query) &#123;</div><div class="line">        <span class="keyword">this</span>.query = query</div><div class="line">      &#125;,</div><div class="line">      blur() &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.query.blur()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="comment">// 监听query</span></div><div class="line">      <span class="keyword">this</span>.$watch(<span class="string">'query'</span>, debounce(<span class="function">(<span class="params">newQuery</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'query'</span>, newQuery)</div><div class="line">      &#125;, <span class="number">200</span>))</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .search-box</div><div class="line">    display: flex</div><div class="line">    align-items: center</div><div class="line">    box-sizing: border-box</div><div class="line">    width: 100%</div><div class="line">    padding: 0 6px</div><div class="line">    height: 40px</div><div class="line">    background: $color-highlight-background</div><div class="line">    border-radius: 6px</div><div class="line">    .icon-search</div><div class="line">      font-size: 24px</div><div class="line">      color: $color-background</div><div class="line">    .box</div><div class="line">      flex: 1</div><div class="line">      margin: 0 5px</div><div class="line">      line-height: 18px</div><div class="line">      background: $color-highlight-background</div><div class="line">      color: $color-text</div><div class="line">      font-size: $font-size-medium</div><div class="line">      &amp;::placeholder</div><div class="line">        color: $color-text-d</div><div class="line">    .icon-dismiss</div><div class="line">      font-size: 16px</div><div class="line">      color: $color-background</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>添加业务组件search</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box-wrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">search-box</span> <span class="attr">ref</span>=<span class="string">"searchBox"</span>&gt;</span><span class="tag">&lt;/<span class="name">search-box</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> SearchBox <span class="keyword">from</span> <span class="string">'base/search-box/search-box'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      SearchBox</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .search</div><div class="line">    .search-box-wrapper</div><div class="line">      margin: 20px</div><div class="line">    .shortcut-wrapper</div><div class="line">      position: fixed</div><div class="line">      top: 178px</div><div class="line">      bottom: 0</div><div class="line">      width: 100%</div><div class="line">      .shortcut</div><div class="line">        height: 100%</div><div class="line">        overflow: hidden</div><div class="line">        .hot-key</div><div class="line">          margin: 0 20px 20px 20px</div><div class="line">          .title</div><div class="line">            margin-bottom: 20px</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-l</div><div class="line">          .item</div><div class="line">            display: inline-block</div><div class="line">            padding: 5px 10px</div><div class="line">            margin: 0 20px 10px 0</div><div class="line">            border-radius: 6px</div><div class="line">            background: $color-highlight-background</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-d</div><div class="line">        .search-history</div><div class="line">          position: relative</div><div class="line">          margin: 0 20px</div><div class="line">          .title</div><div class="line">            display: flex</div><div class="line">            align-items: center</div><div class="line">            height: 40px</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-l</div><div class="line">            .text</div><div class="line">              flex: 1</div><div class="line">            .clear</div><div class="line">              extend-click()</div><div class="line">              .icon-clear</div><div class="line">                font-size: $font-size-medium</div><div class="line">                color: $color-text-d</div><div class="line">    .search-result</div><div class="line">      position: fixed</div><div class="line">      width: 100%</div><div class="line">      top: 178px</div><div class="line">      bottom: 0</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="搜索页面热门搜索数据抓取和应用"><a href="#搜索页面热门搜索数据抓取和应用" class="headerlink" title="搜索页面热门搜索数据抓取和应用"></a>搜索页面热门搜索数据抓取和应用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getHotKey</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">uin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'h5'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box-wrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">search-box</span> <span class="attr">ref</span>=<span class="string">"searchBox"</span>&gt;</span><span class="tag">&lt;/<span class="name">search-box</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"shortcutWrapper"</span> <span class="attr">class</span>=<span class="string">"shortcut-wrapper"</span> <span class="attr">v-show</span>=<span class="string">"!query"</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shortcut"</span>&gt;</span></div><div class="line">	      <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hot-key"</span>&gt;</span></div><div class="line">	          <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>热门搜索<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	          <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">	            <span class="tag">&lt;<span class="name">li</span> @<span class="attr">click</span>=<span class="string">"addQuery(item.k)"</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">v-for</span>=<span class="string">"item in hotKey"</span>&gt;</span></div><div class="line">	              <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.k&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">	            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">	          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">	        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> SearchBox <span class="keyword">from</span> <span class="string">'base/search-box/search-box'</span></div><div class="line">  <span class="keyword">import</span> &#123;getHotKey&#125; <span class="keyword">from</span> <span class="string">'api/search'</span></div><div class="line">  <span class="keyword">import</span> &#123;ERR_OK&#125; <span class="keyword">from</span> <span class="string">'api/config'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">hotKey</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>._getHotKey()</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      addQuery(query) &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.searchBox.setQuery(query)</div><div class="line">      &#125;,</div><div class="line">      _getHotKey() &#123;</div><div class="line">        getHotKey().then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">if</span> (res.code === ERR_OK) &#123;</div><div class="line">            <span class="keyword">this</span>.hotKey = res.data.hotkey.slice(<span class="number">0</span>, <span class="number">10</span>)</div><div class="line">          &#125;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      query(newQuery) &#123;</div><div class="line">        <span class="keyword">if</span> (!newQuery) &#123;</div><div class="line">          setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">this</span>.$refs.shortcut.refresh()</div><div class="line">          &#125;, <span class="number">20</span>)</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      SearchBox</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="搜索页面suggest组件开发"><a href="#搜索页面suggest组件开发" class="headerlink" title="搜索页面suggest组件开发"></a>搜索页面suggest组件开发</h2><ol>
-<li><p>添加接口</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params">query, page, zhida, perpage</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    <span class="attr">w</span>: query,</div><div class="line">    <span class="attr">p</span>: page,</div><div class="line">    perpage,</div><div class="line">    <span class="attr">n</span>: perpage,</div><div class="line">    <span class="attr">catZhida</span>: zhida ? <span class="number">1</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">zhidaqu</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">t</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">flag</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">ie</span>: <span class="string">'utf-8'</span>,</div><div class="line">    <span class="attr">sem</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">aggr</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">remoteplace</span>: <span class="string">'txt.mqq.all'</span>,</div><div class="line">    <span class="attr">uin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'h5'</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>实现上拉刷新, 扩展scroll组件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// props</span></div><div class="line">pullup: &#123;</div><div class="line">  <span class="attr">type</span>: <span class="built_in">Boolean</span>,</div><div class="line">  <span class="attr">default</span>: <span class="literal">false</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// methods</span></div><div class="line"><span class="comment">// 当滚动结束时离底部还有50px时, 派发事件scrollToEnd</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">this</span>.pullup) &#123;</div><div class="line">  <span class="keyword">this</span>.scroll.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.scroll.y &lt;= (<span class="keyword">this</span>.scroll.maxScrollY + <span class="number">50</span>)) &#123;</div><div class="line">      <span class="keyword">this</span>.$emit(<span class="string">'scrollToEnd'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>suggest中添加方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">searchMore() &#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.hasMore) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.page++</div><div class="line">  search(<span class="keyword">this</span>.query, <span class="keyword">this</span>.page, <span class="keyword">this</span>.showSinger, perpage).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> (res.code === ERR_OK) &#123;</div><div class="line">      <span class="keyword">this</span>.result = <span class="keyword">this</span>.result.concat(<span class="keyword">this</span>._genResult(res.data))</div><div class="line">      <span class="keyword">this</span>._checkMore(res.data)</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;,</div><div class="line">_checkMore(data) &#123;</div><div class="line">  <span class="keyword">const</span> song = data.song</div><div class="line">  <span class="keyword">if</span> (!song.list.length || (song.curnum + song.curpage * perpage) &gt;= song.totalnum) &#123;</div><div class="line">    <span class="keyword">this</span>.hasMore = <span class="literal">false</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加actions</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> insertSong = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit, state&#125;, song</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> playlist = state.playlist.slice()</div><div class="line">  <span class="keyword">let</span> sequenceList = state.sequenceList.slice()</div><div class="line">  <span class="keyword">let</span> currentIndex = state.currentIndex</div><div class="line">  <span class="comment">// 记录当前歌曲</span></div><div class="line">  <span class="keyword">let</span> currentSong = playlist[currentIndex]</div><div class="line">  <span class="comment">// 查找当前列表中是否有待插入的歌曲并返回其索引</span></div><div class="line">  <span class="keyword">let</span> fpIndex = findIndex(playlist, song)</div><div class="line">  <span class="comment">// 因为是插入歌曲，所以索引+1</span></div><div class="line">  currentIndex++</div><div class="line">  <span class="comment">// 插入这首歌到当前索引位置</span></div><div class="line">  playlist.splice(currentIndex, <span class="number">0</span>, song)</div><div class="line">  <span class="comment">// 如果已经包含了这首歌</span></div><div class="line">  <span class="keyword">if</span> (fpIndex &gt; <span class="number">-1</span>) &#123;</div><div class="line">    <span class="comment">// 如果当前插入的序号大于列表中的序号</span></div><div class="line">    <span class="keyword">if</span> (currentIndex &gt; fpIndex) &#123;</div><div class="line">      playlist.splice(fpIndex, <span class="number">1</span>)</div><div class="line">      currentIndex--</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      playlist.splice(fpIndex + <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 应该插入的位置</span></div><div class="line">  <span class="keyword">let</span> currentSIndex = findIndex(sequenceList, currentSong) + <span class="number">1</span></div><div class="line"></div><div class="line">  <span class="keyword">let</span> fsIndex = findIndex(sequenceList, song)</div><div class="line"></div><div class="line">  sequenceList.splice(currentSIndex, <span class="number">0</span>, song)</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (fsIndex &gt; <span class="number">-1</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (currentSIndex &gt; fsIndex) &#123;</div><div class="line">      sequenceList.splice(fsIndex, <span class="number">1</span>)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      sequenceList.splice(fsIndex + <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  commit(types.SET_PLAYLIST, playlist)</div><div class="line">  commit(types.SET_SEQUENCE_LIST, sequenceList)</div><div class="line">  commit(types.SET_CURRENT_INDEX, currentIndex)</div><div class="line">  commit(types.SET_FULL_SCREEN, <span class="literal">true</span>)</div><div class="line">  commit(types.SET_PLAYING_STATE, <span class="literal">true</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加通用组件no-result</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"no-result"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"no-result-icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"no-result-text"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ecmascript-6"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">title</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .no-result</div><div class="line">    text-align: center</div><div class="line">    .no-result-icon</div><div class="line">      width: 86px</div><div class="line">      height: 90px</div><div class="line">      margin: 0 auto</div><div class="line">      bg-image('no-result')</div><div class="line">      background-size: 86px 90px</div><div class="line">    .no-result-text</div><div class="line">      margin-top: 30px</div><div class="line">      font-size: $font-size-medium</div><div class="line">      color: $color-text-d</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>在common/js/util.js中添加节流函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, delay</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> timer</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (timer) &#123;</div><div class="line">      clearTimeout(timer)</div><div class="line">    &#125;</div><div class="line">    timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      func.apply(<span class="keyword">this</span>, args)</div><div class="line">    &#125;, delay)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="搜索页面搜索结果保存功能实现"><a href="#搜索页面搜索结果保存功能实现" class="headerlink" title="搜索页面搜索结果保存功能实现"></a>搜索页面搜索结果保存功能实现</h2><ol>
-<li><p>suggest组件selectItem方法派发事件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item)</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加commom/js/cache.js 缓存操作</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertArray</span>(<span class="params">arr, val, compare, maxLen</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> index = arr.findIndex(compare)</div><div class="line">  <span class="keyword">if</span> (index === <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 存在元素删除后插入, 没有直接插入</span></div><div class="line">  <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</div><div class="line">    arr.splice(index, <span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">  arr.unshift(val)</div><div class="line">  <span class="keyword">if</span> (maxLen &amp;&amp; arr.length &gt; maxLen) &#123;</div><div class="line">    arr.pop()</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSearch</span>(<span class="params">query</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> searches = storage.get(SEARCH_KEY, [])</div><div class="line">  insertArray(searches, query, (item) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> item === query</div><div class="line">  &#125;, SEARCH_MAX_LEN)</div><div class="line">  storage.set(SEARCH_KEY, searches)</div><div class="line">  <span class="keyword">return</span> searches</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加actions</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveSearchHistory = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;, query</span>) </span>&#123;</div><div class="line">  commit(types.SET_SEARCH_HISTORY, saveSearch(query))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="搜索页面search-list-组件功能实现"><a href="#搜索页面search-list-组件功能实现" class="headerlink" title="搜索页面search-list 组件功能实现"></a>搜索页面search-list 组件功能实现</h2><ol>
-<li><p>添加组件search-list</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-list"</span> <span class="attr">v-show</span>=<span class="string">"searches.length"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"search-item"</span> @<span class="attr">click</span>=<span class="string">"selectItem(item)"</span> <span class="attr">v-for</span>=<span class="string">"item in searches"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon"</span> @<span class="attr">click.stop</span>=<span class="string">"deleteOne(item)"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-delete"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">searches</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: []</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      selectItem(item) &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item)</div><div class="line">      &#125;,</div><div class="line">      deleteOne(item) &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'delete'</span>, item)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .search-list</div><div class="line">    .search-item</div><div class="line">      display: flex</div><div class="line">      align-items: center</div><div class="line">      height: 40px</div><div class="line">      .text</div><div class="line">        flex: 1</div><div class="line">        color: $color-text-l</div><div class="line">      .icon</div><div class="line">        extend-click()</div><div class="line">        .icon-delete</div><div class="line">          font-size: $font-size-small</div><div class="line">          color: $color-text-d</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>cache添加方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteFromArray</span>(<span class="params">arr, compare</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> index = arr.findIndex(compare)</div><div class="line">  <span class="keyword">if</span> (index &gt; <span class="number">-1</span>) &#123;</div><div class="line">    arr.splice(index, <span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">deleteSearch</span>(<span class="params">query</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> searches = storage.get(SEARCH_KEY, [])</div><div class="line">  deleteFromArray(searches, (item) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> item === query</div><div class="line">  &#125;)</div><div class="line">  storage.set(SEARCH_KEY, searches)</div><div class="line">  <span class="keyword">return</span> searches</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加action</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> deleteSearchHistory = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;, query</span>) </span>&#123;</div><div class="line">  commit(types.SET_SEARCH_HISTORY, deleteSearch(query))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加cache</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">clearSearch</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  storage.remove(SEARCH_KEY)</div><div class="line">  <span class="keyword">return</span> []</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>添加actions</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> clearSearchHistory = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;</span>) </span>&#123;</div><div class="line">  commit(types.SET_SEARCH_HISTORY, clearSearch())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="搜索页面confirm-组件功能实现"><a href="#搜索页面confirm-组件功能实现" class="headerlink" title="搜索页面confirm 组件功能实现"></a>搜索页面confirm 组件功能实现</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"confirm-fade"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"confirm"</span> <span class="attr">v-show</span>=<span class="string">"showFlag"</span> @<span class="attr">click.stop</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"confirm-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"confirm-content"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"operate"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"cancel"</span> <span class="attr">class</span>=<span class="string">"operate-btn left"</span>&gt;</span>&#123;&#123;cancelBtnText&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">"confirm"</span> <span class="attr">class</span>=<span class="string">"operate-btn"</span>&gt;</span>&#123;&#123;confirmBtnText&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">text</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">''</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">confirmBtnText</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'确定'</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">cancelBtnText</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</div><div class="line">        <span class="attr">default</span>: <span class="string">'取消'</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">showFlag</span>: <span class="literal">false</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      show() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">true</span></div><div class="line">      &#125;,</div><div class="line">      hide() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">false</span></div><div class="line">      &#125;,</div><div class="line">      cancel() &#123;</div><div class="line">        <span class="keyword">this</span>.hide()</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'cancel'</span>)</div><div class="line">      &#125;,</div><div class="line">      confirm() &#123;</div><div class="line">        <span class="keyword">this</span>.hide()</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'confirm'</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .confirm</div><div class="line">    position: fixed</div><div class="line">    left: 0</div><div class="line">    right: 0</div><div class="line">    top: 0</div><div class="line">    bottom: 0</div><div class="line">    z-index: 998</div><div class="line">    background-color: $color-background-d</div><div class="line">    &amp;.confirm-fade-enter-active</div><div class="line">      animation: confirm-fadein 0.3s</div><div class="line">      .confirm-content</div><div class="line">        animation: confirm-zoom 0.3s</div><div class="line">    .confirm-wrapper</div><div class="line">      position: absolute</div><div class="line">      top: 50%</div><div class="line">      left: 50%</div><div class="line">      transform: translate(-50%, -50%)</div><div class="line">      z-index: 999</div><div class="line">      .confirm-content</div><div class="line">        width: 270px</div><div class="line">        border-radius: 13px</div><div class="line">        background: $color-highlight-background</div><div class="line">        .text</div><div class="line">          padding: 19px 15px</div><div class="line">          line-height: 22px</div><div class="line">          text-align: center</div><div class="line">          font-size: $font-size-large</div><div class="line">          color: $color-text-l</div><div class="line">        .operate</div><div class="line">          display: flex</div><div class="line">          align-items: center</div><div class="line">          text-align: center</div><div class="line">          font-size: $font-size-large</div><div class="line">          .operate-btn</div><div class="line">            flex: 1</div><div class="line">            line-height: 22px</div><div class="line">            padding: 10px 0</div><div class="line">            border-top: 1px solid $color-background-d</div><div class="line">            color: $color-text-d</div><div class="line">            &amp;.left</div><div class="line">              border-right: 1px solid $color-background-d</div><div class="line">  @keyframes confirm-fadein</div><div class="line">    0%</div><div class="line">      opacity: 0</div><div class="line">    100%</div><div class="line">      opacity: 1</div><div class="line">  @keyframes confirm-zoom</div><div class="line">    0%</div><div class="line">      transform: scale(0)</div><div class="line">    50%</div><div class="line">      transform: scale(1.1)</div><div class="line">    100%</div><div class="line">      transform: scale(1)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="搜索页面剩余功能实现"><a href="#搜索页面剩余功能实现" class="headerlink" title="搜索页面剩余功能实现"></a>搜索页面剩余功能实现</h2><p>给滚动组件传值, 一个复合属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">computed: &#123;</div><div class="line">  shortcut() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.hotKey.concat(<span class="keyword">this</span>.searchHistory)</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/10个JavaScript难点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/10/10个JavaScript难点/" itemprop="url">10个JavaScript难点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T15:19:33+08:00">
-                2017-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="10个JavaScript难点"><a href="#10个JavaScript难点" class="headerlink" title="10个JavaScript难点"></a>10个JavaScript难点</h1><blockquote>
-<p>本文转载自：<a href="https://segmentfault.com" target="_blank" rel="external">segmentfault</a><br>译者：<a href="https://segmentfault.com/u/fundebug" target="_blank" rel="external">fundebug</a><br>链接：<a href="https://segmentfault.com/a/1190000010371988#articleHeader10" target="_blank" rel="external">https://segmentfault.com/a/1190000010371988#articleHeader10</a><br>原文：<a href="http://www.infoworld.com/article/3196070/node-js/10-javascript-concepts-nodejs-programmers-must-master.html" target="_blank" rel="external">10 JavaScript concepts every Node.js programmer must master</a></p>
-</blockquote>
-<h2 id="1-立即执行函数"><a href="#1-立即执行函数" class="headerlink" title="1. 立即执行函数"></a>1. 立即执行函数</h2><p><strong>立即执行函数</strong>，即Immediately Invoked Function Expression (IIFE)，正如它的名字，就是创建函数的同时立即执行。它没有绑定任何事件，也无需等待任何异步操作：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="comment">// 代码</span></div><div class="line">     <span class="comment">// ...</span></div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
-<p><strong>function(){…}</strong>是一个匿名函数，包围它的一对括号将其转换为一个表达式，紧跟其后的一对括号调用了这个函数。<strong>立即执行函数</strong>也可以理解为立即调用一个匿名函数。<strong>立即执行函数</strong>最常见的应用场景就是：将var变量的作用域限制于你们函数内，这样可以避免命名冲突。</p>
-<h2 id="2-闭包"><a href="#2-闭包" class="headerlink" title="2. 闭包"></a>2. 闭包</h2><p>对于闭包(closure)，当外部函数返回之后，内部函数依然可以访问外部函数的变量。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> N = <span class="number">0</span>; <span class="comment">// N是f1函数的局部变量</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) // <span class="title">f2</span>是<span class="title">f1</span>函数的内部函数，是闭包</span></div><div class="line">    &#123;</div><div class="line">        N += <span class="number">1</span>; <span class="comment">// 内部函数f2中使用了外部函数f1中的变量N</span></div><div class="line">        <span class="built_in">console</span>.log(N);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> f2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> result = f1();</div><div class="line"></div><div class="line">result(); <span class="comment">// 输出1</span></div><div class="line">result(); <span class="comment">// 输出2</span></div><div class="line">result(); <span class="comment">// 输出3</span></div></pre></td></tr></table></figure>
-<p>代码中，外部函数<strong>f1</strong>只执行了一次，变量<strong>N</strong>设为<strong>0</strong>，并将内部函数<strong>f2</strong>赋值给了变量<strong>result</strong>。由于外部函数<strong>f1</strong>已经执行完毕，其内部变量<strong>N</strong>应该在内存中被清除，然而事实并不是这样：我们每次调用<strong>result</strong>的时候，发现变量<strong>N</strong>一直在内存中，并且在累加。为什么呢？这就是闭包的神奇之处了！</p>
-<h2 id="使用闭包定义私有变量"><a href="#使用闭包定义私有变量" class="headerlink" title="使用闭包定义私有变量"></a>使用闭包定义私有变量</h2><p>通常，JavaScript开发者使用下划线作为私有变量的前缀。但是实际上，这些变量依然可以被访问和修改，并非真正的私有变量。这时，使用闭包可以定义真正的私有变量：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> name;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.setName = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">        name = value;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Product();</div><div class="line">p.setName(<span class="string">"Fundebug"</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(p.name); <span class="comment">// 输出undefined</span></div><div class="line"><span class="built_in">console</span>.log(p.getName()); <span class="comment">// 输出Fundebug</span></div></pre></td></tr></table></figure>
-<p>代码中，对象<strong>p</strong>的的<strong>name</strong>属性为私有属性，使用<strong>p.name</strong>不能直接访问。</p>
-<h2 id="4-prototype"><a href="#4-prototype" class="headerlink" title="4. prototype"></a>4. prototype</h2><p>每个JavaScript构造函数都有一个<strong>prototype</strong>属性，用于设置所有实例对象需要共享的属性和方法。<strong>prototype</strong>属性不能列举。JavaScript仅支持通过<strong>prototype</strong>属性进行继承属性和方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span>(<span class="params">x, y</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">this</span>._length = x;</div><div class="line">    <span class="keyword">this</span>._breadth = y;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Rectangle.prototype.getDimensions = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">length</span>: <span class="keyword">this</span>._length,</div><div class="line">        <span class="attr">breadth</span>: <span class="keyword">this</span>._breadth</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> Rectangle(<span class="number">3</span>, <span class="number">4</span>);</div><div class="line"><span class="keyword">var</span> y = <span class="keyword">new</span> Rectangle(<span class="number">4</span>, <span class="number">3</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(x.getDimensions()); <span class="comment">// &#123; length: 3, breadth: 4 &#125;</span></div><div class="line"><span class="built_in">console</span>.log(y.getDimensions()); <span class="comment">// &#123; length: 4, breadth: 3 &#125;</span></div></pre></td></tr></table></figure>
-<p>代码中，<strong>x</strong>和<strong>y</strong>都是构造函数<strong>Rectangle</strong>创建的对象实例，它们通过prototype继承了getDimensions方法。</p>
-<h2 id="5-模块化"><a href="#5-模块化" class="headerlink" title="5. 模块化"></a>5. 模块化</h2><p>JavaScript并非模块化编程语言，至少ES6落地之前都不是。然而对于一个复杂的Web应用，模块化编程是一个最基本的要求。这时，可以使用<strong>立即执行函数</strong>来实现模块化，正如很多JS库比如<a href="https://github.com/jquery/jquery" target="_blank" rel="external">jQuery</a>以及我们<a href="https://fundebug.com/" target="_blank" rel="external">Fundebug</a>都是这样实现的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">module</span> = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> N = <span class="number">5</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"The result is: "</span> + x);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> x = a + N;</div><div class="line">        print(x);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">description</span>: <span class="string">"This is description"</span>,</div><div class="line">        <span class="attr">add</span>: add</div><div class="line">    &#125;;</div><div class="line">&#125;)();</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.description); <span class="comment">// 输出"this is description" </span></div><div class="line"></div><div class="line"><span class="built_in">module</span>.add(<span class="number">5</span>); <span class="comment">// 输出“The result is: 10”</span></div></pre></td></tr></table></figure>
-<p>所谓模块化，就是根据需要控制模块内属性与方法的可访问性，即私有或者公开。在代码中，module为一个独立的模块，<strong>N</strong>为其私有属性，<strong>print</strong>为其私有方法，<strong>decription</strong>为其公有属性，<strong>add</strong>为其共有方法。</p>
-<h2 id="6-变量提升"><a href="#6-变量提升" class="headerlink" title="6. 变量提升"></a>6. 变量提升</h2><p>JavaScript会将所有变量和函数声明移动到它的作用域的最前面，这就是所谓的<strong>变量提升(Hoisting)</strong>。也就是说，无论你在什么地方声明变量和函数，解释器都会将它们移动到作用域的最前面。因此我们可以先使用变量和函数，而后声明它们。</p>
-<p>但是，仅仅是变量声明被提升了，而变量赋值不会被提升。如果你不明白这一点，有时则会出错：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(y);  <span class="comment">// 输出undefined</span></div><div class="line"></div><div class="line">y = <span class="number">2</span>; <span class="comment">// 初始化y</span></div></pre></td></tr></table></figure>
-<p>上面的代码等价于下面的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> y;  <span class="comment">// 声明y</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(y);  <span class="comment">// 输出undefined</span></div><div class="line"></div><div class="line">y = <span class="number">2</span>; <span class="comment">// 初始化y</span></div></pre></td></tr></table></figure>
-<p>为了避免BUG，开发者应该在每个作用域开始时声明变量和函数。</p>
-<h2 id="7-柯里化"><a href="#7-柯里化" class="headerlink" title="7. 柯里化"></a>7. 柯里化</h2><p>柯里化，即<strong>Currying</strong>，可以是函数变得更加灵活。我们可以一次性传入多个参数调用它；也可以只传入一部分参数来调用它，让它返回一个函数去处理剩下的参数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> x + y;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>)(<span class="number">1</span>)); <span class="comment">// 输出2</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> add1 = add(<span class="number">1</span>);</div><div class="line"><span class="built_in">console</span>.log(add1(<span class="number">1</span>)); <span class="comment">// 输出2</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> add10 = add(<span class="number">10</span>);</div><div class="line"><span class="built_in">console</span>.log(add10(<span class="number">1</span>)); <span class="comment">// 输出11</span></div></pre></td></tr></table></figure>
-<p>代码中，我们可以一次性传入2个1作为参数<strong>add(1)(1)</strong>，也可以传入1个参数之后获取<strong>add1</strong>与<strong>add10</strong>函数，这样使用起来非常灵活。</p>
-<h2 id="8-apply-call与bind方法"><a href="#8-apply-call与bind方法" class="headerlink" title="8. apply, call与bind方法"></a>8. apply, call与bind方法</h2><p>JavaScript开发者有必要理解<strong>apply</strong>、<strong>call</strong>与<strong>bind</strong>方法的不同点。它们的共同点是第一个参数都是<strong>this</strong>，即函数运行时依赖的上下文。</p>
-<p>三者之中，<strong>call</strong>方法是最简单的，它等价于指定<strong>this</strong>值调用函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> user = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"Rahul Mhatre"</span>,</div><div class="line">    <span class="attr">whatIsYourName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">user.whatIsYourName(); <span class="comment">// 输出"Rahul Mhatre",</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> user2 = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">"Neha Sampat"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">user.whatIsYourName.call(user2); <span class="comment">// 输出"Neha Sampat"</span></div></pre></td></tr></table></figure>
-<p><strong>apply</strong>方法与<strong>call</strong>方法类似。两者唯一的不同点在于，<strong>apply</strong>方法使用数组指定参数，而<strong>call</strong>方法每个参数单独需要指定：</p>
-<ul>
-<li>apply(thisArg, [argsArray])</li>
-<li>call(thisArg, arg1, arg2, …)</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> user = &#123;</div><div class="line">    <span class="attr">greet</span>: <span class="string">"Hello!"</span>,</div><div class="line">    <span class="attr">greetUser</span>: <span class="function"><span class="keyword">function</span>(<span class="params">userName</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.greet + <span class="string">" "</span> + userName);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> greet1 = &#123;</div><div class="line">    <span class="attr">greet</span>: <span class="string">"Hola"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">user.greetUser.call(greet1, <span class="string">"Rahul"</span>); <span class="comment">// 输出"Hola Rahul"</span></div><div class="line">user.greetUser.apply(greet1, [<span class="string">"Rahul"</span>]); <span class="comment">// 输出"Hola Rahul"</span></div></pre></td></tr></table></figure>
-<p>使用<strong>bind</strong>方法，可以为函数绑定<strong>this</strong>值，然后作为一个新的函数返回：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> user = &#123;</div><div class="line">     <span class="attr">greet</span>: <span class="string">"Hello!"</span>,</div><div class="line">     <span class="attr">greetUser</span>: <span class="function"><span class="keyword">function</span>(<span class="params">userName</span>) </span>&#123;</div><div class="line">     <span class="built_in">console</span>.log(<span class="keyword">this</span>.greet + <span class="string">" "</span> + userName);</div><div class="line">     &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> greetHola = user.greetUser.bind(&#123;<span class="attr">greet</span>: <span class="string">"Hola"</span>&#125;);</div><div class="line"><span class="keyword">var</span> greetBonjour = user.greetUser.bind(&#123;<span class="attr">greet</span>: <span class="string">"Bonjour"</span>&#125;);</div><div class="line"></div><div class="line">greetHola(<span class="string">"Rahul"</span>) <span class="comment">// 输出"Hola Rahul"</span></div><div class="line">greetBonjour(<span class="string">"Rahul"</span>) <span class="comment">// 输出"Bonjour Rahul"</span></div></pre></td></tr></table></figure>
-<h2 id="9-Memoization"><a href="#9-Memoization" class="headerlink" title="9. Memoization"></a>9. Memoization</h2><p><strong>Memoization</strong>用于优化比较耗时的计算，通过将计算结果缓存到内存中，这样对于同样的输入值，下次只需要中内存中读取结果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">memoizeFunction</span>(<span class="params">func</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> cache = &#123;&#125;;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> key = <span class="built_in">arguments</span>[<span class="number">0</span>];</div><div class="line">        <span class="keyword">if</span> (cache[key])</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> cache[key];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">var</span> val = func.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</div><div class="line">            cache[key] = val;</div><div class="line">            <span class="keyword">return</span> val;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> fibonacci = memoizeFunction(<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> (n === <span class="number">0</span> || n === <span class="number">1</span>) ? n : fibonacci(n - <span class="number">1</span>) + fibonacci(n - <span class="number">2</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(fibonacci(<span class="number">100</span>)); <span class="comment">// 输出354224848179262000000</span></div><div class="line"><span class="built_in">console</span>.log(fibonacci(<span class="number">100</span>)); <span class="comment">// 输出354224848179262000000</span></div></pre></td></tr></table></figure>
-<p>代码中，第2次计算<strong>fibonacci(100)</strong>则只需要在内存中直接读取结果。</p>
-<h2 id="10-函数重载"><a href="#10-函数重载" class="headerlink" title="10. 函数重载"></a>10. 函数重载</h2><p>所谓<strong>函数重载(method overloading)</strong>，就是函数名称一样，但是输入输出不一样。或者说，允许某个函数有各种不同输入，根据不同的输入，返回不同的结果。凭直觉，<strong>函数重载</strong>可以通过<strong>if…else</strong>或者<strong>switch</strong>实现，这就不去管它了。jQuery之父John Resig提出了一个非常巧(bian)妙(tai)的方法，利用了闭包。</p>
-<p>从效果上来说，<strong>people</strong>对象的<strong>find</strong>方法允许3种不同的输入: 0个参数时，返回所有人名；1个参数时，根据firstName查找人名并返回；2个参数时，根据完整的名称查找人名并返回。</p>
-<p>难点在于，<strong>people.find</strong>只能绑定一个函数，那它为何可以处理3种不同的输入呢？它不可能同时绑定3个函数<strong>find0,find1</strong>与<strong>find2</strong>啊！这里的关键在于<strong>old</strong>属性。</p>
-<p>由<strong>addMethod</strong>函数的调用顺序可知，<strong>people.find</strong>最终绑定的是<strong>find2</strong>函数。然而，在绑定<strong>find2</strong>时，<strong>old</strong>为<strong>find1</strong>；同理，绑定<strong>find1</strong>时，<strong>old</strong>为<strong>find0</strong>。3个函数<strong>find0</strong>,<strong>find1</strong>与<strong>find2</strong>就这样通过闭包链接起来了。</p>
-<p>根据<strong>addMethod</strong>的逻辑，当<strong>f.length</strong>与<strong>arguments.length</strong>不匹配时，就会去调用<strong>old</strong>，直到匹配为止。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addMethod</span>(<span class="params">object, name, f</span>)</span></div><div class="line">&#123;　　</div><div class="line">    <span class="keyword">var</span> old = object[name];　　</div><div class="line">    object[name] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// f.length为函数定义时的参数个数</span></div><div class="line">        <span class="comment">// arguments.length为函数调用时的参数个数　　　　</span></div><div class="line">        <span class="keyword">if</span> (f.length === <span class="built_in">arguments</span>.length)</div><div class="line">        &#123;　　</div><div class="line">            <span class="keyword">return</span> f.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);　　　　</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> old === <span class="string">"function"</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> old.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);　　　　</div><div class="line">        &#125;　　</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 不传参数时，返回所有name</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">find0</span>(<span class="params"></span>)</span></div><div class="line">&#123;　　</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.names;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 传一个参数时，返回firstName匹配的name</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">find1</span>(<span class="params">firstName</span>)</span></div><div class="line">&#123;　　</div><div class="line">    <span class="keyword">var</span> result = [];　　</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.names.length; i++)</div><div class="line">    &#123;　　　　</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.names[i].indexOf(firstName) === <span class="number">0</span>)</div><div class="line">        &#123;　　　　　　</div><div class="line">            result.push(<span class="keyword">this</span>.names[i]);　　　　</div><div class="line">        &#125;　　</div><div class="line">    &#125;　　</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 传两个参数时，返回firstName和lastName都匹配的name</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">find2</span>(<span class="params">firstName, lastName</span>)</span></div><div class="line">&#123;　</div><div class="line">    <span class="keyword">var</span> result = [];　　</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.names.length; i++)</div><div class="line">    &#123;　　　　</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.names[i] === (firstName + <span class="string">" "</span> + lastName))</div><div class="line">        &#123;　　　　　　</div><div class="line">            result.push(<span class="keyword">this</span>.names[i]);　　　　</div><div class="line">        &#125;　　</div><div class="line">    &#125;　　</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> people = &#123;　　</div><div class="line">    <span class="attr">names</span>: [<span class="string">"Dean Edwards"</span>, <span class="string">"Alex Russell"</span>, <span class="string">"Dean Tom"</span>]</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">addMethod(people, <span class="string">"find"</span>, find0);</div><div class="line">addMethod(people, <span class="string">"find"</span>, find1);</div><div class="line">addMethod(people, <span class="string">"find"</span>, find2);</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(people.find()); <span class="comment">// 输出["Dean Edwards", "Alex Russell", "Dean Tom"]</span></div><div class="line"><span class="built_in">console</span>.log(people.find(<span class="string">"Dean"</span>)); <span class="comment">// 输出["Dean Edwards", "Dean Tom"]</span></div><div class="line"><span class="built_in">console</span>.log(people.find(<span class="string">"Dean"</span>, <span class="string">"Edwards"</span>)); <span class="comment">// 输出["Dean Edwards"]</span></div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1951,7 +1902,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1973,7 +1924,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -313,6 +313,358 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/24/Vue-js-中，7种定义组件模板的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/24/Vue-js-中，7种定义组件模板的方法/" itemprop="url">Vue.js 中，7种定义组件模板的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-24T15:14:33+08:00">
+                2017-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue-js-中，7种定义组件模板的方法-Codementor"><a href="#Vue-js-中，7种定义组件模板的方法-Codementor" class="headerlink" title="Vue.js 中，7种定义组件模板的方法 | Codementor"></a>Vue.js 中，7种定义组件模板的方法 | Codementor</h1><blockquote>
+<p>本文转载自：<a href="http://www.zcfy.cc" target="_blank" rel="external">众成翻译</a><br>译者：<a href="http://www.zcfy.cc/@Mcbai" target="_blank" rel="external">Mcbai</a><br>审校: <a href="http://www.zcfy.cc/@huangxiaolu" target="_blank" rel="external">huangxiaolu</a><br>链接：<a href="http://www.zcfy.cc/article/3644" target="_blank" rel="external">http://www.zcfy.cc/article/3644</a><br>原文：<a href="https://www.codementor.io/vuejsdevelopers/7-ways-to-define-a-component-template-in-vue-js-8wxxhmxo6" target="_blank" rel="external">https://www.codementor.io/vuejsdevelopers/7-ways-to-define-a-component-template-in-vue-js-8wxxhmxo6</a></p>
+</blockquote>
+<p><span style="font-size: 1rem;">有多种方式可以</span>在vue中定义模板组件。我算了一下，至少有7种不同的方法：</p>
+<ul>
+<li><p>字符串（String）</p>
+</li>
+<li><p>模板字符串（Template literal）</p>
+</li>
+<li><p>X-Templates</p>
+</li>
+<li><p>内联（Inline）</p>
+</li>
+<li><p>Render函数（Render functions）</p>
+</li>
+<li><p>JSX</p>
+</li>
+<li><p>单文件组件（Single page components）</p>
+</li>
+</ul>
+<p>当然，可能还有更多方法!</p>
+<p>在这篇文章里，我们将会展示每一个方法的示例，分析其优缺点，以便你能明白在特定的情形下，哪种方式是合适的。</p>
+<blockquote>
+<p>_注意: 这篇文章最初发表在<a href="http://vuejsdevelopers.com/2017/03/24/vue-js-component-templates/?jsdojo_id=cm_cot" target="_blank" rel="external">在Vue.js Developers blog上</a> on 2017/03/24_</p>
+</blockquote>
+<h2 id="1-字符串"><a href="#1-字符串" class="headerlink" title=" 1. 字符串"></a><a href="#1-strings"></a> 1. 字符串</h2><p>默认情况下，<span style="font-size: 1rem;">在JS文件里</span>模板会被定义为一个字符串。但是我觉得大家都会同意这种写法很难看懂，它除了有广泛的浏览器支持之外，并没有什么优势。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'&lt;div class="checkbox-wrapper" @click="check"&gt;&lt;div :class="&#123; checkbox: true, checked: checked &#125;"&gt;&lt;/div&gt;&lt;div class="title"&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;&lt;/div&gt;'</span>,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="2-模板字符串（Template-literals）"><a href="#2-模板字符串（Template-literals）" class="headerlink" title=" 2. 模板字符串（Template literals）"></a><a href="#2-template-literals"></a> 2. 模板字符串（Template literals）</h2><p>通过ES6的模板字符串（反引号）语法，你在定义模板时可以直接换行，这是通过常规的JavaScript字符串没法做到的。<br>这种写法更容易阅读，并且这种模板字符串语法得到了许多新版本浏览器的支持。当然，为了安全起见，你仍然应该把它转译为ES5的语法形式。</p>
+<p>然而，这种方式并不完美，我发现大多数的IDE在语法高亮上做的差强人意，并且在缩进和换行等的格式方面，仍然很痛苦。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">`&lt;div class="checkbox-wrapper" @click="check"&gt;</span></div><div class="line">              &lt;div :class="&#123; checkbox: true, checked: checked &#125;"&gt;&lt;/div&gt;</div><div class="line">              &lt;div class="title"&gt;&#123;&#123; title &#125;&#125;&lt;/div&gt;</div><div class="line">            &lt;/div&gt;`,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="3-X-Templates"><a href="#3-X-Templates" class="headerlink" title=" 3. X-Templates"></a><a href="#3-x-templates"></a> 3. X-Templates</h2><p>使用这种方法，你需要在<em>index.html</em>文件里的script标签中定义你的模板。script标签需要添加<code>text/x-template</code>类型作为标记，并且在定义组件时，通过id来引用。</p>
+<p>我喜欢这种方式，它允许你使用真正的HTML标记来书写你的HTML文件，但是不足之处在于，这种方式会把模板和组件其它部分的定义分开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  <span class="attr">template</span>: <span class="string">'#checkbox-template'</span>,</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/x-template"</span> <span class="attr">id</span>=<span class="string">"checkbox-template"</span>&gt;</span><span class="xml"></span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> @<span class="attr">click</span>=<span class="string">"check"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; checkbox: true, checked: checked &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="4-内联模板（Inline-Templates）"><a href="#4-内联模板（Inline-Templates）" class="headerlink" title=" 4. 内联模板（Inline Templates）"></a><a href="#4-inline-templates"></a> 4. 内联模板（Inline Templates）</h2><p>通过给组件添加<code>inline-template</code>属性来告诉Vue，里面的内容就是模板，而不是把它当作是分发内容(见 <a href="https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots" target="_blank" rel="external">slots</a>)。</p>
+<p>它的缺点和x-templates一样，但是有一个优点就是，它的内容就在HTML模板对应的位置，所以页面一加载就会渲染，而不用等到JavaScript执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">my-checkbox</span> <span class="attr">inline-template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> @<span class="attr">click</span>=<span class="string">"check"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; checkbox: true, checked: checked &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">my-checkbox</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="5-Render-functions（渲染函数）"><a href="#5-Render-functions（渲染函数）" class="headerlink" title=" 5. Render functions（渲染函数）"></a><a href="#5-render-functions"></a> 5. Render functions（渲染函数）</h2><p>渲染函数需要你把模板当作一个JavaScript对象来进行定义，它们是一些复杂并且抽象的模板选项。</p>
+<p>然而，它的优点是你定义的模板更接近编译器，你可以使用所有JavaScript方法，而不仅是指令提供的那些功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;,</div><div class="line">  render(createElement) &#123;</div><div class="line">    <span class="keyword">return</span> createElement(</div><div class="line">      <span class="string">'div'</span>,</div><div class="line">        &#123;</div><div class="line">          <span class="attr">attrs</span>: &#123;</div><div class="line">            <span class="string">'class'</span>: <span class="string">'checkbox-wrapper'</span></div><div class="line">          &#125;,</div><div class="line">          <span class="attr">on</span>: &#123;</div><div class="line">            <span class="attr">click</span>: <span class="keyword">this</span>.check</div><div class="line">          &#125;</div><div class="line">        &#125;,</div><div class="line">        [</div><div class="line">          createElement(</div><div class="line">            <span class="string">'div'</span>,</div><div class="line">            &#123;</div><div class="line">              <span class="string">'class'</span>: &#123;</div><div class="line">                <span class="attr">checkbox</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">checked</span>: <span class="keyword">this</span>.checked</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          ),</div><div class="line">          createElement(</div><div class="line">            <span class="string">'div'</span>,</div><div class="line">            &#123;</div><div class="line">              <span class="attr">attrs</span>: &#123;</div><div class="line">                <span class="string">'class'</span>: <span class="string">'title'</span></div><div class="line">              &#125;</div><div class="line">            &#125;,</div><div class="line">            [ <span class="keyword">this</span>.title ]</div><div class="line">          )</div><div class="line">        ]</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="6-JSX"><a href="#6-JSX" class="headerlink" title=" 6. JSX"></a><a href="#6-jsx"></a> 6. JSX</h2><p>Vue中最有争议性的模板选项就是JSX，一些开发者认为JSX语法太丑，不直观，而且和Vue的简洁特性背道而驰。</p>
+<p>JSX需要事先编译，因为浏览器并不支持JSX。但是如果你需要使用渲染函数，那么JSX语法绝对是一种更简洁的定义模板的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Vue.component(<span class="string">'my-checkbox'</span>, &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">  &#125;,</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> <span class="attr">onClick</span>=<span class="string">&#123;</span> <span class="attr">this.check</span> &#125;&gt;</span></span></div><div class="line">             <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#123;&#123;</span> <span class="attr">checkbox:</span> <span class="attr">true</span>, <span class="attr">checked:</span> <span class="attr">this.checked</span> &#125;&#125;&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123; this.title &#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="7-单文件组件（Single-File-Components）"><a href="#7-单文件组件（Single-File-Components）" class="headerlink" title=" 7. 单文件组件（Single File Components）"></a><a href="#7-single-file-components"></a> 7. 单文件组件（<span style="font-family: inherit;">Single File Components）</span></h2><p>只要你愿意在项目中使用构建工具，那么单文件组件绝对是这些方法中的首选。它们有两个最好的优点：允许你使用标记，同时把所有组件定义都写在一个文件中。</p>
+<p>尽管单文件组件需要编译，并且一些IDE不支持这种类型文件的语法高亮，但它仍然很难被其它方法战胜。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox-wrapper"</span> @<span class="attr">click</span>=<span class="string">"check"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123; checkbox: true, checked: checked &#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123; title &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123; <span class="attr">checked</span>: <span class="literal">false</span>, <span class="attr">title</span>: <span class="string">'Check me'</span> &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      check() &#123; <span class="keyword">this</span>.checked = !<span class="keyword">this</span>.checked; &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>你可能会举出还有更多的方式来定义模板，因为你还可以使用一些模板预处理器，比如Pug！</p>
+<h2 id="哪个最好"><a href="#哪个最好" class="headerlink" title=" 哪个最好?"></a><a href="#which-is-the-best"></a> 哪个最好?</h2><p>当然没有完美的方法，你应该根据你的实际情况来进行判断。我觉得一个好的程序员应该知道所有的方式，并把它们当作Vue.js技术栈里一种解决问题的工具。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第三章-页面骨架开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/20/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第三章-页面骨架开发）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第三章 页面骨架开发）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T23:18:01+08:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第三章-页面骨架开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第三章-页面骨架开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第三章 页面骨架开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第三章 页面骨架开发）</h1><h2 id="页面入口-header-组件的编写"><a href="#页面入口-header-组件的编写" class="headerlink" title="页面入口+header 组件的编写"></a>页面入口+header 组件的编写</h2><h3 id="index-js-添加-viewport"><a href="#index-js-添加-viewport" class="headerlink" title="index.js 添加 viewport"></a>index.js 添加 viewport</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>vue-music<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- built files will be auto injected --&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="package-json-添加依赖"><a href="#package-json-添加依赖" class="headerlink" title="package.json 添加依赖"></a>package.json 添加依赖</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "dependencies": &#123;</div><div class="line">	 "babel-runtime": "^6.0.0", // es语法转义</div><div class="line">    "fastclick": "^1.0.6" // 解决 移动端点击300毫秒延迟的问题</div><div class="line">  &#125;,</div><div class="line">  "devDependencies": &#123;</div><div class="line">    "babel-polyfill": "^6.2.0" // babel补丁，可以使用es6的一些api</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="src-main-js-引入fastclick"><a href="#src-main-js-引入fastclick" class="headerlink" title="/src/main.js 引入fastclick"></a>/src/main.js 引入fastclick</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'babel-polyfill'</span></div><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></div><div class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></div><div class="line"></div><div class="line"><span class="comment">// 引入fastclick</span></div><div class="line"><span class="keyword">import</span> fastclick <span class="keyword">from</span> <span class="string">'fastclick'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">'common/stylus/index.styl'</span></div><div class="line"></div><div class="line"><span class="comment">// 使用fastclick</span></div><div class="line">fastclick.attach(<span class="built_in">document</span>.body)</div><div class="line"></div><div class="line"><span class="comment">/* eslint-disable no-new */</span></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="创建m-header组件"><a href="#创建m-header组件" class="headerlink" title="创建m-header组件"></a>创建m-header组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"m-header"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>Chicken Music<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ecmascript-6"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .m-header</div><div class="line">    position: relative</div><div class="line">    height: 44px</div><div class="line">    text-align: center</div><div class="line">    color: $color-theme</div><div class="line">    font-size: 0</div><div class="line">    .icon</div><div class="line">      display: inline-block</div><div class="line">      vertical-align: top</div><div class="line">      margin-top: 6px</div><div class="line">      width: 30px</div><div class="line">      height: 32px</div><div class="line">      margin-right: 9px</div><div class="line">      bg-image('logo')</div><div class="line">      background-size: 30px 32px</div><div class="line">    .text</div><div class="line">      display: inline-block</div><div class="line">      vertical-align: top</div><div class="line">      line-height: 44px</div><div class="line">      font-size: $font-size-large</div><div class="line">    .mine</div><div class="line">      position: absolute</div><div class="line">      top: 0</div><div class="line">      right: 0</div><div class="line">      .icon-mine</div><div class="line">        display: block</div><div class="line">        padding: 12px</div><div class="line">        font-size: 20px</div><div class="line">        color: $color-theme</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="App-vue-引入Header组件"><a href="#App-vue-引入Header组件" class="headerlink" title="App.vue 引入Header组件"></a>App.vue 引入Header组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">touchmove.prevent</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">m-header</span>&gt;</span><span class="tag">&lt;/<span class="name">m-header</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ecmascript-6"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> MHeader <span class="keyword">from</span> <span class="string">'components/m-header/m-header'</span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      MHeader</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="webpack-base-conf-js-别名配置"><a href="#webpack-base-conf-js-别名配置" class="headerlink" title="webpack.base.conf.js 别名配置"></a>webpack.base.conf.js 别名配置</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">   <span class="attr">extensions</span>: [<span class="string">'.js'</span>, <span class="string">'.vue'</span>, <span class="string">'.json'</span>],</div><div class="line">   <span class="attr">alias</span>: &#123;</div><div class="line">     <span class="string">'@'</span>: resolve(<span class="string">'src'</span>),</div><div class="line">     <span class="string">'common'</span>: resolve(<span class="string">'src/common'</span>),</div><div class="line">     <span class="string">'components'</span>: resolve(<span class="string">'src/components'</span>)</div><div class="line">   &#125;</div><div class="line"> &#125;,</div></pre></td></tr></table></figure>
+<h2 id="路由配置-tab-顶导组件开发"><a href="#路由配置-tab-顶导组件开发" class="headerlink" title="路由配置+ tab 顶导组件开发"></a>路由配置+ tab 顶导组件开发</h2><h3 id="router初始化"><a href="#router初始化" class="headerlink" title="router初始化"></a>router初始化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></div><div class="line"><span class="keyword">import</span> Recommend <span class="keyword">from</span> <span class="string">'components/recommend/recommend'</span></div><div class="line"><span class="keyword">import</span> Singer <span class="keyword">from</span> <span class="string">'components/singer/singer'</span></div><div class="line"><span class="keyword">import</span> Rank <span class="keyword">from</span> <span class="string">'components/rank/rank'</span></div><div class="line"><span class="keyword">import</span> Search <span class="keyword">from</span> <span class="string">'components/search/search'</span></div><div class="line"></div><div class="line">Vue.use(Router)</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</div><div class="line">  <span class="attr">routes</span>: [</div><div class="line">	 <span class="comment">// 根路径配置</span></div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">      <span class="attr">redirect</span>: <span class="string">'/recommend'</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'/recommend'</span>,</div><div class="line">      <span class="attr">component</span>: Recommend</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'/singer'</span>,</div><div class="line">      <span class="attr">component</span>: Singer</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'/rank'</span>,</div><div class="line">      <span class="attr">component</span>: Rank</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">path</span>: <span class="string">'/search'</span>,</div><div class="line">      <span class="attr">component</span>: Search</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="main-js-引入router"><a href="#main-js-引入router" class="headerlink" title="main.js 引入router"></a>main.js 引入router</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'babel-polyfill'</span></div><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></div><div class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></div><div class="line"><span class="keyword">import</span> fastclick <span class="keyword">from</span> <span class="string">'fastclick'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">'common/stylus/index.styl'</span></div><div class="line"></div><div class="line">fastclick.attach(<span class="built_in">document</span>.body)</div><div class="line"></div><div class="line"><span class="comment">/* eslint-disable no-new */</span></div><div class="line"><span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">  router,</div><div class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="App-vue-中使用router"><a href="#App-vue-中使用router" class="headerlink" title="App.vue 中使用router"></a>App.vue 中使用router</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">touchmove.prevent</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">m-header</span>&gt;</span><span class="tag">&lt;/<span class="name">m-header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="创建tab-vue-组件"><a href="#创建tab-vue-组件" class="headerlink" title="创建tab.vue 组件"></a>创建tab.vue 组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span></div><div class="line">	// tag: 渲染的标签</div><div class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">tag</span>=<span class="string">"div"</span> <span class="attr">class</span>=<span class="string">"tab-item"</span> <span class="attr">to</span>=<span class="string">"/recommend"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"tab-link"</span>&gt;</span>推荐<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">tag</span>=<span class="string">"div"</span> <span class="attr">class</span>=<span class="string">"tab-item"</span> <span class="attr">to</span>=<span class="string">"/singer"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"tab-link"</span>&gt;</span>歌手<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">tag</span>=<span class="string">"div"</span> <span class="attr">class</span>=<span class="string">"tab-item"</span> <span class="attr">to</span>=<span class="string">"/rank"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"tab-link"</span>&gt;</span>排行</div><div class="line">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">tag</span>=<span class="string">"div"</span> <span class="attr">class</span>=<span class="string">"tab-item"</span> <span class="attr">to</span>=<span class="string">"/search"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"tab-link"</span>&gt;</span>搜索<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ecmascript-6"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .tab</div><div class="line">    display: flex</div><div class="line">    height: 44px</div><div class="line">    line-height: 44px</div><div class="line">    font-size: $font-size-medium</div><div class="line">    .tab-item</div><div class="line">      flex: 1</div><div class="line">      text-align: center</div><div class="line">      .tab-link</div><div class="line">        padding-bottom: 5px</div><div class="line">        color: $color-text-l</div><div class="line">      &amp;.router-link-active</div><div class="line">        .tab-link</div><div class="line">          color: $color-theme</div><div class="line">          border-bottom: 2px solid $color-theme</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="App-vue-引入tab组件"><a href="#App-vue-引入tab组件" class="headerlink" title="App.vue 引入tab组件"></a>App.vue 引入tab组件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> @<span class="attr">touchmove.prevent</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">m-header</span>&gt;</span><span class="tag">&lt;/<span class="name">m-header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tab</span>&gt;</span><span class="tag">&lt;/<span class="name">tab</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/ecmascript-6"</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> MHeader <span class="keyword">from</span> <span class="string">'components/m-header/m-header'</span></div><div class="line">  <span class="keyword">import</span> Tab <span class="keyword">from</span> <span class="string">'components/tab/tab'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      MHeader,</div><div class="line">      Tab</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/坦然面对：应对前端疲劳/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1864,494 +2216,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/16/MySQL运算符和函数/" itemprop="url">MySQL运算符和函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:34:25+08:00">
-                2017-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="MySQL运算符和函数"><a href="#MySQL运算符和函数" class="headerlink" title="MySQL运算符和函数"></a>MySQL运算符和函数</h1><h2 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CONCAT()</td>
-<td style="text-align:left">字符连接</td>
-</tr>
-<tr>
-<td style="text-align:left">CONCAT_WS()</td>
-<td style="text-align:left">使用指定的分隔符进行字符连接</td>
-</tr>
-<tr>
-<td style="text-align:left">FORMAT()</td>
-<td style="text-align:left">数字格式化</td>
-</tr>
-<tr>
-<td style="text-align:left">LOWEER()</td>
-<td style="text-align:left">转换成小写字母</td>
-</tr>
-<tr>
-<td style="text-align:left">UPPER()</td>
-<td style="text-align:left">转换成大写字母</td>
-</tr>
-<tr>
-<td style="text-align:left">LEFT()</td>
-<td style="text-align:left">获取左侧字符</td>
-</tr>
-<tr>
-<td style="text-align:left">RIGHT()</td>
-<td style="text-align:left">获取右侧字符</td>
-</tr>
-<tr>
-<td style="text-align:left">LENGTH()</td>
-<td style="text-align:left">获取字符串长度</td>
-</tr>
-<tr>
-<td style="text-align:left">LTRIM()</td>
-<td style="text-align:left">删除前导空格</td>
-</tr>
-<tr>
-<td style="text-align:left">RTRIM()</td>
-<td style="text-align:left">删除后续空格</td>
-</tr>
-<tr>
-<td style="text-align:left">TRIM()</td>
-<td style="text-align:left">删除前导和后续空格</td>
-</tr>
-<tr>
-<td style="text-align:left">SUBSTRING()</td>
-<td style="text-align:left">字符串截取</td>
-</tr>
-<tr>
-<td style="text-align:left">[NOT] LIKE()</td>
-<td style="text-align:left">匹配模式</td>
-</tr>
-<tr>
-<td style="text-align:left">REPLACE()</td>
-<td style="text-align:left">字符串替换</td>
-</tr>
-</tbody>
-</table>
-<h2 id="数值运算符与函数"><a href="#数值运算符与函数" class="headerlink" title="数值运算符与函数"></a>数值运算符与函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CEIL()</td>
-<td style="text-align:left">进一取整</td>
-</tr>
-<tr>
-<td style="text-align:left">DIV</td>
-<td style="text-align:left">整数除法</td>
-</tr>
-<tr>
-<td style="text-align:left">FLOOR()</td>
-<td style="text-align:left">舍一取整</td>
-</tr>
-<tr>
-<td style="text-align:left">MOD</td>
-<td style="text-align:left">取余数（取模）</td>
-</tr>
-<tr>
-<td style="text-align:left">POWER()</td>
-<td style="text-align:left">幂运算</td>
-</tr>
-<tr>
-<td style="text-align:left">ROUND()</td>
-<td style="text-align:left">四舍五入</td>
-</tr>
-<tr>
-<td style="text-align:left">TRUNCATE()</td>
-<td style="text-align:left">字数截取</td>
-</tr>
-</tbody>
-</table>
-<h2 id="比较运算符与函数"><a href="#比较运算符与函数" class="headerlink" title="比较运算符与函数"></a>比较运算符与函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">[NOT] BETWEEN…AND…</td>
-<td style="text-align:left">[不]在范围之内</td>
-</tr>
-<tr>
-<td style="text-align:left">[NOT] IN()</td>
-<td style="text-align:left">[不]在列出值范围内</td>
-</tr>
-<tr>
-<td style="text-align:left">IS [NOT] NULL</td>
-<td style="text-align:left">[不]为空</td>
-</tr>
-</tbody>
-</table>
-<h2 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">NOW()</td>
-<td style="text-align:left">当前日期和时间</td>
-</tr>
-<tr>
-<td style="text-align:left">CURDATE()</td>
-<td style="text-align:left">当前日期</td>
-</tr>
-<tr>
-<td style="text-align:left">CURTIME()</td>
-<td style="text-align:left">当前时间</td>
-</tr>
-<tr>
-<td style="text-align:left">DATE_ADD()</td>
-<td style="text-align:left">日期变化</td>
-</tr>
-<tr>
-<td style="text-align:left">DATEDIFF()</td>
-<td style="text-align:left">日期差值</td>
-</tr>
-<tr>
-<td style="text-align:left">DATE_FORMAT()</td>
-<td style="text-align:left">日期格式化</td>
-</tr>
-</tbody>
-</table>
-<h2 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CONNECTION_ID()</td>
-<td style="text-align:left">连接ID</td>
-</tr>
-<tr>
-<td style="text-align:left">DATEBASE()</td>
-<td style="text-align:left">当前数据库</td>
-</tr>
-<tr>
-<td style="text-align:left">LAST_INSERT_ID()</td>
-<td style="text-align:left">最后插入记录的ID号</td>
-</tr>
-<tr>
-<td style="text-align:left">USER()</td>
-<td style="text-align:left">当前用户</td>
-</tr>
-<tr>
-<td style="text-align:left">VERSION()</td>
-<td style="text-align:left">版本信息</td>
-</tr>
-</tbody>
-</table>
-<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">AVG()</td>
-<td style="text-align:left">平均值</td>
-</tr>
-<tr>
-<td style="text-align:left">COUNT()</td>
-<td style="text-align:left">计数</td>
-</tr>
-<tr>
-<td style="text-align:left">MAX()</td>
-<td style="text-align:left">最大值</td>
-</tr>
-<tr>
-<td style="text-align:left">MIN()</td>
-<td style="text-align:left">最小值</td>
-</tr>
-<tr>
-<td style="text-align:left">SUM()</td>
-<td style="text-align:left">求和</td>
-</tr>
-</tbody>
-</table>
-<h2 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数名称</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">MD5()</td>
-<td style="text-align:left">信息摘要算法</td>
-</tr>
-<tr>
-<td style="text-align:left">PASSWORD()</td>
-<td style="text-align:left">密码算法</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/14/bash示例和书写流程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/14/bash示例和书写流程/" itemprop="url">bash示例和书写流程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T12:56:42+08:00">
-                2017-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="bash示例和书写流程"><a href="#bash示例和书写流程" class="headerlink" title="bash示例和书写流程"></a>bash示例和书写流程</h1><h2 id="新建文件test-sh"><a href="#新建文件test-sh" class="headerlink" title="新建文件test.sh"></a>新建文件test.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch test.sh</div></pre></td></tr></table></figure>
-<h2 id="添加可执行权限"><a href="#添加可执行权限" class="headerlink" title="添加可执行权限"></a>添加可执行权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ chmod +x test.sh</div></pre></td></tr></table></figure>
-<h2 id="编辑test-sh，test-sh内容如下："><a href="#编辑test-sh，test-sh内容如下：" class="headerlink" title="编辑test.sh，test.sh内容如下："></a>编辑test.sh，test.sh内容如下：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"hello bash"</span></div><div class="line"></div><div class="line"><span class="built_in">exit</span> 0</div></pre></td></tr></table></figure>
-<p>说明：</p>
-<ul>
-<li>#!/bin/bash : 它是bash文件声明语句，表示是以/bin/bash程序执行该文件。它必须写在文件的第一行！</li>
-<li>echo “hello bash” : 表示在终端输出“hello bash”</li>
-<li>exit 0 : 表示返回0。在bash中，0表示执行成功，其他表示失败。</li>
-</ul>
-<h2 id="执行bash脚本"><a href="#执行bash脚本" class="headerlink" title="执行bash脚本"></a>执行bash脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">./test.sh</div><div class="line"><span class="comment">#或者</span></div><div class="line">sh test.sh</div><div class="line">bash test.sh</div></pre></td></tr></table></figure>
-<p>在终端输出“bash hello”</p>
-<p>参考：<br><a href="http://www.cnblogs.com/skywang12345/archive/2013/05/30/3106570.html" target="_blank" rel="external">linux bash总结</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2402,7 +2266,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2424,7 +2288,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
