@@ -1,15 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -74,7 +75,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="javascript," />
@@ -86,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -110,9 +111,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -208,7 +210,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -233,6 +235,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="http://resume.taohong.space" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -298,7 +310,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/09/输出csv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,6 +373,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -366,27 +385,15 @@
         <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">exportToCsv</span>(<span class="params">filename, rows</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> processRow = <span class="function"><span class="keyword">function</span> (<span class="params">row</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> finalVal = <span class="string">''</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; row.length; j++) &#123;</div><div class="line">                <span class="keyword">var</span> innerValue = row[j] === <span class="literal">null</span> ? <span class="string">''</span> : row[j].toString();</div><div class="line">                <span class="keyword">if</span> (row[j] <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</div><div class="line">                    innerValue = row[j].toLocaleString();</div><div class="line">                &#125;;</div><div class="line">                <span class="keyword">var</span> result = innerValue.replace(<span class="regexp">/"/g</span>, <span class="string">'""'</span>);</div><div class="line">                <span class="keyword">if</span> (result.search(<span class="regexp">/("|,|\n)/g</span>) &gt;= <span class="number">0</span>)</div><div class="line">                    result = <span class="string">'"'</span> + result + <span class="string">'"'</span>;</div><div class="line">                <span class="keyword">if</span> (j &gt; <span class="number">0</span>)</div><div class="line">                    finalVal += <span class="string">','</span>;</div><div class="line">                finalVal += result;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> finalVal + <span class="string">'\n'</span>;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> csvFile = <span class="string">''</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; rows.length; i++) &#123;</div><div class="line">            csvFile += processRow(rows[i]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([csvFile], &#123; <span class="attr">type</span>: <span class="string">'text/csv;charset=utf-8;'</span> &#125;);</div><div class="line">        <span class="keyword">if</span> (navigator.msSaveBlob) &#123; <span class="comment">// IE 10+</span></div><div class="line">            navigator.msSaveBlob(blob, filename);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">var</span> link = <span class="built_in">document</span>.createElement(<span class="string">"a"</span>);</div><div class="line">            <span class="keyword">if</span> (link.download !== <span class="literal">undefined</span>) &#123; <span class="comment">// feature detection</span></div><div class="line">                <span class="comment">// Browsers that support HTML5 download attribute</span></div><div class="line">                <span class="keyword">var</span> url = URL.createObjectURL(blob);</div><div class="line">                link.setAttribute(<span class="string">"href"</span>, url);</div><div class="line">                link.setAttribute(<span class="string">"download"</span>, filename);</div><div class="line">                link.style.visibility = <span class="string">'hidden'</span>;</div><div class="line">                <span class="built_in">document</span>.body.appendChild(link);</div><div class="line">                link.click();</div><div class="line">                <span class="built_in">document</span>.body.removeChild(link);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">exportToCsv(<span class="string">'export.csv'</span>, [</div><div class="line">  [<span class="string">'name'</span>,<span class="string">'description'</span>],	</div><div class="line">  [<span class="string">'david'</span>,<span class="string">'123'</span>],</div><div class="line">  [<span class="string">'jona'</span>,<span class="string">'""'</span>],</div><div class="line">  [<span class="string">'a'</span>,<span class="string">'b'</span>],</div><div class="line">])</div></pre></td></tr></table></figure>
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -426,6 +433,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -459,6 +470,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -480,7 +492,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -502,7 +514,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -520,7 +532,9 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
                 </a>
               </span>
             
@@ -570,7 +584,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Gemini
   </a>
 </div>
 
@@ -641,32 +655,32 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 

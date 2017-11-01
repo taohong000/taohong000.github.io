@@ -1,15 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -74,7 +75,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -86,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -107,9 +108,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -205,7 +207,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -230,6 +232,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="http://resume.taohong.space" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -287,7 +299,11 @@
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
 
 	<h1 class="post-title" itemprop="name headline">标签</h1>
 
@@ -295,16 +311,28 @@
 
 </header>
 
-    
-    
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 12 个标签
-        </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/Linux/" style="font-size: 21px; color: #6f6f6f">Linux</a> <a href="/tags/bash/" style="font-size: 12px; color: #ccc">bash</a> <a href="/tags/chrome-devtools/" style="font-size: 12px; color: #ccc">chrome devtools</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/js/" style="font-size: 12px; color: #ccc">js</a> <a href="/tags/mysql/" style="font-size: 16.5px; color: #9d9d9d">mysql</a> <a href="/tags/scss/" style="font-size: 12px; color: #ccc">scss</a> <a href="/tags/sublime/" style="font-size: 16.5px; color: #9d9d9d">sublime</a> <a href="/tags/vue/" style="font-size: 30px; color: #111">vue</a> <a href="/tags/慕课网/" style="font-size: 25.5px; color: #404040">慕课网</a> <a href="/tags/成长经验/" style="font-size: 12px; color: #ccc">成长经验</a> <a href="/tags/数据库/" style="font-size: 16.5px; color: #9d9d9d">数据库</a>
-        </div>
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <div class="tag-cloud">
+            <div class="tag-cloud-title">
+                目前共计 21 个标签
+            </div>
+            <div class="tag-cloud-tags">
+              <a href="/tags/JavaScript/" style="font-size: 12px; color: #ccc">JavaScript</a> <a href="/tags/Next/" style="font-size: 12px; color: #ccc">Next</a> <a href="/tags/bash/" style="font-size: 12px; color: #ccc">bash</a> <a href="/tags/charles/" style="font-size: 12px; color: #ccc">charles</a> <a href="/tags/chrome-devtools/" style="font-size: 12px; color: #ccc">chrome devtools</a> <a href="/tags/css/" style="font-size: 19.2px; color: #818181">css</a> <a href="/tags/hexo/" style="font-size: 15.6px; color: #a7a7a7">hexo</a> <a href="/tags/javascript/" style="font-size: 12px; color: #ccc">javascript</a> <a href="/tags/js/" style="font-size: 12px; color: #ccc">js</a> <a href="/tags/linux/" style="font-size: 22.8px; color: #5c5c5c">linux</a> <a href="/tags/mysql/" style="font-size: 15.6px; color: #a7a7a7">mysql</a> <a href="/tags/npm/" style="font-size: 12px; color: #ccc">npm</a> <a href="/tags/scss/" style="font-size: 12px; color: #ccc">scss</a> <a href="/tags/sublime/" style="font-size: 15.6px; color: #a7a7a7">sublime</a> <a href="/tags/vue/" style="font-size: 30px; color: #111">vue</a> <a href="/tags/代理/" style="font-size: 12px; color: #ccc">代理</a> <a href="/tags/基础/" style="font-size: 15.6px; color: #a7a7a7">基础</a> <a href="/tags/开发工具/" style="font-size: 12px; color: #ccc">开发工具</a> <a href="/tags/慕课网/" style="font-size: 26.4px; color: #363636">慕课网</a> <a href="/tags/成长经验/" style="font-size: 12px; color: #ccc">成长经验</a> <a href="/tags/数据库/" style="font-size: 15.6px; color: #a7a7a7">数据库</a>
+            </div>
+          </div>
+        
       </div>
+      
+      
+      
+    </div>
+    
+    
     
   </div>
 
@@ -332,6 +360,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -353,7 +382,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -375,7 +404,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -393,7 +422,9 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
                 </a>
               </span>
             
@@ -443,7 +474,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Gemini
   </a>
 </div>
 
@@ -514,32 +545,32 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
   
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 

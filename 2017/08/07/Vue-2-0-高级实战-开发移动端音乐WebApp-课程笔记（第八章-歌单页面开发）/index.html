@@ -1,15 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -74,7 +75,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="慕课网,vue," />
@@ -86,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -99,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/07/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第八章-歌单页面开发）/index.html">
 <meta property="og:site_name" content="Taohong's blog">
 <meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发）歌单详情页布局介绍及Vuex实现路由数据通讯歌单详情页数据抓取api/recommend.js 添加方法12345678910111213141516export function getSongList(disstid) &amp;#123;  const url = &apos;https://c.y.qq.com/qzone">
-<meta property="og:updated_time" content="2017-08-07T02:43:24.796Z">
+<meta property="og:updated_time" content="2017-08-07T07:47:15.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发）">
 <meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发）歌单详情页布局介绍及Vuex实现路由数据通讯歌单详情页数据抓取api/recommend.js 添加方法12345678910111213141516export function getSongList(disstid) &amp;#123;  const url = &apos;https://c.y.qq.com/qzone">
@@ -110,9 +111,10 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
@@ -208,7 +210,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -233,6 +235,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="http://resume.taohong.space" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -298,7 +310,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第八章-歌单页面开发）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,6 +406,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -398,30 +417,17 @@
       
         <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第八章-歌单页面开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第八章-歌单页面开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发）</h1><h2 id="歌单详情页布局介绍及Vuex实现路由数据通讯"><a href="#歌单详情页布局介绍及Vuex实现路由数据通讯" class="headerlink" title="歌单详情页布局介绍及Vuex实现路由数据通讯"></a>歌单详情页布局介绍及Vuex实现路由数据通讯</h2><h2 id="歌单详情页数据抓取"><a href="#歌单详情页数据抓取" class="headerlink" title="歌单详情页数据抓取"></a>歌单详情页数据抓取</h2><p>api/recommend.js 添加方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getSongList</span>(<span class="params">disstid</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'</span></div><div class="line"></div><div class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</div><div class="line">    disstid,</div><div class="line">    <span class="attr">type</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">json</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">utf8</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">onlysong</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">platform</span>: <span class="string">'yqq'</span>,</div><div class="line">    <span class="attr">hostUin</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">needNewCode</span>: <span class="number">0</span></div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> jsonp(url, data, options)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="歌单详情页数据的处理和应用"><a href="#歌单详情页数据的处理和应用" class="headerlink" title="歌单详情页数据的处理和应用"></a>歌单详情页数据的处理和应用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">_normalizeSongs(list) &#123;</div><div class="line">  <span class="keyword">let</span> ret = []</div><div class="line">  list.forEach(<span class="function">(<span class="params">musicData</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> (musicData.songid &amp;&amp; musicData.albummid) &#123;</div><div class="line">      ret.push(createSong(musicData))</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">  <span class="keyword">return</span> ret</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -452,6 +458,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/08/07/添加hexo-Next主题自定样式/" rel="prev" title="添加hexo Next主题自定样式">
+                添加hexo Next主题自定样式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -459,6 +469,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -492,6 +506,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -522,7 +537,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -544,7 +559,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -562,7 +577,9 @@
                   
                     <i class="fa fa-fw fa-github"></i>
                   
-                  GitHub
+                    
+                      GitHub
+                    
                 </a>
               </span>
             
@@ -628,7 +645,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
+    NexT.Gemini
   </a>
 </div>
 
@@ -699,32 +716,32 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
