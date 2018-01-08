@@ -313,6 +313,499 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/sublime快捷键设置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/16/sublime快捷键设置/" itemprop="url">sublime快捷键设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:53:07+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="sublime快捷键设置"><a href="#sublime快捷键设置" class="headerlink" title="sublime快捷键设置"></a>sublime快捷键设置</h1><h2 id="快捷键设计原则"><a href="#快捷键设计原则" class="headerlink" title="快捷键设计原则"></a>快捷键设计原则</h2><ol>
+<li>尽量不改变原有快捷键</li>
+<li>手指跨幅不要太大</li>
+<li>语义化表达</li>
+<li>相反操作用ctrl和ctrl+alt操作</li>
+</ol>
+<h2 id="快捷键配置"><a href="#快捷键配置" class="headerlink" title="快捷键配置"></a>快捷键配置</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">	// 字母大小写</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+u"</span>], <span class="attr">"command"</span>: <span class="string">"title_case"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+u"</span>, <span class="string">"ctrl+u"</span>], <span class="attr">"command"</span>: <span class="string">"upper_case"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+l"</span>], <span class="attr">"command"</span>: <span class="string">"lower_case"</span> &#125;,</div><div class="line"></div><div class="line">	// 折叠代码操作</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+shift+["</span>], <span class="attr">"command"</span>: <span class="string">"fold"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+shift+]"</span>], <span class="attr">"command"</span>: <span class="string">"unfold"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+1"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">1</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+2"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">2</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+3"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">3</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+4"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">4</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+5"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">5</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+6"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">6</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+7"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">7</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+8"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">8</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+9"</span>], <span class="attr">"command"</span>: <span class="string">"fold_by_level"</span>, <span class="attr">"args"</span>: &#123;<span class="attr">"level"</span>: <span class="number">9</span>&#125; &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+0"</span>], <span class="attr">"command"</span>: <span class="string">"unfold_all"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+alt+k"</span>, <span class="string">"ctrl+alt+0"</span>], <span class="attr">"command"</span>: <span class="string">"fold_all"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+k"</span>, <span class="string">"ctrl+j"</span>], <span class="attr">"command"</span>: <span class="string">"unfold_all"</span> &#125;,</div><div class="line">	&#123; <span class="attr">"keys"</span>: [<span class="string">"ctrl+alt+k"</span>, <span class="string">"ctrl+alt+j"</span>], <span class="attr">"command"</span>: <span class="string">"fold_tag_attributes"</span> &#125;,</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="导航-跳转"><a href="#导航-跳转" class="headerlink" title="导航/跳转"></a>导航/跳转</h3><p>ctrl+p:根据文件名快速打开文件<br>+@:跳转到所定义模块<br>+#:跳转到关键字<br>+:跳转到行</p>
+<h3 id="tabs"><a href="#tabs" class="headerlink" title="tabs"></a>tabs</h3><p>ctrl+shift+t:打开最近关闭的tab<br>ctrl+pgUp:逆序显示tab<br>ctrl+pgUp:顺序序显示tab<br>ctrl+w:关闭tab</p>
+<h3 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h3><p>alt+shift+2<br>alt+shift+1</p>
+<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><p>删除<br>ctrl+x:删除行<br>ctrl+kk:删除光标后所有内容<br>ctrl+j:将下一行与当前行连接</p>
+<p>移位<br>ctrl+回车:在当前行下方另起一行<br>ctrl+shift+回车:在当前行上方另起一行<br>ctrl+shift+上下键:交换上下行</p>
+<p>选中<br>ctrl+方向键:选中<br>ctrl+shift+左右键:以词为单位选中<br>ctrl+shift+m:选中封闭模块内容<br>ctrl+m:跳转到模块处<br>ctrl+d:选中相同词<br>ctrl+K,ctrl+d:跳过最后选中的词<br>alt+f3:选择全部相同单词<br>ctrl+l:选中行<br>ctrl+shift+l</p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>ctrl+f:查找<br>ctrl+h:替换</p>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>ctrl+f2:设置书签<br>f2:上一个书签<br>shift:下一个书签<br>ctrl+shift+f2:清除所有书签</p>
+<h3 id="文本操作"><a href="#文本操作" class="headerlink" title="文本操作"></a>文本操作</h3><p>ctrl+ku 首字母大小写<br>ctrl+uu 大写<br>ctrl+kl 小写</p>
+<h3 id="代码折叠"><a href="#代码折叠" class="headerlink" title="代码折叠"></a>代码折叠</h3><p>ctrl+shift+[:折叠<br>ctrl+shift+]:取消折叠<br>ctrl+k, ctrl+0:取消所有折叠<br>ctrl+alt+k, ctrl+alt+0:折叠全部<br>ctrl+k, ctrl+j:取消所有折叠<br>ctrl+alt+k, ctrl+alt+j:折叠所有标签</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/sublime常用插件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/16/sublime常用插件/" itemprop="url">sublime常用插件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:52:02+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="sublime常用插件"><a href="#sublime常用插件" class="headerlink" title="sublime常用插件"></a>sublime常用插件</h1><h2 id="设置-setting"><a href="#设置-setting" class="headerlink" title="设置(setting)"></a>设置(setting)</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"auto_complete_triggers"</span>:</div><div class="line">	[</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"characters"</span>: <span class="string">"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.&lt;"</span>,</div><div class="line">			<span class="attr">"selector"</span>: <span class="string">"text.html"</span></div><div class="line">		&#125;</div><div class="line">	],</div><div class="line">	<span class="attr">"font_size"</span>: <span class="number">14</span>,</div><div class="line">	<span class="attr">"ignored_packages"</span>:</div><div class="line">	[</div><div class="line">		<span class="string">"Vintage"</span></div><div class="line">	],</div><div class="line">	<span class="attr">"tab_size"</span>: <span class="number">2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctrl+shirt+p</div></pre></td></tr></table></figure>
+<p>install package control</p>
+<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><h4 id="emmet"><a href="#emmet" class="headerlink" title="emmet"></a>emmet</h4><p>介绍：仿选择器语法生成代码</p>
+<h4 id="docBlock"><a href="#docBlock" class="headerlink" title="docBlock"></a>docBlock</h4><p>介绍：自动补全注释</p>
+<h4 id="html-css-js-prettify"><a href="#html-css-js-prettify" class="headerlink" title="html/css/js prettify"></a>html/css/js prettify</h4><p>介绍：整理代码</p>
+<h4 id="CSScomb"><a href="#CSScomb" class="headerlink" title="CSScomb"></a>CSScomb</h4><p>介绍：规范css，整理css顺序<br>配置网站：<a href="http://csscomb.com/config" target="_blank" rel="external">http://csscomb.com/config</a><br>配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"node-path"</span> : <span class="string">"C:\\Program Files\\nodejs.node.exe"</span>,</div><div class="line">    <span class="attr">"config"</span>: &#123;</div><div class="line">        <span class="attr">"remove-empty-rulesets"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"always-semicolon"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"color-case"</span>: <span class="string">"lower"</span>,</div><div class="line">        <span class="attr">"block-indent"</span>: <span class="string">"\t"</span>,</div><div class="line">        <span class="attr">"color-shorthand"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"element-case"</span>: <span class="string">"lower"</span>,</div><div class="line">        <span class="attr">"eof-newline"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"leading-zero"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"quotes"</span>: <span class="string">"single"</span>,</div><div class="line">        <span class="attr">"sort-order-fallback"</span>: <span class="string">"abc"</span>,</div><div class="line">        <span class="attr">"space-before-colon"</span>: <span class="string">""</span>,</div><div class="line">        <span class="attr">"space-after-colon"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-before-combinator"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-after-combinator"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-between-declarations"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-before-opening-brace"</span>: <span class="string">" "</span>,</div><div class="line">        <span class="attr">"space-after-opening-brace"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-after-selector-delimiter"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"space-before-selector-delimiter"</span>: <span class="string">""</span>,</div><div class="line">        <span class="attr">"space-before-closing-brace"</span>: <span class="string">"\n"</span>,</div><div class="line">        <span class="attr">"strip-spaces"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"tab-size"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"unitless-zero"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"vendor-prefix-align"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="file-header"><a href="#file-header" class="headerlink" title="file header"></a>file header</h4><p>介绍：添加文件header</p>
+<h4 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h4><p>介绍：jquery代码提示</p>
+<h4 id="Bootstrap-3-Snippets"><a href="#Bootstrap-3-Snippets" class="headerlink" title="Bootstrap 3 Snippets"></a>Bootstrap 3 Snippets</h4><p>介绍：bootstrap3 代码片段</p>
+<h4 id="SCSS"><a href="#SCSS" class="headerlink" title="SCSS"></a>SCSS</h4><p>介绍：scss代码提示</p>
+<h4 id="ES6-Toolkit"><a href="#ES6-Toolkit" class="headerlink" title="ES6-Toolkit"></a>ES6-Toolkit</h4><p>介绍：es6转es5,es6代码片段</p>
+<h4 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h4><p>介绍：打开浏览器</p>
+<h4 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h4><p>介绍：打开命令行工具</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/16/linux常用命令/" itemprop="url">linux常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-16T18:36:16+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h1><h2 id="命令的基本格式"><a href="#命令的基本格式" class="headerlink" title="命令的基本格式"></a>命令的基本格式</h2><p>命令 [选项] [参数]</p>
+<p>注意:个别命令使用不遵循此格式<br>        当有多个选项时,可以写在一起<br>        简化选项等于完整选项<br>        -a 等于 –all</p>
+<p>查询目录中内容:ls<br>ls [选项] [文件或目录]<br>选项：<br>-a 显示所有文件，包含隐藏文件<br>-l 显示详细信息<br>-d 查看目录本身属性<br>-h 人性化显示文件大小<br>-i 显示inode节点（储存时生成的编码，格式化硬盘时候，分成等大的内存块4k,同时生成相应的节点表）</p>
+<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><h3 id="目录和文件处理命令"><a href="#目录和文件处理命令" class="headerlink" title="目录和文件处理命令"></a>目录和文件处理命令</h3><h4 id="建立目录：mkdir"><a href="#建立目录：mkdir" class="headerlink" title="建立目录：mkdir"></a>建立目录：mkdir</h4><ul>
+<li>mkdir -p [目录名]<br>-p 递归创建<br>命令英文原意:<strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectories</li>
+</ul>
+<h4 id="切换所在目录：cd"><a href="#切换所在目录：cd" class="headerlink" title="切换所在目录：cd"></a>切换所在目录：cd</h4><ul>
+<li><p>cd [目录]<br>命令英文原意:<strong>c</strong>hange <strong>d</strong>irectory</p>
+</li>
+<li><p>简化命令<br>cd和cd ~进入当前用户的家目录<br>cd - 进入上次目录<br>cd .. 进入上一级目录<br>cd .  进入当前目录</p>
+</li>
+</ul>
+<p>Ctrl+L 清屏<br>tab 可以补全目录或命令</p>
+<h4 id="查询所在目录位置：pwd"><a href="#查询所在目录位置：pwd" class="headerlink" title="查询所在目录位置：pwd"></a>查询所在目录位置：pwd</h4><p>命令英文原意:<strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory</p>
+<h4 id="删除空目录：rmdir"><a href="#删除空目录：rmdir" class="headerlink" title="删除空目录：rmdir"></a>删除空目录：rmdir</h4><ul>
+<li>rmdir [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove empty <strong>dir</strong>ectories</li>
+</ul>
+<h4 id="删除文件或目录：rm"><a href="#删除文件或目录：rm" class="headerlink" title="删除文件或目录：rm"></a>删除文件或目录：rm</h4><ul>
+<li>rm -rf [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove</li>
+<li>选项：<br>-r 删除目录<br>-f 强制</li>
+</ul>
+<h4 id="复制命令：cp"><a href="#复制命令：cp" class="headerlink" title="复制命令：cp"></a>复制命令：cp</h4><ul>
+<li>cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：<strong>c</strong>op<strong>y</strong></li>
+<li>选项：<br>-r   复制目录<br>-p   连带文件属性复制<br>-d   若源文件是链接文件,则复制链接属性<br>-a   相当于 -pdr</li>
+</ul>
+<h4 id="剪切或改名命令：mv"><a href="#剪切或改名命令：mv" class="headerlink" title="剪切或改名命令：mv"></a>剪切或改名命令：mv</h4><ul>
+<li>mv [原文件或目录] [目标目录]<br>命令英文原意：<strong>m</strong>o<strong>v</strong>e</li>
+</ul>
+<p>ll 等于 ls -l</p>
+<h4 id="常用目录的作用"><a href="#常用目录的作用" class="headerlink" title="常用目录的作用"></a>常用目录的作用</h4><ul>
+<li>/根目录<ul>
+<li>/bin命令保存目录（普通用户就可以读取的命令）</li>
+<li>/boot启动目录，启动相关文件</li>
+<li>/dev设备文件保存目录</li>
+<li>/etc配置文件保存目录</li>
+<li>/home普通用户的家目录</li>
+<li>/lib系统库保存目录</li>
+<li>/mnt系统挂载目录</li>
+<li>/media挂载目录</li>
+<li>/root超级用户的家目录</li>
+<li>/tmp临时目录</li>
+<li>/sbin命令保存目录（超级用户才能使用的目录）</li>
+<li>/proc直接写入内存的</li>
+<li>/sys</li>
+<li>/usr系统软件资源目录<ul>
+<li>/usr/bin/系统命令（普通用户）</li>
+<li>/usr/sbin/（超级用户）</li>
+</ul>
+</li>
+<li>/var系统相关文档内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
+<li>ln -s [原文件] [目标文件]<br>命令英文原意：<strong>l</strong>i<strong>n</strong>k</li>
+<li>功能描述：生成链接文件</li>
+<li>选项： -s 创建软链接</li>
+</ul>
+<p>硬链接特征：<br>1、拥有相同的i节点和存储block块，可以看作是同一个文件<br>2、可通过i节点识别<br>3、不能跨分区<br>4、不能针对目录使用</p>
+<p>软链接特征：<br>1、类似Windows快捷方式<br>2、软链接拥有自己的i节点和Block块，但是数据块中只保存原文件的文件名和i节点号，并没有实际的文件数据<br>3、lrwxrwxrwx l 软链接<br>4、修改任意文件，另一个文件都改变<br>5、删除原文件，软链接不能使用</p>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
+<li>locate 文件名<br>在后台数据库中安文件名搜索，搜索速度更快</li>
+<li>updatedb<br>更新数据库</li>
+</ul>
+<h3 id="命令搜索命令-whereis-和-which"><a href="#命令搜索命令-whereis-和-which" class="headerlink" title="命令搜索命令 whereis 和 which"></a>命令搜索命令 whereis 和 which</h3><ul>
+<li><p>whereis 命令名<br>搜索命令所在路径及帮助文档所在位置<br>选项：<br>-b：只查找可执行文件<br>-m：只查找帮助文档</p>
+</li>
+<li><p>which 文件名<br>搜索命令所在路径及别名</p>
+</li>
+</ul>
+<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
+<li><p>find [搜索范围] [搜索条件]<br>搜索文件</p>
+</li>
+<li><p>find / -name install.log<br>避免大范围搜索，会非常消耗系统资源<br>find是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
+</li>
+<li><p>find / -iname install.log<br>不区分大小写</p>
+</li>
+<li><p>find / -user install.log<br>按照所有者搜索</p>
+</li>
+<li><p>find /root -nouser<br>查找没有所有者的文件</p>
+</li>
+<li><p>find /var/log/ -mtime +10<br>查找10天亲修改的文件</p>
+<p>+10 10天以前<br>-10 10天内<br>10 10天当天<br>-mtime 修改文件内容<br>-ctime 修改文件属性<br>-atime 文件访问时间</p>
+</li>
+<li><p>find . -size 25k<br>查找文件大小是25KB的文件</p>
+</li>
+</ul>
+<p>-25k 小于25KB的文件<br>25k 等于25KB的文件<br>+25k 大于25KB的文件</p>
+<ul>
+<li>find . -inum 262422<br>查找i几点是262422的文件</li>
+</ul>
+<p>find /ect -size +20k -a -size -50k<br>查找/etc/目录下，大于20KB并且小于50KB的文件<br>-a and 逻辑与<br>-o or 逻辑或</p>
+<p>find /ect -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20KB并且小于50KB的文件，并显示详细信息<br>-exec/-ok 命令 {} \; 对搜索结果执行操作</p>
+<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
+<li>grep [选项] 字符串 文件名<br>在文件当中匹配符合条件的字符串</li>
+</ul>
+<p>选项：<br>-i 忽略大小写<br>-v 排除指定的字符串</p>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><p>man 命令</p>
+<p>查看命令拥有哪个级别的帮助<br>man -f 命令<br>相当于<br>whereis 命令</p>
+<p>举例：<br>man -5 passwd</p>
+<p>查看和命令相关的所有帮助<br>man -k 命令<br>相当于<br>apropos 命令</p>
+<p>选项帮助<br>命令 –help</p>
+<p>shell内部命令帮助<br>help shell内部命令</p>
+<p>详细命令info<br>info 命令<br>回车：进入子帮助页面<br>u：进入上层页面<br>n：进入下一个帮助小节<br>p：进入上一个帮助小节<br>q：退出</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/MySQL运算符和函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1552,7 +2045,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1574,7 +2067,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1629,7 +2122,7 @@ INNER JOIN tdb_goods_brands AS b ON g.brand_id = b.brand_id\G;
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

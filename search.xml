@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[IE针对Ajax请求结果的缓存的解决办法]]></title>
+    <url>%2F2017%2F11%2F08%2FIE%E9%92%88%E5%AF%B9Ajax%E8%AF%B7%E6%B1%82%E7%BB%93%E6%9E%9C%E7%9A%84%E7%BC%93%E5%AD%98%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[IE针对Ajax请求结果的缓存的解决办法 本文转载自：https://www.cnblogs.com/artech/archive/2013/01/03/cache-4-ie.html 在默认情况下，IE会针对请求地址缓存Ajax请求的结果。换句话说，在缓存过期之前，针对相同地址发起的多个Ajax请求，只有第一次会真正发送到服务端。在某些情况下，这种默认的缓存机制并不是我们希望的（比如获取实时数据），这篇文章就来简单地讨论这个问题，以及介绍几种解决方案。 通过为URL地址添加后缀的方式解决问题一般在请求url后添加时间戳 通过JQuery的Ajax设置解决问题jQuery具有针对这个的Ajax设置，我们只需要按照如下的方式调用$.ajaxSetup方法禁止掉Ajaz的缓存机制。1234567891011121314151617181920&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;script type="text/javascript"&gt; $(function() &#123; $.ajaxSetup(&#123; cache: false &#125;); window.setInterval(function() &#123; $.ajax(&#123; url: '@Url.Action("GetCurrentTime")', success: function(result) &#123; $("ul").append("&lt;li&gt;" + result + "&lt;/li&gt;"); &#125; &#125;); &#125;, 5000); &#125;); &lt;/script&gt;&lt;/head&gt;&lt;/html&gt; 实际上jQuery的这个机制也是通过为请求地址添加不同的查询字符串后缀来实现的 通过定制响应解决问题 HTTP/1.1 200 OKServer: ASP.NET Development Server/10.0.0.0Date: Thu, 03 Jan 2013 12:54:56 GMTX-AspNet-Version: 4.0.30319X-AspNetMvc-Version: 4.0Cache-Control: no-cachePragma: no-cacheExpires: -1Content-Type: text/html; charset=utf-8Content-Length: 10Connection: Close]]></content>
+      <tags>
+        <tag>浏览器</tag>
+        <tag>ie</tag>
+        <tag>ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo-设置阅读全文]]></title>
+    <url>%2F2017%2F11%2F08%2Fhexo-%E8%AE%BE%E7%BD%AE%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87%2F</url>
+    <content type="text"><![CDATA[hexo-设置阅读全文 在文章中使用&lt;!--more--&gt;手动进行截断这种方法可以根据文章的内容，自己在合适的位置添加&lt;!--more--&gt;标签，使用灵活，也是Hexo推荐的方法 ，这种方式也可以让 Hexo 中的插件更好的识别。 12345678---title: Hello World---Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).&lt;!--more--&gt;## Quick Start### Create a new post 在文章中的front-matter中添加description，并提供文章摘录这种方式只会在首页列表中显示文章的摘要内容，进入文章详情后不会再显示。 1234---title: Hello Worlddescription: 这是摘要,进入文章详情后不会再显示。--- 自动形成摘要，在主题配置文件中添加默认截取的长度为 150 字符，可以根据需要自行设定 123auto_excerpt: enable: true length: 150]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[runjs测试]]></title>
+    <url>%2F2017%2F11%2F07%2Frunjs%E6%B5%8B%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[charles本地调试之map功能]]></title>
     <url>%2F2017%2F11%2F01%2Fcharles%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95%E4%B9%8Bmap%E5%8A%9F%E8%83%BD%2F</url>
     <content type="text"><![CDATA[charles本地调试之map功能map功能介绍 map功能，顾名思义就是将某个请求进行重定向，用重定向后的内容来响应请求的内容；map功能分为map Local和map Remote, 二者区分是： map Local：是将某个网络请求重定向到本地的某个文件 map Remote：是将某个网络请求重定向到另一个网络请求 二者除了重定向文件的位置不同之外，其他功能都是一样的。他们都可以对js、css、html以及api接口均可重定向，此外也可以使用通配符来进行简单的批量匹配，达到批量重定向的目的。 实例这里介绍一下我最常用的功能api重定向 为了mock数据；一般使用map Remote功能来将本地的请求重定向到测试或者线上环境的网络请求。 例子如下:1http://127.0.0.1:8080/api/foo/bar ---&gt; http://test.com/api/foo/bar 配置如下 注意上面map From中的Path配置项使用了*通配符，表示匹配127.0.0.1:8080/api/下的所有文件及子路径，将其重定向到test.com下的/api/路径下 map通配符map隐射可以使用的模式匹配符有三种： *: 可以匹配0个或者多个字符 ?: 可以匹配一个字符 [...]: 范围选择符，可以匹配范围中的任意一个字符 map配置实例假设Map From配置中的各个项为空，表示匹配所有请求，然后Map To项的配置不同，代表不同含义，下表列出一个简单例子 Host配置值 Path配置值 配置产生的结果 charlesproxy.com 匹配所有的请求重定向到charlesproxy.com主机 *.charlesproxy.com 匹配所有的请求重定向到以.charlesproxy.com结尾的主机 charlesproxy.com /charles/ 匹配所有请求只重定向到charlesproxy.com/charles/路径下 charlesproxy.com /charles/* 匹配所有请求只重定向到charlesproxy.com/charles/路径下,包括路径下的文件及其路径的子路径 charlesproxy.com /charles 匹配所有请求只重定向到charlesproxy.com/charles下 charlesproxy.com /index.html 匹配所有请求重定向到charlesproxy.com/index.html /charles/*.html 匹配所有请求重定向到任意主机下的以.html结尾的文件，该文件存放在主机的/charles/及其子目录下]]></content>
