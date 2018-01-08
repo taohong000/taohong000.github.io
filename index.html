@@ -313,6 +313,384 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/08/IE针对Ajax请求结果的缓存的解决办法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/IE针对Ajax请求结果的缓存的解决办法/" itemprop="url">IE针对Ajax请求结果的缓存的解决办法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T14:26:24+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="IE针对Ajax请求结果的缓存的解决办法"><a href="#IE针对Ajax请求结果的缓存的解决办法" class="headerlink" title="IE针对Ajax请求结果的缓存的解决办法"></a>IE针对Ajax请求结果的缓存的解决办法</h1><blockquote>
+<p>本文转载自：<a href="https://www.cnblogs.com/artech/archive/2013/01/03/cache-4-ie.html" target="_blank" rel="external">https://www.cnblogs.com/artech/archive/2013/01/03/cache-4-ie.html</a></p>
+</blockquote>
+<p>在默认情况下，IE会针对请求地址缓存Ajax请求的结果。换句话说，在缓存过期之前，针对相同地址发起的多个Ajax请求，只有第一次会真正发送到服务端。在某些情况下，这种默认的缓存机制并不是我们希望的（比如获取实时数据），这篇文章就来简单地讨论这个问题，以及介绍几种解决方案。</p>
+<h2 id="通过为URL地址添加后缀的方式解决问题"><a href="#通过为URL地址添加后缀的方式解决问题" class="headerlink" title="通过为URL地址添加后缀的方式解决问题"></a>通过为URL地址添加后缀的方式解决问题</h2><p>一般在请求url后添加时间戳</p>
+<h2 id="通过JQuery的Ajax设置解决问题"><a href="#通过JQuery的Ajax设置解决问题" class="headerlink" title="通过JQuery的Ajax设置解决问题"></a>通过JQuery的Ajax设置解决问题</h2><p>jQuery具有针对这个的Ajax设置，我们只需要按照如下的方式调用$.ajaxSetup方法禁止掉Ajaz的缓存机制。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        $.ajaxSetup(&#123; <span class="attr">cache</span>: <span class="literal">false</span> &#125;);</div><div class="line">        <span class="built_in">window</span>.setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            $.ajax(&#123;</div><div class="line">                <span class="attr">url</span>: <span class="string">'@Url.Action("GetCurrentTime")'</span>,</div><div class="line">                <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">                    $(<span class="string">"ul"</span>).append(<span class="string">"&lt;li&gt;"</span> + result + <span class="string">"&lt;/li&gt;"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;, <span class="number">5000</span>);</div><div class="line">    &#125;);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>实际上jQuery的这个机制也是通过为请求地址添加不同的查询字符串后缀来实现的</p>
+<h2 id="通过定制响应解决问题"><a href="#通过定制响应解决问题" class="headerlink" title="通过定制响应解决问题"></a>通过定制响应解决问题</h2><blockquote>
+<p>HTTP/1.1 200 OK<br>Server: ASP.NET Development Server/10.0.0.0<br>Date: Thu, 03 Jan 2013 12:54:56 GMT<br>X-AspNet-Version: 4.0.30319<br>X-AspNetMvc-Version: 4.0<br><strong>Cache-Control: no-cache</strong><br>Pragma: no-cache<br>Expires: -1<br>Content-Type: text/html; charset=utf-8<br>Content-Length: 10<br>Connection: Close</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/08/hexo-设置阅读全文/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/hexo-设置阅读全文/" itemprop="url"> hexo-设置阅读全文</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T10:19:50+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="hexo-设置阅读全文"><a href="#hexo-设置阅读全文" class="headerlink" title="hexo-设置阅读全文"></a>hexo-设置阅读全文</h1><ol>
+<li><p>在文章中使用<code>&lt;!--more--&gt;</code>手动进行截断<br>这种方法可以根据文章的内容，自己在合适的位置添加<code>&lt;!--more--&gt;</code>标签，使用灵活，也是Hexo推荐的方法 ，这种方式也可以让 Hexo 中的插件更好的识别。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line"><span class="section">title: Hello World</span></div><div class="line">---</div><div class="line">Welcome to [<span class="string">Hexo</span>](<span class="link">https://hexo.io/</span>)! This is your very first post. Check [<span class="string">documentation</span>](<span class="link">https://hexo.io/docs/</span>) for more info. If you get any problems when using Hexo, you can find the answer in [<span class="string">troubleshooting</span>](<span class="link">https://hexo.io/docs/troubleshooting.html</span>) or you can ask me on [<span class="string">GitHub</span>](<span class="link">https://github.com/hexojs/hexo/issues</span>).</div><div class="line"><span class="xml"><span class="comment">&lt;!--more--&gt;</span></span></div><div class="line"><span class="section">## Quick Start</span></div><div class="line"></div><div class="line"><span class="section">### Create a new post</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>在文章中的front-matter中添加description，并提供文章摘录<br>这种方式只会在首页列表中显示文章的摘要内容，进入文章详情后不会再显示。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: Hello World</div><div class="line"><span class="section">description: 这是摘要,进入文章详情后不会再显示。</span></div><div class="line">---</div></pre></td></tr></table></figure>
+</li>
+<li><p>自动形成摘要，在主题配置文件中添加<br>默认截取的长度为 150 字符，可以根据需要自行设定</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">auto_excerpt:</span></div><div class="line">	enable: <span class="literal">true</span></div><div class="line">	length: <span class="number">150</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/runjs测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/runjs测试/" itemprop="url">runjs测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T09:26:29+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script async src="//jsrun.net/a9pKp/embed/all/light/"></script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/charles本地调试之map功能/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1369,489 +1747,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第13章-编译打包）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第13章-编译打包）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第13章 编译打包）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T14:30:44+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">课程笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第13章-编译打包）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第13章-编译打包）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第13章 编译打包）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第13章 编译打包）</h1><h2 id="编译打包-项目编译打包及node服务测试"><a href="#编译打包-项目编译打包及node服务测试" class="headerlink" title="编译打包-项目编译打包及node服务测试"></a>编译打包-项目编译打包及node服务测试</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</div><div class="line"><span class="keyword">let</span> config = <span class="built_in">require</span>(<span class="string">'./config/index'</span>)</div><div class="line"><span class="keyword">let</span> axios = <span class="built_in">require</span>(<span class="string">'axios'</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> app = express()</div><div class="line"></div><div class="line"><span class="keyword">var</span> apiRoutes = express.Router()</div><div class="line"></div><div class="line">apiRoutes.get(<span class="string">'/getDiscList'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> url = <span class="string">'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'</span></div><div class="line">  axios.get(url, &#123;</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">      <span class="attr">referer</span>: <span class="string">'https://c.y.qq.com/'</span>,</div><div class="line">      <span class="attr">host</span>: <span class="string">'c.y.qq.com'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">params</span>: req.query</div><div class="line">  &#125;).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">    res.json(response.data)</div><div class="line">  &#125;).catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(e)</div><div class="line">  &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">apiRoutes.get(<span class="string">'/lyric'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> url = <span class="string">'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'</span></div><div class="line"></div><div class="line">  axios.get(url, &#123;</div><div class="line">    <span class="attr">headers</span>: &#123;</div><div class="line">      <span class="attr">referer</span>: <span class="string">'https://c.y.qq.com/'</span>,</div><div class="line">      <span class="attr">host</span>: <span class="string">'c.y.qq.com'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">params</span>: req.query</div><div class="line">  &#125;).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">var</span> ret = response.data</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> ret === <span class="string">'string'</span>) &#123;</div><div class="line">      <span class="keyword">var</span> reg = <span class="regexp">/^\w+\((&#123;[^()]+&#125;)\)$/</span></div><div class="line">      <span class="keyword">var</span> matches = ret.match(reg)</div><div class="line">      <span class="keyword">if</span> (matches) &#123;</div><div class="line">        ret = <span class="built_in">JSON</span>.parse(matches[<span class="number">1</span>])</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    res.json(ret)</div><div class="line">  &#125;).catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(e)</div><div class="line">  &#125;)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.use(<span class="string">'/api'</span>, apiRoutes)</div><div class="line"></div><div class="line">app.use(express.static(<span class="string">'./dist'</span>))</div><div class="line"></div><div class="line"><span class="keyword">let</span> port = process.env.PORT || config.build.port</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = app.listen(port, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (err) &#123;</div><div class="line">		<span class="built_in">console</span>.log(err)</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Listening at https://localhost:'</span> + port + <span class="string">'\n'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="编译打包-路由组件实现懒加载"><a href="#编译打包-路由组件实现懒加载" class="headerlink" title="编译打包-路由组件实现懒加载"></a>编译打包-路由组件实现懒加载</h2><p>修改router<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Recommend = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/recommend/recommend'</span>)</div><div class="line"><span class="keyword">const</span> Singer = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/singer/singer'</span>)</div><div class="line"><span class="keyword">const</span> Rank = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/rank/rank'</span>)</div><div class="line"><span class="keyword">const</span> Search = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/search/search'</span>)</div><div class="line"><span class="keyword">const</span> SingerDetail = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/singer-detail/singer-detail'</span>)</div><div class="line"><span class="keyword">const</span> Disc = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/disc/disc'</span>)</div><div class="line"><span class="keyword">const</span> TopList = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/top-list/top-list'</span>)</div><div class="line"><span class="keyword">const</span> UserCenter = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'components/user-center/user-center'</span>)</div></pre></td></tr></table></figure></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>学习的价值不在于获得源码</li>
-<li>组件化、模块化的本质都是分治(把复杂的项目拆分成一个个模块, 把模块拆分成组件, 把能复用的功能都抽象出js文件)</li>
-<li>遇到问题要勇于面对、勤于思考</li>
-<li>学会主动学习</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第12章-用户中心页面）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第12章-用户中心页面）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第12章 用户中心页面）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T14:29:23+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">课程笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第12章-用户中心页面）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第12章-用户中心页面）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第12章 用户中心页面）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第12章 用户中心页面）</h1><h2 id="用户中心页面布局和功能介绍"><a href="#用户中心页面布局和功能介绍" class="headerlink" title="用户中心页面布局和功能介绍"></a>用户中心页面布局和功能介绍</h2><p>组件基本dom结构<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"slide"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"user-center"</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 返回按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 返回按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- switch按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"switches-wrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- switch按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 随机播放按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"playBtn"</span> <span class="attr">class</span>=<span class="string">"play-btn"</span> @<span class="attr">click</span>=<span class="string">"random"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-play"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>随机播放全部<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 随机播放按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 列表 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span> <span class="attr">ref</span>=<span class="string">"listWrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 列表 end --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="用户中心页面收藏列表的Vuex数据设计和实现"><a href="#用户中心页面收藏列表的Vuex数据设计和实现" class="headerlink" title="用户中心页面收藏列表的Vuex数据设计和实现"></a>用户中心页面收藏列表的Vuex数据设计和实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// state</span></div><div class="line">favoriteList: loadFavorite()</div><div class="line"></div><div class="line"><span class="comment">// mutation-type</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_FAVORITE_LIST = <span class="string">'SET_FAVORITE_LIST'</span></div><div class="line"></div><div class="line"><span class="comment">// mutation</span></div><div class="line">[types.SET_FAVORITE_HISTORY](state, list) &#123;</div><div class="line">  state.favoriteList = list</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// getters</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> favoriteList = <span class="function"><span class="params">state</span> =&gt;</span> state.favoriteList</div><div class="line"></div><div class="line"><span class="comment">// actions</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> saveFavoriteList = <span class="function"><span class="keyword">function</span>(<span class="params">&#123; commit &#125;, song</span>) </span>&#123;</div><div class="line">  commit(types.SET_FAVORITE_LIST, saveFavorite(song))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> deleteFavoriteList = <span class="function"><span class="keyword">function</span>(<span class="params">&#123; commit &#125;, song</span>) </span>&#123;</div><div class="line">  commit(types.SET_FAVORITE_LIST, deleteFavorite(song))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="用户中心页面收藏歌曲功能实现"><a href="#用户中心页面收藏歌曲功能实现" class="headerlink" title="用户中心页面收藏歌曲功能实现"></a>用户中心页面收藏歌曲功能实现</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"slide"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"user-center"</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 返回按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 返回按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- switch按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"switches-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">switches</span> @<span class="attr">switch</span>=<span class="string">"swtichItem"</span> <span class="attr">:switches</span>=<span class="string">"switches"</span> <span class="attr">:currentIndex</span>=<span class="string">"currentIndex"</span>&gt;</span><span class="tag">&lt;/<span class="name">switches</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- switch按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 随机播放按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"playBtn"</span> <span class="attr">class</span>=<span class="string">"play-btn"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-play"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>随机播放全部<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 随机播放按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 列表 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span> <span class="attr">ref</span>=<span class="string">"listWrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">ref</span>=<span class="string">"favoriteList"</span> <span class="attr">class</span>=<span class="string">"list-scroll"</span> <span class="attr">v-if</span>=<span class="string">"currentIndex===0"</span> <span class="attr">:data</span>=<span class="string">"favoriteList"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-inner"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">song-list</span> <span class="attr">:songs</span>=<span class="string">"favoriteList"</span> @<span class="attr">select</span>=<span class="string">"selectSong"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">ref</span>=<span class="string">"playList"</span> <span class="attr">class</span>=<span class="string">"list-scroll"</span> <span class="attr">v-if</span>=<span class="string">"currentIndex===1"</span> <span class="attr">:data</span>=<span class="string">"playHistory"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-inner"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">song-list</span> <span class="attr">:songs</span>=<span class="string">"playHistory"</span> @<span class="attr">select</span>=<span class="string">"selectSong"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 列表 end --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> Switches <span class="keyword">from</span> <span class="string">'base/switches/switches'</span></div><div class="line">  <span class="keyword">import</span> Scroll <span class="keyword">from</span> <span class="string">'base/scroll/scroll'</span></div><div class="line">  <span class="keyword">import</span> SongList <span class="keyword">from</span> <span class="string">'base/song-list/song-list'</span></div><div class="line">  <span class="keyword">import</span> Song <span class="keyword">from</span> <span class="string">'common/js/song'</span></div><div class="line">  <span class="keyword">import</span> &#123;mapGetters, mapActions&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">currentIndex</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">switches</span>: [</div><div class="line">          &#123;<span class="attr">name</span>: <span class="string">'我喜欢的'</span>&#125;,</div><div class="line">          &#123;<span class="attr">name</span>: <span class="string">'最近听的'</span>&#125;</div><div class="line">        ]</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">computed</span>: &#123;</div><div class="line">      ...mapGetters([</div><div class="line">        <span class="string">'favoriteList'</span>,</div><div class="line">        <span class="string">'playHistory'</span></div><div class="line">      ])</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      swtichItem(index) &#123;</div><div class="line">        <span class="keyword">this</span>.currentIndex = index</div><div class="line">      &#125;,</div><div class="line">      selectSong(song) &#123;</div><div class="line">        <span class="keyword">this</span>.insertSong(<span class="keyword">new</span> Song(song))</div><div class="line">      &#125;,</div><div class="line">      ...mapActions([</div><div class="line">        <span class="string">'insertSong'</span></div><div class="line">      ])</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      Switches,</div><div class="line">      Scroll,</div><div class="line">      SongList</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="用户中心页面剩余功能实现"><a href="#用户中心页面剩余功能实现" class="headerlink" title="用户中心页面剩余功能实现"></a>用户中心页面剩余功能实现</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"slide"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"user-center"</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 返回按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span> @<span class="attr">click</span>=<span class="string">"back"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 返回按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- switch按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"switches-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">switches</span> @<span class="attr">switch</span>=<span class="string">"swtichItem"</span> <span class="attr">:switches</span>=<span class="string">"switches"</span> <span class="attr">:currentIndex</span>=<span class="string">"currentIndex"</span>&gt;</span><span class="tag">&lt;/<span class="name">switches</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- switch按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 随机播放按钮 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"playBtn"</span> <span class="attr">class</span>=<span class="string">"play-btn"</span> @<span class="attr">click</span>=<span class="string">"random"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-play"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>随机播放全部<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 随机播放按钮 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 列表 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span> <span class="attr">ref</span>=<span class="string">"listWrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">ref</span>=<span class="string">"favoriteList"</span> <span class="attr">class</span>=<span class="string">"list-scroll"</span> <span class="attr">v-if</span>=<span class="string">"currentIndex===0"</span> <span class="attr">:data</span>=<span class="string">"favoriteList"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-inner"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">song-list</span> <span class="attr">:songs</span>=<span class="string">"favoriteList"</span> @<span class="attr">select</span>=<span class="string">"selectSong"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">ref</span>=<span class="string">"playlist"</span> <span class="attr">class</span>=<span class="string">"list-scroll"</span> <span class="attr">v-if</span>=<span class="string">"currentIndex===1"</span> <span class="attr">:data</span>=<span class="string">"playHistory"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-inner"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">song-list</span> <span class="attr">:songs</span>=<span class="string">"playHistory"</span> @<span class="attr">select</span>=<span class="string">"selectSong"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 列表 end --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"no-result-wrapper"</span> <span class="attr">v-show</span>=<span class="string">"noResult"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">no-result</span> <span class="attr">:title</span>=<span class="string">"noResultDesc"</span>&gt;</span><span class="tag">&lt;/<span class="name">no-result</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> Switches <span class="keyword">from</span> <span class="string">'base/switches/switches'</span></div><div class="line">  <span class="keyword">import</span> Scroll <span class="keyword">from</span> <span class="string">'base/scroll/scroll'</span></div><div class="line">  <span class="keyword">import</span> SongList <span class="keyword">from</span> <span class="string">'base/song-list/song-list'</span></div><div class="line">  <span class="keyword">import</span> NoResult <span class="keyword">from</span> <span class="string">'base/no-result/no-result'</span></div><div class="line">  <span class="keyword">import</span> Song <span class="keyword">from</span> <span class="string">'common/js/song'</span></div><div class="line">  <span class="keyword">import</span> &#123;mapGetters, mapActions&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line">  <span class="keyword">import</span> &#123;playlistMixin&#125; <span class="keyword">from</span> <span class="string">'common/js/mixin'</span></div><div class="line"></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">mixins</span>: [playlistMixin],</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">currentIndex</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">switches</span>: [</div><div class="line">          &#123;<span class="attr">name</span>: <span class="string">'我喜欢的'</span>&#125;,</div><div class="line">          &#123;<span class="attr">name</span>: <span class="string">'最近听的'</span>&#125;</div><div class="line">        ]</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">computed</span>: &#123;</div><div class="line">      noResult() &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.currentIndex === <span class="number">0</span>) &#123;</div><div class="line">          <span class="keyword">return</span> !<span class="keyword">this</span>.favoriteList.length</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="keyword">return</span> !<span class="keyword">this</span>.playlist.length</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      noResultDesc() &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.currentIndex === <span class="number">0</span>) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="string">'暂无收藏歌曲'</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="keyword">return</span> <span class="string">'你还没有听过歌曲'</span></div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      ...mapGetters([</div><div class="line">        <span class="string">'favoriteList'</span>,</div><div class="line">        <span class="string">'playHistory'</span></div><div class="line">      ])</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      handlePlaylist(playlist) &#123;</div><div class="line">        <span class="keyword">const</span> bottom = playlist.length &gt; <span class="number">0</span> ? <span class="string">'60px'</span> : <span class="string">''</span></div><div class="line">        <span class="keyword">this</span>.$refs.listWrapper.style.bottom = bottom</div><div class="line">        <span class="keyword">this</span>.$refs.$favoriteList &amp;&amp; <span class="keyword">this</span>.$refs.$favoriteList.refresh()</div><div class="line">        <span class="keyword">this</span>.$refs.$playlist &amp;&amp; <span class="keyword">this</span>.$refs.$playlist.refresh()</div><div class="line">      &#125;,</div><div class="line">      swtichItem(index) &#123;</div><div class="line">        <span class="keyword">this</span>.currentIndex = index</div><div class="line">      &#125;,</div><div class="line">      selectSong(song) &#123;</div><div class="line">        <span class="keyword">this</span>.insertSong(<span class="keyword">new</span> Song(song))</div><div class="line">      &#125;,</div><div class="line">      back() &#123;</div><div class="line">        <span class="keyword">this</span>.$router.back()</div><div class="line">      &#125;,</div><div class="line">      random() &#123;</div><div class="line">        <span class="keyword">let</span> list = <span class="keyword">this</span>.currentIndex === <span class="number">0</span> ? <span class="keyword">this</span>.favoriteList : <span class="keyword">this</span>.playHistory</div><div class="line">        <span class="keyword">if</span> (list.length === <span class="number">0</span>) &#123;</div><div class="line">          <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 为什么用song的实例, song的实例上不仅有属性, 还有方法</span></div><div class="line">        list = list.map(<span class="function"><span class="params">song</span> =&gt;</span> <span class="keyword">new</span> Song(song))</div><div class="line">        <span class="keyword">this</span>.randomPlay(&#123;list&#125;)</div><div class="line">      &#125;,</div><div class="line">      ...mapActions([</div><div class="line">        <span class="string">'insertSong'</span>,</div><div class="line">        <span class="string">'randomPlay'</span></div><div class="line">      ])</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      Switches,</div><div class="line">      Scroll,</div><div class="line">      SongList,</div><div class="line">      NoResult</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第11章-歌曲列表组件）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Taohong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ot2alabfu.bkt.clouddn.com/image/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Taohong's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第11章-歌曲列表组件）/" itemprop="url">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第11章 歌曲列表组件）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T14:27:51+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">课程笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第11章-歌曲列表组件）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第11章-歌曲列表组件）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第11章 歌曲列表组件）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第11章 歌曲列表组件）</h1><h2 id="歌曲列表组件布局和功能介绍"><a href="#歌曲列表组件布局和功能介绍" class="headerlink" title="歌曲列表组件布局和功能介绍"></a>歌曲列表组件布局和功能介绍</h2><p>添加playlist组件<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"list-fade"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"playlist"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-header"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">ref</span>=<span class="string">"listContent"</span> <span class="attr">class</span>=<span class="string">"list-content"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">transition-group</span> <span class="attr">name</span>=<span class="string">"list"</span> <span class="attr">tag</span>=<span class="string">"ul"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">ref</span>=<span class="string">"listItem"</span> <span class="attr">class</span>=<span class="string">"item"</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"current"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"like"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-not-favorite"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">              <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"delete"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-delete"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">              <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-operate"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"add"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-add"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>添加歌曲到队列<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-close"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">span</span>&gt;</span>关闭<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  @import "~common/stylus/mixin"</div><div class="line">  .playlist</div><div class="line">    position: fixed</div><div class="line">    left: 0</div><div class="line">    right: 0</div><div class="line">    top: 0</div><div class="line">    bottom: 0</div><div class="line">    z-index: 200</div><div class="line">    background-color: $color-background-d</div><div class="line">    &amp;.list-fade-enter-active, &amp;.list-fade-leave-active</div><div class="line">      transition: opacity 0.3s</div><div class="line">      .list-wrapper</div><div class="line">        transition: all 0.3s</div><div class="line">    &amp;.list-fade-enter, &amp;.list-fade-leave-to</div><div class="line">      opacity: 0</div><div class="line">      .list-wrapper</div><div class="line">        transform: translate3d(0, 100%, 0)</div><div class="line">    &amp;.list-fade-enter</div><div class="line">    .list-wrapper</div><div class="line">      position: absolute</div><div class="line">      left: 0</div><div class="line">      bottom: 0</div><div class="line">      width: 100%</div><div class="line">      background-color: $color-highlight-background</div><div class="line">      .list-header</div><div class="line">        position: relative</div><div class="line">        padding: 20px 30px 10px 20px</div><div class="line">        .title</div><div class="line">          display: flex</div><div class="line">          align-items: center</div><div class="line">          .icon</div><div class="line">            margin-right: 10px</div><div class="line">            font-size: 30px</div><div class="line">            color: $color-theme-d</div><div class="line">          .text</div><div class="line">            flex: 1</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-l</div><div class="line">          .clear</div><div class="line">            extend-click()</div><div class="line">            .icon-clear</div><div class="line">              font-size: $font-size-medium</div><div class="line">              color: $color-text-d</div><div class="line">      .list-content</div><div class="line">        max-height: 240px</div><div class="line">        overflow: hidden</div><div class="line">        .item</div><div class="line">          display: flex</div><div class="line">          align-items: center</div><div class="line">          height: 40px</div><div class="line">          padding: 0 30px 0 20px</div><div class="line">          overflow: hidden</div><div class="line">          &amp;.list-enter-active, &amp;.list-leave-active</div><div class="line">            transition: all 0.1s</div><div class="line">          &amp;.list-enter, &amp;.list-leave-to</div><div class="line">            height: 0</div><div class="line">          .current</div><div class="line">            flex: 0 0 20px</div><div class="line">            width: 20px</div><div class="line">            font-size: $font-size-small</div><div class="line">            color: $color-theme-d</div><div class="line">          .text</div><div class="line">            flex: 1</div><div class="line">            no-wrap()</div><div class="line">            font-size: $font-size-medium</div><div class="line">            color: $color-text-d</div><div class="line">          .like</div><div class="line">            extend-click()</div><div class="line">            margin-right: 15px</div><div class="line">            font-size: $font-size-small</div><div class="line">            color: $color-theme</div><div class="line">            .icon-favorite</div><div class="line">              color: $color-sub-theme</div><div class="line">          .delete</div><div class="line">            extend-click()</div><div class="line">            font-size: $font-size-small</div><div class="line">            color: $color-theme</div><div class="line">      .list-operate</div><div class="line">        width: 140px</div><div class="line">        margin: 20px auto 30px auto</div><div class="line">        .add</div><div class="line">          display: flex</div><div class="line">          align-items: center</div><div class="line">          padding: 8px 16px</div><div class="line">          border: 1px solid $color-text-l</div><div class="line">          border-radius: 100px</div><div class="line">          color: $color-text-l</div><div class="line">          .icon-add</div><div class="line">            margin-right: 5px</div><div class="line">            font-size: $font-size-small-s</div><div class="line">          .text</div><div class="line">            font-size: $font-size-small</div><div class="line">      .list-close</div><div class="line">        text-align: center</div><div class="line">        line-height: 50px</div><div class="line">        background: $color-background</div><div class="line">        font-size: $font-size-medium-x</div><div class="line">        color: $color-text-l</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="歌曲列表组件显示和隐藏的控制"><a href="#歌曲列表组件显示和隐藏的控制" class="headerlink" title="歌曲列表组件显示和隐藏的控制"></a>歌曲列表组件显示和隐藏的控制</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 蒙层添加点击关闭事件 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"playlist"</span> <span class="attr">v-show</span>=<span class="string">"showFlag"</span> @<span class="attr">click</span>=<span class="string">"hide"</span>&gt;</span></div><div class="line">	  <span class="comment">&lt;!-- 列表组件添加阻止冒泡事件 --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-wrapper"</span> @<span class="attr">click.stop</span>&gt;</span></div><div class="line">      ...</div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">showFlag</span>: <span class="literal">false</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      show() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">true</span></div><div class="line">      &#125;,</div><div class="line">      hide() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">false</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="歌曲列表组件播放列表的实现"><a href="#歌曲列表组件播放列表的实现" class="headerlink" title="歌曲列表组件播放列表的实现"></a>歌曲列表组件播放列表的实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">showFlag</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">computed</span>: &#123;</div><div class="line">    ...mapGetters([</div><div class="line">      <span class="string">'sequenceList'</span>,</div><div class="line">      <span class="string">'currentSong'</span>,</div><div class="line">      <span class="string">'playlist'</span>,</div><div class="line">      <span class="string">'mode'</span></div><div class="line">    ])</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    show() &#123;</div><div class="line">      <span class="keyword">this</span>.showFlag = <span class="literal">true</span></div><div class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.$refs.listContent.refresh()</div><div class="line">        <span class="keyword">this</span>.scrollToCurrent(<span class="keyword">this</span>.currentSong)</div><div class="line">      &#125;, <span class="number">20</span>)</div><div class="line">    &#125;,</div><div class="line">    hide() &#123;</div><div class="line">      <span class="keyword">this</span>.showFlag = <span class="literal">false</span></div><div class="line">    &#125;,</div><div class="line">    getCurrentIcon(item) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.currentSong.id === item.id ? <span class="string">'icon-play'</span> : <span class="string">''</span></div><div class="line">    &#125;,</div><div class="line">    selectItem(item, index) &#123;</div><div class="line">      <span class="comment">// 播放模式是随机播放, 找到歌曲索引</span></div><div class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.mode === playMode.random) &#123;</div><div class="line">        index = <span class="keyword">this</span>.playlist.findIndex(<span class="function">(<span class="params">song</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">return</span> song.id === item.id</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">this</span>.setCurrentIndex(index)</div><div class="line">      <span class="keyword">this</span>.setPlayingState(<span class="literal">true</span>)</div><div class="line">    &#125;,</div><div class="line">    scrollToCurrent(current) &#123;</div><div class="line">      <span class="keyword">const</span> index = <span class="keyword">this</span>.sequenceList.findIndex(<span class="function">(<span class="params">song</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> current.id === song.id</div><div class="line">      &#125;)</div><div class="line">      <span class="keyword">this</span>.$refs.listContent.scrollToElement(<span class="keyword">this</span>.$refs.listItem[index], <span class="number">300</span>)</div><div class="line">    &#125;,</div><div class="line">    ...mapMutations(&#123;</div><div class="line">      <span class="string">'setCurrentIndex'</span>: <span class="string">'SET_CURRENT_INDEX'</span>,</div><div class="line">      <span class="string">'setPlayingState'</span>: <span class="string">'SET_PLAYING_STATE'</span></div><div class="line">    &#125;)</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    currentSong(newSong, oldSong) &#123;</div><div class="line">      <span class="keyword">if</span> (!<span class="keyword">this</span>.showFlag || newSong.id === oldSong.id) &#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">      &#125;</div><div class="line">      <span class="keyword">this</span>.scrollToCurrent(newSong)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    Scroll</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>添加action, 清空playlist<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> deleteSongList = <span class="function"><span class="keyword">function</span>(<span class="params">&#123; commit &#125;</span>) </span>&#123;</div><div class="line">  commit(types.SET_PLAYLIST, [])</div><div class="line">  commit(types.SET_SEQUENCE_LIST, [])</div><div class="line">  commit(types.SET_CURRENT_INDEX, <span class="number">-1</span>)</div><div class="line">  commit(types.SET_PLAYING_STATE, <span class="literal">false</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="歌曲列表组件-playerMixin的抽象"><a href="#歌曲列表组件-playerMixin的抽象" class="headerlink" title="歌曲列表组件 playerMixin的抽象"></a>歌曲列表组件 playerMixin的抽象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> playlistMixin = &#123;</div><div class="line">  <span class="attr">computed</span>: &#123;</div><div class="line">    ...mapGetters([</div><div class="line">      <span class="string">'playlist'</span></div><div class="line">    ])</div><div class="line">  &#125;,</div><div class="line">  mounted() &#123;</div><div class="line">    <span class="keyword">this</span>.handlePlaylist(<span class="keyword">this</span>.playlist)</div><div class="line">  &#125;,</div><div class="line">  activated() &#123;</div><div class="line">    <span class="keyword">this</span>.handlePlaylist(<span class="keyword">this</span>.playlist)</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">watch</span>: &#123;</div><div class="line">    playlist(newVal) &#123;</div><div class="line">      <span class="keyword">this</span>.handlePlaylist(newVal)</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    handlePlaylist() &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'component must implement handlePlaylist method'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> playerMixin = &#123;</div><div class="line">  <span class="attr">computed</span>: &#123;</div><div class="line">    iconMode() &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.mode === playMode.sequence ? <span class="string">'icon-sequence'</span> : <span class="keyword">this</span>.mode === playMode.loop ? <span class="string">'icon-loop'</span> : <span class="string">'icon-random'</span></div><div class="line">    &#125;,</div><div class="line">    ...mapGetters([</div><div class="line">      <span class="string">'sequenceList'</span>,</div><div class="line">      <span class="string">'currentSong'</span>,</div><div class="line">      <span class="string">'playlist'</span>,</div><div class="line">      <span class="string">'mode'</span></div><div class="line">    ])</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    changeMode() &#123;</div><div class="line">      <span class="keyword">const</span> mode = (<span class="keyword">this</span>.mode + <span class="number">1</span>) % <span class="number">3</span></div><div class="line">      <span class="keyword">this</span>.setPlayMode(mode)</div><div class="line">      <span class="keyword">let</span> list = <span class="literal">null</span></div><div class="line">      <span class="keyword">if</span> (mode === playMode.random) &#123;</div><div class="line">        list = shuffle(<span class="keyword">this</span>.sequenceList)</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        list = <span class="keyword">this</span>.sequenceList</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">this</span>.resetCurrentIndex(list)</div><div class="line">      <span class="keyword">this</span>.setPlaylist(list)</div><div class="line">    &#125;,</div><div class="line">    resetCurrentIndex(list) &#123;</div><div class="line">      <span class="keyword">let</span> index = list.findIndex(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> item.id === <span class="keyword">this</span>.currentSong.id</div><div class="line">      &#125;)</div><div class="line">      <span class="keyword">this</span>.setCurrentIndex(index)</div><div class="line">    &#125;,</div><div class="line">    ...mapMutations(&#123;</div><div class="line">      <span class="attr">setPlayingState</span>: <span class="string">'SET_PLAYING_STATE'</span>,</div><div class="line">      <span class="attr">setCurrentIndex</span>: <span class="string">'SET_CURRENT_INDEX'</span>,</div><div class="line">      <span class="attr">setPlayMode</span>: <span class="string">'SET_PLAY_MODE'</span>,</div><div class="line">      <span class="attr">setPlaylist</span>: <span class="string">'SET_PLAYLIST'</span></div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>好处</p>
-<ol>
-<li>节省代码量</li>
-<li>方便代码维护</li>
-</ol>
-<h2 id="歌曲列表组件add-song组件实现"><a href="#歌曲列表组件add-song组件实现" class="headerlink" title="歌曲列表组件add-song组件实现"></a>歌曲列表组件add-song组件实现</h2><p>组件add-song简单dom结构<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"slide"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"add-song"</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 添加歌曲header start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>添加歌曲到列表<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"close"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-close"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 添加歌曲header end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 搜索框 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-box-wrapper"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 搜索框 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 快速导航 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"shortcut"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 快速导航 end --&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 搜索结果 start --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"search-result"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- 搜索结果 end --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>添加mixin, search和add-song组件公用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> searchMixin = &#123;</div><div class="line">  data() &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">query</span>: <span class="string">''</span>,</div><div class="line">      <span class="attr">refreshDelay</span>: <span class="number">120</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">computed</span>: &#123;</div><div class="line">    ...mapGetters([</div><div class="line">      <span class="string">'searchHistory'</span></div><div class="line">    ])</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">methods</span>: &#123;</div><div class="line">    blurInput() &#123;</div><div class="line">      <span class="keyword">this</span>.$refs.searchBox.blur()</div><div class="line">    &#125;,</div><div class="line">    saveSearch() &#123;</div><div class="line">      <span class="keyword">this</span>.saveSearchHistory(<span class="keyword">this</span>.query)</div><div class="line">    &#125;,</div><div class="line">    onQueryChange(query) &#123;</div><div class="line">      <span class="keyword">this</span>.query = query</div><div class="line">    &#125;,</div><div class="line">    addQuery(query) &#123;</div><div class="line">      <span class="keyword">this</span>.$refs.searchBox.setQuery(query)</div><div class="line">    &#125;,</div><div class="line">    ...mapActions([</div><div class="line">      <span class="string">'saveSearchHistory'</span>,</div><div class="line">      <span class="string">'deleteSearchHistory'</span></div><div class="line">    ])</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>添加基础组件switches<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"switches"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"switch-item"</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in switches"</span> <span class="attr">:class</span>=<span class="string">"&#123;'active':currentIndex === index&#125;"</span></span></div><div class="line">        @<span class="attr">click</span>=<span class="string">"switchItem(index)"</span>&gt;</div><div class="line">      <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.name&#125;&#125; <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">switches</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Array</span>,</div><div class="line">        <span class="attr">default</span>: []</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">currentIndex</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">        <span class="attr">default</span>: <span class="number">0</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      switchItem(index) &#123;</div><div class="line">        <span class="keyword">this</span>.$emit(<span class="string">'switch'</span>, index)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .switches</div><div class="line">    display: flex</div><div class="line">    align-items: center</div><div class="line">    width: 240px</div><div class="line">    margin: 0 auto</div><div class="line">    border: 1px solid $color-highlight-background</div><div class="line">    border-radius: 5px</div><div class="line">    .switch-item</div><div class="line">      flex: 1</div><div class="line">      padding: 8px</div><div class="line">      text-align: center</div><div class="line">      font-size: $font-size-medium</div><div class="line">      color: $color-text-d</div><div class="line">      &amp;.active</div><div class="line">        background: $color-highlight-background</div><div class="line">        color: $color-text</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>实现最近播放<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">scroll</span> <span class="attr">class</span>=<span class="string">"list-scroll"</span> <span class="attr">v-if</span>=<span class="string">"currentIndex===0"</span> <span class="attr">:data</span>=<span class="string">"playHistory"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-inner"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">song-list</span> <span class="attr">:songs</span>=<span class="string">"playHistory"</span> @<span class="attr">select</span>=<span class="string">"selectSong"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>实现搜索历史<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">scroll</span> <span class="attr">ref</span>=<span class="string">"searchList"</span> <span class="attr">class</span>=<span class="string">"list-scroll"</span> <span class="attr">v-if</span>=<span class="string">"currentIndex===1"</span> <span class="attr">:data</span>=<span class="string">"searchHistory"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-inner"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">search-list</span> <span class="attr">:searches</span>=<span class="string">"searchHistory"</span> @<span class="attr">delete</span>=<span class="string">"deleteSearchHistory"</span> @<span class="attr">select</span>=<span class="string">"addQuery"</span>&gt;</span><span class="tag">&lt;/<span class="name">search-list</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="歌曲列表组件top-list组件实现"><a href="#歌曲列表组件top-list组件实现" class="headerlink" title="歌曲列表组件top-list组件实现"></a>歌曲列表组件top-list组件实现</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"drop"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"top-tip"</span> <span class="attr">v-show</span>=<span class="string">"showFlag"</span> @<span class="attr">click.stop</span>=<span class="string">"hide"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">props</span>: &#123;</div><div class="line">      <span class="attr">delay</span>: &#123;</div><div class="line">        <span class="attr">type</span>: <span class="built_in">Number</span>,</div><div class="line">        <span class="attr">default</span>: <span class="number">2000</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">showFlag</span>: <span class="literal">false</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      show() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">true</span></div><div class="line">        clearTimeout(<span class="keyword">this</span>.timer)</div><div class="line">        <span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.hide()</div><div class="line">        &#125;, <span class="keyword">this</span>.delay)</div><div class="line">      &#125;,</div><div class="line">      hide() &#123;</div><div class="line">        <span class="keyword">this</span>.showFlag = <span class="literal">false</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span><span class="undefined"></span></div><div class="line">  @import "~common/stylus/variable"</div><div class="line">  .top-tip</div><div class="line">    position: fixed</div><div class="line">    top: 0</div><div class="line">    width: 100%</div><div class="line">    z-index: 500</div><div class="line">    background: $color-dialog-background</div><div class="line">    &amp;.drop-enter-active, &amp;.drop-leave-active</div><div class="line">      transition: all 0.3s</div><div class="line">    &amp;.drop-enter, &amp;.drop-leave-to</div><div class="line">      transform: translate3d(0, -100%, 0)</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1902,7 +1797,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1924,7 +1819,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1979,7 +1874,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
