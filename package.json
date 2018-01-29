@@ -6,7 +6,7 @@
     "push": "hexo g -d && git add . && git commit -m \"push\" && git push origin server"
   },
   "hexo": {
-    "version": "3.4.4"
+    "version": "3.5.0"
   },
   "dependencies": {
     "hexo": "^3.2.0",
