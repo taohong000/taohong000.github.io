@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "push": "hexo g -d && git add . && git commit -m \"push\" && git push origin server"
+    "push": "hexo g -d && git add . && git commit -m \"push\" && git push origin server",
+    "server": "hexo server --draft",
+    "s": "npm run server"
   },
   "hexo": {
     "version": "3.5.0"
