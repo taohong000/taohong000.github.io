@@ -127,7 +127,7 @@ $ npx create-react-app my-cool-new-app
 
 再比如 npx http-server 可以一句话帮你开启一个静态服务器
 ``` bash
-$ npx create-react-app my-cool-new-app
+$ npx http-server
 ```
 
 
