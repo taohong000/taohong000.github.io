@@ -8,7 +8,7 @@ tags:
 
 ## 跨文件查找
 在查询框下面的两个输入框，你可以选择包含和排除的文件。单击右侧图标来启用glob匹配模式语法：
-- * 匹配路径段中的一个或多个字符
+- \* 匹配路径段中的一个或多个字符
 - ? 匹配路径段中的一个字符
 - ** 匹配任意数量的路径段，包括空
 - {} 匹配分组条件（如： {**/*.html,**/*.txt} 匹配所有HTML和txt文件）
@@ -34,7 +34,7 @@ VS Code 默认会排除一些你不会感兴趣的文件夹（如： node_module
 - : 跳转到行数，也可以Ctrl+G直接进入
 - @ 跳转到symbol（搜索变量或者函数），也可以Ctrl+Shift+O直接进入
 - @:根据分类跳转symbol，查找属性或函数，也可以Ctrl+Shift+O后输入:进入
-- # 根据名字查找symbol，也可以Ctrl+T
+- \# 根据名字查找symbol，也可以Ctrl+T
 
 ### 格式调整
 
@@ -78,12 +78,12 @@ VS Code 默认会排除一些你不会感兴趣的文件夹（如： node_module
 - 查找替换 Ctrl+H
 - 整个文件夹中查找 Ctrl+Shift+F
 - 匹配符：
-  - * to match one or more characters in a path segment
+  - \* to match one or more characters in a path segment
   - ? to match on one character in a path segment
   - ** to match any number of path segments ,including none
-  - {} to group conditions (e.g. {**/*.html,**/*.txt} matches all html and txt files)
+  - {} to group conditions (e.g. {\*\*/\*.html,\*\*/\*.txt} matches all html and txt files)
   - [] to declare a range of characters to match (e.g., example.[0-9] to match on example.0,example.1,…
-- 
+  
 ### 显示相关
 
 - 全屏：F11
