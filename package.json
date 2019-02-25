@@ -8,7 +8,7 @@
     "s": "npm run server"
   },
   "hexo": {
-    "version": "3.7.1"
+    "version": "3.4.4"
   },
   "dependencies": {
     "hexo": "^3.2.0",
