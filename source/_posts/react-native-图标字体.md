@@ -1,6 +1,9 @@
 ---
-title: 图标字体'
-tags: 
+title: react native 图标字体
+categories:
+  - 技术
+date: 2020-08-21 16:10:16
+tags:
 - react native
 ---
 
