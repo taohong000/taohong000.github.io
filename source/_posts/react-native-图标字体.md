@@ -37,7 +37,7 @@ npx iconfont-init
 根据需求配置 `iconfont.json`
 ``` json
 {
-    "symbol_url": "http://at.alicdn.com/t/font_2018804_v2ssfx4wlub.js",
+    "symbol_url": "//at.alicdn.com/t/font_2018217_2h9xudzdl62.js",
     "use_typescript": true,
     "save_dir": "./src/components/iconfont",
     "trim_icon_prefix": "",

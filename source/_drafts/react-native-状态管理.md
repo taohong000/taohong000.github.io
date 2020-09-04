@@ -23,3 +23,8 @@ yarn add --dev @types/react-redux
 ### 异步操作
 
 ### 插件 dav-loading
+
+安装
+```
+yarn add dav-loading-ts
+```
