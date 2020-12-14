@@ -325,7 +325,29 @@
       
         
           
-            
+            <blockquote>
+<p><a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-get-started" target="_blank" rel="noopener">React Native Client SDK入门</a></p>
+</blockquote>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-native-code-push</span><br></pre></td></tr></table></figure>
+<h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><h4 id="安装插件-1"><a href="#安装插件-1" class="headerlink" title="安装插件"></a>安装插件</h4><ol>
+<li>在您的<code>android/settings.gradle</code>文件中，添加以下内容：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include &apos;:app&apos;, &apos;:react-native-code-push&apos;</span><br><span class="line">project(&apos;:react-native-code-push&apos;).projectDir = new File(rootProject.projectDir, &apos;../node_modules/react-native-code-push/android/app&apos;)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在<code>android/app/build.gradle</code>文件中，将文件添加<code>codepush.gradle</code>为下面的其他构建任务定义<code>react.gradle</code>：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">apply from: &quot;../../node_modules/react-native/react.gradle&quot;</span><br><span class="line">apply from: &quot;../../node_modules/react-native-code-push/android/codepush.gradle&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>MainApplication.java通过以下更改更新文件以使用CodePush：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment">// 1. Import the plugin class.</span></span><br><span class="line"><span class="keyword">import</span> com.microsoft.codepush.react.CodePush;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> <span class="keyword">implements</span> <span class="title">ReactApplication</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReactNativeHost mReactNativeHost = <span class="keyword">new</span> ReactNativeHost(<span class="keyword">this</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// 2. Override the getJSBundleFile method to let</span></span><br><span class="line">        <span class="comment">// the CodePush runtime determine where to get the JS</span></span><br><span class="line">        <span class="comment">// bundle location from on each app start</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> String <span class="title">getJSBundleFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> CodePush.getJSBundleFile();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>将部署密钥添加到strings.xml：</li>
+</ol>
+<p>为了让CodePush运行时知道它应该查询哪些部署更新，请打开您的应用程序的<code>strings.xml</code>文件，并添加一个名为新的字符串<code>CodePushDeploymentKey</code>，要配置对这个应用程序（如为关键，它的值是部署的关键<code>Staging</code>部署的<code>FooBar</code>应用程序）。您可以通过appcenter codepush deployment list -a <ownername>/<appname> -k在App Center CLI中运行来检索此值（该-k标志是必需的，因为默认情况下不会显示键），然后复制与Key您要使用的部署相对应的列的值（请参见下文）。使用部署名称（例如暂存）将不起作用。“友好名称”仅用于CLI中经过身份验证的管理用途，不适用于您的应用程序中的公共使用。</appname></ownername></p>
+<p><img src="https://cloud.githubusercontent.com/assets/116461/11601733/13011d5e-9a8a-11e5-9ce2-b100498ffb34.png" alt="图片"></p>
+<p>为了有效利用与CodePush应用程序一起创建的<code>Staging</code>和<code>Production</code>部署，请在实际将您的应用程序对CodePush的使用移入生产之前，请参考下面的<a href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-deployment#multi-deployment-testing" target="_blank" rel="noopener">多部署测试</a>文档。</p>
+
           
         
       
