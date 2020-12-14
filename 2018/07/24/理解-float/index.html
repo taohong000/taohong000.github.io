@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="css,float,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="float 的9条规则###　规则1  原文:The left outer edge of a left-floating box may not be to the left of the left edge of its containing block. An analogous rule holds for right-floating elements. 译文:左浮动的盒子的左边界不会超">
+<meta name="keywords" content="css,float">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 float">
+<meta property="og:url" content="http://yoursite.com/2018/07/24/理解-float/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="float 的9条规则###　规则1  原文:The left outer edge of a left-floating box may not be to the left of the left edge of its containing block. An analogous rule holds for right-floating elements. 译文:左浮动的盒子的左边界不会超">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="理解 float">
+<meta name="twitter:description" content="float 的9条规则###　规则1  原文:The left outer edge of a left-floating box may not be to the left of the left edge of its containing block. An analogous rule holds for right-floating elements. 译文:左浮动的盒子的左边界不会超">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/24/理解-float/">
+
+
+
+
+
+  <title>理解 float | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/理解-float/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">理解 float</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-24T16:32:54+08:00">
+                2018-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="float-的9条规则"><a href="#float-的9条规则" class="headerlink" title="float 的9条规则"></a>float 的9条规则</h2><p>###　规则1</p>
+<blockquote>
+<p>原文:The left outer edge of a left-floating box may not be to the left of the left edge of its containing block. An analogous rule holds for right-floating elements.</p>
+<p>译文:左浮动的盒子的左边界不会超出容器的左边界，右浮动同理.</p>
+</blockquote>
+<h3 id="规则2"><a href="#规则2" class="headerlink" title="规则2"></a>规则2</h3><blockquote>
+<p>原文:If the current box is left-floating, and there are any left-floating boxes generated by elements earlier in the source document, then for each such earlier box, either the left outer edge of the current box must be to the right of the right outer edge of the earlier box, or its top must be lower than the bottom of the earlier box. Analogous rules hold for right-floating boxes.</p>
+<p>译文:如果盒子是左浮动的,那么在html文档中晚出现的左浮动盒子只允许出现在先出现的左浮动盒子的右边或者晚出现的左浮动盒子的顶部必须在早出现左浮动盒子的底部之下。右浮动同理.</p>
+</blockquote>
+<iframe width="100%" height="300" src="//jsrun.net/GegKp/embedded/html,css,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<h3 id="规则3"><a href="#规则3" class="headerlink" title="规则3"></a>规则3</h3><blockquote>
+<p>原文:The right outer edge of a left-floating box may not be to the right of the left outer edge of any right-floating box that is next to it. Analogous rules hold for right-floating elements.</p>
+<p>译文:左浮动盒子的右外边缘可能不在其旁边的任何右浮动框的左外边缘的右边，右浮动同理.</p>
+</blockquote>
+<iframe width="100%" height="300" src="//jsrun.net/5egKp/embedded/html,css,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<h3 id="规则4"><a href="#规则4" class="headerlink" title="规则4"></a>规则4</h3><blockquote>
+<p>原文:A floating box’s outer top may not be higher than the top of its containing block. When the float occurs between two collapsing margins, the float is positioned as if it had an otherwise empty anonymous block parent taking part in the flow. The position of such a parent is defined by the rules in the section on margin collapsing.</p>
+<p>译文:浮动盒子的顶部不能超出容器的顶部边界</p>
+</blockquote>
+<h3 id="规则5"><a href="#规则5" class="headerlink" title="规则5"></a>规则5</h3><blockquote>
+<p>原文:The outer top of a floating box may not be higher than the outer top of any block or floated box generated by an element earlier in the source document.</p>
+<p>译文:浮动盒子的顶部不会超出在html文档中早出现的的块级元素(block)或者是浮动元素的顶部</p>
+</blockquote>
+<iframe width="100%" height="300" src="//jsrun.net/tegKp/embedded/html,css,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<h3 id="规则6"><a href="#规则6" class="headerlink" title="规则6"></a>规则6</h3><blockquote>
+<p>原文:The outer top of an element’s floating box may not be higher than the top of any line-box containing a box generated by an element earlier in the source document.</p>
+<p>译文:浮动盒子的顶部不会超出在html文档中早出现的包含盒子的line-box元素顶部</p>
+</blockquote>
+<iframe width="100%" height="300" src="//jsrun.net/jegKp/embedded/html,css,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<h3 id="规则7"><a href="#规则7" class="headerlink" title="规则7"></a>规则7</h3><blockquote>
+<p>原文:A left-floating box that has another left-floating box to its left may not have its right outer edge to the right of its containing block’s right edge. (Loosely: a left float may not stick out at the right edge, unless it is already as far to the left as possible.) An analogous rule holds for right-floating elements.</p>
+<p>译文:一个左浮动元素右边的另一个左浮动元素的右边界不会超出容器的右边界,右浮动同理</p>
+</blockquote>
+<p>如果一行之内要放第二个浮动元素，如果放不下了，那就换行。</p>
+<h2 id="规则8"><a href="#规则8" class="headerlink" title="规则8"></a>规则8</h2><blockquote>
+<p>原文:A floating box must be placed as high as possible.</p>
+<p>译文:一个浮动盒子应该放的尽可能的高</p>
+</blockquote>
+<h2 id="规则9"><a href="#规则9" class="headerlink" title="规则9"></a>规则9</h2><blockquote>
+<p>原文:A left-floating box must be put as far to the left as possible, a right-floating box as far to the right as possible. A higher position is preferred over one that is further to the left/right.</p>
+<p>译文:一个左浮动元素应该放的尽可能的靠左，右浮动元素应该被放的尽可能的靠右。当元素既可以放置”最高”又可以”最右”的时候，优先考虑”最高”。</p>
+</blockquote>
+<iframe width="100%" height="300" src="//jsrun.net/GegKp/embedded/html,css,result/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>为什么盒子五不直接放在盒子一下面，这是因为当一个元素既可以放的最左（最右）和最高的时候，优先选择最高，所以这里就放在了盒子四的下面。</p>
+<h2 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h2><p>最后说两句，浮动元素其实对在它出现之前的元素影响不大，但是由于浮动是使元素脱离了文档流，那么在浮动元素之后出现的元素：</p>
+<ul>
+<li>块元素:直接无视浮动元素，该怎么显示就怎么显示，并且会被浮动元素覆盖。</li>
+<li>行内元素:行内元素会环绕在浮动元素周围。</li>
+</ul>
+<h2 id="浮动元素的业界公认特点"><a href="#浮动元素的业界公认特点" class="headerlink" title="浮动元素的业界公认特点"></a>浮动元素的业界公认特点</h2><ol>
+<li>元素被视作块级元素，相当于display设置为”block”；</li>
+<li>元素具备包裹性，会根据它所包含的元素实现宽度、高度自适应；</li>
+<li>浮动元素前后的块级兄弟元素忽视浮动元素的而占据它的位置，并且元素会处在浮动元素的下层（并且无法通过z-index属性改变他们的层叠位置），但它的内部文字和其他行内元素都会环绕浮动元素；</li>
+<li>浮动元素前后的行内元素环绕浮动元素排列；</li>
+<li>浮动元素之前的元素如果也是浮动元素，且方向相同，它会紧跟在它们后面；父元素宽度不够，换行展示；</li>
+<li>浮动元素之间的水平间距不会重叠；</li>
+<li>当包含元素中只有浮动元素时，包含元素将会高度塌陷；</li>
+<li>浮动元素的父元素的非浮动兄弟元素，忽视浮动元素存在，覆盖浮动元素；</li>
+<li>浮动元素的父元素的浮动兄弟元素，会跟随浮动元素布局，仿佛处在同一父元素中。</li>
+</ol>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><p>清除浮动的方法, 主要分为两类</p>
+<ul>
+<li>利用clear属性清除浮动</li>
+<li>利用bfc原理包容浮动</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://www.w3.org/TR/CSS2/visuren.html#float-rules" target="_blank" rel="noopener">W3 float-rules</a></li>
+<li><a href="https://segmentfault.com/a/1190000005925592#articleHeader11" target="_blank" rel="noopener">CSS Float nine rules</a></li>
+<li><a href="http://efe.baidu.com/blog/float/" target="_blank" rel="noopener">回归CSS标准之Float</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/float/" rel="tag"># float</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/在Android手机上line-height垂直居中出现偏离/" rel="next" title="在Android手机上line-height垂直居中出现偏离">
+                <i class="fa fa-chevron-left"></i> 在Android手机上line-height垂直居中出现偏离
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/24/js-执行机制/" rel="prev" title="js 执行机制">
+                js 执行机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#float-的9条规则"><span class="nav-number">1.</span> <span class="nav-text">float 的9条规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规则2"><span class="nav-number">1.1.</span> <span class="nav-text">规则2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则3"><span class="nav-number">1.2.</span> <span class="nav-text">规则3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则4"><span class="nav-number">1.3.</span> <span class="nav-text">规则4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则5"><span class="nav-number">1.4.</span> <span class="nav-text">规则5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则6"><span class="nav-number">1.5.</span> <span class="nav-text">规则6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规则7"><span class="nav-number">1.6.</span> <span class="nav-text">规则7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规则8"><span class="nav-number">2.</span> <span class="nav-text">规则8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规则9"><span class="nav-number">3.</span> <span class="nav-text">规则9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#finally"><span class="nav-number">4.</span> <span class="nav-text">finally</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动元素的业界公认特点"><span class="nav-number">5.</span> <span class="nav-text">浮动元素的业界公认特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清除浮动"><span class="nav-number">6.</span> <span class="nav-text">清除浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">7.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

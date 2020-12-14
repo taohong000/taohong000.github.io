@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="经验,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="开发前任务评估 任务的分解, 按页面&amp;gt;模块&amp;gt;需求点划分, 如果有时间. 时间进度的划分, 按半小时划分. 每天工作10个半小时, 即5小时. 为什么是5 小时, 一是方便统计, 二是流出冗余时间. 时间加权, 根据需求是否明确, 是否有探索性的内容, 是否做过进行加权. eg: 最快时间 + 0.5(没有做过类似模块) + 0.5(需求不明确) + 0.5~1(探索性内容). 如果有时">
+<meta name="keywords" content="经验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发流程">
+<meta property="og:url" content="http://yoursite.com/2020/02/06/开发流程/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="开发前任务评估 任务的分解, 按页面&amp;gt;模块&amp;gt;需求点划分, 如果有时间. 时间进度的划分, 按半小时划分. 每天工作10个半小时, 即5小时. 为什么是5 小时, 一是方便统计, 二是流出冗余时间. 时间加权, 根据需求是否明确, 是否有探索性的内容, 是否做过进行加权. eg: 最快时间 + 0.5(没有做过类似模块) + 0.5(需求不明确) + 0.5~1(探索性内容). 如果有时">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开发流程">
+<meta name="twitter:description" content="开发前任务评估 任务的分解, 按页面&amp;gt;模块&amp;gt;需求点划分, 如果有时间. 时间进度的划分, 按半小时划分. 每天工作10个半小时, 即5小时. 为什么是5 小时, 一是方便统计, 二是流出冗余时间. 时间加权, 根据需求是否明确, 是否有探索性的内容, 是否做过进行加权. eg: 最快时间 + 0.5(没有做过类似模块) + 0.5(需求不明确) + 0.5~1(探索性内容). 如果有时">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/06/开发流程/">
+
+
+
+
+
+  <title>开发流程 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/开发流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">开发流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-06T22:01:57+08:00">
+                2020-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发流程/" itemprop="url" rel="index">
+                    <span itemprop="name">开发流程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="开发前"><a href="#开发前" class="headerlink" title="开发前"></a>开发前</h2><h3 id="任务评估"><a href="#任务评估" class="headerlink" title="任务评估"></a>任务评估</h3><ol>
+<li>任务的分解, 按页面&gt;模块&gt;需求点划分, 如果有时间.</li>
+<li>时间进度的划分, 按半小时划分. 每天工作10个半小时, 即5小时. 为什么是5 小时, 一是方便统计, 二是流出冗余时间.</li>
+<li>时间加权, 根据需求是否明确, 是否有探索性的内容, 是否做过进行加权. eg: 最快时间 + 0.5(没有做过类似模块) + 0.5(需求不明确) + 0.5~1(探索性内容).</li>
+<li>如果有时间, 先写测试用例, 采用TDD 模式开发.</li>
+</ol>
+<h3 id="需求讨论"><a href="#需求讨论" class="headerlink" title="需求讨论"></a>需求讨论</h3><p>在写任务规划中, 也是对需求的再次理解, 不明确的地方, 用户体验不好的地方都要记下来, 和产品经理讨论.</p>
+<h3 id="业务熟悉"><a href="#业务熟悉" class="headerlink" title="业务熟悉"></a>业务熟悉</h3><p>如果是在原有代码上的二次开发, 一定要搞清楚原有的业务逻辑. 不然很容易改出bug.</p>
+<h2 id="开发中"><a href="#开发中" class="headerlink" title="开发中"></a>开发中</h2><h3 id="如何写代码"><a href="#如何写代码" class="headerlink" title="如何写代码"></a>如何写代码</h3><ol>
+<li>开发中要遵循套路(风格), 这样才能反复练习.</li>
+<li>要有工匠精神. <ol>
+<li>该写注释的地方写注释. </li>
+<li>该合并变量的时候合并变量. </li>
+<li>注意空行的使用. </li>
+<li>要注意性能.</li>
+</ol>
+</li>
+<li>要勇于重构.</li>
+</ol>
+<h3 id="在开发中有新需求"><a href="#在开发中有新需求" class="headerlink" title="在开发中有新需求"></a>在开发中有新需求</h3><p>首先看是否影响原有的开发进度. 如果不影响. 可以改.<br>如果影响, 区分是否是必须添加的. 如果是必须添加的, 那评估时间并且同步其他人. 如果是非必须的.<br>区分是否来得及, 如果来的及, 原有需求开发完成后, 放在冗余时间或测试阶段.<br>如果来不及, 放弃或放在下次迭代.</p>
+<h2 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h2><p>在测试前首先向qa 要测试用例, 自己测试一遍, 在测试过程中及时跟进.</p>
+<h2 id="开发后"><a href="#开发后" class="headerlink" title="开发后"></a>开发后</h2><ol>
+<li>开始几天多点点, 看看有没有bug.</li>
+<li>监测页面的性能.</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/经验/" rel="tag"># 经验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/30/项目结构化套路/" rel="next" title="项目结构化套路">
+                <i class="fa fa-chevron-left"></i> 项目结构化套路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/03/cocos-UI-系统/" rel="prev" title="cocos UI 系统">
+                cocos UI 系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发前"><span class="nav-number">1.</span> <span class="nav-text">开发前</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务评估"><span class="nav-number">1.1.</span> <span class="nav-text">任务评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求讨论"><span class="nav-number">1.2.</span> <span class="nav-text">需求讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务熟悉"><span class="nav-number">1.3.</span> <span class="nav-text">业务熟悉</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发中"><span class="nav-number">2.</span> <span class="nav-text">开发中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何写代码"><span class="nav-number">2.1.</span> <span class="nav-text">如何写代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在开发中有新需求"><span class="nav-number">2.2.</span> <span class="nav-text">在开发中有新需求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试阶段"><span class="nav-number">3.</span> <span class="nav-text">测试阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发后"><span class="nav-number">4.</span> <span class="nav-text">开发后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

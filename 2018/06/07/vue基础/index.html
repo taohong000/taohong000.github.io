@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="内部指令   名称 说明     v-if v-else 是否加载html中的DOM   v-show 是否用display属性显示出来   v-for 循环渲染   v-text v-html 输出text 输出html   v-on 绑定事件监听，缩写@   v-model 双向绑定，修饰符.lazy、.number、.trim   v-bind 绑定标签的属性，缩写:   其它 v-pre，">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue基础">
+<meta property="og:url" content="http://yoursite.com/2018/06/07/vue基础/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="内部指令   名称 说明     v-if v-else 是否加载html中的DOM   v-show 是否用display属性显示出来   v-for 循环渲染   v-text v-html 输出text 输出html   v-on 绑定事件监听，缩写@   v-model 双向绑定，修饰符.lazy、.number、.trim   v-bind 绑定标签的属性，缩写:   其它 v-pre，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/vue基础/lifecycle.png">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue基础">
+<meta name="twitter:description" content="内部指令   名称 说明     v-if v-else 是否加载html中的DOM   v-show 是否用display属性显示出来   v-for 循环渲染   v-text v-html 输出text 输出html   v-on 绑定事件监听，缩写@   v-model 双向绑定，修饰符.lazy、.number、.trim   v-bind 绑定标签的属性，缩写:   其它 v-pre，">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/07/vue基础/lifecycle.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/07/vue基础/">
+
+
+
+
+
+  <title>vue基础 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/vue基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-07T16:52:56+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="内部指令"><a href="#内部指令" class="headerlink" title="内部指令"></a>内部指令</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v-if v-else</td>
+<td>是否加载html中的DOM</td>
+</tr>
+<tr>
+<td>v-show</td>
+<td>是否用display属性显示出来</td>
+</tr>
+<tr>
+<td>v-for</td>
+<td>循环渲染</td>
+</tr>
+<tr>
+<td>v-text v-html</td>
+<td>输出text 输出html</td>
+</tr>
+<tr>
+<td>v-on</td>
+<td>绑定事件监听，缩写<code>@</code></td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>双向绑定，修饰符<code>.lazy</code>、<code>.number</code>、<code>.trim</code></td>
+</tr>
+<tr>
+<td>v-bind</td>
+<td>绑定标签的属性，缩写<code>:</code></td>
+</tr>
+<tr>
+<td>其它 v-pre，v-cloak，v-once</td>
+<td>输出原始值，渲染整个DOM后再显示，渲染一次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="全局API"><a href="#全局API" class="headerlink" title="全局API"></a>全局API</h2><p>什么是全局API？</p>
+<p>全局API并不在构造器里，而是先声明全局变量或者直接在Vue上定义一些新功能，Vue内置了一些全局API，比如Vue.directive。说的简单些就是，在构造器外部用Vue提供给我们的API函数来定义新的功能。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vue.extend</td>
+<td>使用基础 Vue 构造器，创建一个“子类”</td>
+</tr>
+<tr>
+<td>Vue.nextTick</td>
+<td>在下次 DOM 更新循环结束之后执行延迟回调</td>
+</tr>
+<tr>
+<td>Vue.set</td>
+<td>向响应式对象中添加一个属性</td>
+</tr>
+<tr>
+<td>Vue.delete</td>
+<td>删除对象的属性</td>
+</tr>
+<tr>
+<td>Vue.directive</td>
+<td>注册或获取全局指令</td>
+</tr>
+<tr>
+<td>Vue.filter</td>
+<td>注册或获取全局过滤器</td>
+</tr>
+<tr>
+<td>Vue.component</td>
+<td>注册或获取全局组件</td>
+</tr>
+<tr>
+<td>Vue.use</td>
+<td>安装 Vue.js 插件</td>
+</tr>
+<tr>
+<td>Vue.mixin</td>
+<td>全局注册一个混入</td>
+</tr>
+<tr>
+<td>Vue.compile</td>
+<td>在 render 函数中编译模板字符串。<strong>只在独立构建时有效</strong></td>
+</tr>
+<tr>
+<td>Vue.version</td>
+<td>提供字符串形式的 Vue 安装版本号</td>
+</tr>
+</tbody>
+</table>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>Vue 实例的数据对象</td>
+</tr>
+<tr>
+<td>props</td>
+<td>用于接收来自父组件的数据</td>
+</tr>
+<tr>
+<td>propsData</td>
+<td>创建实例时传递 props。主要作用是方便测试。</td>
+</tr>
+<tr>
+<td>computed</td>
+<td>计算属性将被混入到 Vue 实例中</td>
+</tr>
+<tr>
+<td>methods</td>
+<td>methods 将被混入到 Vue 实例中</td>
+</tr>
+<tr>
+<td>watch</td>
+<td>一个对象，键是需要观察的表达式，值是对应回调函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>el</td>
+<td>提供一个在页面上已存在的 DOM 元素作为 Vue 实例的挂载目标</td>
+</tr>
+<tr>
+<td>render</td>
+<td>一个字符串模板作为 Vue 实例的标识使用</td>
+</tr>
+<tr>
+<td>renderError</td>
+<td>当 <code>render</code> 函数遭遇错误时，提供另外一种渲染输出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="生命周期钩子"><a href="#生命周期钩子" class="headerlink" title="生命周期钩子"></a>生命周期钩子</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td>在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。</td>
+</tr>
+<tr>
+<td>created</td>
+<td>在实例创建完成后被立即调用。</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td>在挂载开始之前被调用</td>
+</tr>
+<tr>
+<td>mounted</td>
+<td><code>el</code> 被新创建的 <code>vm.$el</code> 替换，并挂载到实例上去之后调用该钩子。</td>
+</tr>
+<tr>
+<td>beforeUpdate</td>
+<td>数据更新时调用，发生在虚拟 DOM 打补丁之前。</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>实例销毁之前调用。在这一步，实例仍然完全可用。</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>Vue 实例销毁后调用。</td>
+</tr>
+<tr>
+<td>activated</td>
+<td>keep-alive 组件激活时调用。</td>
+</tr>
+<tr>
+<td>deactivated</td>
+<td>keep-alive 组件停用时调用。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2018/06/07/vue基础/lifecycle.png" width="50%" height="50%"></p>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>directives</td>
+<td>包含 Vue 实例可用指令的哈希表。</td>
+</tr>
+<tr>
+<td>filters</td>
+<td>包含 Vue 实例可用过滤器的哈希表。</td>
+</tr>
+<tr>
+<td>components</td>
+<td>包含 Vue 实例可用组件的哈希表。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parent</td>
+<td>指定已创建的实例之父实例，在两者之间建立父子关系</td>
+</tr>
+<tr>
+<td>mixins</td>
+<td>选项接受一个混入对象的数组。</td>
+</tr>
+<tr>
+<td>extends</td>
+<td>允许声明扩展另一个组件</td>
+</tr>
+<tr>
+<td>provide / inject</td>
+<td>提供/注入 主要为高阶插件/组件库提供用例</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/31/VS-code-ESLint-配置/" rel="next" title="VS code ESLint 配置">
+                <i class="fa fa-chevron-left"></i> VS code ESLint 配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/08/如何从0开始配置webapck/" rel="prev" title="如何从0开始配置webapck">
+                如何从0开始配置webapck <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内部指令"><span class="nav-number">1.</span> <span class="nav-text">内部指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局API"><span class="nav-number">2.</span> <span class="nav-text">全局API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-number">3.1.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM"><span class="nav-number">3.2.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期钩子"><span class="nav-number">3.3.</span> <span class="nav-text">生命周期钩子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源"><span class="nav-number">3.4.</span> <span class="nav-text">资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合"><span class="nav-number">3.5.</span> <span class="nav-text">组合</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

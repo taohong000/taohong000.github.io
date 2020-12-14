@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,构建工具,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="webpack 环境配置搭建开发环境主要有三种  webpack watch mode webpack-dev-server express + webpack-dev-middleware（更灵活，但是需要更多配置）  webpack watch mode清除打包内容 clean-webpack-plugin webpack dev server live reloading（自动刷新浏览器）">
+<meta name="keywords" content="webpack,构建工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack环境配置">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/webpack环境配置/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="webpack 环境配置搭建开发环境主要有三种  webpack watch mode webpack-dev-server express + webpack-dev-middleware（更灵活，但是需要更多配置）  webpack watch mode清除打包内容 clean-webpack-plugin webpack dev server live reloading（自动刷新浏览器）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack环境配置">
+<meta name="twitter:description" content="webpack 环境配置搭建开发环境主要有三种  webpack watch mode webpack-dev-server express + webpack-dev-middleware（更灵活，但是需要更多配置）  webpack watch mode清除打包内容 clean-webpack-plugin webpack dev server live reloading（自动刷新浏览器）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/26/webpack环境配置/">
+
+
+
+
+
+  <title>webpack环境配置 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/webpack环境配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack环境配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T09:55:41+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="webpack-环境配置"><a href="#webpack-环境配置" class="headerlink" title="webpack 环境配置"></a>webpack 环境配置</h1><p>搭建开发环境主要有三种</p>
+<ol>
+<li>webpack watch mode</li>
+<li>webpack-dev-server</li>
+<li>express + webpack-dev-middleware（更灵活，但是需要更多配置）</li>
+</ol>
+<h2 id="webpack-watch-mode"><a href="#webpack-watch-mode" class="headerlink" title="webpack watch mode"></a>webpack watch mode</h2><p>清除打包内容</p>
+<p>clean-webpack-plugin</p>
+<h2 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack dev server"></a>webpack dev server</h2><ol>
+<li>live reloading（自动刷新浏览器）</li>
+<li>不能打包文件</li>
+<li>路径重定向</li>
+<li>https</li>
+<li>浏览器中显示编译错误</li>
+<li>接口代理</li>
+<li>模块热更新</li>
+</ol>
+<p>devServer<br>  inline<br>  contentBase<br>  port<br>  historyApiFallback<br>  https<br>  proxy<br>  hot<br>  openpage<br>  lazy<br>  overlay</p>
+<p>historyApiFallback</p>
+<p>对于单页面程序，浏览器的brower histroy可以设置成html5 history api或者hash，而设置为html5 api的，如果刷新浏览器会出现404 not found，原因是它通过这个路径（比如： /activities/2/ques/2）来访问后台，所以会出现404，而把historyApiFallback设置为true那么所有的路径都执行index.html</p>
+<h2 id="代理远程接口"><a href="#代理远程接口" class="headerlink" title="代理远程接口"></a>代理远程接口</h2><p>proxy</p>
+<p>代理远程接口请求</p>
+<p>使用的是 http-proxy-middleware</p>
+<p>options</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">配置选项</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">target</td>
+<td style="text-align:left">代理地址</td>
+</tr>
+<tr>
+<td style="text-align:left">changeOrigin</td>
+<td style="text-align:left">改变你的源到这个url</td>
+</tr>
+<tr>
+<td style="text-align:left">headers</td>
+<td style="text-align:left">http请求头</td>
+</tr>
+<tr>
+<td style="text-align:left">logLevel</td>
+<td style="text-align:left">调试用的</td>
+</tr>
+<tr>
+<td style="text-align:left">pathRewrite</td>
+<td style="text-align:left">重定向接口请求</td>
+</tr>
+</tbody>
+</table>
+<h2 id="模块热更新"><a href="#模块热更新" class="headerlink" title="模块热更新"></a>模块热更新</h2><p>Module Hot Reloading</p>
+<ul>
+<li>保持应用的数据状态</li>
+<li>节省调试时间</li>
+<li>样式调试更快</li>
+</ul>
+<p>如何设置</p>
+<ul>
+<li>devServer.hot</li>
+<li>webpack.HotModuleReplacementPlugin</li>
+<li>webpack.NamedModulesPlugin(查看模块的相对路径)</li>
+</ul>
+<p>热门框架都有相应的热更新loader</p>
+<h2 id="开启调试-SourceMap"><a href="#开启调试-SourceMap" class="headerlink" title="开启调试 SourceMap"></a>开启调试 SourceMap</h2><h2 id="设置-ESLink-检查代码格式"><a href="#设置-ESLink-检查代码格式" class="headerlink" title="设置 ESLink 检查代码格式"></a>设置 ESLink 检查代码格式</h2><h2 id="区分开发环境-和-生产环境"><a href="#区分开发环境-和-生产环境" class="headerlink" title="区分开发环境 和 生产环境"></a>区分开发环境 和 生产环境</h2><ul>
+<li>开发环境<ul>
+<li>模块热更新</li>
+<li>sourceMap</li>
+<li>接口代理</li>
+<li>代码规范检查</li>
+</ul>
+</li>
+<li>生产环境<ul>
+<li>提取公共代码</li>
+<li>压缩混淆</li>
+<li>文件压缩 或是 Base64 编码</li>
+<li>去除无用的代码</li>
+</ul>
+</li>
+</ul>
+<p>共同点</p>
+<ul>
+<li>同样的入口哦</li>
+<li>同样的代码处理（loader处理）</li>
+<li>同样的解析配置</li>
+</ul>
+<p>如何做<br>webpack-merge<br>webpack.dev.conf.js<br>webpack.prod.conf.js<br>webpack.common.conf.js</p>
+<h2 id="使用-middleware-来搭建开发环境"><a href="#使用-middleware-来搭建开发环境" class="headerlink" title="使用 middleware 来搭建开发环境"></a>使用 middleware 来搭建开发环境</h2><p>更灵活</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+            <a href="/tags/构建工具/" rel="tag"># 构建工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/17/css小技巧/" rel="next" title="css小技巧">
+                <i class="fa fa-chevron-left"></i> css小技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/移动页面开发/" rel="prev" title="移动页面开发">
+                移动页面开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack-环境配置"><span class="nav-number">1.</span> <span class="nav-text">webpack 环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-watch-mode"><span class="nav-number">1.1.</span> <span class="nav-text">webpack watch mode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-dev-server"><span class="nav-number">1.2.</span> <span class="nav-text">webpack dev server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理远程接口"><span class="nav-number">1.3.</span> <span class="nav-text">代理远程接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块热更新"><span class="nav-number">1.4.</span> <span class="nav-text">模块热更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启调试-SourceMap"><span class="nav-number">1.5.</span> <span class="nav-text">开启调试 SourceMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-ESLink-检查代码格式"><span class="nav-number">1.6.</span> <span class="nav-text">设置 ESLink 检查代码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区分开发环境-和-生产环境"><span class="nav-number">1.7.</span> <span class="nav-text">区分开发环境 和 生产环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-middleware-来搭建开发环境"><span class="nav-number">1.8.</span> <span class="nav-text">使用 middleware 来搭建开发环境</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

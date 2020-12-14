@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="charles,代理,开发工具,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="charles本地调试之map功能map功能介绍 map功能，顾名思义就是将某个请求进行重定向，用重定向后的内容来响应请求的内容；map功能分为map Local和map Remote, 二者区分是：  map Local：是将某个网络请求重定向到本地的某个文件 map Remote：是将某个网络请求重定向到另一个网络请求  二者除了重定向文件的位置不同之外，其他功能都是一样的。他们都可以对js、">
+<meta name="keywords" content="charles,代理,开发工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="charles本地调试之map功能">
+<meta property="og:url" content="http://yoursite.com/2017/11/01/charles本地调试之map功能/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="charles本地调试之map功能map功能介绍 map功能，顾名思义就是将某个请求进行重定向，用重定向后的内容来响应请求的内容；map功能分为map Local和map Remote, 二者区分是：  map Local：是将某个网络请求重定向到本地的某个文件 map Remote：是将某个网络请求重定向到另一个网络请求  二者除了重定向文件的位置不同之外，其他功能都是一样的。他们都可以对js、">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2017/11/01/charles本地调试之map功能/edit%20map.PNG">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="charles本地调试之map功能">
+<meta name="twitter:description" content="charles本地调试之map功能map功能介绍 map功能，顾名思义就是将某个请求进行重定向，用重定向后的内容来响应请求的内容；map功能分为map Local和map Remote, 二者区分是：  map Local：是将某个网络请求重定向到本地的某个文件 map Remote：是将某个网络请求重定向到另一个网络请求  二者除了重定向文件的位置不同之外，其他功能都是一样的。他们都可以对js、">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/01/charles本地调试之map功能/edit%20map.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/01/charles本地调试之map功能/">
+
+
+
+
+
+  <title>charles本地调试之map功能 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/charles本地调试之map功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">charles本地调试之map功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-01T19:00:13+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="charles本地调试之map功能"><a href="#charles本地调试之map功能" class="headerlink" title="charles本地调试之map功能"></a>charles本地调试之map功能</h1><h2 id="map功能介绍"><a href="#map功能介绍" class="headerlink" title="map功能介绍"></a>map功能介绍</h2><p> map功能，顾名思义就是将某个请求进行重定向，用重定向后的内容来响应请求的内容；<br>map功能分为<strong>map Local</strong>和<strong>map Remote</strong>, 二者区分是：</p>
+<ul>
+<li><strong>map Local</strong>：是将某个网络请求重定向到本地的某个文件</li>
+<li><strong>map Remote</strong>：是将某个网络请求重定向到另一个网络请求</li>
+</ul>
+<p>二者除了重定向文件的位置不同之外，其他功能都是一样的。他们都可以对js、css、html以及api接口均可重定向，此外也可以使用通配符来进行简单的批量匹配，达到批量重定向的目的。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>这里介绍一下我最常用的功能<strong>api重定向</strong></p>
+<p>为了mock数据；一般使用<strong>map Remote</strong>功能来将本地的请求重定向到测试或者线上环境的网络请求。</p>
+<p> 例子如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:8080/api/foo/bar ---&gt; http://test.com/api/foo/bar</span><br></pre></td></tr></table></figure></p>
+<p>配置如下<br><img src="/2017/11/01/charles本地调试之map功能/edit map.PNG" alt="edit map"></p>
+<blockquote>
+<p>注意上面map From中的Path配置项使用了<code>*</code>通配符，表示匹配127.0.0.1:8080/api/下的所有文件及子路径，将其重定向到test.com下的/api/路径下</p>
+</blockquote>
+<h2 id="map通配符"><a href="#map通配符" class="headerlink" title="map通配符"></a>map通配符</h2><p>map隐射可以使用的模式匹配符有三种：</p>
+<ul>
+<li><p><code>*</code>: 可以匹配0个或者多个字符</p>
+</li>
+<li><p><code>?</code>: 可以匹配一个字符</p>
+</li>
+<li><p><code>[...]</code>: 范围选择符，可以匹配范围中的任意一个字符</p>
+</li>
+</ul>
+<h2 id="map配置实例"><a href="#map配置实例" class="headerlink" title="map配置实例"></a>map配置实例</h2><p>假设<code>Map From</code>配置中的各个项为空，表示匹配所有请求，然后<code>Map To</code>项的配置不同，代表不同含义，下表列出一个简单例子</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Host配置值</th>
+<th style="text-align:left">Path配置值</th>
+<th style="text-align:left">配置产生的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">匹配所有的请求重定向到charlesproxy.com主机</td>
+</tr>
+<tr>
+<td style="text-align:left">*.charlesproxy.com</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">匹配所有的请求重定向到以.charlesproxy.com结尾的主机</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/charles/</td>
+<td style="text-align:left">匹配所有请求只重定向到charlesproxy.com/charles/路径下</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/charles/*</td>
+<td style="text-align:left">匹配所有请求只重定向到charlesproxy.com/charles/路径下,包括路径下的文件及其路径的子路径</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/charles</td>
+<td style="text-align:left">匹配所有请求只重定向到charlesproxy.com/charles下</td>
+</tr>
+<tr>
+<td style="text-align:left">charlesproxy.com</td>
+<td style="text-align:left">/index.html</td>
+<td style="text-align:left">匹配所有请求重定向到charlesproxy.com/index.html</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">/charles/*.html</td>
+<td style="text-align:left">匹配所有请求重定向到任意主机下的以.html结尾的文件，该文件存放在主机的/charles/及其子目录下</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/charles/" rel="tag"># charles</a>
+          
+            <a href="/tags/代理/" rel="tag"># 代理</a>
+          
+            <a href="/tags/开发工具/" rel="tag"># 开发工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/01/hexo博客引用本地图片/" rel="next" title="hexo博客引用本地图片">
+                <i class="fa fa-chevron-left"></i> hexo博客引用本地图片
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/08/hexo-设置阅读全文/" rel="prev" title=" hexo-设置阅读全文">
+                 hexo-设置阅读全文 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#charles本地调试之map功能"><span class="nav-number">1.</span> <span class="nav-text">charles本地调试之map功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#map功能介绍"><span class="nav-number">1.1.</span> <span class="nav-text">map功能介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map通配符"><span class="nav-number">1.3.</span> <span class="nav-text">map通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map配置实例"><span class="nav-number">1.4.</span> <span class="nav-text">map配置实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="linux常用命令命令的基本格式命令 [选项] [参数] 注意:个别命令使用不遵循此格式        当有多个选项时,可以写在一起        简化选项等于完整选项        -a 等于 –all 查询目录中内容:lsls [选项] [文件或目录]选项：-a 显示所有文件，包含隐藏文件-l 显示详细信息-d 查看目录本身属性-h 人性化显示文件大小-i 显示inode节点（储存时生成的编码">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用命令">
+<meta property="og:url" content="http://yoursite.com/2017/07/16/Linux常用命令/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="linux常用命令命令的基本格式命令 [选项] [参数] 注意:个别命令使用不遵循此格式        当有多个选项时,可以写在一起        简化选项等于完整选项        -a 等于 –all 查询目录中内容:lsls [选项] [文件或目录]选项：-a 显示所有文件，包含隐藏文件-l 显示详细信息-d 查看目录本身属性-h 人性化显示文件大小-i 显示inode节点（储存时生成的编码">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux常用命令">
+<meta name="twitter:description" content="linux常用命令命令的基本格式命令 [选项] [参数] 注意:个别命令使用不遵循此格式        当有多个选项时,可以写在一起        简化选项等于完整选项        -a 等于 –all 查询目录中内容:lsls [选项] [文件或目录]选项：-a 显示所有文件，包含隐藏文件-l 显示详细信息-d 查看目录本身属性-h 人性化显示文件大小-i 显示inode节点（储存时生成的编码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/16/Linux常用命令/">
+
+
+
+
+
+  <title>linux常用命令 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux常用命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-16T18:36:16+08:00">
+                2017-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h1><h2 id="命令的基本格式"><a href="#命令的基本格式" class="headerlink" title="命令的基本格式"></a>命令的基本格式</h2><p>命令 [选项] [参数]</p>
+<p>注意:个别命令使用不遵循此格式<br>        当有多个选项时,可以写在一起<br>        简化选项等于完整选项<br>        -a 等于 –all</p>
+<p>查询目录中内容:ls<br>ls [选项] [文件或目录]<br>选项：<br>-a 显示所有文件，包含隐藏文件<br>-l 显示详细信息<br>-d 查看目录本身属性<br>-h 人性化显示文件大小<br>-i 显示inode节点（储存时生成的编码，格式化硬盘时候，分成等大的内存块4k,同时生成相应的节点表）</p>
+<h2 id="文件处理命令"><a href="#文件处理命令" class="headerlink" title="文件处理命令"></a>文件处理命令</h2><h3 id="目录和文件处理命令"><a href="#目录和文件处理命令" class="headerlink" title="目录和文件处理命令"></a>目录和文件处理命令</h3><h4 id="建立目录：mkdir"><a href="#建立目录：mkdir" class="headerlink" title="建立目录：mkdir"></a>建立目录：mkdir</h4><ul>
+<li>mkdir -p [目录名]<br>-p 递归创建<br>命令英文原意:<strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectories</li>
+</ul>
+<h4 id="切换所在目录：cd"><a href="#切换所在目录：cd" class="headerlink" title="切换所在目录：cd"></a>切换所在目录：cd</h4><ul>
+<li><p>cd [目录]<br>命令英文原意:<strong>c</strong>hange <strong>d</strong>irectory</p>
+</li>
+<li><p>简化命令<br>cd和cd ~进入当前用户的家目录<br>cd - 进入上次目录<br>cd .. 进入上一级目录<br>cd .  进入当前目录</p>
+</li>
+</ul>
+<p>Ctrl+L 清屏<br>tab 可以补全目录或命令</p>
+<h4 id="查询所在目录位置：pwd"><a href="#查询所在目录位置：pwd" class="headerlink" title="查询所在目录位置：pwd"></a>查询所在目录位置：pwd</h4><p>命令英文原意:<strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory</p>
+<h4 id="删除空目录：rmdir"><a href="#删除空目录：rmdir" class="headerlink" title="删除空目录：rmdir"></a>删除空目录：rmdir</h4><ul>
+<li>rmdir [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove empty <strong>dir</strong>ectories</li>
+</ul>
+<h4 id="删除文件或目录：rm"><a href="#删除文件或目录：rm" class="headerlink" title="删除文件或目录：rm"></a>删除文件或目录：rm</h4><ul>
+<li>rm -rf [目录名]<br>命令英文原意:<strong>r</strong>e<strong>m</strong>ove</li>
+<li>选项：<br>-r 删除目录<br>-f 强制</li>
+</ul>
+<h4 id="复制命令：cp"><a href="#复制命令：cp" class="headerlink" title="复制命令：cp"></a>复制命令：cp</h4><ul>
+<li>cp [选项] [原文件或目录] [目标目录]<br>命令英文原意：<strong>c</strong>op<strong>y</strong></li>
+<li>选项：<br>-r   复制目录<br>-p   连带文件属性复制<br>-d   若源文件是链接文件,则复制链接属性<br>-a   相当于 -pdr</li>
+</ul>
+<h4 id="剪切或改名命令：mv"><a href="#剪切或改名命令：mv" class="headerlink" title="剪切或改名命令：mv"></a>剪切或改名命令：mv</h4><ul>
+<li>mv [原文件或目录] [目标目录]<br>命令英文原意：<strong>m</strong>o<strong>v</strong>e</li>
+</ul>
+<p>ll 等于 ls -l</p>
+<h4 id="常用目录的作用"><a href="#常用目录的作用" class="headerlink" title="常用目录的作用"></a>常用目录的作用</h4><ul>
+<li>/根目录<ul>
+<li>/bin命令保存目录（普通用户就可以读取的命令）</li>
+<li>/boot启动目录，启动相关文件</li>
+<li>/dev设备文件保存目录</li>
+<li>/etc配置文件保存目录</li>
+<li>/home普通用户的家目录</li>
+<li>/lib系统库保存目录</li>
+<li>/mnt系统挂载目录</li>
+<li>/media挂载目录</li>
+<li>/root超级用户的家目录</li>
+<li>/tmp临时目录</li>
+<li>/sbin命令保存目录（超级用户才能使用的目录）</li>
+<li>/proc直接写入内存的</li>
+<li>/sys</li>
+<li>/usr系统软件资源目录<ul>
+<li>/usr/bin/系统命令（普通用户）</li>
+<li>/usr/sbin/（超级用户）</li>
+</ul>
+</li>
+<li>/var系统相关文档内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="链接命令"><a href="#链接命令" class="headerlink" title="链接命令"></a>链接命令</h3><ul>
+<li>ln -s [原文件] [目标文件]<br>命令英文原意：<strong>l</strong>i<strong>n</strong>k</li>
+<li>功能描述：生成链接文件</li>
+<li>选项： -s 创建软链接</li>
+</ul>
+<p>硬链接特征：<br>1、拥有相同的i节点和存储block块，可以看作是同一个文件<br>2、可通过i节点识别<br>3、不能跨分区<br>4、不能针对目录使用</p>
+<p>软链接特征：<br>1、类似Windows快捷方式<br>2、软链接拥有自己的i节点和Block块，但是数据块中只保存原文件的文件名和i节点号，并没有实际的文件数据<br>3、lrwxrwxrwx l 软链接<br>4、修改任意文件，另一个文件都改变<br>5、删除原文件，软链接不能使用</p>
+<h2 id="文件搜索命令"><a href="#文件搜索命令" class="headerlink" title="文件搜索命令"></a>文件搜索命令</h2><h3 id="文件搜索命令-locate"><a href="#文件搜索命令-locate" class="headerlink" title="文件搜索命令 locate"></a>文件搜索命令 locate</h3><ul>
+<li>locate 文件名<br>在后台数据库中安文件名搜索，搜索速度更快</li>
+<li>updatedb<br>更新数据库</li>
+</ul>
+<h3 id="命令搜索命令-whereis-和-which"><a href="#命令搜索命令-whereis-和-which" class="headerlink" title="命令搜索命令 whereis 和 which"></a>命令搜索命令 whereis 和 which</h3><ul>
+<li><p>whereis 命令名<br>搜索命令所在路径及帮助文档所在位置<br>选项：<br>-b：只查找可执行文件<br>-m：只查找帮助文档</p>
+</li>
+<li><p>which 文件名<br>搜索命令所在路径及别名</p>
+</li>
+</ul>
+<h3 id="文件搜索命令-find"><a href="#文件搜索命令-find" class="headerlink" title="文件搜索命令 find"></a>文件搜索命令 find</h3><ul>
+<li><p>find [搜索范围] [搜索条件]<br>搜索文件</p>
+</li>
+<li><p>find / -name install.log<br>避免大范围搜索，会非常消耗系统资源<br>find是在系统当中搜索符合条件的文件名。如果需要匹配，使用通配符匹配，通配符是完全匹配。</p>
+</li>
+<li><p>find / -iname install.log<br>不区分大小写</p>
+</li>
+<li><p>find / -user install.log<br>按照所有者搜索</p>
+</li>
+<li><p>find /root -nouser<br>查找没有所有者的文件</p>
+</li>
+<li><p>find /var/log/ -mtime +10<br>查找10天亲修改的文件</p>
+<p>+10 10天以前<br>-10 10天内<br>10 10天当天<br>-mtime 修改文件内容<br>-ctime 修改文件属性<br>-atime 文件访问时间</p>
+</li>
+<li><p>find . -size 25k<br>查找文件大小是25KB的文件</p>
+</li>
+</ul>
+<p>-25k 小于25KB的文件<br>25k 等于25KB的文件<br>+25k 大于25KB的文件</p>
+<ul>
+<li>find . -inum 262422<br>查找i几点是262422的文件</li>
+</ul>
+<p>find /ect -size +20k -a -size -50k<br>查找/etc/目录下，大于20KB并且小于50KB的文件<br>-a and 逻辑与<br>-o or 逻辑或</p>
+<p>find /ect -size +20k -a -size -50k -exec ls -lh {} \;<br>查找/etc/目录下，大于20KB并且小于50KB的文件，并显示详细信息<br>-exec/-ok 命令 {} \; 对搜索结果执行操作</p>
+<h3 id="字符串搜索命令-grep"><a href="#字符串搜索命令-grep" class="headerlink" title="字符串搜索命令 grep"></a>字符串搜索命令 grep</h3><ul>
+<li>grep [选项] 字符串 文件名<br>在文件当中匹配符合条件的字符串</li>
+</ul>
+<p>选项：<br>-i 忽略大小写<br>-v 排除指定的字符串</p>
+<h2 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h2><p>man 命令</p>
+<p>查看命令拥有哪个级别的帮助<br>man -f 命令<br>相当于<br>whereis 命令</p>
+<p>举例：<br>man -5 passwd</p>
+<p>查看和命令相关的所有帮助<br>man -k 命令<br>相当于<br>apropos 命令</p>
+<p>选项帮助<br>命令 –help</p>
+<p>shell内部命令帮助<br>help shell内部命令</p>
+<p>详细命令info<br>info 命令<br>回车：进入子帮助页面<br>u：进入上层页面<br>n：进入下一个帮助小节<br>p：进入上一个帮助小节<br>q：退出</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/16/MySQL运算符和函数/" rel="next" title="MySQL运算符和函数">
+                <i class="fa fa-chevron-left"></i> MySQL运算符和函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/16/sublime常用插件/" rel="prev" title="sublime常用插件">
+                sublime常用插件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux常用命令"><span class="nav-number">1.</span> <span class="nav-text">linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令的基本格式"><span class="nav-number">1.1.</span> <span class="nav-text">命令的基本格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件处理命令"><span class="nav-number">1.2.</span> <span class="nav-text">文件处理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录和文件处理命令"><span class="nav-number">1.2.1.</span> <span class="nav-text">目录和文件处理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立目录：mkdir"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">建立目录：mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切换所在目录：cd"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">切换所在目录：cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询所在目录位置：pwd"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">查询所在目录位置：pwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除空目录：rmdir"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">删除空目录：rmdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除文件或目录：rm"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">删除文件或目录：rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制命令：cp"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">复制命令：cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#剪切或改名命令：mv"><span class="nav-number">1.2.1.7.</span> <span class="nav-text">剪切或改名命令：mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用目录的作用"><span class="nav-number">1.2.1.8.</span> <span class="nav-text">常用目录的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接命令"><span class="nav-number">1.2.2.</span> <span class="nav-text">链接命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件搜索命令"><span class="nav-number">1.3.</span> <span class="nav-text">文件搜索命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件搜索命令-locate"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件搜索命令 locate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令搜索命令-whereis-和-which"><span class="nav-number">1.3.2.</span> <span class="nav-text">命令搜索命令 whereis 和 which</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件搜索命令-find"><span class="nav-number">1.3.3.</span> <span class="nav-text">文件搜索命令 find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串搜索命令-grep"><span class="nav-number">1.3.4.</span> <span class="nav-text">字符串搜索命令 grep</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助命令"><span class="nav-number">1.4.</span> <span class="nav-text">帮助命令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

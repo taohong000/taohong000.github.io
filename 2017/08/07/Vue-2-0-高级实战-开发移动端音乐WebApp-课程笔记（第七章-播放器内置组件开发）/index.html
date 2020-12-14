@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue,慕课网,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）播放器Vuex数据设计 state123456789const state = &amp;#123;  singer: &amp;#123;&amp;#125;,  playing: false,  fullScreen: false,  playlist: [],  sequenceList: [],  mode: playMo">
+<meta name="keywords" content="vue,慕课网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）">
+<meta property="og:url" content="http://yoursite.com/2017/08/07/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第七章-播放器内置组件开发）/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）播放器Vuex数据设计 state123456789const state = &amp;#123;  singer: &amp;#123;&amp;#125;,  playing: false,  fullScreen: false,  playlist: [],  sequenceList: [],  mode: playMo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）">
+<meta name="twitter:description" content="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）播放器Vuex数据设计 state123456789const state = &amp;#123;  singer: &amp;#123;&amp;#125;,  playing: false,  fullScreen: false,  playlist: [],  sequenceList: [],  mode: playMo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/07/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第七章-播放器内置组件开发）/">
+
+
+
+
+
+  <title>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发） | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/07/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第七章-播放器内置组件开发）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-07T10:40:32+08:00">
+                2017-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第七章-播放器内置组件开发）"><a href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第七章-播放器内置组件开发）" class="headerlink" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）"></a>Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）</h1><h2 id="播放器Vuex数据设计"><a href="#播放器Vuex数据设计" class="headerlink" title="播放器Vuex数据设计"></a>播放器Vuex数据设计</h2><ol>
+<li>state<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line">  singer: &#123;&#125;,</span><br><span class="line">  playing: <span class="literal">false</span>,</span><br><span class="line">  fullScreen: <span class="literal">false</span>,</span><br><span class="line">  playlist: [],</span><br><span class="line">  sequenceList: [],</span><br><span class="line">  mode: playMode.sequence,</span><br><span class="line">  currentIndex: <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>state只保留最基础的数据, 计算属性放在getters中</p>
+<ol start="2">
+<li><p>getters</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> playing = <span class="function"><span class="params">state</span> =&gt;</span> state.playing</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> fullScreen = <span class="function"><span class="params">state</span> =&gt;</span> state.fullScreen</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> playlist = <span class="function"><span class="params">state</span> =&gt;</span> state.playlist</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> sequenceList = <span class="function"><span class="params">state</span> =&gt;</span> state.sequenceList</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> mode = <span class="function"><span class="params">state</span> =&gt;</span> state.mode</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> currentIndex = <span class="function"><span class="params">state</span> =&gt;</span> state.currentIndex</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> currentSong = <span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> state.playlist[state.currentIndex] || &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mutation-types</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_PLAYING_STATE = <span class="string">'SET_PLAYING_STATE'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_FULL_SCREEN = <span class="string">'SET_FULL_SCREEN'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_PLAYLIST = <span class="string">'SET_PLAYLIST'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_SEQUENCE_LIST = <span class="string">'SET_SEQUENCE_LIST'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_PLAY_MODE = <span class="string">'SET_PLAY_MODE'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_CURRENT_INDEX = <span class="string">'SET_CURRENT_INDEX'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mutations</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">'./mutation-types'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> matutaions = &#123;</span><br><span class="line">  [types.SET_SINGER](state, singer) &#123;</span><br><span class="line">    state.singer = singer</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_PLAYING_STATE](state, flag) &#123;</span><br><span class="line">    state.playing = flag</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_FULL_SCREEN](state, flag) &#123;</span><br><span class="line">    state.fullScreen = flag</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_PLAYLIST](state, list) &#123;</span><br><span class="line">    state.playlist = list</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_SEQUENCE_LIST](state, list) &#123;</span><br><span class="line">    state.sequenceList = list</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_PLAY_MODE](state, mode) &#123;</span><br><span class="line">    state.mode = mode</span><br><span class="line">  &#125;,</span><br><span class="line">  [types.SET_CURRENT_INDEX](state, index) &#123;</span><br><span class="line">    state.currentIndex = index</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> matutaions</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>actions的操作通常有两种</p>
+<ol>
+<li>异步操作</li>
+<li>对mutation的封装</li>
+</ol>
+<h2 id="播放器Vuex的相关应用"><a href="#播放器Vuex的相关应用" class="headerlink" title="播放器Vuex的相关应用"></a>播放器Vuex的相关应用</h2><ol>
+<li><p>新建组件player.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"player"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"normal-player"</span>&gt;</span></span><br><span class="line">      播放器</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"mini-player"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在App.vue中注册组件</p>
+</li>
+<li><p>在song-list.vue 中派发事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selectItem(song, index) &#123;</span><br><span class="line">  <span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item, index)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在actions定义动作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">'./mutation-types'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> selectPlay = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit, state&#125;, &#123;list, index&#125;</span>) </span>&#123;</span><br><span class="line">  commit(types.SET_SEQUENCE_LIST, list)</span><br><span class="line">  commit(types.SET_PLAYLIST, randomList)</span><br><span class="line">  commit(types.SET_CURRENT_INDEX, index)</span><br><span class="line">  commit(types.SET_FULL_SCREEN, <span class="literal">true</span>)</span><br><span class="line">  commit(types.SET_PLAYING_STATE, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在music-list.vue 接收事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">selectItem(item, index) &#123;</span><br><span class="line">  <span class="keyword">this</span>.selectPlay(&#123;</span><br><span class="line">    list: <span class="keyword">this</span>.songs,</span><br><span class="line">    index</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">...mapActions([</span><br><span class="line">  <span class="string">'selectPlay'</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="播放器基础样式及歌曲数据的应用"><a href="#播放器基础样式及歌曲数据的应用" class="headerlink" title="播放器基础样式及歌曲数据的应用"></a>播放器基础样式及歌曲数据的应用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"music-list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back"</span> @<span class="attr">click</span>=<span class="string">"back"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span> <span class="attr">v-html</span>=<span class="string">"title"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bg-image"</span> <span class="attr">:style</span>=<span class="string">"bgStyle"</span> <span class="attr">ref</span>=<span class="string">"bgImage"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"play-wrapper"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">"playBtn"</span> <span class="attr">v-show</span>=<span class="string">"songs.length&gt;0"</span> <span class="attr">class</span>=<span class="string">"play"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-play"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>随机播放全部<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"filter"</span> <span class="attr">ref</span>=<span class="string">"filter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bg-layer"</span> <span class="attr">ref</span>=<span class="string">"layer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">:data</span>=<span class="string">"songs"</span> @<span class="attr">scroll</span>=<span class="string">"scroll"</span> <span class="attr">:listen-scroll</span>=<span class="string">"listenScroll"</span> <span class="attr">:probe-type</span>=<span class="string">"probeType"</span> <span class="attr">class</span>=<span class="string">"list"</span> <span class="attr">ref</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"song-list-wrapper"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">song-list</span> @<span class="attr">select</span>=<span class="string">"selectItem"</span> <span class="attr">:songs</span>=<span class="string">"songs"</span>&gt;</span><span class="tag">&lt;/<span class="name">song-list</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-show</span>=<span class="string">"!songs.length"</span> <span class="attr">class</span>=<span class="string">"loading-container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">loading</span>&gt;</span><span class="tag">&lt;/<span class="name">loading</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Scroll <span class="keyword">from</span> <span class="string">'base/scroll/scroll'</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Loading <span class="keyword">from</span> <span class="string">'base/loading/loading'</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> SongList <span class="keyword">from</span> <span class="string">'base/song-list/song-list'</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; prefixStyle &#125; <span class="keyword">from</span> <span class="string">'common/js/dom'</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; mapActions &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> RESERVED_HEIGHT = <span class="number">40</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> transform = prefixStyle(<span class="string">'transform'</span>)</span></span><br><span class="line"><span class="javascript"><span class="keyword">const</span> backdrop = prefixStyle(<span class="string">'backdrop-filter'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">  props: &#123;</span><br><span class="line">    bgImage: &#123;</span><br><span class="line"><span class="javascript">      type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="javascript">      <span class="keyword">default</span>: <span class="string">''</span></span></span><br><span class="line">    &#125;,</span><br><span class="line">    songs: &#123;</span><br><span class="line"><span class="javascript">      type: <span class="built_in">Array</span>,</span></span><br><span class="line"><span class="javascript">      <span class="keyword">default</span>: []</span></span><br><span class="line">    &#125;,</span><br><span class="line">    title: &#123;</span><br><span class="line"><span class="javascript">      type: <span class="built_in">String</span>,</span></span><br><span class="line"><span class="javascript">      <span class="keyword">default</span>: <span class="string">''</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line">      scrollY: 0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    bgStyle() &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> <span class="string">`background-image:url(<span class="subst">$&#123;<span class="keyword">this</span>.bgImage&#125;</span>)`</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.probeType = <span class="number">3</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.listenScroll = <span class="literal">true</span></span></span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.imageHeight = <span class="keyword">this</span>.$refs.bgImage.clientHeight</span></span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.minTransalteY = -<span class="keyword">this</span>.imageHeight + RESERVED_HEIGHT</span></span><br><span class="line"><span class="javascript">    <span class="keyword">this</span>.$refs.list.$el.style.top = <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.imageHeight&#125;</span>px`</span></span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    scroll(pos) &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.scrollY = pos.y</span></span><br><span class="line">    &#125;,</span><br><span class="line">    back() &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$router.back()</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="comment">// 子组件行为和本身相关, 不要依赖外部组件使用定义子组件, 子组件行为和本身相关, 传item值是子组件点击时该做的事</span></span></span><br><span class="line">    selectItem(item, index) &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.selectPlay(&#123;</span></span><br><span class="line"><span class="javascript">        list: <span class="keyword">this</span>.songs,</span></span><br><span class="line">        index</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    ...mapActions([</span><br><span class="line"><span class="javascript">      <span class="string">'selectPlay'</span></span></span><br><span class="line">    ])</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    scrollY(newVal) &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> translateY = <span class="built_in">Math</span>.max(<span class="keyword">this</span>.minTransalteY, newVal)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> scale = <span class="number">1</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> zIndex = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> blur = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 计算图片放大比例</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> percent = <span class="built_in">Math</span>.abs(newVal / <span class="keyword">this</span>.imageHeight)</span></span><br><span class="line">      if (newVal &gt; 0) &#123;</span><br><span class="line">        scale = 1 + percent</span><br><span class="line">        zIndex = 10</span><br><span class="line"><span class="javascript">      &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 计算模糊比例</span></span></span><br><span class="line"><span class="javascript">        blur = <span class="built_in">Math</span>.min(<span class="number">20</span>, percent * <span class="number">20</span>)</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$refs.layer.style[transform] = <span class="string">`translate3d(0,<span class="subst">$&#123;translateY&#125;</span>px,0)`</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$refs.filter.style[backdrop] = <span class="string">`blur(<span class="subst">$&#123;blur&#125;</span>px)`</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (newVal &lt; <span class="keyword">this</span>.minTransalteY) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 向上滑动超过minTransalteY, 改变图片zIndex和高度, 按钮消失</span></span></span><br><span class="line">        zIndex = 10</span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.bgImage.style.paddingTop = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.bgImage.style.height = <span class="string">`<span class="subst">$&#123;RESERVED_HEIGHT&#125;</span>px`</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.playBtn.style.display = <span class="string">'none'</span></span></span><br><span class="line"><span class="javascript">      &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 反之, 重置</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.bgImage.style.paddingTop = <span class="string">'70%'</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.bgImage.style.height = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.playBtn.style.display = <span class="string">''</span></span></span><br><span class="line">      &#125;</span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$refs.bgImage.style[transform] = <span class="string">`scale(<span class="subst">$&#123;scale&#125;</span>)`</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.$refs.bgImage.style.zIndex = zIndex</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    Scroll,</span><br><span class="line">    Loading,</span><br><span class="line">    SongList</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="播放器展开收起动画"><a href="#播放器展开收起动画" class="headerlink" title="播放器展开收起动画"></a>播放器展开收起动画</h2><p>第三方库: <a href="https://github.com/HenrikJoreteg/create-keyframe-animation" target="_blank" rel="noopener">create-keyframe-animation</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"normal"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">enter</span>=<span class="string">"enter"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">after-enter</span>=<span class="string">"afterEnter"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">leave</span>=<span class="string">"leave"</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">after-leave</span>=<span class="string">"afterLeave"</span>&gt;</span></span><br><span class="line">  ...normal</span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入插件</span></span><br><span class="line"><span class="keyword">import</span> animations <span class="keyword">from</span> <span class="string">'create-keyframe-animation'</span></span><br><span class="line"><span class="keyword">import</span> &#123;prefixStyle&#125; <span class="keyword">from</span> <span class="string">'common/js/dom'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> transform = prefixStyle(<span class="string">'transform'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加methods方法</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 动画进入</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param  <span class="type">&#123;object&#125;</span>   </span>el   dom</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param  <span class="type">&#123;Function&#125;</span> </span>done 回调函数, 即afterEnter</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">enter(el, done) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;x, y, scale&#125; = <span class="keyword">this</span>._getPosAndScale()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> animation = &#123;</span><br><span class="line">    <span class="number">0</span>: &#123;</span><br><span class="line">      transform: <span class="string">`translate3d(<span class="subst">$&#123;x&#125;</span>px,<span class="subst">$&#123;y&#125;</span>px,0) scale(<span class="subst">$&#123;scale&#125;</span>)`</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="number">60</span>: &#123;</span><br><span class="line">      transform: <span class="string">`translate3d(0,0,0) scale(1.1)`</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="number">100</span>: &#123;</span><br><span class="line">      transform: <span class="string">`translate3d(0,0,0) scale(1)`</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  animations.registerAnimation(&#123;</span><br><span class="line">    name: <span class="string">'move'</span>,</span><br><span class="line">    animation,</span><br><span class="line">    presets: &#123;</span><br><span class="line">      duration: <span class="number">400</span>,</span><br><span class="line">      easing: <span class="string">'linear'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  animations.runAnimation(<span class="keyword">this</span>.$refs.cdWrapper, <span class="string">'move'</span>, done)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 注销动画</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">afterEnter() &#123;</span><br><span class="line">  animations.unregisterAnimation(<span class="string">'move'</span>)</span><br><span class="line">  <span class="keyword">this</span>.$refs.cdWrapper.style.animation = <span class="string">''</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 动画离开</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param  <span class="type">&#123;object&#125;</span>   </span>el   dom</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param  <span class="type">&#123;Function&#125;</span> </span>done 回调函数, 即afterLeave</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">leave(el, done) &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.cdWrapper.style.transition = <span class="string">'all 0.4s'</span></span><br><span class="line">  <span class="keyword">const</span> &#123;x, y, scale&#125; = <span class="keyword">this</span>._getPosAndScale()</span><br><span class="line">  <span class="keyword">this</span>.$refs.cdWrapper.style[transform] = <span class="string">`translate3d(<span class="subst">$&#123;x&#125;</span>px,<span class="subst">$&#123;y&#125;</span>px,0) scale(<span class="subst">$&#123;scale&#125;</span>)`</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.cdWrapper.addEventListener(<span class="string">'transitionend'</span>, done)</span><br><span class="line">&#125;,</span><br><span class="line">afterLeave() &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.cdWrapper.style.transition = <span class="string">''</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.cdWrapper.style[transform] = <span class="string">''</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算相对位置和缩放比例</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;object&#125;</span> </span>宽度, 高度, 缩放比例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">_getPosAndScale() &#123;</span><br><span class="line">  <span class="keyword">const</span> targetWidth = <span class="number">40</span></span><br><span class="line">  <span class="keyword">const</span> paddingLeft = <span class="number">40</span></span><br><span class="line">  <span class="keyword">const</span> paddingBottom = <span class="number">30</span></span><br><span class="line">  <span class="keyword">const</span> paddingTop = <span class="number">80</span></span><br><span class="line">  <span class="keyword">const</span> width = <span class="built_in">window</span>.innerWidth * <span class="number">0.8</span></span><br><span class="line">  <span class="keyword">const</span> scale = targetWidth / width</span><br><span class="line">  <span class="keyword">const</span> x = -(<span class="built_in">window</span>.innerWidth / <span class="number">2</span> - paddingLeft)</span><br><span class="line">  <span class="keyword">const</span> y = <span class="built_in">window</span>.innerHeight - paddingTop - width / <span class="number">2</span> - paddingBottom</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    x,</span><br><span class="line">    y,</span><br><span class="line">    scale</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="播放器歌曲播放功能实现"><a href="#播放器歌曲播放功能实现" class="headerlink" title="播放器歌曲播放功能实现"></a>播放器歌曲播放功能实现</h2><ol>
+<li><p>添加radio</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">ref</span>=<span class="string">"audio"</span> <span class="attr">:src</span>=<span class="string">"currentSong.url"</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加methods: togglePlaying, watch: currentSong,<br>playing</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// methods</span></span><br><span class="line">togglePlaying() &#123;</span><br><span class="line">  <span class="keyword">this</span>.setPlayingState(!<span class="keyword">this</span>.playing)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// watch</span></span><br><span class="line">currentSong(newSong, oldSong) &#123;</span><br><span class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.$refs.audio.play()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">playing(newPlaying) &#123;</span><br><span class="line">  <span class="keyword">const</span> audio = <span class="keyword">this</span>.$refs.audio</span><br><span class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    newPlaying ? audio.play() : audio.pause()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加计算属性, 计算图标</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">playIcon() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.playing ? <span class="string">'icon-pause'</span> : <span class="string">'icon-play'</span></span><br><span class="line">&#125;,</span><br><span class="line">miniIcon() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.playing ? <span class="string">'icon-pause-mini'</span> : <span class="string">'icon-play-mini'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加计算属性, 计算图标是否旋转</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cdCls() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.playing ? <span class="string">'play'</span> : <span class="string">'play pause'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.cd</span> &#123;</span><br><span class="line">	&amp;<span class="selector-class">.play</span> &#123;</span><br><span class="line">		<span class="attribute">animation</span>: rotate <span class="number">20s</span> linear infinite</span><br><span class="line">	&#125;</span><br><span class="line">	&amp;.pause &#123;</span><br><span class="line">		animation-play-state: paused</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@keyframes rotate &#123;</span><br><span class="line">	<span class="number">0%</span> &#123;</span><br><span class="line">		transform: rotate(<span class="number">0</span>)</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">	    transform: rotate(<span class="number">360deg</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="播放器歌曲前进后退功能实现"><a href="#播放器歌曲前进后退功能实现" class="headerlink" title="播放器歌曲前进后退功能实现"></a>播放器歌曲前进后退功能实现</h2><ol>
+<li>添加歌曲上一首, 下一首事件<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 播放下一首歌</span></span><br><span class="line">next() &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.songReady) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> index = <span class="keyword">this</span>.currentIndex + <span class="number">1</span></span><br><span class="line">  <span class="keyword">if</span> (index === <span class="keyword">this</span>.playlist.length) &#123;</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.setCurrentIndex(index)</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.playing) &#123;</span><br><span class="line">    <span class="keyword">this</span>.togglePlaying()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.songReady = <span class="literal">false</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 播放上一首歌</span></span><br><span class="line">prev() &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.songReady) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> index = <span class="keyword">this</span>.currentIndex - <span class="number">1</span></span><br><span class="line">  <span class="keyword">if</span> (index === <span class="number">-1</span>) &#123;</span><br><span class="line">    index = <span class="keyword">this</span>.playlist.length - <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.setCurrentIndex(index)</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.playing) &#123;</span><br><span class="line">    <span class="keyword">this</span>.togglePlaying()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.songReady = <span class="literal">false</span></span><br><span class="line">&#125;,</span><br><span class="line">ready() &#123;</span><br><span class="line">  <span class="keyword">this</span>.songReady = <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="播放器播放时间获取和更新"><a href="#播放器播放时间获取和更新" class="headerlink" title="播放器播放时间获取和更新"></a>播放器播放时间获取和更新</h2><p>添加事件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取播放时间</span></span><br><span class="line">updateTime(e) &#123;</span><br><span class="line">  <span class="keyword">this</span>.currentTime = e.target.currentTime</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 补位</span></span><br><span class="line">_pad(num, n = <span class="number">2</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> len = num.toString().length</span><br><span class="line">  <span class="keyword">while</span> (len &lt; n) &#123;</span><br><span class="line">    num = <span class="string">'0'</span> + num</span><br><span class="line">    len++</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> num</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 格式化</span></span><br><span class="line">format(interval) &#123;</span><br><span class="line">  interval = interval | <span class="number">0</span></span><br><span class="line">  <span class="keyword">const</span> minute = interval / <span class="number">60</span> | <span class="number">0</span></span><br><span class="line">  <span class="keyword">const</span> second = <span class="keyword">this</span>._pad(interval % <span class="number">60</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;minute&#125;</span>:<span class="subst">$&#123;second&#125;</span>`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="播放器progress-bar进度条组件实现"><a href="#播放器progress-bar进度条组件实现" class="headerlink" title="播放器progress-bar进度条组件实现"></a>播放器progress-bar进度条组件实现</h2><ol>
+<li><p>palyer.vue 添加计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">percent() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.currentTime / <span class="keyword">this</span>.currentSong.duration</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加基础组件progress-bar.vue</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-bar"</span> <span class="attr">ref</span>=<span class="string">"progressBar"</span> @<span class="attr">click</span>=<span class="string">"progressClick"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bar-inner"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress"</span> <span class="attr">ref</span>=<span class="string">"progress"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-btn-wrapper"</span> <span class="attr">ref</span>=<span class="string">"progressBtn"</span></span></span><br><span class="line"><span class="tag">           @<span class="attr">touchstart.prevent</span>=<span class="string">"progressTouchStart"</span></span></span><br><span class="line"><span class="tag">           @<span class="attr">touchmove.prevent</span>=<span class="string">"progressTouchMove"</span></span></span><br><span class="line"><span class="tag">           @<span class="attr">touchend</span>=<span class="string">"progressTouchEnd"</span></span></span><br><span class="line"><span class="tag">      &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-btn"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123;prefixStyle&#125; <span class="keyword">from</span> <span class="string">'common/js/dom'</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">  <span class="keyword">const</span> progressBtnWidth = <span class="number">16</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">const</span> transform = prefixStyle(<span class="string">'transform'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    props: &#123;</span><br><span class="line">      percent: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">Number</span>,</span></span><br><span class="line"><span class="javascript">        <span class="keyword">default</span>: <span class="number">0</span></span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created() &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">this</span>.touch = &#123;&#125;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      progressTouchStart(e) &#123;</span><br><span class="line"><span class="javascript">        <span class="comment">// 标识位, 表示已经初始化</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.touch.initiated = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 点击位置</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.touch.startX = e.touches[<span class="number">0</span>].pageX</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 进度条宽度</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.touch.left = <span class="keyword">this</span>.$refs.progress.clientWidth</span></span><br><span class="line">      &#125;,</span><br><span class="line">      progressTouchMove(e) &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!<span class="keyword">this</span>.touch.initiated) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span></span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="comment">// 偏移量</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> deltaX = e.touches[<span class="number">0</span>].pageX - <span class="keyword">this</span>.touch.startX</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 移动距离</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> offsetWidth = <span class="built_in">Math</span>.min(<span class="keyword">this</span>.$refs.progressBar.clientWidth - progressBtnWidth, <span class="built_in">Math</span>.max(<span class="number">0</span>, <span class="keyword">this</span>.touch.left + deltaX))</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>._offset(offsetWidth)</span></span><br><span class="line">      &#125;,</span><br><span class="line">      progressTouchEnd() &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.touch.initiated = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>._triggerPercent()</span></span><br><span class="line">      &#125;,</span><br><span class="line">      /**</span><br><span class="line">       * 点击进度条事件</span><br><span class="line"><span class="javascript">       * @param  &#123;<span class="built_in">Object</span>&#125; e event对象</span></span><br><span class="line">       */</span><br><span class="line">      progressClick(e) &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> rect = <span class="keyword">this</span>.$refs.progressBar.getBoundingClientRect()</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> offsetWidth = e.pageX - rect.left</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>._offset(offsetWidth)</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 这里当我们点击 progressBtn 的时候，e.offsetX 获取不对</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">// this._offset(e.offsetX)</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>._triggerPercent()</span></span><br><span class="line">      &#125;,</span><br><span class="line">      _triggerPercent() &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> barWidth = <span class="keyword">this</span>.$refs.progressBar.clientWidth - progressBtnWidth</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> percent = <span class="keyword">this</span>.$refs.progress.clientWidth / barWidth</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$emit(<span class="string">'percentChange'</span>, percent)</span></span><br><span class="line">      &#125;,</span><br><span class="line">      _offset(offsetWidth) &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.progress.style.width = <span class="string">`<span class="subst">$&#123;offsetWidth&#125;</span>px`</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.$refs.progressBtn.style[transform] = <span class="string">`translate3d(<span class="subst">$&#123;offsetWidth&#125;</span>px,0,0)`</span></span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      percent(newPercent) &#123;</span><br><span class="line"><span class="javascript">        <span class="comment">// 没有在拖动中</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (newPercent &gt;= <span class="number">0</span> &amp;&amp; !<span class="keyword">this</span>.touch.initiated) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// 进度条宽度</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">const</span> barWidth = <span class="keyword">this</span>.$refs.progressBar.clientWidth - progressBtnWidth</span></span><br><span class="line"><span class="javascript">          <span class="comment">// 偏移宽度</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">const</span> offsetWidth = newPercent * barWidth</span></span><br><span class="line"><span class="javascript">          <span class="keyword">this</span>._offset(offsetWidth)</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span></span><br><span class="line">  @import "~common/stylus/variable"</span><br><span class="line">  .progress-bar</span><br><span class="line">    height: 30px</span><br><span class="line">    .bar-inner</span><br><span class="line">      position: relative</span><br><span class="line">      top: 13px</span><br><span class="line">      height: 4px</span><br><span class="line">      background: rgba(0, 0, 0, 0.3)</span><br><span class="line">      .progress</span><br><span class="line">        position: absolute</span><br><span class="line">        height: 100%</span><br><span class="line">        background: $color-theme</span><br><span class="line">      .progress-btn-wrapper</span><br><span class="line">        position: absolute</span><br><span class="line">        left: -8px</span><br><span class="line">        top: -13px</span><br><span class="line">        width: 30px</span><br><span class="line">        height: 30px</span><br><span class="line">        .progress-btn</span><br><span class="line">          position: relative</span><br><span class="line">          top: 7px</span><br><span class="line">          left: 7px</span><br><span class="line">          box-sizing: border-box</span><br><span class="line">          width: 16px</span><br><span class="line">          height: 16px</span><br><span class="line">          border: 3px solid $color-text</span><br><span class="line">          border-radius: 50%</span><br><span class="line">          background: $color-theme</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>组件player.vue 添加事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onProgressBarChange(percent) &#123;</span><br><span class="line">  <span class="keyword">const</span> currentTime = <span class="keyword">this</span>.currentSong.duration * percent</span><br><span class="line">  <span class="keyword">this</span>.$refs.audio.currentTime = currentTime</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.playing) &#123;</span><br><span class="line">    <span class="keyword">this</span>.togglePlaying()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="播放器progress-circle-圆形进度条组件实现"><a href="#播放器progress-circle-圆形进度条组件实现" class="headerlink" title="播放器progress-circle 圆形进度条组件实现"></a>播放器progress-circle 圆形进度条组件实现</h1><p>添加基础组件progress-circle<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-circle"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- viewBox和r成比例 --&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">svg</span> <span class="attr">:width</span>=<span class="string">"radius"</span> <span class="attr">:height</span>=<span class="string">"radius"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 100 100"</span> <span class="attr">version</span>=<span class="string">"1.1"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">"progress-background"</span> <span class="attr">r</span>=<span class="string">"50"</span> <span class="attr">cx</span>=<span class="string">"50"</span> <span class="attr">cy</span>=<span class="string">"50"</span> <span class="attr">fill</span>=<span class="string">"transparent"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">"progress-bar"</span> <span class="attr">r</span>=<span class="string">"50"</span> <span class="attr">cx</span>=<span class="string">"50"</span> <span class="attr">cy</span>=<span class="string">"50"</span> <span class="attr">fill</span>=<span class="string">"transparent"</span> <span class="attr">:stroke-dasharray</span>=<span class="string">"dashArray"</span></span></span><br><span class="line"><span class="tag">              <span class="attr">:stroke-dashoffset</span>=<span class="string">"dashOffset"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">    props: &#123;</span><br><span class="line">      radius: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">Number</span>,</span></span><br><span class="line"><span class="javascript">        <span class="keyword">default</span>: <span class="number">100</span></span></span><br><span class="line">      &#125;,</span><br><span class="line">      percent: &#123;</span><br><span class="line"><span class="javascript">        type: <span class="built_in">Number</span>,</span></span><br><span class="line"><span class="javascript">        <span class="keyword">default</span>: <span class="number">0</span></span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">        dashArray: <span class="built_in">Math</span>.PI * <span class="number">100</span></span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">      dashOffset() &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> (<span class="number">1</span> - <span class="keyword">this</span>.percent) * <span class="keyword">this</span>.dashArray</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span> <span class="attr">lang</span>=<span class="string">"stylus"</span> <span class="attr">rel</span>=<span class="string">"stylesheet/stylus"</span>&gt;</span></span><br><span class="line">  @import "~common/stylus/variable"</span><br><span class="line">  .progress-circle</span><br><span class="line">    position: relative</span><br><span class="line">    circle</span><br><span class="line">      stroke-width: 8px</span><br><span class="line">      transform-origin: center</span><br><span class="line">      &amp;.progress-background</span><br><span class="line">        transform: scale(0.9)</span><br><span class="line">        stroke: $color-theme-d</span><br><span class="line">      &amp;.progress-bar</span><br><span class="line">        transform: scale(0.9) rotate(-90deg)</span><br><span class="line">        stroke: $color-theme</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="播放器模式切换功能实现"><a href="#播放器模式切换功能实现" class="headerlink" title="播放器模式切换功能实现"></a>播放器模式切换功能实现</h1><ol>
+<li><p>添加common/js/util.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomInt</span>(<span class="params">min, max</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (max - min + <span class="number">1</span>) + min)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">shuffle</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> _arr = arr.slice()</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; _arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> j = getRandomInt(<span class="number">0</span>, i)</span><br><span class="line">    <span class="keyword">let</span> t = _arr[i]</span><br><span class="line">    _arr[i] = _arr[j]</span><br><span class="line">    _arr[j] = t</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> _arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在play.vue中添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">changeMode() &#123;</span><br><span class="line">  <span class="keyword">const</span> mode = (<span class="keyword">this</span>.mode + <span class="number">1</span>) % <span class="number">3</span></span><br><span class="line">  <span class="keyword">this</span>.setPlayMode(mode)</span><br><span class="line">  <span class="keyword">let</span> list = <span class="literal">null</span></span><br><span class="line">  <span class="keyword">if</span> (mode === playMode.random) &#123;</span><br><span class="line">    list = shuffle(<span class="keyword">this</span>.sequenceList)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    list = <span class="keyword">this</span>.sequenceList</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.resetCurrentIndex(list)</span><br><span class="line">  <span class="keyword">this</span>.setPlaylist(list)</span><br><span class="line">&#125;,</span><br><span class="line">resetCurrentIndex(list) &#123;</span><br><span class="line">  <span class="keyword">let</span> index = list.findIndex(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.id === <span class="keyword">this</span>.currentSong.id</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">this</span>.setCurrentIndex(index)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在player.vue中添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">end() &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.mode === playMode.loop) &#123;</span><br><span class="line">    <span class="keyword">this</span>.loop()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.next()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">loop() &#123;</span><br><span class="line">  <span class="keyword">this</span>.$refs.audio.currentTime = <span class="number">0</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.audio.play()</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在store/action中添加乱序播放方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> randomPlay = <span class="function"><span class="keyword">function</span> (<span class="params">&#123;commit&#125;, &#123;list&#125;</span>) </span>&#123;</span><br><span class="line">  commit(types.SET_PLAY_MODE, playMode.random)</span><br><span class="line">  commit(types.SET_SEQUENCE_LIST, list)</span><br><span class="line">  <span class="keyword">let</span> randomList = shuffle(list)</span><br><span class="line">  commit(types.SET_PLAYLIST, randomList)</span><br><span class="line">  commit(types.SET_CURRENT_INDEX, <span class="number">0</span>)</span><br><span class="line">  commit(types.SET_FULL_SCREEN, <span class="literal">true</span>)</span><br><span class="line">  commit(types.SET_PLAYING_STATE, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在music-list.vue中添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">random() &#123;</span><br><span class="line">  <span class="keyword">this</span>.randomPlay(&#123;</span><br><span class="line">    list: <span class="keyword">this</span>.songs</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改store/action</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findIndex</span>(<span class="params">list, song</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> list.findIndex(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.id === song.id</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> selectPlay = <span class="function"><span class="keyword">function</span>(<span class="params">&#123; commit, state &#125;, &#123; list, index &#125;</span>) </span>&#123;</span><br><span class="line">  commit(types.SET_SEQUENCE_LIST, list)</span><br><span class="line">  <span class="keyword">if</span> (state.mode === playMode.random) &#123;</span><br><span class="line">    <span class="keyword">let</span> randomList = shuffle(list)</span><br><span class="line">    commit(types.SET_PLAYLIST, randomList)</span><br><span class="line">    index = findIndex(randomList, list[index])</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    commit(types.SET_PLAYLIST, list)</span><br><span class="line">  &#125;</span><br><span class="line">  commit(types.SET_CURRENT_INDEX, index)</span><br><span class="line">  commit(types.SET_FULL_SCREEN, <span class="literal">true</span>)</span><br><span class="line">  commit(types.SET_PLAYING_STATE, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="播放器歌词数据抓取"><a href="#播放器歌词数据抓取" class="headerlink" title="播放器歌词数据抓取"></a>播放器歌词数据抓取</h2><ol>
+<li><p>添加api/song.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;commonParams&#125; <span class="keyword">from</span> <span class="string">'./config'</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getLyric</span>(<span class="params">mid</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">'/api/lyric'</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</span><br><span class="line">    songmid: mid,</span><br><span class="line">    platform: <span class="string">'yqq'</span>,</span><br><span class="line">    hostUin: <span class="number">0</span>,</span><br><span class="line">    needNewCode: <span class="number">0</span>,</span><br><span class="line">    categoryId: <span class="number">10000000</span>,</span><br><span class="line">    pcachetime: +<span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">    format: <span class="string">'json'</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> axios.get(url, &#123;</span><br><span class="line">    params: data</span><br><span class="line">  &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(res.data)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>build/dev-server.js添加方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">apiRoutes.get(<span class="string">'/lyric'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'</span></span><br><span class="line"></span><br><span class="line">  axios.get(url, &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      referer: <span class="string">'https://c.y.qq.com/'</span>,</span><br><span class="line">      host: <span class="string">'c.y.qq.com'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    params: req.query</span><br><span class="line">  &#125;).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> ret = response.data</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> ret === <span class="string">'string'</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> reg = <span class="regexp">/^\w+\((&#123;[^()]+&#125;)\)$/</span></span><br><span class="line">      <span class="keyword">var</span> matches = ret.match(reg)</span><br><span class="line">      <span class="keyword">if</span> (matches) &#123;</span><br><span class="line">        ret = <span class="built_in">JSON</span>.parse(matches[<span class="number">1</span>])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    res.json(ret)</span><br><span class="line">  &#125;).catch(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>song.js class 添加获取歌词方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">getLyric() &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.lyric) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="keyword">this</span>.lyric)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    getLyric(<span class="keyword">this</span>.mid).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (res.retcode === ERR_OK) &#123;</span><br><span class="line">        <span class="keyword">this</span>.lyric = Base64.decode(res.lyric)</span><br><span class="line">        resolve(<span class="keyword">this</span>.lyric)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="string">'no lyric'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="播放器歌词滚动列表实现"><a href="#播放器歌词滚动列表实现" class="headerlink" title="播放器歌词滚动列表实现"></a>播放器歌词滚动列表实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">handleLyric(&#123;lineNum, txt&#125;) &#123;</span><br><span class="line">  <span class="keyword">this</span>.currentLineNum = lineNum</span><br><span class="line">  <span class="comment">// 超过5行, 滚动到lineNum - 5, 5行之内, 滚动到顶部</span></span><br><span class="line">  <span class="keyword">if</span> (lineNum &gt; <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> lineEl = <span class="keyword">this</span>.$refs.lyricLine[lineNum - <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">this</span>.$refs.lyricList.scrollToElement(lineEl, <span class="number">1000</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.$refs.lyricList.scrollTo(<span class="number">0</span>, <span class="number">0</span>, <span class="number">1000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.playingLyric = txt</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="播放器歌词左右滑动实现"><a href="#播放器歌词左右滑动实现" class="headerlink" title="播放器歌词左右滑动实现"></a>播放器歌词左右滑动实现</h2><ol>
+<li><p>created时添加变量touch</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">this</span>.touch = &#123;&#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加滑动事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">middleTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">this</span>.touch.initiated = <span class="literal">true</span></span><br><span class="line">  <span class="comment">// 用来判断是否是一次移动</span></span><br><span class="line">  <span class="keyword">this</span>.touch.moved = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">const</span> touch = e.touches[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">this</span>.touch.startX = touch.pageX</span><br><span class="line">  <span class="keyword">this</span>.touch.startY = touch.pageY</span><br><span class="line">&#125;,</span><br><span class="line">middleTouchMove(e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.touch.initiated) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> touch = e.touches[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">const</span> deltaX = touch.pageX - <span class="keyword">this</span>.touch.startX</span><br><span class="line">  <span class="keyword">const</span> deltaY = touch.pageY - <span class="keyword">this</span>.touch.startY</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(deltaY) &gt; <span class="built_in">Math</span>.abs(deltaX)) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.touch.moved) &#123;</span><br><span class="line">    <span class="keyword">this</span>.touch.moved = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> left = <span class="keyword">this</span>.currentShow === <span class="string">'cd'</span> ? <span class="number">0</span> : -<span class="built_in">window</span>.innerWidth</span><br><span class="line">  <span class="keyword">const</span> offsetWidth = <span class="built_in">Math</span>.min(<span class="number">0</span>, <span class="built_in">Math</span>.max(-<span class="built_in">window</span>.innerWidth, left + deltaX))</span><br><span class="line">  <span class="keyword">this</span>.touch.percent = <span class="built_in">Math</span>.abs(offsetWidth / <span class="built_in">window</span>.innerWidth)</span><br><span class="line">  <span class="keyword">this</span>.$refs.lyricList.$el.style[transform] = <span class="string">`translate3d(<span class="subst">$&#123;offsetWidth&#125;</span>px,0,0)`</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.lyricList.$el.style[transitionDuration] = <span class="number">0</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.middleL.style.opacity = <span class="number">1</span> - <span class="keyword">this</span>.touch.percent</span><br><span class="line">  <span class="keyword">this</span>.$refs.middleL.style[transitionDuration] = <span class="number">0</span></span><br><span class="line">&#125;,</span><br><span class="line">middleTouchEnd() &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.touch.moved) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> offsetWidth</span><br><span class="line">  <span class="keyword">let</span> opacity</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.currentShow === <span class="string">'cd'</span>) &#123;</span><br><span class="line">    <span class="comment">// 从右向左滑, 超过10%, 滚动屏幕</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.touch.percent &gt; <span class="number">0.1</span>) &#123;</span><br><span class="line">      offsetWidth = -<span class="built_in">window</span>.innerWidth</span><br><span class="line">      opacity = <span class="number">0</span></span><br><span class="line">      <span class="keyword">this</span>.currentShow = <span class="string">'lyric'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      offsetWidth = <span class="number">0</span></span><br><span class="line">      opacity = <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.touch.percent &lt; <span class="number">0.9</span>) &#123;</span><br><span class="line">      offsetWidth = <span class="number">0</span></span><br><span class="line">      <span class="keyword">this</span>.currentShow = <span class="string">'cd'</span></span><br><span class="line">      opacity = <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      offsetWidth = -<span class="built_in">window</span>.innerWidth</span><br><span class="line">      opacity = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> time = <span class="number">300</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.lyricList.$el.style[transform] = <span class="string">`translate3d(<span class="subst">$&#123;offsetWidth&#125;</span>px,0,0)`</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.lyricList.$el.style[transitionDuration] = <span class="string">`<span class="subst">$&#123;time&#125;</span>ms`</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.middleL.style.opacity = opacity</span><br><span class="line">  <span class="keyword">this</span>.$refs.middleL.style[transitionDuration] = <span class="string">`<span class="subst">$&#123;time&#125;</span>ms`</span></span><br><span class="line">  <span class="keyword">this</span>.touch.initiated = <span class="literal">false</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="播放器歌词剩余功能实现"><a href="#播放器歌词剩余功能实现" class="headerlink" title="播放器歌词剩余功能实现"></a>播放器歌词剩余功能实现</h2><h2 id="播放器底部播放器适配-mixin的应用"><a href="#播放器底部播放器适配-mixin的应用" class="headerlink" title="播放器底部播放器适配+mixin的应用"></a>播放器底部播放器适配+mixin的应用</h2><p>添加common/js/mixin.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;mapGetters&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> playlistMixin = &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="string">'playlist'</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="keyword">this</span>.handlePlaylist(<span class="keyword">this</span>.playlist)</span><br><span class="line">  &#125;,</span><br><span class="line">  activated() &#123;</span><br><span class="line">    <span class="keyword">this</span>.handlePlaylist(<span class="keyword">this</span>.playlist)</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    playlist(newVal) &#123;</span><br><span class="line">      <span class="keyword">this</span>.handlePlaylist(newVal)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handlePlaylist() &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'component must implement handlePlaylist method'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入mixin</span></span><br><span class="line"><span class="keyword">import</span> &#123;playlistMixin&#125; <span class="keyword">from</span> <span class="string">'common/js/mixin'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用mixin</span></span><br><span class="line">mixins: [playlistMixin],</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加handlePlaylist方法</span></span><br><span class="line">handlePlaylist(playlist) &#123;</span><br><span class="line"><span class="keyword">const</span> bottom = playlist.length &gt; <span class="number">0</span> ? <span class="string">'60px'</span> : <span class="string">''</span></span><br><span class="line">  <span class="comment">// this.$refs.list.$el 是 this.$refs.list的DOM元素</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.list.$el.style.bottom = bottom</span><br><span class="line">  <span class="keyword">this</span>.$refs.list.refresh()</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+            <a href="/tags/慕课网/" rel="tag"># 慕课网</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/01/掌握Chrome开发工具：新一代前端开发技术/" rel="next" title="掌握Chrome开发工具：新一代前端开发技术">
+                <i class="fa fa-chevron-left"></i> 掌握Chrome开发工具：新一代前端开发技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/07/Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第八章-歌单页面开发）/" rel="prev" title="Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发）">
+                Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第八章 歌单页面开发） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-2-0-高级实战-开发移动端音乐WebApp-课程笔记（第七章-播放器内置组件开发）"><span class="nav-number">1.</span> <span class="nav-text">Vue 2.0 高级实战-开发移动端音乐WebApp 课程笔记（第七章 播放器内置组件开发）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器Vuex数据设计"><span class="nav-number">1.1.</span> <span class="nav-text">播放器Vuex数据设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器Vuex的相关应用"><span class="nav-number">1.2.</span> <span class="nav-text">播放器Vuex的相关应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器基础样式及歌曲数据的应用"><span class="nav-number">1.3.</span> <span class="nav-text">播放器基础样式及歌曲数据的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器展开收起动画"><span class="nav-number">1.4.</span> <span class="nav-text">播放器展开收起动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器歌曲播放功能实现"><span class="nav-number">1.5.</span> <span class="nav-text">播放器歌曲播放功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器歌曲前进后退功能实现"><span class="nav-number">1.6.</span> <span class="nav-text">播放器歌曲前进后退功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器播放时间获取和更新"><span class="nav-number">1.7.</span> <span class="nav-text">播放器播放时间获取和更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器progress-bar进度条组件实现"><span class="nav-number">1.8.</span> <span class="nav-text">播放器progress-bar进度条组件实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#播放器progress-circle-圆形进度条组件实现"><span class="nav-number">2.</span> <span class="nav-text">播放器progress-circle 圆形进度条组件实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#播放器模式切换功能实现"><span class="nav-number">3.</span> <span class="nav-text">播放器模式切换功能实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器歌词数据抓取"><span class="nav-number">3.1.</span> <span class="nav-text">播放器歌词数据抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器歌词滚动列表实现"><span class="nav-number">3.2.</span> <span class="nav-text">播放器歌词滚动列表实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器歌词左右滑动实现"><span class="nav-number">3.3.</span> <span class="nav-text">播放器歌词左右滑动实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器歌词剩余功能实现"><span class="nav-number">3.4.</span> <span class="nav-text">播放器歌词剩余功能实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放器底部播放器适配-mixin的应用"><span class="nav-number">3.5.</span> <span class="nav-text">播放器底部播放器适配+mixin的应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

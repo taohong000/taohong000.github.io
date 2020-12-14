@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue,文档工具,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="vuePress vue驱动的静态站点生成工具起步全局安装1234567891011# 全局安装yarn global add vuepress # 或 npm install -g vuepress# 创建一个 markdown 文件echo &apos;# Hello VuePress&apos; &amp;gt; README.md# 开始编写文档vuepress dev# 构建vuepress build 在已有项目">
+<meta name="keywords" content="vue,文档工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuePress vue驱动的静态站点生成工具">
+<meta property="og:url" content="http://yoursite.com/2018/04/25/vuePress-vue驱动的静态站点生成工具/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="vuePress vue驱动的静态站点生成工具起步全局安装1234567891011# 全局安装yarn global add vuepress # 或 npm install -g vuepress# 创建一个 markdown 文件echo &apos;# Hello VuePress&apos; &amp;gt; README.md# 开始编写文档vuepress dev# 构建vuepress build 在已有项目">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vuePress vue驱动的静态站点生成工具">
+<meta name="twitter:description" content="vuePress vue驱动的静态站点生成工具起步全局安装1234567891011# 全局安装yarn global add vuepress # 或 npm install -g vuepress# 创建一个 markdown 文件echo &apos;# Hello VuePress&apos; &amp;gt; README.md# 开始编写文档vuepress dev# 构建vuepress build 在已有项目">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/25/vuePress-vue驱动的静态站点生成工具/">
+
+
+
+
+
+  <title>vuePress vue驱动的静态站点生成工具 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/25/vuePress-vue驱动的静态站点生成工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vuePress vue驱动的静态站点生成工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-25T13:56:59+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="vuePress-vue驱动的静态站点生成工具"><a href="#vuePress-vue驱动的静态站点生成工具" class="headerlink" title="vuePress vue驱动的静态站点生成工具"></a>vuePress vue驱动的静态站点生成工具</h1><h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装</span></span><br><span class="line">yarn global add vuepress <span class="comment"># 或 npm install -g vuepress</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个 markdown 文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'# Hello VuePress'</span> &gt; README.md</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始编写文档</span></span><br><span class="line">vuepress dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建</span></span><br><span class="line">vuepress build</span><br></pre></td></tr></table></figure>
+<h3 id="在已有项目中安装"><a href="#在已有项目中安装" class="headerlink" title="在已有项目中安装"></a>在已有项目中安装</h3><p>如果你想要在一个已有项目中维护文档，就应该将 VuePress 安装为本地依赖。此设置还允许你使用 CI 或 Netlify 服务，在推送时自动部署。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装为本地依赖项</span></span><br><span class="line">yarn add -D vuepress <span class="comment"># 或 npm install -D vuepress</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个 docs 目录</span></span><br><span class="line">mkdir docs</span><br><span class="line"><span class="comment"># 创建一个 markdown 文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'# Hello VuePress'</span> &gt; docs/README.md</span><br></pre></td></tr></table></figure>
+<p>然后，给 package.json 添加一些 scripts 脚本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"docs:dev"</span>: <span class="string">"vuepress dev docs"</span>,</span><br><span class="line">    <span class="attr">"docs:build"</span>: <span class="string">"vuepress build docs"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="主页-Homepage"><a href="#主页-Homepage" class="headerlink" title="主页(Homepage)"></a>主页(Homepage)</h2><p>默认主题提供了一个主页布局（用于<a href="/">该网站的主页</a>）。要使用它，需要在你的根目录 <code>README.md</code> 的 <a href="../guide/markdown.html#yaml-front-matter">YAML front matter</a> 中指定 <code>home：true</code>，并加上一些其他的元数据。这是本网站使用的实际数据：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">home:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">heroImage:</span> <span class="string">/hero.png</span></span><br><span class="line"><span class="attr">actionText:</span> <span class="string">起步</span> <span class="string">→</span></span><br><span class="line"><span class="attr">actionLink:</span> <span class="string">/guide/</span></span><br><span class="line"><span class="attr">features:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">title:</span> <span class="string">简明优先</span></span><br><span class="line">  <span class="attr">details:</span> <span class="string">对以</span> <span class="string">markdown</span> <span class="string">为中心的项目结构，做最简化的配置，帮助你专注于创作。</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">title:</span> <span class="string">Vue</span> <span class="string">驱动</span></span><br><span class="line">  <span class="attr">details:</span> <span class="string">享用</span> <span class="string">Vue</span> <span class="string">+</span> <span class="string">webpack</span> <span class="string">开发环境，在</span> <span class="string">markdown</span> <span class="string">中使用</span> <span class="string">Vue</span> <span class="string">组件，并通过</span> <span class="string">Vue</span> <span class="string">开发自定义主题。</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">title:</span> <span class="string">性能高效</span></span><br><span class="line">  <span class="attr">details:</span> <span class="string">VuePress</span> <span class="string">将每个页面生成为预渲染的静态</span> <span class="string">HTML，每个页面加载之后，然后作为单页面应用程序(SPA)运行。</span></span><br><span class="line"><span class="attr">footer:</span> <span class="string">MIT</span> <span class="string">Licensed</span> <span class="string">|</span> <span class="string">Copyright</span> <span class="string">©</span> <span class="number">2018</span><span class="string">-present</span> <span class="string">Evan</span> <span class="string">You</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+<p><code>YAML front matter</code> 的内容之后的其他任意内容，将被解析为正常 markdown，并在 features 部分之后渲染。</p>
+<p>如果你想彻底自定义主页的布局，你还可以使用<a href="#custom-layout-for-specific-pages">自定义布局</a></p>
+<h2 id="导航链接-navbar-links"><a href="#导航链接-navbar-links" class="headerlink" title="导航链接(navbar links)"></a>导航链接(navbar links)</h2><p>你可以通过 <code>themeConfig.nav</code> 将链接添加到导航栏中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .vuepress/config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  themeConfig: &#123;</span><br><span class="line">    nav: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">'Home'</span>, <span class="attr">link</span>: <span class="string">'/'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">'Guide'</span>, <span class="attr">link</span>: <span class="string">'/guide/'</span> &#125;,</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">'External'</span>, <span class="attr">link</span>: <span class="string">'https://google.com'</span> &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="文档链接"><a href="#文档链接" class="headerlink" title="文档链接"></a>文档链接</h2><p><a href="https://vuepress.docschina.org/" target="_blank" rel="noopener">官网</a></p>
+<p><a href="https://vuepress.docschina.org/" target="_blank" rel="noopener">中文文档</a></p>
+<p><a href="https://github.com/docschina/vuepress" target="_blank" rel="noopener">参考项目</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+            <a href="/tags/文档工具/" rel="tag"># 文档工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/23/单元测试/" rel="next" title="单元测试">
+                <i class="fa fa-chevron-left"></i> 单元测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/27/npm-npx-使用指南/" rel="prev" title="npm npx 使用指南">
+                npm npx 使用指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vuePress-vue驱动的静态站点生成工具"><span class="nav-number">1.</span> <span class="nav-text">vuePress vue驱动的静态站点生成工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#起步"><span class="nav-number">1.1.</span> <span class="nav-text">起步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">全局安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在已有项目中安装"><span class="nav-number">1.1.2.</span> <span class="nav-text">在已有项目中安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主页-Homepage"><span class="nav-number">1.2.</span> <span class="nav-text">主页(Homepage)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导航链接-navbar-links"><span class="nav-number">1.3.</span> <span class="nav-text">导航链接(navbar links)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档链接"><span class="nav-number">1.4.</span> <span class="nav-text">文档链接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

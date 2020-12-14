@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="gulp,基础知识,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考文档：gulp 官网  快速开始安装 gulp，作为开发时依赖项1npm install --save-dev gulp 在根目录创建 gulpfile.js123456function defaultTask(cb) &amp;#123;  // place code for your default task here  cb();&amp;#125;exports.default = defaultT">
+<meta name="keywords" content="gulp,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp 基础知识">
+<meta property="og:url" content="http://yoursite.com/2020/04/03/gulp-基础知识/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="参考文档：gulp 官网  快速开始安装 gulp，作为开发时依赖项1npm install --save-dev gulp 在根目录创建 gulpfile.js123456function defaultTask(cb) &amp;#123;  // place code for your default task here  cb();&amp;#125;exports.default = defaultT">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.743Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp 基础知识">
+<meta name="twitter:description" content="参考文档：gulp 官网  快速开始安装 gulp，作为开发时依赖项1npm install --save-dev gulp 在根目录创建 gulpfile.js123456function defaultTask(cb) &amp;#123;  // place code for your default task here  cb();&amp;#125;exports.default = defaultT">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/03/gulp-基础知识/">
+
+
+
+
+
+  <title>gulp 基础知识 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/03/gulp-基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">gulp 基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-03T16:32:24+08:00">
+                2020-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端知识/" itemprop="url" rel="index">
+                    <span itemprop="name">前端知识</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端知识/构建工具/" itemprop="url" rel="index">
+                    <span itemprop="name">构建工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>参考文档：<a href="https://www.gulpjs.com.cn/" target="_blank" rel="noopener">gulp 官网</a></p>
+</blockquote>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="安装-gulp，作为开发时依赖项"><a href="#安装-gulp，作为开发时依赖项" class="headerlink" title="安装 gulp，作为开发时依赖项"></a>安装 gulp，作为开发时依赖项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev gulp</span><br></pre></td></tr></table></figure>
+<h3 id="在根目录创建-gulpfile-js"><a href="#在根目录创建-gulpfile-js" class="headerlink" title="在根目录创建 gulpfile.js"></a>在根目录创建 gulpfile.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defaultTask</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// place code for your default task here</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = defaultTask</span><br></pre></td></tr></table></figure>
+<h3 id="执行gulp-命令"><a href="#执行gulp-命令" class="headerlink" title="执行gulp 命令"></a>执行gulp 命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure>
+<h2 id="创建任务（task）"><a href="#创建任务（task）" class="headerlink" title="创建任务（task）"></a>创建任务（task）</h2><p>gulp 提供了两个组合方法： series() 和 parallel()，允许将多个独立的任务组合为一个更大的操作。</p>
+<ol>
+<li>series() 是按顺序执行任务, parallel() 是并发执行任务.</li>
+<li>这两个方法都可以接受任意数目的任务（task）函数或已经组合的操作.</li>
+<li>series() 和 parallel() 可以互相嵌套至任意深度。</li>
+</ol>
+<p>举例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; series, parallel &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clean</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body omitted</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">css</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body omitted</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">javascript</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body omitted</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.build = series(clean, parallel(css, javascript));</span><br></pre></td></tr></table></figure></p>
+<h2 id="异步执行"><a href="#异步执行" class="headerlink" title="异步执行"></a>异步执行</h2><h3 id="使用callback"><a href="#使用callback" class="headerlink" title="使用callback"></a>使用callback</h3><p>如果任务（task）不返回任何内容，则必须使用 callback 来指示任务已完成。在如下示例中，callback 将作为唯一一个名为 cb() 的参数传递给你的任务（task）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callbackTask</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// `cb()` should be called by some async work</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = callbackTask;</span><br></pre></td></tr></table></figure>
+<p>你通常会将此 callback 函数传递给另一个 API ，而不是自己调用它。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">passingCallback</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  fs.access(<span class="string">'gulpfile.js'</span>, cb);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = passingCallback;</span><br></pre></td></tr></table></figure>
+<h3 id="使用-async-await"><a href="#使用-async-await" class="headerlink" title="使用 async/await"></a>使用 async/await</h3><p>如果不使用前面提供到几种方式，你还可以将任务（task）定义为一个 async 函数，它将利用 promise 对你的任务（task）进行包装。这将允许你使用 <code>await</code> 处理 promise，并使用其他同步代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">asyncAwaitTask</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; version &#125; = fs.readFileSync(<span class="string">'package.json'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(version);</span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.resolve(<span class="string">'some result'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = asyncAwaitTask;</span><br></pre></td></tr></table></figure>
+<h2 id="处理文件"><a href="#处理文件" class="headerlink" title="处理文件"></a>处理文件</h2><p>gulp 暴露了 src() 和 dest() 方法用于处理计算机上存放的文件。</p>
+<ol>
+<li>src() 接受 <a href="https://www.gulpjs.com.cn/docs/getting-started/explaining-globs/" target="_blank" rel="noopener">glob</a> 参数，并从文件系统中读取文件然后生成一个 Node 流（stream）。 </li>
+<li>流（stream）所提供的主要的 API 是 .pipe() 方法, 大多数情况下，利用 .pipe() 方法将插件放置在 src() 和 dest() 之间，并转换流（stream）中的文件。</li>
+<li>dest() 接受一个输出目录作为参数，并且它还会产生一个 Node 流（stream）。它会将文件内容及文件属性写入到指定的目录中。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span>(<span class="string">'gulp-babel'</span>);</span><br><span class="line"></span><br><span class="line">exports.default = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">'src/*.js'</span>)</span><br><span class="line">    .pipe(babel())</span><br><span class="line">    .pipe(dest(<span class="string">'output/'</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p>Gulp 插件实质上是 Node 转换流（Transform Streams），它封装了通过管道（pipeline）转换文件的常见功能，通常是使用 .pipe() 方法并放在 src() 和 dest() 之间。他们可以更改经过流（stream）的每个文件的文件名、元数据或文件内容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>);</span><br><span class="line"><span class="keyword">const</span> rename = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>);</span><br><span class="line"></span><br><span class="line">exports.default = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">'src/*.js'</span>)</span><br><span class="line">    <span class="comment">// gulp-uglify 插件并不改变文件名</span></span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    <span class="comment">// 因此使用 gulp-rename 插件修改文件的扩展名</span></span><br><span class="line">    .pipe(rename(&#123; <span class="attr">extname</span>: <span class="string">'.min.js'</span> &#125;))</span><br><span class="line">    .pipe(dest(<span class="string">'output/'</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="条件插件"><a href="#条件插件" class="headerlink" title="条件插件"></a>条件插件</h3><p>因为插件的操作不应该针对特定文件类型，因此你可能需要使用像 gulp-if 之类的插件来完成转换某些文件的操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">const</span> gulpif = <span class="built_in">require</span>(<span class="string">'gulp-if'</span>);</span><br><span class="line"><span class="keyword">const</span> uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isJavaScript</span>(<span class="params">file</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 判断文件的扩展名是否是 '.js'</span></span><br><span class="line">  <span class="keyword">return</span> file.extname === <span class="string">'.js'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 在同一个管道（pipeline）上处理 JavaScript 和 CSS 文件</span></span><br><span class="line">  <span class="keyword">return</span> src([<span class="string">'src/*.js'</span>, <span class="string">'src/*.css'</span>])</span><br><span class="line">    <span class="comment">// 只对 JavaScript 文件应用 gulp-uglify 插件</span></span><br><span class="line">    .pipe(gulpif(isJavaScript, uglify()))</span><br><span class="line">    .pipe(dest(<span class="string">'output/'</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="文件监控"><a href="#文件监控" class="headerlink" title="文件监控"></a>文件监控</h2><p>watch() 将 globs 与 任务（task） 进行关联。它对匹配 glob 的文件进行监控，如果有文件被修改了就执行关联的任务（task）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; watch, series &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clean</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body omitted</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">javascript</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body omitted</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">css</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// body omitted</span></span><br><span class="line">  cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以只关联一个任务</span></span><br><span class="line">watch(<span class="string">'src/*.css'</span>, css);</span><br><span class="line"><span class="comment">// 或者关联一个任务组合</span></span><br><span class="line">watch(<span class="string">'src/*.js'</span>, series(clean, javascript));</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp/" rel="tag"># gulp</a>
+          
+            <a href="/tags/基础知识/" rel="tag"># 基础知识</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/03/cocos-UI-系统/" rel="next" title="cocos UI 系统">
+                <i class="fa fa-chevron-left"></i> cocos UI 系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/20/前端面试总结/" rel="prev" title="前端面试总结">
+                前端面试总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速开始"><span class="nav-number">1.</span> <span class="nav-text">快速开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-gulp，作为开发时依赖项"><span class="nav-number">1.1.</span> <span class="nav-text">安装 gulp，作为开发时依赖项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在根目录创建-gulpfile-js"><span class="nav-number">1.2.</span> <span class="nav-text">在根目录创建 gulpfile.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行gulp-命令"><span class="nav-number">1.3.</span> <span class="nav-text">执行gulp 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建任务（task）"><span class="nav-number">2.</span> <span class="nav-text">创建任务（task）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步执行"><span class="nav-number">3.</span> <span class="nav-text">异步执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用callback"><span class="nav-number">3.1.</span> <span class="nav-text">使用callback</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-async-await"><span class="nav-number">3.2.</span> <span class="nav-text">使用 async/await</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理文件"><span class="nav-number">4.</span> <span class="nav-text">处理文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用插件"><span class="nav-number">5.</span> <span class="nav-text">使用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件插件"><span class="nav-number">5.1.</span> <span class="nav-text">条件插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件监控"><span class="nav-number">6.</span> <span class="nav-text">文件监控</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

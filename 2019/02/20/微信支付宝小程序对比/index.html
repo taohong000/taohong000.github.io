@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="小程序,微信小程序,支付宝小程序,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="微信和小程序大同小异, 这里通过对比两者的不同点帮助知识迁移.  基础   名称 微信 支付宝     命名空间 wx my   文件类型 js, wxml, wxss, json js, axml, acss, json   绑定事件从bind改为on开头，并且采用驼峰形式 bindchange=”xx” onChange=”xx   if 和 for语句写法不同 wx:if wx:for a:">
+<meta name="keywords" content="小程序,微信小程序,支付宝小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信支付宝小程序对比">
+<meta property="og:url" content="http://yoursite.com/2019/02/20/微信支付宝小程序对比/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="微信和小程序大同小异, 这里通过对比两者的不同点帮助知识迁移.  基础   名称 微信 支付宝     命名空间 wx my   文件类型 js, wxml, wxss, json js, axml, acss, json   绑定事件从bind改为on开头，并且采用驼峰形式 bindchange=”xx” onChange=”xx   if 和 for语句写法不同 wx:if wx:for a:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信支付宝小程序对比">
+<meta name="twitter:description" content="微信和小程序大同小异, 这里通过对比两者的不同点帮助知识迁移.  基础   名称 微信 支付宝     命名空间 wx my   文件类型 js, wxml, wxss, json js, axml, acss, json   绑定事件从bind改为on开头，并且采用驼峰形式 bindchange=”xx” onChange=”xx   if 和 for语句写法不同 wx:if wx:for a:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/20/微信支付宝小程序对比/">
+
+
+
+
+
+  <title>微信支付宝小程序对比 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/微信支付宝小程序对比/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微信支付宝小程序对比</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-20T22:25:36+08:00">
+                2019-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>微信和小程序大同小异, 这里通过对比两者的不同点帮助知识迁移. </p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>微信</th>
+<th>支付宝</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>命名空间</td>
+<td>wx</td>
+<td>my</td>
+</tr>
+<tr>
+<td>文件类型</td>
+<td>js, wxml, wxss, json</td>
+<td>js, axml, acss, json</td>
+</tr>
+<tr>
+<td>绑定事件从bind改为on开头，并且采用驼峰形式</td>
+<td>bindchange=”xx”</td>
+<td>onChange=”xx</td>
+</tr>
+<tr>
+<td>if 和 for语句写法不同</td>
+<td>wx:if wx:for</td>
+<td>a:if a:for</td>
+</tr>
+</tbody>
+</table>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>window对象设置</p>
+<p>微信<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"navigationBarBackgroundColor"</span>: <span class="string">"#ffffff"</span>,</span><br><span class="line">    <span class="attr">"navigationBarTitleText"</span>: <span class="string">"微信接口功能演示"</span>,</span><br><span class="line">    <span class="attr">"enablePullDownRefresh"</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"disableScroll"</span>:<span class="literal">true</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>支付宝<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	"titleBarColor: "#ffffff",</span><br><span class="line">	"defaultTitle": "页面标题",</span><br><span class="line">	"pullRefresh": true,</span><br><span class="line">	"allowsBounceVertical": "YES"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>tabBar<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;tabBar&quot;: &#123;</span><br><span class="line">        &quot;color&quot;: &quot;#999&quot;,</span><br><span class="line">        &quot;selectedColor&quot;: &quot;#333&quot;,</span><br><span class="line">        &quot;backgroundColor&quot;: &quot;#ffffff&quot;,</span><br><span class="line">        &quot;list&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;pagePath&quot;: &quot;pages/index/index&quot;,</span><br><span class="line">                &quot;text&quot;: &quot;首页&quot;,</span><br><span class="line">                &quot;iconPath&quot;: &quot;icons/1.png&quot;</span><br><span class="line">                &quot;selectedIconPath&quot;: &quot;icons/1_c.png&quot;,</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>支付宝<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"tabBar"</span>: &#123;</span><br><span class="line">    <span class="attr">"textColor"</span>: <span class="string">"#999"</span>,</span><br><span class="line">    <span class="attr">"selectedColor"</span>: <span class="string">"#333"</span>,</span><br><span class="line">    <span class="attr">"backgroundColor"</span>: <span class="string">"#ffffff"</span>,</span><br><span class="line">    <span class="attr">"items"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"pagePath"</span>: <span class="string">"pages/index/index"</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"首页"</span></span><br><span class="line">        <span class="string">"icon"</span>:<span class="string">"icons/1.png"</span>,</span><br><span class="line">        <span class="attr">"activeIcon"</span>:<span class="string">"icons/1_c.png"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="逻辑层"><a href="#逻辑层" class="headerlink" title="逻辑层"></a>逻辑层</h3><p>JS模块化, 支付宝支持 ES6 语法</p>
+<p>支付宝支持引入社区上的第三反方NPM，微信则对引入的NPM有规定的格式。</p>
+<p>微信<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = <span class="built_in">require</span>(<span class="string">'foo'</span>);</span><br><span class="line">...</span><br><span class="line"><span class="built_in">module</span>.exports.bar = bar;</span><br></pre></td></tr></table></figure></p>
+<p>支付宝<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">'foo'</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> bar;</span><br></pre></td></tr></table></figure></p>
+<h3 id="视图层"><a href="#视图层" class="headerlink" title="视图层"></a>视图层</h3><h4 id="if-for"><a href="#if-for" class="headerlink" title="if for"></a>if for</h4><p>支付宝条件循环和列表循环和微信不同的地方是修改了命名空间, 如 wx:if-&gt;a:if</p>
+<h4 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h4><p>支付宝支持对象扩展符<code>...</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">"objectCombine"</span> <span class="attr">data</span>=<span class="string">"&#123;&#123;...obj1, ...obj2, e: 5&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义脚本"><a href="#自定义脚本" class="headerlink" title="自定义脚本"></a>自定义脚本</h3><p>微信中使用wxs, 支付宝中使用sjs</p>
+<h3 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h3><p>支付宝</p>
+<p>示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /components/customer/index.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"component"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// /components/customer/index.js</span></span><br><span class="line">Component(&#123;</span><br><span class="line">  mixins: [], <span class="comment">// minxin 方便复用代码</span></span><br><span class="line">  data: &#123; <span class="attr">x</span>: <span class="number">1</span> &#125;, <span class="comment">// 组件内部数据</span></span><br><span class="line">  props: &#123; <span class="attr">y</span>: <span class="number">1</span> &#125;, <span class="comment">// 可给外部传入的属性添加默认值</span></span><br><span class="line">  didMount()&#123;&#125;, <span class="comment">// 生命周期函数</span></span><br><span class="line">  didUpdate()&#123;&#125;,</span><br><span class="line">  didUnmount()&#123;&#125;,</span><br><span class="line">  methods: &#123; <span class="comment">// 自定义事件</span></span><br><span class="line">    handleTap() &#123;</span><br><span class="line">  	  <span class="keyword">this</span>.setData(&#123; <span class="attr">x</span>: <span class="keyword">this</span>.data.x + <span class="number">1</span>&#125;); <span class="comment">// 可使用 setData 改变内部属性</span></span><br><span class="line">    &#125;, </span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- // /components/customer/index.axml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span>&gt;</span>x: &#123;&#123;x&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onTap</span>=<span class="string">"handleTap"</span>&gt;</span>plusOne<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span>&gt;</span>default slot &amp; default value<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /pages/index/index.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"usingComponents"</span>: &#123;</span><br><span class="line">    <span class="string">"customer"</span>: <span class="string">"/components/customer/index"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /pages/index/index.axml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">customer</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>支付宝多了很多微信没有的扩展组件, 非常有参考价值</p>
+<p><a href="https://github.com/ant-mini-program/mini-antui" target="_blank" rel="noopener">mini-antui</a></p>
+<h2 id="api"><a href="#api" class="headerlink" title="api"></a>api</h2><p>常用api对比</p>
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th>微信</th>
+<th>支付宝</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>wx.request()</td>
+<td>my.httpRequest()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.login()</td>
+<td>my.getAuthCode()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.showModal()</td>
+<td>my.confirm()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.getUserInfo()</td>
+<td>my.getAuthUserInfo()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.requestPayment()</td>
+<td>my.tradePay()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.saveImageToPhotosAlbum()</td>
+<td>my.saveImage()</td>
+</tr>
+<tr>
+<td>#导航栏标题</td>
+<td>wx.setNavigationBarTitle()</td>
+<td>my.setNavigationBar()</td>
+</tr>
+<tr>
+<td>#导航栏颜色</td>
+<td>wx.setNavigationBarColor()</td>
+<td>my.setNavigationBar()</td>
+</tr>
+<tr>
+<td>#粘贴板</td>
+<td>wx.getClipboardData()</td>
+<td>my.getClipboard()</td>
+</tr>
+<tr>
+<td>#粘贴板</td>
+<td>wx.setClipboardData()</td>
+<td>my.setClipboard()</td>
+</tr>
+<tr>
+<td>#1.1.3 当前画布的内容导出生成图片</td>
+<td>wx.canvasToTempFilePath()</td>
+<td>my.toTempFilePath()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.scanCode()</td>
+<td>my.scan()</td>
+</tr>
+<tr>
+<td></td>
+<td>wx.closeBLEConnection()</td>
+<td>my.disconnectBLEDevice()</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>参考链接</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/index.html" target="_blank" rel="noopener">微信小程序官方文档</a></p>
+<p><a href="https://docs.alipay.com/mini/developer/getting-started" target="_blank" rel="noopener">支付宝小程序官方文档</a></p>
+<p><a href="http://caibaojian.com/aliapp-wxapp.html" target="_blank" rel="noopener">支付宝小程序与微信小程序的不同点对比</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/小程序/" rel="tag"># 小程序</a>
+          
+            <a href="/tags/微信小程序/" rel="tag"># 微信小程序</a>
+          
+            <a href="/tags/支付宝小程序/" rel="tag"># 支付宝小程序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/15/小程序云开发初探/" rel="next" title="小程序云开发初探">
+                <i class="fa fa-chevron-left"></i> 小程序云开发初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/20/微信小程序转化为百度小程序的方法/" rel="prev" title="微信小程序转化为百度小程序的方法">
+                微信小程序转化为百度小程序的方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#框架"><span class="nav-number">2.</span> <span class="nav-text">框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑层"><span class="nav-number">2.2.</span> <span class="nav-text">逻辑层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图层"><span class="nav-number">2.3.</span> <span class="nav-text">视图层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if-for"><span class="nav-number">2.3.1.</span> <span class="nav-text">if for</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据绑定"><span class="nav-number">2.3.2.</span> <span class="nav-text">数据绑定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义脚本"><span class="nav-number">2.4.</span> <span class="nav-text">自定义脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义组件"><span class="nav-number">2.5.</span> <span class="nav-text">自定义组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件"><span class="nav-number">3.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">4.</span> <span class="nav-text">api</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

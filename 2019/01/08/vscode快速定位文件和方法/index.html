@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="官方文档-代码导航  主命令框最重要的功能就是F1或Ctrl+Shift+P打开的命令面板了，在这个命令框里可以执行VSCode的任何一条命令，甚至关闭这个编辑器。按一下Backspace会进入到Ctrl+P模式里在Ctrl+P下输入&amp;gt;又可以回到Ctrl+Shift+P模式。在Ctrl+P窗口下还可以直接输入文件名，跳转到文件 快速文件导航在浏览项目时，Explorer非常适合在文件之间导">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vscode快速定位文件和方法">
+<meta property="og:url" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/index.html">
+<meta property="og:site_name" content="Taohong的博客">
+<meta property="og:description" content="官方文档-代码导航  主命令框最重要的功能就是F1或Ctrl+Shift+P打开的命令面板了，在这个命令框里可以执行VSCode的任何一条命令，甚至关闭这个编辑器。按一下Backspace会进入到Ctrl+P模式里在Ctrl+P下输入&amp;gt;又可以回到Ctrl+Shift+P模式。在Ctrl+P窗口下还可以直接输入文件名，跳转到文件 快速文件导航在浏览项目时，Explorer非常适合在文件之间导">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/quicknav.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/ctrlhover.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/references.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/errors.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/errorsinline.png">
+<meta property="og:updated_time" content="2020-08-20T01:10:05.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vscode快速定位文件和方法">
+<meta name="twitter:description" content="官方文档-代码导航  主命令框最重要的功能就是F1或Ctrl+Shift+P打开的命令面板了，在这个命令框里可以执行VSCode的任何一条命令，甚至关闭这个编辑器。按一下Backspace会进入到Ctrl+P模式里在Ctrl+P下输入&amp;gt;又可以回到Ctrl+Shift+P模式。在Ctrl+P窗口下还可以直接输入文件名，跳转到文件 快速文件导航在浏览项目时，Explorer非常适合在文件之间导">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/quicknav.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/">
+
+
+
+
+
+  <title>vscode快速定位文件和方法 | Taohong的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Taohong的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/vscode快速定位文件和方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Taohong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Taohong的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vscode快速定位文件和方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T16:14:10+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="https://code.visualstudio.com/docs/editor/editingevolved" target="_blank" rel="noopener">官方文档-代码导航</a></p>
+</blockquote>
+<h2 id="主命令框"><a href="#主命令框" class="headerlink" title="主命令框"></a>主命令框</h2><p>最重要的功能就是<code>F1</code>或<code>Ctrl+Shift+P</code>打开的命令面板了，在这个命令框里可以执行VSCode的任何一条命令，甚至关闭这个编辑器。<br>按一下<code>Backspace</code>会进入到<code>Ctrl+P</code>模式里<br>在<code>Ctrl+P</code>下输入<code>&gt;</code>又可以回到<code>Ctrl+Shift+P</code>模式。<br>在<code>Ctrl+P</code>窗口下还可以直接输入文件名，跳转到文件</p>
+<h2 id="快速文件导航"><a href="#快速文件导航" class="headerlink" title="快速文件导航"></a>快速文件导航</h2><p>在浏览项目时，Explorer非常适合在文件之间导航。但是，当您处理任务时，您会发现自己在同一组文件之间快速跳转。VS Code提供了两个功能强大的命令，可以通过易于使用的键绑定在文件中导航和跨文件导航。</p>
+<p>按住<code>Ctrl</code>键并按<code>Tab</code>键查看编辑器组中打开的所有文件的列表。要打开其中一个文件，请再次使用<code>Tab</code>选择要导航到的文件，然后释放<code>Ctrl</code>以将其打开。</p>
+<p><img src="/2019/01/08/vscode快速定位文件和方法/quicknav.png" alt="quicknav"></p>
+<p>或者，您可以使用<code>Alt + Left</code>和<code>Alt + Right</code>在文件和编辑位置之间导航。如果您在同一文件的不同行之间跳转，这些快捷方式允许您轻松地在这些位置之间导航。</p>
+<blockquote>
+<p>提示：键入<code>Ctrl + P</code>（快速打开）时，可以按名称打开任何文件。</p>
+</blockquote>
+<h2 id="转到定义"><a href="#转到定义" class="headerlink" title="转到定义"></a>转到定义</h2><p>如果某种语言支持它，您可以按F12转到符号的定义。</p>
+<p>如果按<code>Ctrl</code>键并将鼠标悬停在符号上，将显示声明的预览：</p>
+<p><img src="/2019/01/08/vscode快速定位文件和方法/ctrlhover.png" alt="ctrlhover"></p>
+<blockquote>
+<p>提示：您可以使用<code>Ctrl +单击</code>跳转到定义，或使用<code>Ctrl + Alt +单击</code>打开侧面的定义。</p>
+</blockquote>
+<h2 id="转到类型定义"><a href="#转到类型定义" class="headerlink" title="转到类型定义"></a>转到类型定义</h2><p>某些语言还支持通过从编辑器上下文菜单或命令选项板运行“ 转到类型定义”命令来跳转到符号的类型定义。这将带您到符号类型的定义。命令<code>editor.action.goToTypeDefinition</code>默认情况下不绑定到键盘快捷键，但您可以添加自己的自定义键绑定。</p>
+<h2 id="转到引用"><a href="#转到引用" class="headerlink" title="转到引用"></a>转到引用</h2><p>语言还可以通过按<code>Ctrl+F12</code>支持跳转到符号的实现。对于接口，它显示了该接口的所有实现者，对于抽象方法，这显示了该方法的所有具体实现。</p>
+<h2 id="转到符号"><a href="#转到符号" class="headerlink" title="转到符号"></a>转到符号</h2><p>您可以使用<code>Ctrl+Shift+O</code>在文件内导航符号。通过键入：符号将按类别分组。按<code>向上</code>或<code>向下</code>键并导航到所需的位置。</p>
+<h2 id="按名称打开符号"><a href="#按名称打开符号" class="headerlink" title="按名称打开符号"></a>按名称打开符号</h2><p>某些语言支持使用<code>Ctrl+T</code>跨文件跳转到符号。键入要导航到的类型的第一个字母，无论哪个文件包含它，然后按Enter键。</p>
+<h2 id="窥视"><a href="#窥视" class="headerlink" title="窥视"></a>窥视</h2><p>我们认为没有什么比一个大的上下文切换更糟糕了，当你想要的只是快速检查一些东西。 这就是为什么我们支持偷看的编辑。 当您执行Peek References搜索（通过Shift+F12 ）或Peek Definition （通过Alt+F12 ）时，我们将结果嵌入到内联中：</p>
+<p><img src="/2019/01/08/vscode快速定位文件和方法/references.png" alt="references"></p>
+<p>您可以在窥视编辑器中的不同引用之间导航，并在那里进行快速编辑。 单击隐藏的编辑器文件名或双击结果列表将在外部编辑器中打开引用。</p>
+<blockquote>
+<p>提示：此外，如果您按下<code>Escape</code>或在<code>peek</code>编辑器区域中双击，则会关闭查看窗口。您可以使用<code>editor.stablePeek</code> 设置禁用此行为。</p>
+</blockquote>
+<p>##错误和警告<br>警告或错误可以通过已配置的任务，丰富的语言服务或者在后台不断分析代码的连接器(linters)生成。由于我们喜欢无错误的代码，警告和错误会出现在多个地方：</p>
+<ul>
+<li>在状态栏中，有一个所有错误和警告计数的摘要。</li>
+<li>您可以单击摘要或按<code>Ctrl+Shift+M</code>以显示“问题”面板，其中包含所有当前错误的列表。</li>
+<li>如果打开包含错误或警告的文件，它们将与文本和概述标尺一起呈现。</li>
+</ul>
+<p><img src="/2019/01/08/vscode快速定位文件和方法/errors.png" alt="errors"></p>
+<blockquote>
+<p>提示：要循环显示当前文件中的错误或警告，可以按<code>F8</code>或<code>Shift+F8</code> ，这将显示详细说明问题的内联区域和可能的代码操作（如果可用）：</p>
+</blockquote>
+<p><img src="/2019/01/08/vscode快速定位文件和方法/errorsinline.png" alt="errorsinline"></p>
+<p>警告和错误可以提供代码操作（也称为快速修复）以帮助解决问题。 这些将作为灯泡显示在左边距的编辑器中。 单击灯泡将显示“代码操作”选项或执行操作。</p>
+<h2 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h2><ul>
+<li>查找 Ctrl+F</li>
+<li>查找替换 Ctrl+H</li>
+<li>整个文件夹中查找 Ctrl+Shift+F</li>
+<li>匹配符：<ul>
+<li>* to match one or more characters in a path segment</li>
+<li>? to match on one character in a path segment</li>
+<li>** to match any number of path segments ,including none</li>
+<li>{} to group conditions (e.g. {**/*.html,**/*.txt} matches all html and txt files)</li>
+<li>[] to declare a range of characters to match (e.g., example.[0-9] to match on example.0,example.1,…</li>
+</ul>
+</li>
+</ul>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="Bookmarks"><a href="#Bookmarks" class="headerlink" title="Bookmarks"></a>Bookmarks</h3><p>这是一款给文件打上书签, 方便快速跳转的插件</p>
+<table>
+<thead>
+<tr>
+<th>常用快捷键</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ctrl+alt+k</td>
+<td>添加或取消标签</td>
+</tr>
+<tr>
+<td>ctrl+alt+j</td>
+<td>跳转到上一个标签</td>
+</tr>
+<tr>
+<td>ctrl+alt+l</td>
+<td>跳转到下一个标签</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/25/格式化上下文-Formatting-Context/" rel="next" title="格式化上下文(Formatting Context)">
+                <i class="fa fa-chevron-left"></i> 格式化上下文(Formatting Context)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/08/vscode常用快捷键/" rel="prev" title="vscode常用快捷键">
+                vscode常用快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Taohong</p>
+              <p class="site-description motion-element" itemprop="description">记录前端技术，学习心得与生活感悟</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主命令框"><span class="nav-number">1.</span> <span class="nav-text">主命令框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速文件导航"><span class="nav-number">2.</span> <span class="nav-text">快速文件导航</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转到定义"><span class="nav-number">3.</span> <span class="nav-text">转到定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转到类型定义"><span class="nav-number">4.</span> <span class="nav-text">转到类型定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转到引用"><span class="nav-number">5.</span> <span class="nav-text">转到引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转到符号"><span class="nav-number">6.</span> <span class="nav-text">转到符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按名称打开符号"><span class="nav-number">7.</span> <span class="nav-text">按名称打开符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#窥视"><span class="nav-number">8.</span> <span class="nav-text">窥视</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找替换"><span class="nav-number">9.</span> <span class="nav-text">查找替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-number">10.</span> <span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bookmarks"><span class="nav-number">10.1.</span> <span class="nav-text">Bookmarks</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Taohong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
